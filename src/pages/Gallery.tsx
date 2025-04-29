@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Gallery as GalleryIcon } from "lucide-react";
+import { ImageIcon } from "lucide-react";
 
 // Image data structure
 type GalleryImage = {
@@ -63,6 +63,27 @@ const galleryImages: GalleryImage[] = [
     alt: "Teacher presenting to students",
     description: "" 
   },
+  // Adding new uploaded images
+  {
+    src: "/lovable-uploads/e68264fd-133c-403d-a73b-cca770079d9d.png",
+    alt: "Students studying at blue table",
+    description: ""
+  },
+  {
+    src: "/lovable-uploads/89d84289-2de4-4f17-b865-1cceb223a2c3.png",
+    alt: "Presenter giving lecture with presentation",
+    description: ""
+  },
+  {
+    src: "/lovable-uploads/b55f53a7-d436-458c-ba89-aeeee09230cb.png",
+    alt: "Lecturer explaining presentation with students",
+    description: ""
+  },
+  {
+    src: "/lovable-uploads/1329e185-b82c-45f9-b6f5-ba2435e240b6.png",
+    alt: "Group photo with blackboard in background",
+    description: ""
+  }
 ];
 
 const Gallery = () => {
@@ -72,7 +93,7 @@ const Gallery = () => {
     <div className="space-y-8">
       <div className="flex items-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
-          <GalleryIcon className="h-6 w-6 text-blue-700 dark:text-blue-300" />
+          <ImageIcon className="h-6 w-6 text-blue-700 dark:text-blue-300" />
         </div>
         <div>
           <h1 className="text-3xl font-bold mb-0">Photo Gallery</h1>
@@ -98,7 +119,7 @@ const Gallery = () => {
         <TabsContent value="teaching" className="mt-0">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryImages
-              .filter((_, i) => [1, 5, 7, 8, 9].includes(i))
+              .filter((_, i) => [1, 5, 7, 8, 9, 10, 11, 12].includes(i))
               .map((image, index) => (
                 <GalleryCard key={index} image={image} />
               ))}
@@ -108,7 +129,7 @@ const Gallery = () => {
         <TabsContent value="professional" className="mt-0">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryImages
-              .filter((_, i) => [0, 2, 3, 4, 6].includes(i))
+              .filter((_, i) => [0, 2, 3, 4, 6, 13].includes(i))
               .map((image, index) => (
                 <GalleryCard key={index} image={image} />
               ))}
