@@ -96,7 +96,7 @@ const Education = () => {
                     <div className="flex flex-wrap gap-2 items-center mb-2">
                       <CardTitle>{edu.degree}</CardTitle>
                       <Badge variant="outline" className="ml-2">GPA: {edu.gpa}</Badge>
-                      <Badge variant="secondary">Honored Student</Badge>
+                      <Badge variant="secondary">YELLO</Badge>
                     </div>
                     <CardDescription className="text-base">
                       {edu.institution}, {edu.location}
