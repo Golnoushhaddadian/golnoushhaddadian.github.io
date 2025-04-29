@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Globe, Phone, MapPin, Send } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -62,7 +62,22 @@ const Contact = () => {
                 <Mail className="h-5 w-5 text-primary mt-0.5" />
                 <div>
                   <h3 className="font-medium mb-1">Email</h3>
-                  <p className="text-sm text-muted-foreground">your.email@university.edu</p>
+                  <p className="text-sm text-muted-foreground">ghaddadian1@gsu.edu</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Globe className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <h3 className="font-medium mb-1">Website</h3>
+                  <a 
+                    href="http://www.ai2researchlab.org/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-500 hover:underline"
+                  >
+                    http://www.ai2researchlab.org/
+                  </a>
                 </div>
               </div>
 
@@ -70,7 +85,7 @@ const Contact = () => {
                 <Phone className="h-5 w-5 text-primary mt-0.5" />
                 <div>
                   <h3 className="font-medium mb-1">Phone</h3>
-                  <p className="text-sm text-muted-foreground">(123) 456-7890</p>
+                  <p className="text-sm text-muted-foreground">Available upon request</p>
                 </div>
               </div>
 
@@ -79,10 +94,9 @@ const Contact = () => {
                 <div>
                   <h3 className="font-medium mb-1">Office</h3>
                   <p className="text-sm text-muted-foreground">
-                    Department Name<br />
-                    Building Name, Room 123<br />
-                    University Name<br />
-                    City, State ZIP
+                    231 College of Education and Human Development<br />
+                    30 Pryor St SW<br />
+                    Atlanta, GA 30303
                   </p>
                 </div>
               </div>

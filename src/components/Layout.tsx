@@ -54,7 +54,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen flex flex-col">
       <header className="border-b py-4 px-6 md:px-10 sticky top-0 bg-background/90 backdrop-blur-sm z-10">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="text-xl font-semibold">Your Name</div>
+          <div className="text-xl font-semibold">Golnoush (Lia) Haddadian</div>
           
           {/* Mobile menu toggle */}
           <div className="md:hidden flex items-center gap-2">
@@ -126,7 +126,7 @@ const Layout = ({ children }: LayoutProps) => {
       
       <footer className="border-t py-6 px-6 md:px-10 text-sm text-muted-foreground">
         <div className="max-w-7xl mx-auto">
-          <p>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Golnoush (Lia) Haddadian. All rights reserved.</p>
         </div>
       </footer>
     </div>
