@@ -1,26 +1,48 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import Layout from "@/components/Layout";
+
+// Page components
+import AboutMe from "@/pages/AboutMe";
+import Awards from "@/pages/Awards";
+import Research from "@/pages/Research";
+import Teaching from "@/pages/Teaching";
+import Service from "@/pages/Service";
+import Projects from "@/pages/Projects";
+import CurriculumVitae from "@/pages/CurriculumVitae";
+import Contact from "@/pages/Contact";
+import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<AboutMe />} />
+              <Route path="/awards" element={<Awards />} />
+              <Route path="/research" element={<Research />} />
+              <Route path="/teaching" element={<Teaching />} />
+              <Route path="/service" element={<Service />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/cv" element={<CurriculumVitae />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
