@@ -90,7 +90,7 @@ const CurriculumVitae = () => {
     <section className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1>Curriculum Vitae</h1>
+          <h1>CV</h1>
           <p className="text-lg text-muted-foreground">
             Academic and professional background.
           </p>

@@ -1,4 +1,3 @@
-
 import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sun, Moon, Menu, X, Award, FileText, BookOpen, Users, BookText } from 'lucide-react';
@@ -48,8 +47,8 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/research', label: 'Research' },
     { path: '/teaching', label: 'Teaching' },
     { path: '/service', label: 'Service' },
-    { path: '/affiliations', label: 'Professional Affiliations' },
-    { path: '/cv', label: 'Curriculum Vitae' },
+    { path: '/affiliations', label: 'Affiliations' },
+    { path: '/cv', label: 'CV' },
     { path: '/contact', label: 'Contact' },
   ];
 
