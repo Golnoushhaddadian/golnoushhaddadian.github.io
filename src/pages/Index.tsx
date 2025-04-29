@@ -29,7 +29,7 @@ const Index = () => {
         <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="md:w-1/3 flex justify-center">
             <Avatar className="h-64 w-64 rounded-lg">
-              <AvatarImage src="/your-profile-image.jpg" alt="Golnoush (Lia) Haddadian" />
+              <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" />
               <AvatarFallback className="text-2xl">GH</AvatarFallback>
             </Avatar>
           </div>
