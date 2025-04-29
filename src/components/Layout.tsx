@@ -1,7 +1,7 @@
 
 import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X, Award, FileText, BookOpen, Briefcase } from 'lucide-react';
+import { Sun, Moon, Menu, X, Award, FileText, BookOpen, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/ThemeProvider';
 import { cn } from '@/lib/utils';
@@ -47,7 +47,7 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/research', label: 'Research' },
     { path: '/teaching', label: 'Teaching' },
     { path: '/service', label: 'Service' },
-    { path: '/projects', label: 'Projects' },
+    { path: '/affiliations', label: 'Professional Affiliations' },
     { path: '/cv', label: 'Curriculum Vitae' },
     { path: '/contact', label: 'Contact' },
   ];
