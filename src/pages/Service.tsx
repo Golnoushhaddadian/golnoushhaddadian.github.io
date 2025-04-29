@@ -1,95 +1,123 @@
 
-import { Award, BookText, FileText, Users } from "lucide-react";
+import { Award, Trophy, FileText, Users, Star } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const Service = () => {
   const professionalService = [
     {
+      year: "2025",
       role: "Scholarships Reviewer",
       organization: "ISLS/ICLS - The International Society of the Learning Sciences Travel to Helsinki Scholarships (Equity Travel Support and ILSSA Annual Meeting Scholarship)",
-      period: "2025",
-      description: ""
+      description: "",
+      icon: <Star className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "2025",
       role: "Student Representative and Proposal Evaluator",
       organization: "Faculty Technology Initiatives, College of Education and Human Development, Georgia State University",
-      period: "2025",
-      description: ""
+      description: "",
+      icon: <Users className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Journal Reviewer",
       organization: "Innovations in Education and Teaching International",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <FileText className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Journal Reviewer",
       organization: "Education and Information Technologies",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <FileText className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Journal Reviewer",
       organization: "Computer Assisted Language Learning",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <FileText className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Journal Reviewer",
       organization: "Computer-Assisted Language Learning Electronic Journal",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <FileText className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Program Committee Member",
       organization: "ISLS/ICLS - The International Society of the Learning Sciences",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <Users className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Program Committee Member",
       organization: "SITE - Society for Information Technology and Teacher Education",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <Users className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Program Committee Member",
       organization: "AECT International Convention - Association for Educational Communications & Technology",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <Users className="h-10 w-10 text-primary/60 mb-2" />
     },
     {
+      year: "Since 2024",
       role: "Program Committee Member",
       organization: "ACM Learning @ Scale - Georgia Institute of Technology",
-      period: "Since 2024",
-      description: ""
+      description: "",
+      icon: <Users className="h-10 w-10 text-primary/60 mb-2" />
     }
   ];
 
   return (
     <section className="space-y-8">
-      <div className="relative mb-8">
-        <div className="bg-black py-4 px-6 text-white text-center rounded-sm">
-          <h1 className="text-xl font-semibold">Professional Service</h1>
-        </div>
+      <div>
+        <h1 className="flex items-center gap-2">
+          <Award className="h-8 w-8 text-primary" />
+          Professional Service
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          Academic and professional contributions to the field.
+        </p>
       </div>
 
-      <div className="flex items-center gap-2 mb-6">
-        <FileText className="h-6 w-6 text-primary" />
-        <h2 className="text-2xl font-semibold">Academic & Professional Service</h2>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-5">
         {professionalService.map((item, index) => (
-          <Card key={index} className="overflow-hidden hover:shadow-md transition-shadow">
-            <CardHeader className="bg-muted/30">
-              <CardTitle className="text-xl">{item.role}</CardTitle>
-              <CardDescription className="line-clamp-2 text-foreground/70">{item.organization}</CardDescription>
-            </CardHeader>
-            <CardContent className="pt-4">
-              <p className="text-sm font-medium text-primary">{item.period}</p>
-              {item.description && <p className="mt-2 text-muted-foreground">{item.description}</p>}
-            </CardContent>
+          <Card key={index} className="overflow-hidden transition-shadow hover:shadow-md">
+            <div className="flex flex-col md:flex-row">
+              <div className="flex items-center justify-center md:justify-start p-6 bg-primary/5 md:w-48 shrink-0">
+                <div className="flex flex-col items-center">
+                  {item.icon}
+                  <span className="text-lg font-medium">{item.year}</span>
+                </div>
+              </div>
+              
+              <div className="flex-1 p-6">
+                <CardHeader className="p-0 pb-3">
+                  <div className="flex flex-wrap gap-2 items-center mb-2">
+                    <CardTitle>{item.role}</CardTitle>
+                  </div>
+                  {item.organization && (
+                    <CardDescription className="text-base">
+                      {item.organization}
+                    </CardDescription>
+                  )}
+                </CardHeader>
+                {item.description && (
+                  <CardContent className="p-0 pt-2">
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                  </CardContent>
+                )}
+              </div>
+            </div>
           </Card>
         ))}
       </div>
