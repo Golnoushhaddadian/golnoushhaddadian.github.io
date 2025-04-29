@@ -1,29 +1,29 @@
 
-import { Award, FileText, Users, Star } from "lucide-react";
+import { Award, Users, FileText } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
 const Service = () => {
-  const professionalService = [
+  const services = [
     {
       year: "2025",
       role: "Scholarships Reviewer",
-      organization: "ISLS/ICLS - The International Society of the Learning Sciences Travel to Helsinki Scholarships (Equity Travel Support and ILSSA Annual Meeting Scholarship)",
-      description: "",
-      icon: <Star className="h-10 w-10" />,
+      organization: "ISLS/ICLS - The International Society of the Learning Sciences",
+      description: "Travel to Helsinki Scholarships (Equity Travel Support and ILSSA Annual Meeting Scholarship)",
+      icon: <FileText className="h-10 w-10" />,
       color: "bg-blue-100 dark:bg-blue-950"
     },
     {
       year: "2025",
       role: "Student Representative and Proposal Evaluator",
-      organization: "Faculty Technology Initiatives, College of Education and Human Development, Georgia State University",
-      description: "",
+      organization: "Faculty Technology Initiatives",
+      description: "College of Education and Human Development, Georgia State University",
       icon: <Users className="h-10 w-10" />,
       color: "bg-violet-100 dark:bg-violet-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Journal Reviewer",
       organization: "Innovations in Education and Teaching International",
       description: "",
@@ -31,7 +31,7 @@ const Service = () => {
       color: "bg-green-100 dark:bg-green-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Journal Reviewer",
       organization: "Education and Information Technologies",
       description: "",
@@ -39,7 +39,7 @@ const Service = () => {
       color: "bg-amber-100 dark:bg-amber-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Journal Reviewer",
       organization: "Computer Assisted Language Learning",
       description: "",
@@ -47,7 +47,7 @@ const Service = () => {
       color: "bg-teal-100 dark:bg-teal-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Journal Reviewer",
       organization: "Computer-Assisted Language Learning Electronic Journal",
       description: "",
@@ -55,7 +55,7 @@ const Service = () => {
       color: "bg-pink-100 dark:bg-pink-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Program Committee Member",
       organization: "ISLS/ICLS - The International Society of the Learning Sciences",
       description: "",
@@ -63,7 +63,7 @@ const Service = () => {
       color: "bg-indigo-100 dark:bg-indigo-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Program Committee Member",
       organization: "SITE - Society for Information Technology and Teacher Education",
       description: "",
@@ -71,7 +71,7 @@ const Service = () => {
       color: "bg-emerald-100 dark:bg-emerald-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Program Committee Member",
       organization: "AECT International Convention - Association for Educational Communications & Technology",
       description: "",
@@ -79,7 +79,7 @@ const Service = () => {
       color: "bg-orange-100 dark:bg-orange-950"
     },
     {
-      year: "Since 2024",
+      year: "2024",
       role: "Program Committee Member",
       organization: "ACM Learning @ Scale - Georgia Institute of Technology",
       description: "",
@@ -111,7 +111,7 @@ const Service = () => {
           Professional Service
         </h1>
         <p className="text-lg text-muted-foreground">
-          Academic and professional contributions to the field.
+          Academic and professional service contributions.
         </p>
       </div>
 
@@ -121,35 +121,31 @@ const Service = () => {
         initial="hidden"
         animate="show"
       >
-        {professionalService.map((item, index) => (
+        {services.map((service, index) => (
           <motion.div key={index} variants={item}>
             <Card className="overflow-hidden transition-shadow hover:shadow-md border-l-4 border-primary">
               <div className="flex flex-col md:flex-row">
-                <div className={`flex items-center justify-center md:justify-start p-6 ${item.color} md:w-48 shrink-0`}>
+                <div className={`flex items-center justify-center md:justify-start p-6 ${service.color} md:w-48 shrink-0`}>
                   <div className="flex flex-col items-center">
                     <div className="bg-background/90 rounded-full p-3 mb-2">
-                      {item.icon}
+                      {service.icon}
                     </div>
-                    <span className="text-lg font-medium">{item.year}</span>
+                    <span className="text-lg font-medium">{service.year}</span>
                   </div>
                 </div>
                 
                 <div className="flex-1 p-6">
                   <CardHeader className="p-0 pb-3">
                     <div className="flex flex-wrap gap-2 items-center mb-2">
-                      <CardTitle>{item.role}</CardTitle>
+                      <CardTitle>{service.role}</CardTitle>
                     </div>
-                    {item.organization && (
-                      <CardDescription className="text-base">
-                        {item.organization}
-                      </CardDescription>
+                    <CardDescription className="text-base">
+                      {service.organization}
+                    </CardDescription>
+                    {service.description && (
+                      <p className="text-sm text-muted-foreground mt-1">{service.description}</p>
                     )}
                   </CardHeader>
-                  {item.description && (
-                    <CardContent className="p-0 pt-2">
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
-                    </CardContent>
-                  )}
                 </div>
               </div>
             </Card>

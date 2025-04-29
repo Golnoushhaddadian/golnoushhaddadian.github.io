@@ -74,7 +74,7 @@ const Awards = () => {
       title: "Ranked 1st in GPA for Master's Degree",
       organization: "",
       description: "",
-      location: "",
+      location: "Sharif University of Technology, Tehran, Iran",
       icon: <GraduationCap className="h-10 w-10" />,
       color: "bg-emerald-100 dark:bg-emerald-950"
     },
@@ -110,7 +110,7 @@ const Awards = () => {
       title: "Ranked 1st in GPA for Bachelor's Degree",
       organization: "",
       description: "",
-      location: "",
+      location: "Kar Institute of Higher Education, Emam Khomeiny International University (Qazvin, Iran)",
       icon: <GraduationCap className="h-10 w-10" />,
       color: "bg-fuchsia-100 dark:bg-fuchsia-950"
     },
