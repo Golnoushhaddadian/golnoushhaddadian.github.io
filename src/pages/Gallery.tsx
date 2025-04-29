@@ -121,6 +121,25 @@ const galleryImages: GalleryImage[] = [
     description: "",
     category: "research"
   },
+  // New research images
+  {
+    src: "/lovable-uploads/fdc1799c-3c0e-4bf5-b1d3-813b11a1ca1c.png",
+    alt: "Researcher explaining Private AI curriculum poster at academic conference",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/ce144f88-d4b2-4005-b6e6-156bcaf449a1.png",
+    alt: "Researcher at AERA 2023 Annual Meeting registration area",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/21082eac-6384-443f-8100-fe4fe60caac7.png",
+    alt: "Researcher at AAAL 2025 Annual Conference in Denver",
+    description: "",
+    category: "research"
+  },
   
   // Awards images - newly added
   {
