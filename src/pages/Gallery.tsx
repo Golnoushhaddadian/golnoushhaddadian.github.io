@@ -14,7 +14,7 @@ type GalleryImage = {
 };
 
 const galleryImages: GalleryImage[] = [
-  // Teaching & Professional images - merged from both categories and removed duplicates
+  // Teaching & Professional images
   { 
     src: "/lovable-uploads/a23fd0a3-6057-45eb-ae13-68e9a74814e2.png", 
     alt: "Group photo with purple background",
@@ -48,12 +48,6 @@ const galleryImages: GalleryImage[] = [
   { 
     src: "/lovable-uploads/1329e185-b82c-45f9-b6f5-ba2435e240b6.png", 
     alt: "Group photo with blackboard in background",
-    description: "",
-    category: "teaching_professional"
-  },
-  { 
-    src: "/lovable-uploads/76d7583c-66c7-478b-878b-19cc3330e383.png", 
-    alt: "Person holding learning materials",
     description: "",
     category: "teaching_professional"
   },
@@ -152,6 +146,61 @@ const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/8081ed33-39b5-47a3-8659-98300dc65826.png",
     alt: "Two researchers at academic conference with purple lighting and exhibition hall",
+    description: "",
+    category: "research"
+  },
+  // New research images
+  {
+    src: "/lovable-uploads/a75afbd3-406d-464d-a46f-0f4457805f19.png",
+    alt: "Researcher presenting to audience in a conference room with large display screen",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/f49465bf-cc45-4487-81f6-20f6757d6db9.png",
+    alt: "AI-ALOE Institute research team group photo with green logo",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/2b6e6c4c-e99b-4398-838b-1ce6431dfa93.png",
+    alt: "AI-ALOE Institute faculty and staff group photo",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/f41ffdb7-ebdd-49c1-8529-e63d93cba58d.png",
+    alt: "Research team presenting posters at Georgia Tech with city view in background",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/a0b4a16a-0f4d-4b8c-8e25-a41d7e6c20f5.png",
+    alt: "Conference presentation with audience and AI-ALOE slides",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/ff7e9711-b669-42a3-abb0-f4401802e6d9.png",
+    alt: "Researcher giving presentation with colorful research slides",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/7830c47d-1774-4aef-9c7d-70b6f899bdfa.png",
+    alt: "Research team with academic poster on Private AI Curriculum",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/a2a3ce7b-78fa-4a39-900d-484680a04ec6.png",
+    alt: "Classroom full of students participating in research study",
+    description: "",
+    category: "research"
+  },
+  {
+    src: "/lovable-uploads/b55f53a7-d436-458c-ba89-aeeee09230cb.png",
+    alt: "Students in classroom with projector during research study",
     description: "",
     category: "research"
   },
