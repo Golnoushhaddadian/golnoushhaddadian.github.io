@@ -51,13 +51,15 @@ const AboutMe = () => {
 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-6">Research Interests</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {researchInterests.map((interest, index) => (
-              <Card key={index} className="overflow-hidden h-full aspect-square">
-                <CardContent className="p-6 flex flex-col justify-center h-full">
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1 flex-shrink-0">{interest.icon}</div>
-                    <p className="flex-1">{interest.text}</p>
+              <Card key={index} className="overflow-hidden h-48 aspect-square shadow-md hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-4 flex flex-col justify-center h-full">
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="p-2 bg-primary/10 rounded-full">
+                      {interest.icon}
+                    </div>
+                    <p className="text-sm">{interest.text}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -67,13 +69,17 @@ const AboutMe = () => {
 
         <section>
           <h2 className="text-2xl font-semibold mb-6">About Me</h2>
-          <p className="text-muted-foreground">
-            I am a Ph.D. Candidate in Learning Sciences at Georgia State University. My research 
-            focuses on the design and development of AI-augmented learning environments, 
-            particularly for enhancing writing instruction and feedback systems. I am part of 
-            the AI2 Research Laboratory, where we work on advancing more adaptable, engaged, 
-            equitable, and effective teaching and learning in various educational contexts.
-          </p>
+          <div className="prose max-w-none text-muted-foreground">
+            <p>
+              I am Golnoush (Lia) Haddadian, and I am thrilled to share my journey with you. As a passionate advocate for the transformative power of education and technology, I have dedicated my career to creating inclusive, innovative learning environments that empower all learners. From my early days designing interactive learning tools in high school to my current work as a Ph.D. candidate in Educational Technology at Georgia State University, my mission has always been to bridge gaps in education and open new pathways to success.
+            </p>
+            <p>
+              Here, you will find insights into my work at the intersection of learning sciences, artificial intelligence, and educational access. My research focuses on developing personalized, AI-augmented learning tools designed to support diverse learners and foster meaningful, lasting growth. I am especially committed to supporting adult learners, advancing global literacy, and building scalable, accessible learning solutions for all.
+            </p>
+            <p>
+              I invite you to explore my projects, publications, and initiatives aimed at making education more equitable and effective worldwide. Thank you for visiting and joining me on this journey of learning, innovation, and positive change. I hope my work inspires you as much as the pursuit of knowledge continues to inspire me.
+            </p>
+          </div>
         </section>
       </div>
     </div>
