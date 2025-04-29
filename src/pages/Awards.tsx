@@ -2,6 +2,7 @@
 import { Award, Trophy, Medal, GraduationCap, Star } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 const Awards = () => {
   const awards = [
@@ -11,7 +12,8 @@ const Awards = () => {
       organization: "AI in Education Interest Group, The AI Institutes Virtual Organization (AIVO)",
       description: "Awarded to selected graduate researchers representing five major AI in Education Institutes across U.S. (iSAT, AI-ALOE, EngageAI, AI4ExceptionalEd, and INVITE). AIVO acts as a central hub connecting the 27 major AI Institutes across U.S., supporting research that advances U.S. innovation and well-being. Funded by the National Science Foundation and Google.org.",
       location: "AIVO, Washington, DC",
-      icon: <Medal className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Medal className="h-10 w-10" />,
+      color: "bg-blue-100 dark:bg-blue-950"
     },
     {
       year: "2025",
@@ -19,7 +21,8 @@ const Awards = () => {
       organization: "College of Education & Human Development (CEHD)",
       description: "Given to a student who has demonstrated potential for excellence in research, teaching and service in instructional technology.",
       location: "Georgia State University, Atlanta, GA",
-      icon: <Trophy className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Trophy className="h-10 w-10" />,
+      color: "bg-violet-100 dark:bg-violet-950"
     },
     {
       year: "2025",
@@ -27,7 +30,8 @@ const Awards = () => {
       organization: "College of Education & Human Development (CEHD), Learning Technology Department",
       description: "",
       location: "Georgia State University, Atlanta, GA",
-      icon: <Award className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Award className="h-10 w-10" />,
+      color: "bg-green-100 dark:bg-green-950"
     },
     {
       year: "2024",
@@ -35,7 +39,8 @@ const Awards = () => {
       organization: "College of Education & Human Development (CEHD), Learning Technology Department",
       description: "",
       location: "Georgia State University, Atlanta, GA",
-      icon: <Award className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Award className="h-10 w-10" />,
+      color: "bg-amber-100 dark:bg-amber-950"
     },
     {
       year: "2024",
@@ -43,7 +48,8 @@ const Awards = () => {
       organization: "Association for the Advancement of Computing in Education (AACE)",
       description: "Awarded to papers distinguished as outstanding by the AACE Program Committee for exceptional quality, originality, and significant scholarly contribution.",
       location: "Society for Information Technology & Teacher Education, Las Vegas, Nevada & Waynesville, NC",
-      icon: <Star className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Star className="h-10 w-10" />,
+      color: "bg-teal-100 dark:bg-teal-950"
     },
     {
       year: "2023",
@@ -51,7 +57,8 @@ const Awards = () => {
       organization: "College of Education & Human Development (CEHD), Learning Technology Department",
       description: "Given to three PhD students who demonstrate exceptional scholarship and academic potential in the Learning Technologies (LT) department.",
       location: "Georgia State University, Atlanta, GA",
-      icon: <Medal className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Medal className="h-10 w-10" />,
+      color: "bg-pink-100 dark:bg-pink-950"
     },
     {
       year: "2023",
@@ -59,7 +66,8 @@ const Awards = () => {
       organization: "College of Education & Human Development (CEHD), Learning Technology Department",
       description: "",
       location: "Georgia State University, Atlanta, GA",
-      icon: <Award className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Award className="h-10 w-10" />,
+      color: "bg-indigo-100 dark:bg-indigo-950"
     },
     {
       year: "2014",
@@ -67,7 +75,8 @@ const Awards = () => {
       organization: "",
       description: "",
       location: "",
-      icon: <GraduationCap className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <GraduationCap className="h-10 w-10" />,
+      color: "bg-emerald-100 dark:bg-emerald-950"
     },
     {
       year: "2013",
@@ -75,7 +84,8 @@ const Awards = () => {
       organization: "Balan Language Academy",
       description: "",
       location: "Tehran, Iran",
-      icon: <Award className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Award className="h-10 w-10" />,
+      color: "bg-orange-100 dark:bg-orange-950"
     },
     {
       year: "2012",
@@ -83,7 +93,8 @@ const Awards = () => {
       organization: "National Organization for Development of Exceptional Talents",
       description: "",
       location: "Tehran, Iran",
-      icon: <Star className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Star className="h-10 w-10" />,
+      color: "bg-cyan-100 dark:bg-cyan-950"
     },
     {
       year: "2012",
@@ -91,7 +102,8 @@ const Awards = () => {
       organization: "",
       description: "",
       location: "Tehran, Iran",
-      icon: <Medal className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Medal className="h-10 w-10" />,
+      color: "bg-lime-100 dark:bg-lime-950"
     },
     {
       year: "2012",
@@ -99,7 +111,8 @@ const Awards = () => {
       organization: "",
       description: "",
       location: "",
-      icon: <GraduationCap className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <GraduationCap className="h-10 w-10" />,
+      color: "bg-fuchsia-100 dark:bg-fuchsia-950"
     },
     {
       year: "2010",
@@ -107,7 +120,8 @@ const Awards = () => {
       organization: "Aryana Fanavaran Institute of Technology",
       description: "",
       location: "Tehran, Iran",
-      icon: <Award className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Award className="h-10 w-10" />,
+      color: "bg-yellow-100 dark:bg-yellow-950"
     },
     {
       year: "2006",
@@ -115,7 +129,8 @@ const Awards = () => {
       organization: "Young Researchers and Elite Club",
       description: "",
       location: "Tehran, Iran",
-      icon: <Star className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Star className="h-10 w-10" />,
+      color: "bg-purple-100 dark:bg-purple-950"
     },
     {
       year: "2005",
@@ -123,9 +138,25 @@ const Awards = () => {
       organization: "Shahid Shamloo High School",
       description: "",
       location: "Tehran, Iran",
-      icon: <Star className="h-10 w-10 text-primary/60 mb-2" />
+      icon: <Star className="h-10 w-10" />,
+      color: "bg-rose-100 dark:bg-rose-950"
     }
   ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
 
   return (
     <section className="space-y-8">
@@ -139,43 +170,52 @@ const Awards = () => {
         </p>
       </div>
 
-      <div className="space-y-5">
+      <motion.div 
+        className="space-y-5"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         {awards.map((award, index) => (
-          <Card key={index} className="overflow-hidden transition-shadow hover:shadow-md">
-            <div className="flex flex-col md:flex-row">
-              <div className="flex items-center justify-center md:justify-start p-6 bg-primary/5 md:w-48 shrink-0">
-                <div className="flex flex-col items-center">
-                  {award.icon}
-                  <span className="text-lg font-medium">{award.year}</span>
+          <motion.div key={index} variants={item}>
+            <Card className="overflow-hidden transition-shadow hover:shadow-md border-l-4 border-primary">
+              <div className="flex flex-col md:flex-row">
+                <div className={`flex items-center justify-center md:justify-start p-6 ${award.color} md:w-48 shrink-0`}>
+                  <div className="flex flex-col items-center">
+                    <div className="bg-background/90 rounded-full p-3 mb-2">
+                      {award.icon}
+                    </div>
+                    <span className="text-lg font-medium">{award.year}</span>
+                  </div>
+                </div>
+                
+                <div className="flex-1 p-6">
+                  <CardHeader className="p-0 pb-3">
+                    <div className="flex flex-wrap gap-2 items-center mb-2">
+                      <CardTitle>{award.title}</CardTitle>
+                    </div>
+                    {award.organization && (
+                      <CardDescription className="text-base">
+                        {award.organization}
+                      </CardDescription>
+                    )}
+                    {award.location && (
+                      <Badge variant="outline" className="mt-1">
+                        {award.location}
+                      </Badge>
+                    )}
+                  </CardHeader>
+                  {award.description && (
+                    <CardContent className="p-0 pt-2">
+                      <p className="text-sm text-muted-foreground">{award.description}</p>
+                    </CardContent>
+                  )}
                 </div>
               </div>
-              
-              <div className="flex-1 p-6">
-                <CardHeader className="p-0 pb-3">
-                  <div className="flex flex-wrap gap-2 items-center mb-2">
-                    <CardTitle>{award.title}</CardTitle>
-                  </div>
-                  {award.organization && (
-                    <CardDescription className="text-base">
-                      {award.organization}
-                    </CardDescription>
-                  )}
-                  {award.location && (
-                    <Badge variant="outline" className="mt-1">
-                      {award.location}
-                    </Badge>
-                  )}
-                </CardHeader>
-                {award.description && (
-                  <CardContent className="p-0 pt-2">
-                    <p className="text-sm text-muted-foreground">{award.description}</p>
-                  </CardContent>
-                )}
-              </div>
-            </div>
-          </Card>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

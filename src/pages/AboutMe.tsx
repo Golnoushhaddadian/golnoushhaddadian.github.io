@@ -22,8 +22,7 @@ const AboutMe = () => {
             <p className="text-xl text-muted-foreground mb-4">Ph.D. Candidate in Learning Sciences</p>
             <p className="mb-6">
               Graduate Research Associate at Georgia State University, College of Education and Human Development,
-              Department of Learning Sciences. My research focuses on AI-augmented learning environments, 
-              formative assessment systems, and educational technology.
+              Department of Learning Sciences.
             </p>
           </div>
         </div>
