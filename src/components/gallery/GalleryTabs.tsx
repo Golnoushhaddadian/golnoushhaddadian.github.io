@@ -11,17 +11,12 @@ interface GalleryTabsProps {
 
 export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProps) => {
   return (
-    <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
+    <Tabs defaultValue="awards" value={activeTab} onValueChange={setActiveTab} className="w-full">
       <TabsList className="mb-6 w-full sm:w-auto">
-        <TabsTrigger value="all">All Photos</TabsTrigger>
         <TabsTrigger value="awards">Awards</TabsTrigger>
         <TabsTrigger value="research">Research</TabsTrigger>
         <TabsTrigger value="teaching">Teaching</TabsTrigger>
       </TabsList>
-      
-      <TabsContent value="all" className="mt-0">
-        <GalleryGrid images={images} />
-      </TabsContent>
       
       <TabsContent value="awards" className="mt-0">
         <GalleryGrid images={images.filter(image => image.category === "awards")} />
