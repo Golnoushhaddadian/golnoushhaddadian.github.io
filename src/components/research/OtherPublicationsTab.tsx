@@ -1,62 +1,75 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { NonRefereedPublication, WorkUnderReview } from "@/types/research";
+import React from 'react';
+import { Card, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { NON_REFEREED, UNDER_REVIEW } from "@/data/researchData";
+import { NonRefereedPublication, WorkUnderReview } from '@/types/research';
 
-interface OtherPublicationsTabProps {
-  nonRefereedPublications: NonRefereedPublication[];
-  workUnderReview: WorkUnderReview[];
-}
-
-export const OtherPublicationsTab = ({ nonRefereedPublications, workUnderReview }: OtherPublicationsTabProps) => {
+export const OtherPublicationsTab = () => {
   return (
-    <div className="space-y-6">
-      <Card className="border-l-4 border-primary overflow-hidden">
-        <CardHeader className="bg-primary/5">
-          <CardTitle>Non-Refereed Publications ({nonRefereedPublications.length})</CardTitle>
-          <CardDescription>Research reports, preprints, and other non-peer-reviewed publications</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-6">
-            {nonRefereedPublications.map((pub, index) => (
-              <li key={index} className="border-b pb-5 last:border-0">
-                <p className="font-semibold text-lg mb-1">{pub.title}</p>
-                <p className="mb-1 text-primary/80">{pub.authors}</p>
-                <p className="text-sm text-muted-foreground">
-                  <span>{pub.journal}</span>
-                  {pub.year && <span> ({pub.year})</span>}
-                </p>
-              </li>
+    <div className="space-y-8">
+      {UNDER_REVIEW.length > 0 && (
+        <div>
+          <h3 className="text-xl font-semibold mb-4">Work Under Review</h3>
+          <div className="space-y-6">
+            {UNDER_REVIEW.map((work: WorkUnderReview, index: number) => (
+              <Card key={index} className="overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="mb-3 flex gap-2">
+                    {work.keywords?.map((keyword, i) => (
+                      <Badge key={i} variant="outline" className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/20">
+                        {keyword}
+                      </Badge>
+                    ))}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{work.title}</h3>
+                  <p className="text-muted-foreground mb-3">{work.authors.join(', ')}</p>
+                  <CardDescription className="text-sm text-muted-foreground">
+                    {work.journal || work.conference}, {work.year}
+                  </CardDescription>
+                  {/* Remove references to the status property which doesn't exist in the type */}
+                </CardContent>
+              </Card>
             ))}
-          </ul>
-        </CardContent>
-      </Card>
+          </div>
+        </div>
+      )}
 
-      <Card className="border-l-4 border-primary overflow-hidden">
-        <CardHeader className="bg-primary/5">
-          <CardTitle>Work Under Review/In Revision ({workUnderReview.length})</CardTitle>
-          <CardDescription>Manuscripts submitted to journals or in revision</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-6">
-            {workUnderReview.map((work, index) => (
-              <li key={index} className="border-b pb-5 last:border-0">
-                <p className="font-semibold text-lg mb-1">{work.title}</p>
-                <p className="mb-1 text-primary/80">{work.authors}</p>
-                <p className="text-sm text-muted-foreground">
-                  <span>{work.journal}</span>
-                  <span> ({work.year})</span>
-                </p>
-                {work.status && (
-                  <Badge variant="outline" className="mt-2 bg-primary/5">
-                    {work.status}
-                  </Badge>
-                )}
-              </li>
+      {NON_REFEREED.length > 0 && (
+        <div>
+          <h3 className="text-xl font-semibold mb-4">Non-Refereed Publications</h3>
+          <div className="space-y-6">
+            {NON_REFEREED.map((pub: NonRefereedPublication, index: number) => (
+              <Card key={index} className="overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="mb-3 flex gap-2">
+                    {pub.keywords?.map((keyword, i) => (
+                      <Badge key={i} variant="outline" className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/20">
+                        {keyword}
+                      </Badge>
+                    ))}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{pub.title}</h3>
+                  <p className="text-muted-foreground mb-3">{pub.authors.join(', ')}</p>
+                  <CardDescription className="text-sm text-muted-foreground">
+                    {pub.publication}, {pub.year}
+                  </CardDescription>
+                </CardContent>
+                <CardFooter className="bg-muted/50 px-6 py-3">
+                  {pub.url && (
+                    <Button variant="outline" size="sm" className="ml-auto gap-1">
+                      <ExternalLink className="h-4 w-4 mr-1" />
+                      View Publication
+                    </Button>
+                  )}
+                </CardFooter>
+              </Card>
             ))}
-          </ul>
-        </CardContent>
-      </Card>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

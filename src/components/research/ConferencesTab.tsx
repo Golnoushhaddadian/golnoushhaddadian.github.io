@@ -1,40 +1,42 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ConferenceProceeding } from "@/types/research";
+import React from 'react';
+import { Card, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { CONFERENCES } from "@/data/researchData";
+import { ConferenceProceeding } from '@/types/research';
 
-interface ConferencesTabProps {
-  proceedings: ConferenceProceeding[];
-}
-
-export const ConferencesTab = ({ proceedings }: ConferencesTabProps) => {
+export const ConferencesTab = () => {
   return (
-    <Card className="border-l-4 border-primary overflow-hidden">
-      <CardHeader className="bg-primary/5">
-        <CardTitle>Refereed Conference Proceedings ({proceedings.length})</CardTitle>
-        <CardDescription>Peer-reviewed papers presented at academic conferences</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ul className="space-y-6">
-          {proceedings.map((proc, index) => (
-            <li key={index} className="border-b pb-5 last:border-0">
-              <p className="font-semibold text-lg mb-1">{proc.title}</p>
-              <p className="mb-1 text-primary/80">{proc.authors}</p>
-              <p className="text-sm text-muted-foreground">
-                <span>{proc.conference}</span>
-                {proc.pages && <span>, pp. {proc.pages}</span>}
-                {proc.publisher && <span>. {proc.publisher}</span>}
-                {proc.year && <span> ({proc.year})</span>}
-              </p>
-              {proc.doi && (
-                <Badge variant="outline" className="mt-2 bg-primary/5">
-                  DOI: {proc.doi}
+    <div className="space-y-6">
+      {CONFERENCES.map((conference: ConferenceProceeding, index: number) => (
+        <Card key={index} className="overflow-hidden">
+          <CardContent className="p-6">
+            <div className="mb-3 flex gap-2">
+              {conference.keywords?.map((keyword, i) => (
+                <Badge key={i} variant="outline" className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/20">
+                  {keyword}
                 </Badge>
-              )}
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+              ))}
+            </div>
+            <h3 className="text-lg font-semibold mb-2">{conference.title}</h3>
+            <p className="text-muted-foreground mb-3">{conference.authors.join(', ')}</p>
+            <CardDescription className="text-sm text-muted-foreground">
+              {conference.conference}, {conference.year}
+            </CardDescription>
+            {/* Remove references to the doi property which doesn't exist in the type */}
+          </CardContent>
+          <CardFooter className="bg-muted/50 px-6 py-3">
+            {conference.url && (
+              <Button variant="outline" size="sm" className="ml-auto gap-1">
+                <ExternalLink className="h-4 w-4 mr-1" />
+                View Publication
+              </Button>
+            )}
+          </CardFooter>
+        </Card>
+      ))}
+    </div>
   );
 };

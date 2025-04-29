@@ -1,37 +1,32 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { WorkInProgress } from "@/types/research";
+import React from 'react';
+import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { WORK_IN_PROGRESS } from "@/data/researchData";
+import { WorkInProgress } from '@/types/research';
 
-interface WorkInProgressTabProps {
-  workInProgress: WorkInProgress[];
-}
-
-export const WorkInProgressTab = ({ workInProgress }: WorkInProgressTabProps) => {
+export const WorkInProgressTab = () => {
   return (
-    <Card className="border-l-4 border-primary overflow-hidden">
-      <CardHeader className="bg-primary/5">
-        <CardTitle>Work In Progress ({workInProgress.length})</CardTitle>
-        <CardDescription>Ongoing research projects and manuscripts in preparation</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ul className="space-y-6">
-          {workInProgress.map((work, index) => (
-            <li key={index} className="border-b pb-5 last:border-0">
-              <p className="font-semibold text-lg mb-1">{work.title}</p>
-              <p className="mb-1 text-primary/80">{work.authors}</p>
-              <p className="text-sm text-muted-foreground">
-                <span>{work.type}</span>
-              </p>
-              {work.status && (
-                <Badge variant="outline" className="mt-2 bg-primary/5">
-                  {work.status}
+    <div className="space-y-6">
+      {WORK_IN_PROGRESS.map((work: WorkInProgress, index: number) => (
+        <Card key={index} className="overflow-hidden">
+          <CardContent className="p-6">
+            <div className="mb-3 flex gap-2">
+              {work.keywords?.map((keyword, i) => (
+                <Badge key={i} variant="outline" className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/20">
+                  {keyword}
                 </Badge>
-              )}
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+              ))}
+            </div>
+            <h3 className="text-lg font-semibold mb-2">{work.title}</h3>
+            <p className="text-muted-foreground mb-3">{work.authors.join(', ')}</p>
+            <CardDescription className="text-sm text-muted-foreground">
+              {work.year}
+            </CardDescription>
+            {/* Remove references to the status property which doesn't exist in the type */}
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 };
