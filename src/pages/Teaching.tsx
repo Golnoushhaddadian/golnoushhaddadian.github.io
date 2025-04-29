@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { School, BookOpen, Users } from "lucide-react";
+import { School, BookOpen, Users, GraduationCap } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { motion } from "framer-motion";
 
 const Teaching = () => {
   const courses = [
@@ -90,6 +91,21 @@ const Teaching = () => {
     "I strive to meet diverse learning needs by providing multiple pathways to understanding complex concepts. This includes visual learning aids, hands-on activities, and opportunities for collaborative problem-solving."
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
     <section className="space-y-8">
       <div>
@@ -113,56 +129,69 @@ const Teaching = () => {
 
       <div className="space-y-6">
         <div className="flex items-center gap-2">
-          <Users className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-semibold">Mentorship Experience</h2>
+          <School className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-semibold">Teaching Positions</h2>
         </div>
-        <div className="space-y-6">
-          {mentorships.map((mentorship, index) => (
-            <Card key={index} className="overflow-hidden">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">{mentorship.program}</CardTitle>
-                <CardDescription className="flex justify-between items-center">
-                  <span>{mentorship.role}</span>
-                  <span className="text-sm bg-muted px-3 py-1 rounded-full">{mentorship.year}</span>
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-2">
-                <p className="text-sm text-muted-foreground">{mentorship.description}</p>
-              </CardContent>
-              {index < mentorships.length - 1 && <Separator className="my-1" />}
-            </Card>
+        <motion.div 
+          className="space-y-6"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          {courses.map((course, index) => (
+            <motion.div key={index} variants={item}>
+              <Card key={index} className="overflow-hidden border-l-4 border-primary">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xl">{course.institution}</CardTitle>
+                  <CardDescription className="flex justify-between items-center">
+                    <span>{course.position}</span>
+                    <span className="text-sm bg-muted px-3 py-1 rounded-full">{course.period}</span>
+                  </CardDescription>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Users className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">{course.audience}</span>
+                  </div>
+                </CardHeader>
+                {course.description && (
+                  <CardContent className="pt-2">
+                    <p className="text-sm text-muted-foreground">{course.description}</p>
+                  </CardContent>
+                )}
+                {index < courses.length - 1 && <Separator className="my-1" />}
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <div className="space-y-6">
         <div className="flex items-center gap-2">
-          <School className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-semibold">Teaching Positions</h2>
+          <GraduationCap className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-semibold">Mentorship Experience</h2>
         </div>
-        <div className="space-y-6">
-          {courses.map((course, index) => (
-            <Card key={index} className="overflow-hidden">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">{course.institution}</CardTitle>
-                <CardDescription className="flex justify-between items-center">
-                  <span>{course.position}</span>
-                  <span className="text-sm bg-muted px-3 py-1 rounded-full">{course.period}</span>
-                </CardDescription>
-                <div className="flex items-center gap-2 mt-1">
-                  <Users className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm text-muted-foreground">{course.audience}</span>
-                </div>
-              </CardHeader>
-              {course.description && (
+        <motion.div 
+          className="space-y-6"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          {mentorships.map((mentorship, index) => (
+            <motion.div key={index} variants={item}>
+              <Card className="overflow-hidden border-l-4 border-violet-500 dark:border-violet-400 bg-violet-50 dark:bg-violet-900/20">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xl">{mentorship.program}</CardTitle>
+                  <CardDescription className="flex justify-between items-center">
+                    <span>{mentorship.role}</span>
+                    <span className="text-sm bg-violet-100 dark:bg-violet-800/60 text-violet-800 dark:text-violet-200 px-3 py-1 rounded-full">{mentorship.year}</span>
+                  </CardDescription>
+                </CardHeader>
                 <CardContent className="pt-2">
-                  <p className="text-sm text-muted-foreground">{course.description}</p>
+                  <p className="text-sm text-muted-foreground">{mentorship.description}</p>
                 </CardContent>
-              )}
-              {index < courses.length - 1 && <Separator className="my-1" />}
-            </Card>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
