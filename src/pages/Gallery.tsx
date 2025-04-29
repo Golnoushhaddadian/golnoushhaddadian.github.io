@@ -140,10 +140,16 @@ const galleryImages: GalleryImage[] = [
     description: "",
     category: "research"
   },
-  // New research image
   {
     src: "/lovable-uploads/2017d879-59f0-4a26-b6b1-e374cc61884f.png",
     alt: "Researcher asking question with microphone at academic conference with purple lighting",
+    description: "",
+    category: "research"
+  },
+  // New research image
+  {
+    src: "/lovable-uploads/f218bae5-c8c6-49f7-b0a0-d361b555f43a.png",
+    alt: "Researcher presenting about AI and Machine Learning with colorful diagram on screen",
     description: "",
     category: "research"
   },
