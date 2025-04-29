@@ -10,7 +10,7 @@ import Layout from "@/components/Layout";
 // Page components
 import AboutMe from "@/pages/AboutMe";
 import Awards from "@/pages/Awards";
-import ResearchInterests from "@/pages/ResearchInterests";
+import Projects from "@/pages/Projects";
 import Research from "@/pages/Research";
 import Teaching from "@/pages/Teaching";
 import Service from "@/pages/Service";
@@ -32,7 +32,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<AboutMe />} />
               <Route path="/awards" element={<Awards />} />
-              <Route path="/research-interests" element={<ResearchInterests />} />
+              <Route path="/projects" element={<Projects />} />
               <Route path="/research" element={<Research />} />
               <Route path="/teaching" element={<Teaching />} />
               <Route path="/service" element={<Service />} />

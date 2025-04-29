@@ -1,98 +1,127 @@
 
-import { Briefcase, ArrowRightIcon, ExternalLink } from "lucide-react";
+import { BookOpen, FileText, FileCode, Book, GraduationCap, Clock } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 const Projects = () => {
   const projects = [
     {
-      title: "Project Title 1",
-      type: "Research Project",
-      period: "2022 - Present",
-      description: "This project investigates [research question] using [methodological approach]. Key outcomes include the development of [outcome 1] and [outcome 2] with applications in [field].",
-      technologies: ["Technology 1", "Technology 2", "Technology 3"],
-      link: "#",
-      imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+      title: "Module on Responsible Use of Generative Artificial Intelligence",
+      type: "Curriculum Development",
+      period: "Summer 2024",
+      description: "This module is a part of the Computer Skills for the Information Age course (LT2010) offered at Georgia State University. It is an intensive 2-week asynchronous module delivered in iCollege platform designed to provide undergraduate students with an understanding of the responsible use of GenAI. In this module, students understand and explore GenAI, doing hands-on activities. They will further explore the ethical considerations regarding the use of GenAI and further learn about how to implement responsible AI and act responsibly. The module emphasizes hands-on experience and real-world applications of GenAI.",
+      audience: "Undergraduate Students",
+      icon: <FileCode className="h-10 w-10" />,
+      color: "bg-blue-100 dark:bg-blue-950"
     },
     {
-      title: "Project Title 2",
-      type: "Collaborative Research",
-      period: "2021 - 2022",
-      description: "A collaborative effort with [collaborator] to address [problem statement]. This work resulted in [significant outcome] that improved [metric] by [percentage].",
-      technologies: ["Technology 4", "Technology 5", "Technology 6"],
-      link: "#",
-      imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475"
+      title: "Private Artificial Intelligence Curriculum",
+      type: "Curriculum Development",
+      period: "2021 to 2023",
+      description: "This advanced course is designed to provide graduate students with a deep understanding of private artificial intelligence. It covers a range of topics, including modules on privacy attacks, data and model privacy, privacy-preserving machine learning based on different techniques such differential privacy (DP). The curriculum is modular, allowing instructors to adapt the entire course or select specific modules to integrate into their existing courses.",
+      audience: "Graduate Students",
+      modules: "10 modules",
+      icon: <Book className="h-10 w-10" />,
+      color: "bg-violet-100 dark:bg-violet-950"
     },
     {
-      title: "Project Title 3",
-      type: "Industry Partnership",
-      period: "2020 - 2021",
-      description: "Partnered with [industry partner] to develop [solution] for [industry need]. The project successfully delivered [outcome] that is now being used in [application].",
-      technologies: ["Technology 7", "Technology 8", "Technology 9"],
-      link: "#",
-      imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+      title: "TOEFL Standard/Intensive Courses",
+      type: "Curriculum Development",
+      period: "Since 2015, updated regularly",
+      description: "These courses provide a comprehensive study of all four language skills—reading, writing, listening, and speaking—alongside grammar and vocabulary. The 5-week version is an accelerated and modified course designed to maximize learning in a shorter time frame.",
+      audience: "Undergraduate and Graduate Students",
+      duration: "10-Week/5-Week Curriculum",
+      icon: <BookOpen className="h-10 w-10" />,
+      color: "bg-green-100 dark:bg-green-950"
+    },
+    {
+      title: "GRE Standard Course",
+      type: "Curriculum Development",
+      period: "Since 2019, updated regularly",
+      description: "This course is designed to equip students with the essential skills needed to excel in the GRE exam. With a focus on the analytical writing and verbal reasoning sections, students are guided through a comprehensive curriculum that covers key strategies, techniques, and practice exercises.",
+      audience: "Undergraduate and Graduate Students",
+      duration: "10-Week Curriculum",
+      icon: <GraduationCap className="h-10 w-10" />,
+      color: "bg-amber-100 dark:bg-amber-950"
     }
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
     <section className="space-y-8">
-      <div>
-        <h1>Projects</h1>
+      <div className="mb-10">
+        <h1 className="text-3xl font-bold mb-4">Projects</h1>
         <p className="text-lg text-muted-foreground">
-          Significant research projects and collaborations.
+          Curriculum development and educational projects I've designed and implemented.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
+      <motion.div 
+        className="grid grid-cols-1 gap-8"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         {projects.map((project, index) => (
-          <Card key={index} className="overflow-hidden">
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/3 h-48 md:h-auto">
-                <img 
-                  src={project.imageUrl} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="flex-1 flex flex-col">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-xl">{project.title}</CardTitle>
-                      <CardDescription className="mt-1">{project.type} • {project.period}</CardDescription>
-                    </div>
-                    <Briefcase className="h-5 w-5 text-muted-foreground" />
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="mb-4">{project.description}</p>
+          <motion.div key={index} variants={item}>
+            <Card className="overflow-hidden border-l-4 border-primary">
+              <CardHeader className={`${project.color} p-6`}>
+                <div className="flex justify-between">
                   <div>
-                    <h4 className="text-sm font-medium mb-2">Technologies & Methods:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, idx) => (
-                        <span 
-                          key={idx} 
-                          className="inline-block text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    <CardTitle className="text-xl font-bold mb-2">{project.title}</CardTitle>
+                    <CardDescription className="text-base opacity-90">
+                      <div className="flex items-center gap-2 mb-1">
+                        <FileText className="h-4 w-4" />
+                        <span>{project.type}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>{project.period}</span>
+                      </div>
+                    </CardDescription>
                   </div>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
-                      <span>View Project</span>
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </a>
-                  </Button>
-                </CardFooter>
-              </div>
-            </div>
-          </Card>
+                  <div className="bg-background/90 rounded-full p-4">
+                    {project.icon}
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <p className="mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <Badge variant="outline" className="bg-primary/5">
+                    Audience: {project.audience}
+                  </Badge>
+                  {project.modules && (
+                    <Badge variant="outline" className="bg-primary/5">
+                      {project.modules}
+                    </Badge>
+                  )}
+                  {project.duration && (
+                    <Badge variant="outline" className="bg-primary/5">
+                      {project.duration}
+                    </Badge>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

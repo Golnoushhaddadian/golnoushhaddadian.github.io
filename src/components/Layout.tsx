@@ -1,3 +1,4 @@
+
 import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sun, Moon, Menu, X, Award, FileText, BookOpen, Users, BookText } from 'lucide-react';
@@ -42,7 +43,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   const navLinks = [
     { path: '/', label: 'About Me' },
-    { path: '/research-interests', label: 'Research Interests' },
+    { path: '/projects', label: 'Projects' },
     { path: '/awards', label: 'Awards' },
     { path: '/research', label: 'Research' },
     { path: '/teaching', label: 'Teaching' },
