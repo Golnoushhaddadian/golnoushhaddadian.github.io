@@ -1,6 +1,7 @@
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { BookText, FileText, Layers, FileCode } from "lucide-react";
 
 const AboutMe = () => {
@@ -28,10 +29,14 @@ const AboutMe = () => {
       <div className="w-full max-w-4xl">
         <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="md:w-1/3 flex justify-center">
-            <Avatar className="h-64 w-64 rounded-lg">
-              <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" />
-              <AvatarFallback className="text-2xl">GH</AvatarFallback>
-            </Avatar>
+            <div className="w-64 h-64">
+              <AspectRatio ratio={1/1} className="rounded-lg overflow-hidden">
+                <Avatar className="h-full w-full">
+                  <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" className="object-cover" />
+                  <AvatarFallback className="text-2xl">GH</AvatarFallback>
+                </Avatar>
+              </AspectRatio>
+            </div>
           </div>
           <div className="md:w-2/3">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Golnoush (Lia) Haddadian</h1>
@@ -46,13 +51,13 @@ const AboutMe = () => {
 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-6">Research Interests</h2>
-          <div className="grid gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {researchInterests.map((interest, index) => (
-              <Card key={index} className="overflow-hidden">
-                <CardContent className="p-6">
+              <Card key={index} className="overflow-hidden h-full aspect-square">
+                <CardContent className="p-6 flex flex-col justify-center h-full">
                   <div className="flex items-start gap-4">
-                    <div className="mt-1">{interest.icon}</div>
-                    <p>{interest.text}</p>
+                    <div className="mt-1 flex-shrink-0">{interest.icon}</div>
+                    <p className="flex-1">{interest.text}</p>
                   </div>
                 </CardContent>
               </Card>
