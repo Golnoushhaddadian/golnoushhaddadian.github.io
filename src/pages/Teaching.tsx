@@ -109,29 +109,32 @@ const Teaching = () => {
 
   return (
     <section className="space-y-8">
-      <div className="bg-teal-50 dark:bg-teal-900/20 p-6 rounded-lg border border-teal-200 dark:border-teal-800">
-        <h1 className="text-3xl font-bold mb-2 text-teal-900 dark:text-teal-100">Teaching Experience</h1>
-        <p className="text-lg text-teal-700 dark:text-teal-300">
+      <div className="mb-10">
+        <h1 className="text-3xl font-bold mb-4 flex items-center gap-2">
+          <School className="h-6 w-6 text-primary" />
+          Teaching Experience
+        </h1>
+        <p className="text-lg text-muted-foreground">
           My teaching philosophy and experience across various institutions.
         </p>
       </div>
 
-      <div className="space-y-6 bg-amber-50 dark:bg-amber-900/20 p-6 rounded-lg border border-amber-200 dark:border-amber-800">
-        <div className="flex items-center gap-2">
-          <BookOpen className="h-6 w-6 text-amber-600 dark:text-amber-400" />
-          <h2 className="text-2xl font-semibold text-amber-900 dark:text-amber-100">Teaching Philosophy</h2>
+      <div className="space-y-6">
+        <div className="flex items-center gap-2 mb-4">
+          <BookOpen className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-semibold">Teaching Philosophy</h2>
         </div>
-        <div className="space-y-4 pl-4 border-l-2 border-amber-300 dark:border-amber-700">
+        <div className="space-y-4 pl-4 border-l-2 border-primary/20">
           {philosophy.map((paragraph, index) => (
-            <p key={index} className="text-amber-800 dark:text-amber-200">{paragraph}</p>
+            <p key={index} className="text-muted-foreground">{paragraph}</p>
           ))}
         </div>
       </div>
 
       <div className="space-y-6">
-        <div className="flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 p-4 rounded-t-lg border border-emerald-200 dark:border-emerald-800">
-          <School className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
-          <h2 className="text-2xl font-semibold text-emerald-900 dark:text-emerald-100">Teaching Positions</h2>
+        <div className="flex items-center gap-2 mb-4">
+          <School className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-semibold">Teaching Positions</h2>
         </div>
         <motion.div 
           className="space-y-6"
@@ -141,24 +144,24 @@ const Teaching = () => {
         >
           {courses.map((course, index) => (
             <motion.div key={index} variants={item}>
-              <Card key={index} className="overflow-hidden border-l-4 border-emerald-500 dark:border-emerald-400">
-                <CardHeader className="pb-2 bg-emerald-50/70 dark:bg-emerald-900/20">
-                  <CardTitle className="text-xl text-emerald-900 dark:text-emerald-100">{course.institution}</CardTitle>
+              <Card key={index} className="overflow-hidden border-l-4 border-primary">
+                <CardHeader className="pb-2 bg-primary/5">
+                  <CardTitle className="text-xl">{course.institution}</CardTitle>
                   <CardDescription className="flex justify-between items-center">
                     <span>{course.position}</span>
-                    <span className="text-sm bg-emerald-100 dark:bg-emerald-800/60 text-emerald-800 dark:text-emerald-200 px-3 py-1 rounded-full">{course.period}</span>
+                    <span className="text-sm bg-primary/10 px-3 py-1 rounded-full">{course.period}</span>
                   </CardDescription>
                   <div className="flex items-center gap-2 mt-1">
-                    <Users className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                    <span className="text-sm text-emerald-700 dark:text-emerald-300">{course.audience}</span>
+                    <Users className="h-4 w-4 text-primary/70" />
+                    <span className="text-sm text-muted-foreground">{course.audience}</span>
                   </div>
                 </CardHeader>
                 {course.description && (
                   <CardContent className="pt-2">
-                    <p className="text-sm text-emerald-800/80 dark:text-emerald-200/80">{course.description}</p>
+                    <p className="text-sm text-muted-foreground">{course.description}</p>
                   </CardContent>
                 )}
-                {index < courses.length - 1 && <Separator className="my-1 bg-emerald-100 dark:bg-emerald-800" />}
+                {index < courses.length - 1 && <Separator className="my-1" />}
               </Card>
             </motion.div>
           ))}
@@ -166,9 +169,9 @@ const Teaching = () => {
       </div>
 
       <div className="space-y-6">
-        <div className="flex items-center gap-2 bg-violet-100 dark:bg-violet-900/30 p-4 rounded-t-lg border border-violet-200 dark:border-violet-800">
-          <GraduationCap className="h-6 w-6 text-violet-600 dark:text-violet-400" />
-          <h2 className="text-2xl font-semibold text-violet-900 dark:text-violet-100">Mentorship Experience</h2>
+        <div className="flex items-center gap-2 mb-4">
+          <GraduationCap className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-semibold">Mentorship Experience</h2>
         </div>
         <motion.div 
           className="space-y-6"
@@ -178,16 +181,16 @@ const Teaching = () => {
         >
           {mentorships.map((mentorship, index) => (
             <motion.div key={index} variants={item}>
-              <Card className="overflow-hidden border-l-4 border-violet-500 dark:border-violet-400 bg-violet-50/70 dark:bg-violet-900/20">
+              <Card className="overflow-hidden border-l-4 border-primary bg-primary/5">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-xl text-violet-900 dark:text-violet-100">{mentorship.program}</CardTitle>
+                  <CardTitle className="text-xl">{mentorship.program}</CardTitle>
                   <CardDescription className="flex justify-between items-center">
-                    <span className="text-violet-700 dark:text-violet-300">{mentorship.role}</span>
-                    <span className="text-sm bg-violet-100 dark:bg-violet-800/60 text-violet-800 dark:text-violet-200 px-3 py-1 rounded-full">{mentorship.year}</span>
+                    <span>{mentorship.role}</span>
+                    <span className="text-sm bg-primary/10 px-3 py-1 rounded-full">{mentorship.year}</span>
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pt-2">
-                  <p className="text-sm text-violet-800/80 dark:text-violet-200/80">{mentorship.description}</p>
+                  <p className="text-sm text-muted-foreground">{mentorship.description}</p>
                 </CardContent>
               </Card>
             </motion.div>

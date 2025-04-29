@@ -3,12 +3,12 @@ import { FileChartLine } from "lucide-react";
 
 export const ResearchHeader = () => {
   return (
-    <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
-      <h1 className="flex items-center gap-2">
-        <FileChartLine className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+    <div className="mb-10">
+      <h1 className="text-3xl font-bold mb-4 flex items-center gap-2">
+        <FileChartLine className="h-6 w-6 text-primary" />
         Research
       </h1>
-      <p className="text-lg text-muted-foreground mb-2">
+      <p className="text-lg text-muted-foreground">
         My research focuses on AI in Education, with particular emphasis on innovative learning technologies, formative assessment, and feedback systems.
       </p>
       <div className="flex flex-wrap gap-2 mt-4">
