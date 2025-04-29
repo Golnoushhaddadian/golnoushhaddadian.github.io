@@ -1,10 +1,11 @@
 
 import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, Award, FileText, BookOpen, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/ThemeProvider';
 import { cn } from '@/lib/utils';
+import { Separator } from '@/components/ui/separator';
 
 type NavLinkProps = {
   to: string;
@@ -38,6 +39,7 @@ const Layout = ({ children }: LayoutProps) => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
 
   const navLinks = [
     { path: '/', label: 'About Me' },

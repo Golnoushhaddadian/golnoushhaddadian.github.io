@@ -1,49 +1,66 @@
 
-import { Book, FileText, Download } from "lucide-react";
+import { Book, FileText, Download, Award } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 
 const Research = () => {
   const publications = [
     {
-      title: "Title of Research Paper 1",
-      authors: "Your Name, Co-author Name, Another Author",
-      journal: "Journal of Important Research",
-      year: "2023",
-      abstract: "This paper explores the fundamental aspects of [research topic], providing new insights into [specific area]. We present a novel approach to [problem] that outperforms existing methods by [improvement percentage].",
+      title: "Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum",
+      authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.",
+      journal: "International Journal of Technology in Education (IJTE)",
+      year: "2025",
+      abstract: "This paper explores curriculum development in private artificial intelligence education, providing new insights into problem-centered learning approaches for computer science students.",
       link: "#",
     },
     {
-      title: "Title of Research Paper 2",
-      authors: "Your Name, Different Co-author",
-      journal: "Proceedings of International Conference on [Field]",
-      year: "2022",
-      abstract: "In this work, we address the challenge of [research challenge] through innovative [methodology]. Our experimental results demonstrate significant improvements in [metrics] compared to state-of-the-art approaches.",
+      title: "Construction and validation of a Computerized Formative Assessment Literacy (CFAL) questionnaire for language teachers",
+      authors: "Haddadian, G., Radmanesh, S., & Haddadian, N.",
+      journal: "Language Testing in Asia",
+      year: "2024",
+      abstract: "This research introduces a validated instrument for measuring language teachers' literacy in computerized formative assessment through an exploratory sequential mixed-methods investigation.",
       link: "#",
     },
     {
-      title: "Title of Research Paper 3",
-      authors: "Your Name, Multiple Co-authors",
-      journal: "Transactions on [Field]",
-      year: "2021",
-      abstract: "This research introduces a groundbreaking framework for [research area]. Through extensive validation across multiple datasets, we show that our approach provides robust performance under various conditions.",
+      title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking",
+      authors: "Haddadian, G., & Haddadian, N.",
+      journal: "The Journal of Applied Instructional Design",
+      year: "2024",
+      abstract: "This study investigates how feedback from automated writing evaluation tools can be repurposed to enhance speaking skills among English as a Foreign Language learners.",
       link: "#",
     },
   ];
 
   const currentProjects = [
     {
-      title: "Project 1: Innovative Research Direction",
-      description: "This ongoing project investigates [research question] through [methodological approach]. We are developing new algorithms that address [problem] with applications in [field].",
-      collaborators: "In collaboration with Research Lab at University X",
-      funding: "Funded by National Science Foundation",
+      title: "AI Institutes Virtual Organization (AIVO) – AI4Ed Summer Program",
+      position: "Graduate Fellow",
+      period: "Summer 2025",
+      funding: "Funded by Google.org",
+      description: "This collaborative program brings together graduate student researchers from five NSF-funded national AI institutes dedicated to advancing AI applications in education. The initiative fosters cross-institute partnerships to promote inclusive, ethical, and human-centered AI innovations for lifelong learning. As a selected Fellow, I will represent the AI-ALOE team at Georgia Tech, engaging in interdisciplinary research, knowledge exchange, and synergistic activities to support AIVO's mission of leveraging AI to enhance educational access, equity, and learner success across diverse communities."
     },
     {
-      title: "Project 2: Interdisciplinary Research Initiative",
-      description: "A cross-disciplinary exploration of [topic] that bridges [field 1] and [field 2]. This work aims to develop novel insights that can inform both theoretical understanding and practical applications.",
-      collaborators: "Joint work with Department Y at University Z",
-      funding: "Supported by Industry Partner Grant",
+      title: "Secure and Trustworthy Cyberspace (SaTC): Private Artificial Intelligence (AI)",
+      position: "Graduate Research Associate",
+      period: "August 2021 - present",
+      funding: "Funded by the National Science Foundation (NSF)",
+      description: "This interdisciplinary project focuses on artificial intelligence (AI) and privacy, supported by the Secure and Trustworthy Cyberspace (SaTC) program. Aligned with the Federal Cybersecurity Research and Development Strategic Plan and the National Privacy Research Strategy, it aims to protect the benefits of cyber systems while ensuring security and privacy. The project develops instructional materials and hands-on labs to train students in trustworthy AI. It addresses the fast-growing demand for skilled researchers by integrating technical knowledge with ethical and privacy-focused practices in AI."
+    },
+    {
+      title: "AI Institute for Adult Learning and Online Education (ALOE)",
+      position: "Graduate Research Associate",
+      period: "January 2022 - August 2022",
+      funding: "Funded by the National Science Foundation (NSF)",
+      description: "This interdisciplinary project aims to transform online adult learning through AI-driven models grounded in cognitive and social learning theories. It addresses the distinct needs of adult learners by developing intelligent virtual assistants and personalized learning systems. The initiative brings together a national network of universities, nonprofits, and industry partners to advance foundational research in areas such as cognitive-based AI, scalable personalization, human-AI collaboration, and ethical AI design. Using iterative learning engineering and mixed-methods evaluation, the project seeks to deliver scalable, equitable, and effective solutions for adult education."
+    },
+    {
+      title: "IUSE-Engaged Student Learning (Level 1): AI-Scaffolded Pre-Classroom Learning for Large/Introductory Undergraduate Physics Courses",
+      position: "Researcher",
+      period: "August 2024 - present",
+      funding: "Funded by the National Science Foundation (NSF)",
+      description: "This project designs and implements AI-augmented formative assessment and feedback systems to help students build skills for in-classroom interactive problem-solving activities. The aim is to determine whether AI in education improves students' well-being inside and outside the classroom, with a focus on those traditionally underrepresented in STEM education. Extensive data collected in the final phase will examine the relationships among pre-classroom activities, in-classroom performance, self-efficacy, interest in physics, and student backgrounds, including gender, race, ethnicity, first-generation status, and English language learning."
     },
   ];
 
@@ -52,21 +69,39 @@ const Research = () => {
       <div>
         <h1>Research</h1>
         <p className="text-lg text-muted-foreground mb-6">
-          My research focuses on [your research area], with particular emphasis on [specific aspects].
+          My research focuses on AI in Education, with particular emphasis on innovative learning technologies, formative assessment, and feedback systems.
         </p>
       </div>
 
-      <Tabs defaultValue="publications" className="w-full">
+      <Tabs defaultValue="projects" className="w-full">
         <TabsList className="w-full md:w-auto">
+          <TabsTrigger value="projects" className="flex items-center gap-2">
+            <Award className="h-4 w-4" />
+            <span>Research Projects</span>
+          </TabsTrigger>
           <TabsTrigger value="publications" className="flex items-center gap-2">
             <FileText className="h-4 w-4" />
             <span>Publications</span>
           </TabsTrigger>
-          <TabsTrigger value="projects" className="flex items-center gap-2">
-            <Book className="h-4 w-4" />
-            <span>Current Projects</span>
-          </TabsTrigger>
         </TabsList>
+        
+        <TabsContent value="projects" className="space-y-6 mt-6">
+          {currentProjects.map((project, index) => (
+            <Card key={index} className="overflow-hidden">
+              <CardHeader>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  <Badge variant="outline" className="bg-primary/10">{project.position}</Badge>
+                  <Badge variant="outline" className="bg-primary/5">{project.period}</Badge>
+                </div>
+                <CardTitle className="text-xl">{project.title}</CardTitle>
+                <CardDescription className="text-primary font-medium">{project.funding}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">{project.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
         
         <TabsContent value="publications" className="space-y-6 mt-6">
           {publications.map((pub, index) => (
@@ -89,21 +124,6 @@ const Research = () => {
                   </a>
                 </Button>
               </CardFooter>
-            </Card>
-          ))}
-        </TabsContent>
-        
-        <TabsContent value="projects" className="space-y-6 mt-6">
-          {currentProjects.map((project, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-xl">{project.title}</CardTitle>
-                <CardDescription>{project.collaborators}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p>{project.description}</p>
-                <div className="text-sm text-muted-foreground">{project.funding}</div>
-              </CardContent>
             </Card>
           ))}
         </TabsContent>
