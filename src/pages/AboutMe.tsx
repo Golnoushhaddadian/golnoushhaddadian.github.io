@@ -28,7 +28,7 @@ const AboutMe = () => {
         </div>
 
         <section>
-          <h2 className="text-2xl font-semibold mb-6">About Me</h2>
+          <h2 className="text-2xl font-semibold mb-6">Welcome to My Personal Website</h2>
           <div className="prose max-w-none text-muted-foreground">
             <p>
               I am Golnoush (Lia) Haddadian, and I am thrilled to share my journey with you. As a passionate advocate for the transformative power of education and technology, I have dedicated my career to creating inclusive, innovative learning environments that empower all learners. From my early days designing interactive learning tools in high school to my current work as a Ph.D. candidate in Educational Technology at Georgia State University, my mission has always been to bridge gaps in education and open new pathways to success.
