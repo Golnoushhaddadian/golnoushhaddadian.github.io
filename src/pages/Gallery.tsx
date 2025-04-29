@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -52,7 +51,7 @@ const galleryImages: GalleryImage[] = [
     category: "professional"
   },
   
-  // Teaching images
+  // Teaching images - removed duplicates and added new images
   { 
     src: "/lovable-uploads/76d7583c-66c7-478b-878b-19cc3330e383.png", 
     alt: "Person holding learning materials",
@@ -60,32 +59,32 @@ const galleryImages: GalleryImage[] = [
     category: "teaching"
   },
   { 
-    src: "/lovable-uploads/72e9a4cb-b5d9-47dc-8547-bc57438ce4a5.png", 
-    alt: "Students with learning materials",
+    src: "/lovable-uploads/2e5ec65c-34dd-4f39-96ef-dc515749efc9.png", 
+    alt: "Group of students with instructor, all holding drinks with purple backdrop",
     description: "",
     category: "teaching"
   },
   { 
-    src: "/lovable-uploads/55c11548-ffff-44ec-99aa-d725d9087aaf.png", 
-    alt: "Teacher presenting educational content",
+    src: "/lovable-uploads/99b540ae-8f40-497d-bf6d-62f0be46e20b.png", 
+    alt: "Group of students with instructor in front of blackboard in classroom with blue walls",
     description: "",
     category: "teaching"
   },
   { 
-    src: "/lovable-uploads/6abeee9a-c3e0-447d-a533-0f82e17a98c1.png", 
-    alt: "Students studying at table",
+    src: "/lovable-uploads/d007d6a3-43f6-47a3-b47f-9fd0c17f7cc7.png", 
+    alt: "Two women holding educational certificates with blue wall background",
     description: "",
     category: "teaching"
   },
   { 
-    src: "/lovable-uploads/2a3ce7b3-78fa-4a39-900d-484680a04ec6.png", 
-    alt: "Teacher presenting to students",
+    src: "/lovable-uploads/1098f6c6-5264-4dd9-ac23-75ef46e15cb6.png", 
+    alt: "Group selfie of students and instructor in modern classroom setting",
     description: "",
     category: "teaching"
   },
   { 
-    src: "/lovable-uploads/e68264fd-133c-403d-a73b-cca770079d9d.png",
-    alt: "Students studying at blue table",
+    src: "/lovable-uploads/23aae10d-c4e1-4d97-a49d-56aa2b3e7509.png", 
+    alt: "Group of students and instructor in classroom with blue walls and blackboard",
     description: "",
     category: "teaching"
   },
@@ -121,7 +120,6 @@ const galleryImages: GalleryImage[] = [
     description: "",
     category: "research"
   },
-  // Previously added research images
   {
     src: "/lovable-uploads/fdc1799c-3c0e-4bf5-b1d3-813b11a1ca1c.png",
     alt: "Researcher explaining Private AI curriculum poster at academic conference",
@@ -146,7 +144,6 @@ const galleryImages: GalleryImage[] = [
     description: "",
     category: "research"
   },
-  // New research image
   {
     src: "/lovable-uploads/f218bae5-c8c6-49f7-b0a0-d361b555f43a.png",
     alt: "Researcher presenting about AI and Machine Learning with colorful diagram on screen",
@@ -154,7 +151,7 @@ const galleryImages: GalleryImage[] = [
     category: "research"
   },
   
-  // Awards images - newly added
+  // Awards images
   {
     src: "/lovable-uploads/456f670a-3858-4253-a9f9-4acc80d81cc6.png",
     alt: "Woman in black dress holding award with Georgia State University backdrop",
