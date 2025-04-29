@@ -1,63 +1,77 @@
 
-import { Card } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
+import { BookText, FileText, Layers, FileCode } from "lucide-react";
 
 const AboutMe = () => {
+  const researchInterests = [
+    {
+      icon: <BookText className="h-5 w-5 text-primary" />,
+      text: "1. Instructional/Educational Technology, AI in Education, AI-Augmented Learning Environments, Adaptive Learning Technologies, Personalized Learning Environments; Human-Computer Interaction"
+    },
+    {
+      icon: <FileText className="h-5 w-5 text-primary" />,
+      text: "2. Formative Assessment and Feedback, Peer Feedback, Collaborative Learning"
+    },
+    {
+      icon: <Layers className="h-5 w-5 text-primary" />,
+      text: "3. Automated Writing Evaluation (AWE) Systems, Essay Writing, Computer Assisted Language Learning (CALL)"
+    },
+    {
+      icon: <FileCode className="h-5 w-5 text-primary" />,
+      text: "4. Curriculum Design and Development; Design Based Research (DBR); Mixed-Methods Research"
+    }
+  ];
+
   return (
-    <section className="space-y-8">
-      <div className="flex flex-col md:flex-row gap-8 items-start">
-        <div className="w-full md:w-1/3 mb-6 md:mb-0">
-          <div className="aspect-square bg-muted rounded-lg overflow-hidden">
-            <img 
-              src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7" 
-              alt="Profile" 
-              className="w-full h-full object-cover"
-            />
+    <div className="min-h-screen flex flex-col items-center py-8 px-4">
+      <div className="w-full max-w-4xl">
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+          <div className="md:w-1/3 flex justify-center">
+            <Avatar className="h-64 w-64 rounded-lg">
+              <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" />
+              <AvatarFallback className="text-2xl">GH</AvatarFallback>
+            </Avatar>
+          </div>
+          <div className="md:w-2/3">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">Golnoush (Lia) Haddadian</h1>
+            <p className="text-xl text-muted-foreground mb-4">Ph.D. Candidate in Learning Sciences</p>
+            <p className="mb-6">
+              Graduate Research Associate at Georgia State University, College of Education and Human Development,
+              Department of Learning Sciences. My research focuses on AI-augmented learning environments, 
+              formative assessment systems, and educational technology.
+            </p>
           </div>
         </div>
-        
-        <div className="w-full md:w-2/3">
-          <h1>About Me</h1>
-          
-          <p className="text-lg mb-4">
-            I am a researcher/academic focused on [your field]. My work explores the intersection of [topic] and [topic], with applications in [area].
+
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-6">Research Interests</h2>
+          <div className="grid gap-6">
+            {researchInterests.map((interest, index) => (
+              <Card key={index} className="overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1">{interest.icon}</div>
+                    <p>{interest.text}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-6">About Me</h2>
+          <p className="text-muted-foreground">
+            I am a Ph.D. Candidate in Learning Sciences at Georgia State University. My research 
+            focuses on the design and development of AI-augmented learning environments, 
+            particularly for enhancing writing instruction and feedback systems. I am part of 
+            the AI2 Research Laboratory, where we work on advancing more adaptable, engaged, 
+            equitable, and effective teaching and learning in various educational contexts.
           </p>
-          
-          <p className="mb-4">
-            Currently, I am a [position] at [institution/company], where I lead research on [topic]. Prior to this role, I worked at [previous experience].
-          </p>
-          
-          <p>
-            I received my [degree] in [field] from [university], where I was advised by [advisor name]. My thesis explored [topic], which laid the groundwork for my current research interests.
-          </p>
-        </div>
+        </section>
       </div>
-      
-      <div className="space-y-6">
-        <h2>Research Interests</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card className="p-4">
-            <h3 className="text-base font-medium mb-2">Primary Focus</h3>
-            <p className="text-sm text-muted-foreground">Description of your primary research area and its significance in the broader field.</p>
-          </Card>
-          
-          <Card className="p-4">
-            <h3 className="text-base font-medium mb-2">Secondary Interest</h3>
-            <p className="text-sm text-muted-foreground">Details about another area that complements your main research focus.</p>
-          </Card>
-          
-          <Card className="p-4">
-            <h3 className="text-base font-medium mb-2">Interdisciplinary Work</h3>
-            <p className="text-sm text-muted-foreground">How your work bridges multiple disciplines for innovative outcomes.</p>
-          </Card>
-          
-          <Card className="p-4">
-            <h3 className="text-base font-medium mb-2">Future Directions</h3>
-            <p className="text-sm text-muted-foreground">Emerging questions or technologies you're interested in exploring in upcoming work.</p>
-          </Card>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 };
 
