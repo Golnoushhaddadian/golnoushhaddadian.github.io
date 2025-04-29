@@ -121,7 +121,7 @@ const galleryImages: GalleryImage[] = [
     description: "",
     category: "research"
   },
-  // New research images
+  // Previously added research images
   {
     src: "/lovable-uploads/fdc1799c-3c0e-4bf5-b1d3-813b11a1ca1c.png",
     alt: "Researcher explaining Private AI curriculum poster at academic conference",
@@ -137,6 +137,13 @@ const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/21082eac-6384-443f-8100-fe4fe60caac7.png",
     alt: "Researcher at AAAL 2025 Annual Conference in Denver",
+    description: "",
+    category: "research"
+  },
+  // New research image
+  {
+    src: "/lovable-uploads/2017d879-59f0-4a26-b6b1-e374cc61884f.png",
+    alt: "Researcher asking question with microphone at academic conference with purple lighting",
     description: "",
     category: "research"
   },
