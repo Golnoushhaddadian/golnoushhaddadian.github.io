@@ -1,38 +1,12 @@
 
-import { Book, FileText, Download, Award } from "lucide-react";
+import { Book, FileText, Download, Award, FileCode, BookOpen, FileChartLine } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const Research = () => {
-  const publications = [
-    {
-      title: "Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum",
-      authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.",
-      journal: "International Journal of Technology in Education (IJTE)",
-      year: "2025",
-      abstract: "This paper explores curriculum development in private artificial intelligence education, providing new insights into problem-centered learning approaches for computer science students.",
-      link: "#",
-    },
-    {
-      title: "Construction and validation of a Computerized Formative Assessment Literacy (CFAL) questionnaire for language teachers",
-      authors: "Haddadian, G., Radmanesh, S., & Haddadian, N.",
-      journal: "Language Testing in Asia",
-      year: "2024",
-      abstract: "This research introduces a validated instrument for measuring language teachers' literacy in computerized formative assessment through an exploratory sequential mixed-methods investigation.",
-      link: "#",
-    },
-    {
-      title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking",
-      authors: "Haddadian, G., & Haddadian, N.",
-      journal: "The Journal of Applied Instructional Design",
-      year: "2024",
-      abstract: "This study investigates how feedback from automated writing evaluation tools can be repurposed to enhance speaking skills among English as a Foreign Language learners.",
-      link: "#",
-    },
-  ];
-
   const currentProjects = [
     {
       title: "AI Institutes Virtual Organization (AIVO) – AI4Ed Summer Program",
@@ -64,24 +38,246 @@ const Research = () => {
     },
   ];
 
+  const journalPublications = [
+    {
+      authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.",
+      year: "2025",
+      title: "Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum",
+      journal: "International Journal of Technology in Education (IJTE)",
+      volume: "8(2)",
+      pages: "1-26"
+    },
+    {
+      authors: "Haddadian, G., Radmanesh, S., & Haddadian, N.",
+      year: "2024",
+      title: "Construction and validation of a Computerized Formative Assessment Literacy (CFAL) questionnaire for language teachers: An exploratory sequential mixed-methods investigation",
+      journal: "Language Testing in Asia",
+      volume: "14(33)",
+      pages: ""
+    },
+    {
+      authors: "Haddadian, G., & Haddadian, N.",
+      year: "2024",
+      title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking: Learners' Perceptions and Transformative Engagement Experiences in Focus",
+      journal: "The Journal of Applied Instructional Design",
+      volume: "13(2)",
+      pages: ""
+    },
+    {
+      authors: "Haddadian, G.",
+      year: "2024",
+      title: "Comparing the Effects of Teacher Feedback, Automated Feedback, and Integrative Feedback on EFL Learners' Writing Accuracy and Writing Apprehension",
+      journal: "Computer-Assisted Language Learning Electronic Journal",
+      volume: "25(3)",
+      pages: "124-147"
+    },
+    {
+      authors: "Haddadian, G., & Mahmoodi-Bakhtiari, B.",
+      year: "2018",
+      title: "Conversational Repairs in Persian Dramatic Discourse: Akbar Radi's Pellekân (The Steps)",
+      journal: "Persian Literary Studies Journal",
+      volume: "7(11)",
+      pages: "65-82"
+    },
+  ];
+
+  const conferenceProceedings = [
+    {
+      authors: "Noroozi, O., Haddadian, G., Gao, X., Schunn, C. D., Alqassab, M., & Banihashem, S. K.",
+      year: "Accepted",
+      title: "Supporting peer feedback provision and uptake with GenAI",
+      conference: "International Conference of the Learning Sciences – ICLS/ISLS 2025"
+    },
+    {
+      authors: "Haddadian, G., Han, H., Kim, M. Kim, J., Bae, Y.",
+      year: "Accepted",
+      title: "Automated Generation of Expert Models with Generative AI",
+      conference: "International Conference of the Learning Sciences – ICLS/ISLS 2025"
+    },
+    {
+      authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.",
+      year: "2024",
+      title: "Evaluating Private Artificial Intelligence (AI) Curriculum in Computer Science (CS) Education: Insights for Advancing Student-Centered CS Learning",
+      conference: "In Proceedings of the 18th International Conference of the Learning Sciences-ICLS 2024",
+      pages: "2271-2272",
+      publisher: "International Society of the Learning Sciences"
+    },
+    {
+      authors: "Haddadian, G., & Haddadian, N.",
+      year: "2024",
+      title: "An Investigation of ELT Teachers' Online Self-efficacy: Does Teachers' Level of Agency Matter?",
+      conference: "In J. Cohen & G. Solano (Eds.), Proceedings of Society for Information Technology & Teacher Education International Conference",
+      pages: "1607-1615",
+      publisher: "Las Vegas, Nevada, United States: Association for the Advancement of Computing in Education (AACE)"
+    },
+    {
+      authors: "Daneshvar Ghorbani, B., & Haddadian, G.",
+      year: "2024",
+      title: "The Impact of AI-Enabled Personalized Recommendations on L2 Learners' Engagement, Motivation, and Learning Outcomes",
+      conference: "AIRiAL 2024 Conference, Teachers College, Columbia University"
+    },
+    {
+      authors: "Kim, J., Haddadian, G., & Kim, M.",
+      year: "2023",
+      title: "An investigation of knowledge-based AI vs. human evaluation in academic summary evaluation: Similarities, dissimilarities, and being toward mutual understandings",
+      conference: "In Blikstein, P., Van Aalst, J., Kizito, R., & Brennan, K. (Eds.). Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023",
+      pages: "994-997",
+      publisher: "Montreal, Canada: International Society of the Learning Sciences"
+    },
+    {
+      authors: "Haddadian, G., Takabi, D., Panzade, P., Kim, M.",
+      year: "2023",
+      title: "A Design Study of Problem-Centered Instruction (PCI) for Private Artificial Intelligence (AI) Curriculum Development",
+      conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
+    },
+    {
+      authors: "Haddadian, G., Bae, Y., Kim, J., & Kim, M.",
+      year: "2023",
+      title: "A Comprehensive Model of AI Literacy from a Developmental Perspective",
+      conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
+    },
+    {
+      authors: "Kim, M., Kim, N., Haddadian, G., & Heidari, A.",
+      year: "2023",
+      title: "A test of learning progress models using an AI-enabled knowledge representation system",
+      conference: "In Blikstein, P., Van Aalst, J., Kizito, R., & Brennan, K. (Eds.). Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023",
+      pages: "986-989",
+      publisher: "Montreal, Canada: International Society of the Learning Sciences"
+    },
+    {
+      authors: "Bae, Y., Kim, J., Haddadian, G., Davis, A., & Kim, M.",
+      year: "2023",
+      title: "The impact of an AI-based educational tool, with a focus on technology acceptance and metacognitive awareness of adult learners",
+      conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
+    },
+    {
+      authors: "Kim, J., Bae, Y., Haddadian, G., & Kim, M.",
+      year: "2023",
+      title: "Leveraging machine learning to automatically evaluate cognitive engagement in asynchronous online discussions",
+      conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
+    },
+    {
+      authors: "Kim, J., Bae, Y., Haddadian, G., Morris, W., Crossely, S., Holmes, L., Stravelakis, J., & Kim, M.",
+      year: "2023",
+      title: "AI-augmented summarization: Impact on online adult learners' concept learning, discussion quality, and achievement",
+      conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
+    },
+    {
+      authors: "Radmanesh, S., Haddadian, G.",
+      year: "2020",
+      title: "The Effect of Using Mind Mapping on Iranian EFL Learners' Self-efficacy in Vocabulary Learning",
+      conference: "WEI International Academic Conference on Education, Teaching, and Learning (WEI-ETL-Barcelona), Barcelona, Spain, February 2020"
+    },
+    {
+      authors: "Haddadian, G., Salehi, M.",
+      year: "2015",
+      title: "Design and Development of a Computer-Adaptive Prototype to Measure Written Receptive Vocabulary Knowledge of English Language Learners",
+      conference: "Thesis. Sharif University of Technology, Tehran, Iran, 2014"
+    },
+  ];
+
+  const nonRefereedPublications = [
+    {
+      authors: "Masoumi, V., Salehi, M., Veisi, H., Haddadian, G., Ranjbar, V., & Sahebdel, M.",
+      year: "2020",
+      title: "TeleCrowd: A Crowdsourcing Approach to Create Informal to Formal Text Corpora",
+      journal: "arXiv preprint arXiv:2004.11771"
+    }
+  ];
+
+  const workUnderReview = [
+    {
+      authors: "Haddadian, G., Haddadian, M.",
+      year: "In revision",
+      title: "Learners' Collaboration in Using AI-generated Feedback, Argumentative Writing, and Writing Self-efficacy: Effects and Precepts",
+      journal: "Computer Assisted Language Learning"
+    },
+    {
+      authors: "Noroozi, O., Haddadian, G., Banihashem, K., Schunn, C, Alqassab, M.",
+      year: "In revision",
+      title: "The Scaffolding Value of GenAI during Peer Feedback Provision and Uptake: Student Perceptions and Actual Impacts",
+      journal: "International Journal of Educational Technology in Higher Education"
+    },
+    {
+      authors: "Mashhadi, F., Haddadian, G., Kavoshian, S., Heidari, F.",
+      year: "Under Review",
+      title: "Promoting EFL Teachers' Self-Directed Professional Development through Collaborative Action Research in a Networked Community of Shared Knowledge",
+      journal: "Journal of Language and Education"
+    },
+    {
+      authors: "Kavoshian, S., Mashhadi, F., Haddadian, G.",
+      year: "Under Review",
+      title: "Exploring Classroom Interactions in Iranian EFL Classrooms",
+      journal: "International Journal of Language Studies"
+    }
+  ];
+
+  const workInProgress = [
+    {
+      authors: "Haddadian, G., Kim, M., Haddadian, N.",
+      type: "Journal Article",
+      title: "A Systematic Review of Automated Writing Evaluation in Argumentative Writing for English as Foreign Language Education"
+    },
+    {
+      authors: "Haddadian, G., Kim, M.",
+      type: "Journal Article",
+      title: "Real-time Intelligent Technology for Argumentative Writing (RITA): A Design-Based Research"
+    },
+    {
+      authors: "Alqassab, M., Noroozi, O., Haddadian, G., Banihashem, K., Schunn, C.",
+      type: "Book Chapter",
+      title: "Text-based Generative AI to Facilitate Peer Feedback: Pedagogical Opportunities and Challenges"
+    },
+    {
+      authors: "Han, H., Haddadian, G., Kim, M. Kim, J., Bae, Y.",
+      type: "Journal Article",
+      title: "Students' Plagiarism Behaviors within AI-Enabled Introductory Physics Courses"
+    },
+    {
+      authors: "Han, H., Kim, M. Haddadian, G.",
+      type: "Journal Article",
+      title: "Generative AI for the Automated Construction and Evaluation of Expert Models in Physics Course"
+    },
+    {
+      authors: "Heidari, A., Kim, M., Kim, J., Bae, Y., Haddadian, G.",
+      type: "Journal Article",
+      title: "Examining Learner's Evaluative Judgment Supported by Technology-Enabled Feedback Information"
+    }
+  ];
+
   return (
     <section className="space-y-8">
       <div>
-        <h1>Research</h1>
+        <h1 className="flex items-center gap-2">
+          <FileChartLine className="h-8 w-8 text-primary" />
+          Research
+        </h1>
         <p className="text-lg text-muted-foreground mb-6">
           My research focuses on AI in Education, with particular emphasis on innovative learning technologies, formative assessment, and feedback systems.
         </p>
       </div>
 
       <Tabs defaultValue="projects" className="w-full">
-        <TabsList className="w-full md:w-auto">
+        <TabsList className="w-full md:w-auto flex flex-wrap">
           <TabsTrigger value="projects" className="flex items-center gap-2">
             <Award className="h-4 w-4" />
             <span>Research Projects</span>
           </TabsTrigger>
-          <TabsTrigger value="publications" className="flex items-center gap-2">
+          <TabsTrigger value="journals" className="flex items-center gap-2">
+            <Book className="h-4 w-4" />
+            <span>Journal Publications</span>
+          </TabsTrigger>
+          <TabsTrigger value="conferences" className="flex items-center gap-2">
             <FileText className="h-4 w-4" />
-            <span>Publications</span>
+            <span>Conference Proceedings</span>
+          </TabsTrigger>
+          <TabsTrigger value="other" className="flex items-center gap-2">
+            <BookOpen className="h-4 w-4" />
+            <span>Other Publications</span>
+          </TabsTrigger>
+          <TabsTrigger value="upcoming" className="flex items-center gap-2">
+            <FileCode className="h-4 w-4" />
+            <span>Work in Progress</span>
           </TabsTrigger>
         </TabsList>
         
@@ -103,29 +299,120 @@ const Research = () => {
           ))}
         </TabsContent>
         
-        <TabsContent value="publications" className="space-y-6 mt-6">
-          {publications.map((pub, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-xl">{pub.title}</CardTitle>
-                <CardDescription className="space-y-1">
-                  <div>{pub.authors}</div>
-                  <div className="font-medium text-primary">{pub.journal}, {pub.year}</div>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{pub.abstract}</p>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" size="sm" asChild>
-                  <a href={pub.link} target="_blank" rel="noopener noreferrer">
-                    <Download className="mr-2 h-4 w-4" />
-                    <span>Download PDF</span>
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+        <TabsContent value="journals" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Refereed Journal Publications (5)</CardTitle>
+              <CardDescription>Peer-reviewed research articles published in academic journals</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-6">
+                {journalPublications.map((pub, index) => (
+                  <li key={index} className="border-b pb-5 last:border-0">
+                    <p className="font-semibold text-lg mb-1">{pub.title}</p>
+                    <p className="mb-1 text-primary/80">{pub.authors}</p>
+                    <p className="text-sm text-muted-foreground">
+                      <span className="italic">{pub.journal}</span>
+                      {pub.volume && <span>, {pub.volume}</span>}
+                      {pub.pages && <span>, {pub.pages}</span>}
+                      {pub.year && <span> ({pub.year})</span>}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="conferences" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Refereed Conference Proceedings (14)</CardTitle>
+              <CardDescription>Peer-reviewed papers presented at academic conferences</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-6">
+                {conferenceProceedings.map((proc, index) => (
+                  <li key={index} className="border-b pb-5 last:border-0">
+                    <p className="font-semibold text-lg mb-1">{proc.title}</p>
+                    <p className="mb-1 text-primary/80">{proc.authors}</p>
+                    <p className="text-sm text-muted-foreground">
+                      <span>{proc.conference}</span>
+                      {proc.pages && <span>, pp. {proc.pages}</span>}
+                      {proc.publisher && <span>. {proc.publisher}</span>}
+                      {proc.year && <span> ({proc.year})</span>}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="other" className="space-y-6 mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Non-Refereed Publications (1)</CardTitle>
+              <CardDescription>Research reports, preprints, and other non-peer-reviewed publications</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-6">
+                {nonRefereedPublications.map((pub, index) => (
+                  <li key={index} className="border-b pb-5 last:border-0">
+                    <p className="font-semibold text-lg mb-1">{pub.title}</p>
+                    <p className="mb-1 text-primary/80">{pub.authors}</p>
+                    <p className="text-sm text-muted-foreground">
+                      <span>{pub.journal}</span>
+                      {pub.year && <span> ({pub.year})</span>}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Work Under Review/In Revision (4)</CardTitle>
+              <CardDescription>Manuscripts submitted to journals or in revision</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-6">
+                {workUnderReview.map((work, index) => (
+                  <li key={index} className="border-b pb-5 last:border-0">
+                    <p className="font-semibold text-lg mb-1">{work.title}</p>
+                    <p className="mb-1 text-primary/80">{work.authors}</p>
+                    <p className="text-sm text-muted-foreground">
+                      <span>{work.journal}</span>
+                      <span> ({work.year})</span>
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="upcoming" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Work In Progress (6)</CardTitle>
+              <CardDescription>Ongoing research projects and manuscripts in preparation</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-6">
+                {workInProgress.map((work, index) => (
+                  <li key={index} className="border-b pb-5 last:border-0">
+                    <p className="font-semibold text-lg mb-1">{work.title}</p>
+                    <p className="mb-1 text-primary/80">{work.authors}</p>
+                    <p className="text-sm text-muted-foreground">
+                      <span>{work.type}</span>
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </section>
