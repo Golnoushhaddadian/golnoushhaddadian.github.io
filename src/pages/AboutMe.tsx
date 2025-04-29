@@ -1,29 +1,8 @@
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { BookText, FileText, Layers, FileCode } from "lucide-react";
 
 const AboutMe = () => {
-  const researchInterests = [
-    {
-      icon: <BookText className="h-5 w-5 text-primary" />,
-      text: "1. Instructional/Educational Technology, AI in Education, AI-Augmented Learning Environments, Adaptive Learning Technologies, Personalized Learning Environments; Human-Computer Interaction"
-    },
-    {
-      icon: <FileText className="h-5 w-5 text-primary" />,
-      text: "2. Formative Assessment and Feedback, Peer Feedback, Collaborative Learning"
-    },
-    {
-      icon: <Layers className="h-5 w-5 text-primary" />,
-      text: "3. Automated Writing Evaluation (AWE) Systems, Essay Writing, Computer Assisted Language Learning (CALL)"
-    },
-    {
-      icon: <FileCode className="h-5 w-5 text-primary" />,
-      text: "4. Curriculum Design and Development; Design Based Research (DBR); Mixed-Methods Research"
-    }
-  ];
-
   return (
     <div className="min-h-screen flex flex-col items-center py-8 px-4">
       <div className="w-full max-w-4xl">
@@ -48,24 +27,6 @@ const AboutMe = () => {
             </p>
           </div>
         </div>
-
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-6">Research Interests</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {researchInterests.map((interest, index) => (
-              <Card key={index} className="overflow-hidden h-48 aspect-square shadow-md hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-4 flex flex-col justify-center h-full">
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="p-2 bg-primary/10 rounded-full">
-                      {interest.icon}
-                    </div>
-                    <p className="text-sm">{interest.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
 
         <section>
           <h2 className="text-2xl font-semibold mb-6">About Me</h2>
