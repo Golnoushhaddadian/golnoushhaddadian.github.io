@@ -1,4 +1,3 @@
-
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { School, BookOpen, Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -70,6 +69,21 @@ const Teaching = () => {
     }
   ];
 
+  const mentorships = [
+    {
+      program: "International Learning Sciences Student Association (ILSSA) Mentorship Program",
+      role: "Mentorship Program Initiator & Mentor",
+      year: "2025",
+      description: "Mentorship Program aims to create an adaptive, inclusive, collaborative space for Learning Sciences students and researchers to connect, enhance their expertise, and foster personal and professional development. We aim to empower participants by providing opportunities to receive personalized mentorship to address academic challenges, build professional networks, strengthen leadership and communication skills, and gain constructive feedback on their progress where necessary. By joining, individuals become part of a shared journey that focuses on mutual support, growth, and inspiration within the Learning Sciences community."
+    },
+    {
+      program: "Graduate Student Mentorship",
+      role: "Mentor",
+      year: "2025",
+      description: "Mentoring a team of Master's students in Business Analytics and Computer Science at J. Mack Robinson College of Business for the RITA (Real-time Intelligent Technology for Argumentative Writing) Project."
+    }
+  ];
+
   const philosophy = [
     "I believe in creating an inclusive learning environment that encourages critical thinking and intellectual curiosity. My teaching approach emphasizes active learning strategies that engage students in the material beyond memorization.",
     "My courses integrate theoretical foundations with practical applications, preparing students for real-world challenges in the field. I incorporate current research and emerging trends to ensure relevance.",
@@ -93,6 +107,30 @@ const Teaching = () => {
         <div className="space-y-4 pl-4 border-l-2 border-muted">
           {philosophy.map((paragraph, index) => (
             <p key={index} className="text-muted-foreground">{paragraph}</p>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        <div className="flex items-center gap-2">
+          <Users className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-semibold">Mentorship Experience</h2>
+        </div>
+        <div className="space-y-6">
+          {mentorships.map((mentorship, index) => (
+            <Card key={index} className="overflow-hidden">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xl">{mentorship.program}</CardTitle>
+                <CardDescription className="flex justify-between items-center">
+                  <span>{mentorship.role}</span>
+                  <span className="text-sm bg-muted px-3 py-1 rounded-full">{mentorship.year}</span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pt-2">
+                <p className="text-sm text-muted-foreground">{mentorship.description}</p>
+              </CardContent>
+              {index < mentorships.length - 1 && <Separator className="my-1" />}
+            </Card>
           ))}
         </div>
       </div>
