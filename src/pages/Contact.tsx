@@ -6,43 +6,69 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from '@/components/ui/use-toast';
+import { useForm } from "react-hook-form";
+import emailjs from '@emailjs/browser';
+
+// Define the form data structure
+type FormData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 
 const Contact = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Initialize react-hook-form
+  const { 
+    register, 
+    handleSubmit, 
+    reset,
+    formState: { errors } 
+  } = useForm<FormData>();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Handle form submission
+  const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Create template parameters for EmailJS
+      const templateParams = {
+        to_email: "ghaddadian1@gsu.edu",
+        from_name: data.name,
+        from_email: data.email,
+        subject: data.subject,
+        message: data.message,
+        reply_to: data.email,
+      };
+      
+      // Send email using EmailJS
+      await emailjs.send(
+        'service_contact_form',  // You'll need to create a service in EmailJS
+        'template_contact',      // You'll need to create a template in EmailJS
+        templateParams,
+        'your_public_key'        // Replace with your EmailJS public key
+      );
+      
       toast({
         title: "Message sent",
         description: "Thank you for your message. I'll get back to you soon!",
       });
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+      
+      // Reset form after successful submission
+      reset();
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error",
+        description: "There was an error sending your message. Please try again later.",
+        variant: "destructive",
       });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -113,7 +139,7 @@ const Contact = () => {
         <div className="md:col-span-2">
           <Card>
             <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-medium">
@@ -121,12 +147,13 @@ const Contact = () => {
                     </label>
                     <Input 
                       id="name" 
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required 
+                      {...register("name", { required: "Name is required" })}
+                      aria-invalid={errors.name ? "true" : "false"}
                       placeholder="Your name"
                     />
+                    {errors.name && (
+                      <p className="text-sm text-destructive mt-1">{errors.name.message}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium">
@@ -134,13 +161,20 @@ const Contact = () => {
                     </label>
                     <Input 
                       id="email" 
-                      name="email"
                       type="email" 
-                      value={formData.email}
-                      onChange={handleChange}
-                      required 
+                      {...register("email", { 
+                        required: "Email is required",
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: "Invalid email address"
+                        }
+                      })}
+                      aria-invalid={errors.email ? "true" : "false"}
                       placeholder="your.email@example.com" 
                     />
+                    {errors.email && (
+                      <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+                    )}
                   </div>
                 </div>
 
@@ -150,12 +184,13 @@ const Contact = () => {
                   </label>
                   <Input 
                     id="subject" 
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required 
+                    {...register("subject", { required: "Subject is required" })}
+                    aria-invalid={errors.subject ? "true" : "false"}
                     placeholder="What is this regarding?" 
                   />
+                  {errors.subject && (
+                    <p className="text-sm text-destructive mt-1">{errors.subject.message}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -164,13 +199,14 @@ const Contact = () => {
                   </label>
                   <Textarea 
                     id="message" 
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required 
+                    {...register("message", { required: "Message is required" })}
+                    aria-invalid={errors.message ? "true" : "false"}
                     placeholder="Your message..." 
                     rows={6} 
                   />
+                  {errors.message && (
+                    <p className="text-sm text-destructive mt-1">{errors.message.message}</p>
+                  )}
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
