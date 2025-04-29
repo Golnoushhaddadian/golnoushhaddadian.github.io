@@ -1,116 +1,97 @@
 
+import { Award, BookText, FileText, Users } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
 const Service = () => {
-  const academicService = [
-    {
-      role: "Journal Reviewer",
-      organization: "Journal of [Your Field]",
-      period: "2020 - Present",
-      description: "Review manuscripts in the areas of [specific sub-fields]. Evaluated approximately 15 manuscripts annually, providing detailed feedback to authors and editors."
-    },
-    {
-      role: "Conference Program Committee",
-      organization: "International Conference on [Your Field]",
-      period: "2021 - Present",
-      description: "Serve on the program committee reviewing conference submissions and helping organize conference sessions."
-    },
-    {
-      role: "Faculty Senate Representative",
-      organization: "University Academic Council",
-      period: "2022 - Present",
-      description: "Represent department interests at university-level governance meetings. Serve on the curriculum committee reviewing proposed academic programs."
-    }
-  ];
-
   const professionalService = [
     {
-      role: "Committee Member",
-      organization: "Professional Association of [Your Field]",
-      period: "2019 - Present",
-      description: "Member of the education committee working to develop professional development resources for early-career researchers."
+      role: "Scholarships Reviewer",
+      organization: "ISLS/ICLS - The International Society of the Learning Sciences Travel to Helsinki Scholarships (Equity Travel Support and ILSSA Annual Meeting Scholarship)",
+      period: "2025",
+      description: ""
     },
     {
-      role: "Workshop Organizer",
-      organization: "Annual Summer School on [Topic]",
-      period: "2021, 2022",
-      description: "Co-organized a week-long workshop for graduate students and early-career researchers. Developed curriculum and recruited guest lecturers."
-    }
-  ];
-
-  const communityService = [
-    {
-      role: "Mentor",
-      organization: "Community Science Education Program",
-      period: "2020 - Present",
-      description: "Work with high school students from underrepresented backgrounds interested in [your field]. Provide guidance on college applications and career paths in STEM fields."
+      role: "Student Representative and Proposal Evaluator",
+      organization: "Faculty Technology Initiatives, College of Education and Human Development, Georgia State University",
+      period: "2025",
+      description: ""
     },
     {
-      role: "Volunteer",
-      organization: "Regional Science Fair",
-      period: "2018 - Present",
-      description: "Judge student projects and provide constructive feedback to encourage interest in [your field]."
+      role: "Journal Reviewer",
+      organization: "Innovations in Education and Teaching International",
+      period: "Since 2024",
+      description: ""
+    },
+    {
+      role: "Journal Reviewer",
+      organization: "Education and Information Technologies",
+      period: "Since 2024",
+      description: ""
+    },
+    {
+      role: "Journal Reviewer",
+      organization: "Computer Assisted Language Learning",
+      period: "Since 2024",
+      description: ""
+    },
+    {
+      role: "Journal Reviewer",
+      organization: "Computer-Assisted Language Learning Electronic Journal",
+      period: "Since 2024",
+      description: ""
+    },
+    {
+      role: "Program Committee Member",
+      organization: "ISLS/ICLS - The International Society of the Learning Sciences",
+      period: "Since 2024",
+      description: ""
+    },
+    {
+      role: "Program Committee Member",
+      organization: "SITE - Society for Information Technology and Teacher Education",
+      period: "Since 2024",
+      description: ""
+    },
+    {
+      role: "Program Committee Member",
+      organization: "AECT International Convention - Association for Educational Communications & Technology",
+      period: "Since 2024",
+      description: ""
+    },
+    {
+      role: "Program Committee Member",
+      organization: "ACM Learning @ Scale - Georgia Institute of Technology",
+      period: "Since 2024",
+      description: ""
     }
   ];
 
   return (
     <section className="space-y-8">
-      <div>
-        <h1>Service</h1>
-        <p className="text-lg text-muted-foreground">
-          Contributions to academic, professional, and community organizations.
-        </p>
-      </div>
-
-      <div className="space-y-6">
-        <h2>Academic Service</h2>
-        <div className="space-y-4">
-          {academicService.map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-xl">{item.role}</CardTitle>
-                <CardDescription>{item.organization} • {item.period}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{item.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+      <div className="relative mb-8">
+        <div className="bg-black py-4 px-6 text-white text-center rounded-sm">
+          <h1 className="text-xl font-semibold">Professional Service</h1>
         </div>
       </div>
 
-      <div className="space-y-6">
-        <h2>Professional Service</h2>
-        <div className="space-y-4">
-          {professionalService.map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-xl">{item.role}</CardTitle>
-                <CardDescription>{item.organization} • {item.period}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{item.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+      <div className="flex items-center gap-2 mb-6">
+        <FileText className="h-6 w-6 text-primary" />
+        <h2 className="text-2xl font-semibold">Academic & Professional Service</h2>
       </div>
 
-      <div className="space-y-6">
-        <h2>Community Service</h2>
-        <div className="space-y-4">
-          {communityService.map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-xl">{item.role}</CardTitle>
-                <CardDescription>{item.organization} • {item.period}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{item.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {professionalService.map((item, index) => (
+          <Card key={index} className="overflow-hidden hover:shadow-md transition-shadow">
+            <CardHeader className="bg-muted/30">
+              <CardTitle className="text-xl">{item.role}</CardTitle>
+              <CardDescription className="line-clamp-2 text-foreground/70">{item.organization}</CardDescription>
+            </CardHeader>
+            <CardContent className="pt-4">
+              <p className="text-sm font-medium text-primary">{item.period}</p>
+              {item.description && <p className="mt-2 text-muted-foreground">{item.description}</p>}
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </section>
   );

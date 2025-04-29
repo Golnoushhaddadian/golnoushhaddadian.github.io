@@ -43,7 +43,7 @@ const ProfessionalAffiliations = () => {
     <section className="space-y-8">
       <div className="relative mb-8">
         <div className="bg-black py-4 px-6 text-white text-center rounded-sm">
-          <h1 className="text-xl font-semibold">Affiliations</h1>
+          <h1 className="text-xl font-semibold">Professional Affiliations</h1>
         </div>
       </div>
 
