@@ -19,6 +19,7 @@ import CurriculumVitae from "@/pages/CurriculumVitae";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import Education from "@/pages/Education";
+import Gallery from "@/pages/Gallery";
 
 const queryClient = new QueryClient();
 
@@ -32,12 +33,13 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<AboutMe />} />
+              <Route path="/education" element={<Education />} />
               <Route path="/awards" element={<Awards />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/research" element={<Research />} />
               <Route path="/teaching" element={<Teaching />} />
               <Route path="/service" element={<Service />} />
-              <Route path="/education" element={<Education />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/affiliations" element={<ProfessionalAffiliations />} />
               <Route path="/cv" element={<CurriculumVitae />} />
               <Route path="/contact" element={<Contact />} />
