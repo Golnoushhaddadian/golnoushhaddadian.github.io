@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { WorkInProgress } from "@/types/research";
+import { Badge } from "@/components/ui/badge";
 
 interface WorkInProgressTabProps {
   workInProgress: WorkInProgress[];
@@ -8,8 +9,8 @@ interface WorkInProgressTabProps {
 
 export const WorkInProgressTab = ({ workInProgress }: WorkInProgressTabProps) => {
   return (
-    <Card>
-      <CardHeader>
+    <Card className="border-l-4 border-primary overflow-hidden">
+      <CardHeader className="bg-primary/5">
         <CardTitle>Work In Progress ({workInProgress.length})</CardTitle>
         <CardDescription>Ongoing research projects and manuscripts in preparation</CardDescription>
       </CardHeader>
@@ -22,6 +23,11 @@ export const WorkInProgressTab = ({ workInProgress }: WorkInProgressTabProps) =>
               <p className="text-sm text-muted-foreground">
                 <span>{work.type}</span>
               </p>
+              {work.status && (
+                <Badge variant="outline" className="mt-2 bg-primary/5">
+                  {work.status}
+                </Badge>
+              )}
             </li>
           ))}
         </ul>

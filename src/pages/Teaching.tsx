@@ -2,6 +2,7 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { School, BookOpen, Users, GraduationCap } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
 const Teaching = () => {
@@ -124,11 +125,16 @@ const Teaching = () => {
           <BookOpen className="h-6 w-6 text-primary" />
           <h2 className="text-2xl font-semibold">Teaching Philosophy</h2>
         </div>
-        <div className="space-y-4 pl-4 border-l-2 border-primary/20">
-          {philosophy.map((paragraph, index) => (
-            <p key={index} className="text-muted-foreground">{paragraph}</p>
-          ))}
-        </div>
+        <Card className="border-l-4 border-primary overflow-hidden">
+          <CardHeader className="bg-primary/5">
+            <CardTitle>Philosophy & Approach</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {philosophy.map((paragraph, index) => (
+              <p key={index} className="text-muted-foreground">{paragraph}</p>
+            ))}
+          </CardContent>
+        </Card>
       </div>
 
       <div className="space-y-6">
@@ -144,24 +150,23 @@ const Teaching = () => {
         >
           {courses.map((course, index) => (
             <motion.div key={index} variants={item}>
-              <Card key={index} className="overflow-hidden border-l-4 border-primary">
-                <CardHeader className="pb-2 bg-primary/5">
+              <Card className="overflow-hidden border-l-4 border-primary">
+                <CardHeader className="bg-primary/5 pb-2">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <Badge variant="outline" className="bg-primary/10">{course.position}</Badge>
+                    <Badge variant="outline" className="bg-primary/5">{course.period}</Badge>
+                  </div>
                   <CardTitle className="text-xl">{course.institution}</CardTitle>
-                  <CardDescription className="flex justify-between items-center">
-                    <span>{course.position}</span>
-                    <span className="text-sm bg-primary/10 px-3 py-1 rounded-full">{course.period}</span>
-                  </CardDescription>
                   <div className="flex items-center gap-2 mt-1">
                     <Users className="h-4 w-4 text-primary/70" />
                     <span className="text-sm text-muted-foreground">{course.audience}</span>
                   </div>
                 </CardHeader>
                 {course.description && (
-                  <CardContent className="pt-2">
+                  <CardContent className="pt-4">
                     <p className="text-sm text-muted-foreground">{course.description}</p>
                   </CardContent>
                 )}
-                {index < courses.length - 1 && <Separator className="my-1" />}
               </Card>
             </motion.div>
           ))}
@@ -181,15 +186,15 @@ const Teaching = () => {
         >
           {mentorships.map((mentorship, index) => (
             <motion.div key={index} variants={item}>
-              <Card className="overflow-hidden border-l-4 border-primary bg-primary/5">
-                <CardHeader className="pb-2">
+              <Card className="overflow-hidden border-l-4 border-primary">
+                <CardHeader className="bg-primary/5 pb-2">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <Badge variant="outline" className="bg-primary/10">{mentorship.role}</Badge>
+                    <Badge variant="outline" className="bg-primary/5">{mentorship.year}</Badge>
+                  </div>
                   <CardTitle className="text-xl">{mentorship.program}</CardTitle>
-                  <CardDescription className="flex justify-between items-center">
-                    <span>{mentorship.role}</span>
-                    <span className="text-sm bg-primary/10 px-3 py-1 rounded-full">{mentorship.year}</span>
-                  </CardDescription>
                 </CardHeader>
-                <CardContent className="pt-2">
+                <CardContent className="pt-4">
                   <p className="text-sm text-muted-foreground">{mentorship.description}</p>
                 </CardContent>
               </Card>

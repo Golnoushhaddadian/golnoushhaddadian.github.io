@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { JournalPublication } from "@/types/research";
+import { Badge } from "@/components/ui/badge";
 
 interface JournalsTabProps {
   publications: JournalPublication[];
@@ -8,8 +9,8 @@ interface JournalsTabProps {
 
 export const JournalsTab = ({ publications }: JournalsTabProps) => {
   return (
-    <Card>
-      <CardHeader>
+    <Card className="border-l-4 border-primary overflow-hidden">
+      <CardHeader className="bg-primary/5">
         <CardTitle>Refereed Journal Publications ({publications.length})</CardTitle>
         <CardDescription>Peer-reviewed research articles published in academic journals</CardDescription>
       </CardHeader>
@@ -25,6 +26,11 @@ export const JournalsTab = ({ publications }: JournalsTabProps) => {
                 {pub.pages && <span>, {pub.pages}</span>}
                 {pub.year && <span> ({pub.year})</span>}
               </p>
+              {pub.doi && (
+                <Badge variant="outline" className="mt-2 bg-primary/5">
+                  DOI: {pub.doi}
+                </Badge>
+              )}
             </li>
           ))}
         </ul>

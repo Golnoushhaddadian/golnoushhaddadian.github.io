@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ConferenceProceeding } from "@/types/research";
+import { Badge } from "@/components/ui/badge";
 
 interface ConferencesTabProps {
   proceedings: ConferenceProceeding[];
@@ -8,8 +9,8 @@ interface ConferencesTabProps {
 
 export const ConferencesTab = ({ proceedings }: ConferencesTabProps) => {
   return (
-    <Card>
-      <CardHeader>
+    <Card className="border-l-4 border-primary overflow-hidden">
+      <CardHeader className="bg-primary/5">
         <CardTitle>Refereed Conference Proceedings ({proceedings.length})</CardTitle>
         <CardDescription>Peer-reviewed papers presented at academic conferences</CardDescription>
       </CardHeader>
@@ -25,6 +26,11 @@ export const ConferencesTab = ({ proceedings }: ConferencesTabProps) => {
                 {proc.publisher && <span>. {proc.publisher}</span>}
                 {proc.year && <span> ({proc.year})</span>}
               </p>
+              {proc.doi && (
+                <Badge variant="outline" className="mt-2 bg-primary/5">
+                  DOI: {proc.doi}
+                </Badge>
+              )}
             </li>
           ))}
         </ul>

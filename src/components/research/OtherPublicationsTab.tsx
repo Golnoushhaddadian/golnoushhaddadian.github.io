@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { NonRefereedPublication, WorkUnderReview } from "@/types/research";
+import { Badge } from "@/components/ui/badge";
 
 interface OtherPublicationsTabProps {
   nonRefereedPublications: NonRefereedPublication[];
@@ -10,8 +11,8 @@ interface OtherPublicationsTabProps {
 export const OtherPublicationsTab = ({ nonRefereedPublications, workUnderReview }: OtherPublicationsTabProps) => {
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
+      <Card className="border-l-4 border-primary overflow-hidden">
+        <CardHeader className="bg-primary/5">
           <CardTitle>Non-Refereed Publications ({nonRefereedPublications.length})</CardTitle>
           <CardDescription>Research reports, preprints, and other non-peer-reviewed publications</CardDescription>
         </CardHeader>
@@ -31,8 +32,8 @@ export const OtherPublicationsTab = ({ nonRefereedPublications, workUnderReview 
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
+      <Card className="border-l-4 border-primary overflow-hidden">
+        <CardHeader className="bg-primary/5">
           <CardTitle>Work Under Review/In Revision ({workUnderReview.length})</CardTitle>
           <CardDescription>Manuscripts submitted to journals or in revision</CardDescription>
         </CardHeader>
@@ -46,6 +47,11 @@ export const OtherPublicationsTab = ({ nonRefereedPublications, workUnderReview 
                   <span>{work.journal}</span>
                   <span> ({work.year})</span>
                 </p>
+                {work.status && (
+                  <Badge variant="outline" className="mt-2 bg-primary/5">
+                    {work.status}
+                  </Badge>
+                )}
               </li>
             ))}
           </ul>

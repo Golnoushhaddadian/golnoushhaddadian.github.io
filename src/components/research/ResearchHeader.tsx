@@ -12,10 +12,10 @@ export const ResearchHeader = () => {
         My research focuses on AI in Education, with particular emphasis on innovative learning technologies, formative assessment, and feedback systems.
       </p>
       <div className="flex flex-wrap gap-2 mt-4">
-        <span className="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-800/50 dark:text-blue-200 rounded-full text-sm">AI in Education</span>
-        <span className="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-800/50 dark:text-green-200 rounded-full text-sm">Learning Technologies</span>
-        <span className="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-800/50 dark:text-purple-200 rounded-full text-sm">Formative Assessment</span>
-        <span className="px-3 py-1 bg-amber-100 text-amber-800 dark:bg-amber-800/50 dark:text-amber-200 rounded-full text-sm">Feedback Systems</span>
+        <span className="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full text-sm">AI in Education</span>
+        <span className="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full text-sm">Learning Technologies</span>
+        <span className="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full text-sm">Formative Assessment</span>
+        <span className="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full text-sm">Feedback Systems</span>
       </div>
     </div>
   );
