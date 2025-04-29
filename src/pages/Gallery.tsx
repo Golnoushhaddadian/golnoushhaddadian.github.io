@@ -10,7 +10,7 @@ type GalleryImage = {
   src: string;
   alt: string;
   description: string;
-  category: "teaching" | "professional" | "research";
+  category: "teaching" | "professional" | "research" | "awards";
 };
 
 const galleryImages: GalleryImage[] = [
@@ -52,7 +52,7 @@ const galleryImages: GalleryImage[] = [
     category: "professional"
   },
   
-  // Teaching images - removed duplicates, kept the most relevant ones
+  // Teaching images
   { 
     src: "/lovable-uploads/76d7583c-66c7-478b-878b-19cc3330e383.png", 
     alt: "Person holding learning materials",
@@ -90,7 +90,7 @@ const galleryImages: GalleryImage[] = [
     category: "teaching"
   },
   
-  // Research images - newly uploaded
+  // Research images
   {
     src: "/lovable-uploads/c8f7c099-bd71-4ca8-8021-1cfb168f9d5a.png",
     alt: "Research team at conference with orange background and artistic display",
@@ -120,6 +120,32 @@ const galleryImages: GalleryImage[] = [
     alt: "Researcher presenting research findings and data visualization",
     description: "",
     category: "research"
+  },
+  
+  // Awards images - newly added
+  {
+    src: "/lovable-uploads/456f670a-3858-4253-a9f9-4acc80d81cc6.png",
+    alt: "Woman in black dress holding award with Georgia State University backdrop",
+    description: "",
+    category: "awards"
+  },
+  {
+    src: "/lovable-uploads/6828e63c-0d05-4394-9936-01c4542b4a79.png",
+    alt: "Two women at Honors Day ceremony, one holding award and certificate",
+    description: "",
+    category: "awards"
+  },
+  {
+    src: "/lovable-uploads/379682e5-e6f3-4167-8c6b-bb98ae3dcfa1.png",
+    alt: "Group photo with five people in front of College of Education backdrop, woman in center holding award",
+    description: "",
+    category: "awards"
+  },
+  {
+    src: "/lovable-uploads/b3903a2b-7911-42f7-a228-32eeefa770ec.png",
+    alt: "Award ceremony with two men presenting award to woman on stage",
+    description: "",
+    category: "awards"
   }
 ];
 
@@ -141,6 +167,7 @@ const Gallery = () => {
       <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="mb-6 w-full sm:w-auto">
           <TabsTrigger value="all">All Photos</TabsTrigger>
+          <TabsTrigger value="awards">Awards</TabsTrigger>
           <TabsTrigger value="research">Research</TabsTrigger>
           <TabsTrigger value="teaching">Teaching</TabsTrigger>
           <TabsTrigger value="professional">Professional</TabsTrigger>
@@ -151,6 +178,16 @@ const Gallery = () => {
             {galleryImages.map((image, index) => (
               <GalleryCard key={index} image={image} />
             ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="awards" className="mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {galleryImages
+              .filter(image => image.category === "awards")
+              .map((image, index) => (
+                <GalleryCard key={index} image={image} />
+              ))}
           </div>
         </TabsContent>
         
