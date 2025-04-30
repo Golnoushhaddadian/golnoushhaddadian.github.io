@@ -3,6 +3,7 @@ import { School, BookOpen, Users, GraduationCap } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Teaching = () => {
   const courses = [
@@ -160,6 +161,20 @@ const Teaching = () => {
                 </CardHeader>
                 {course.description && (
                   <CardContent className="pt-4">
+                    {course.institution === "RadGuyesh Haddadian International Institute" && (
+                      <div className="mb-4 rounded-md overflow-hidden">
+                        <AspectRatio ratio={16/9} className="bg-muted">
+                          <img 
+                            src="/lovable-uploads/1069d32e-f9f3-4f64-bef3-4186605cc9c0.png" 
+                            alt="Teaching at RadGuyesh Haddadian International Institute" 
+                            className="object-cover w-full h-full rounded-md"
+                          />
+                        </AspectRatio>
+                        <p className="text-xs text-muted-foreground mt-1 italic text-center">
+                          Teaching a TESOL certification course at RadGuyesh Haddadian International Institute
+                        </p>
+                      </div>
+                    )}
                     <p className="text-sm text-muted-foreground">{course.description}</p>
                   </CardContent>
                 )}
