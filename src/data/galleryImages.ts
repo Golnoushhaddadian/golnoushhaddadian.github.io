@@ -1,101 +1,15 @@
-
 import { GalleryImage } from "@/types/gallery";
 
 export const galleryImages: GalleryImage[] = [
-  // Teaching images
+  // Teaching images - keeping only one
   { 
     src: "/lovable-uploads/a23fd0a3-6057-45eb-ae13-68e9a74814e2.png", 
     alt: "Group photo with purple background",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/2b19eedb-d7c2-4394-ae8e-da6b205f03c6.png", 
-    alt: "Group photo in classroom",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/9df4b996-dfd6-4dbb-aff0-9c09284b56aa.png", 
-    alt: "Group selfie",
-    description: "",
-    category: "teaching" 
-  },
-  { 
-    src: "/lovable-uploads/44fad1a1-241a-4252-b170-c397e6643fd2.png", 
-    alt: "Two women holding certificates",
-    description: "",
-    category: "teaching" 
-  },
-  { 
-    src: "/lovable-uploads/994adcb9-9684-44d8-8238-d35f284c115c.png", 
-    alt: "Group photo with blackboard",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/1329e185-b82c-45f9-b6f5-ba2435e240b6.png", 
-    alt: "Group photo with blackboard in background",
-    description: "",
-    category: "teaching"
-  },
-  // Adding new teaching images
-  { 
-    src: "/lovable-uploads/94c41129-75b0-4aa2-afac-8a4441b4ac72.png", 
-    alt: "Two people in conversation on blue couches",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/0cc1d460-f615-4d5e-94f9-771f6df7e603.png", 
-    alt: "Five people standing in classroom with bookshelves",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/490d04b2-889a-4d0a-af1f-c4e6459f82bc.png", 
-    alt: "Group selfie in meeting room with projector",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/3e98e2bf-e41b-4b14-a6f5-275d56ab040c.png", 
-    alt: "Group of women with certificates in front of decorative wall",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/87d83586-3b4f-4614-8673-d28cd49ae3ab.png", 
-    alt: "Group of professionals standing in office setting",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/c9567501-cad3-47d0-9afd-32f02e36e864.png", 
-    alt: "Woman presenter standing next to educational slide",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/9dbf677d-8d70-40b0-9fc1-e4702c02d423.png", 
-    alt: "Woman taking notes at elegant table with interviewer",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/d5904290-4d0f-481c-a709-41058e26c35c.png", 
-    alt: "Meeting in lounge area with scenic view",
-    description: "",
-    category: "teaching"
-  },
-  { 
-    src: "/lovable-uploads/3aea912a-b1df-4e9e-a49c-b352b80827ba.png", 
-    alt: "Three people in discussion on blue couches with evening view",
-    description: "",
+    description: "Teaching session with graduate students",
     category: "teaching"
   },
   
-  // Research images (only kept unique ones)
+  // Research images (kept unchanged)
   {
     src: "/lovable-uploads/c8f7c099-bd71-4ca8-8021-1cfb168f9d5a.png",
     alt: "Research team at conference with orange background and artistic display",
@@ -205,7 +119,7 @@ export const galleryImages: GalleryImage[] = [
     category: "research"
   },
   
-  // Awards images
+  // Awards images (kept unchanged)
   {
     src: "/lovable-uploads/456f670a-3858-4253-a9f9-4acc80d81cc6.png",
     alt: "Woman in black dress holding award with Georgia State University backdrop",
