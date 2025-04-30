@@ -141,21 +141,6 @@ const Teaching = () => {
                 </CardHeader>
                 {course.description && (
                   <CardContent className="pt-4">
-                    {course.institution === "Andisheh Moein Institute of Higher Education" && (
-                      <div className="mb-4 rounded-md overflow-hidden">
-                        <AspectRatio ratio={4/3} className="bg-muted">
-                          <img 
-                            src="/lovable-uploads/d007d6a3-43f6-47a3-b47f-9fd0c17f7cc7.png" 
-                            alt="MBA English course at Andisheh Moein Institute of Higher Education" 
-                            className="object-contain w-full h-full rounded-md"
-                          />
-                        </AspectRatio>
-                        <p className="text-xs text-muted-foreground mt-1 italic text-center">
-                          Graduate students attending the MBA English course at Andisheh Moein Institute
-                        </p>
-                      </div>
-                    )}
-                    
                     <p className="text-sm text-muted-foreground">{course.description}</p>
                   </CardContent>
                 )}
