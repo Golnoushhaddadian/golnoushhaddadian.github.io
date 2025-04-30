@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Send } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,7 @@ type FormData = {
 const ContactForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   
   // Initialize react-hook-form
   const { 
@@ -36,6 +37,7 @@ const ContactForm = () => {
     try {
       // Create template parameters for EmailJS
       const templateParams = {
+        to_name: "Golnoush Haddadian",
         to_email: "ghaddadian1@gsu.edu",
         from_name: data.name,
         from_email: data.email,
@@ -46,10 +48,10 @@ const ContactForm = () => {
       
       // Send email using EmailJS
       await emailjs.send(
-        'service_contact_form',  // You'll need to create a service in EmailJS
-        'template_contact',      // You'll need to create a template in EmailJS
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_contact_form',
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_contact',
         templateParams,
-        'your_public_key'        // Replace with your EmailJS public key
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key'
       );
       
       toast({
@@ -74,7 +76,7 @@ const ContactForm = () => {
   return (
     <Card>
       <CardContent className="p-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium">
