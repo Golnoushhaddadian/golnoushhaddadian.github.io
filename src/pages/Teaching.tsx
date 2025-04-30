@@ -1,4 +1,3 @@
-
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { School, BookOpen, Users, GraduationCap } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -142,26 +141,11 @@ const Teaching = () => {
                 </CardHeader>
                 {course.description && (
                   <CardContent className="pt-4">
-                    {course.institution === "RadGuyesh Haddadian International Institute" && (
-                      <div className="mb-4 rounded-md overflow-hidden">
-                        <AspectRatio ratio={16/9} className="bg-muted">
-                          <img 
-                            src="/lovable-uploads/1069d32e-f9f3-4f64-bef3-4186605cc9c0.png" 
-                            alt="Teaching at RadGuyesh Haddadian International Institute" 
-                            className="object-cover w-full h-full rounded-md"
-                          />
-                        </AspectRatio>
-                        <p className="text-xs text-muted-foreground mt-1 italic text-center">
-                          Teaching a TESOL certification course at RadGuyesh Haddadian International Institute
-                        </p>
-                      </div>
-                    )}
-                    
                     {course.institution === "Andisheh Moein Institute of Higher Education" && (
                       <div className="mb-4 rounded-md overflow-hidden">
                         <AspectRatio ratio={4/3} className="bg-muted">
                           <img 
-                            src="/lovable-uploads/ba0542ca-5316-4653-9f33-ee4015633c1c.png" 
+                            src="/lovable-uploads/d007d6a3-43f6-47a3-b47f-9fd0c17f7cc7.png" 
                             alt="MBA English course at Andisheh Moein Institute of Higher Education" 
                             className="object-contain w-full h-full rounded-md"
                           />
