@@ -5,8 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 const CurriculumVitae = () => {
-  // Google Drive direct download link
-  const cvFileUrl = "https://docs.google.com/document/d/1viqbhhMz-tldpIW7cALV3XDMsQT9O2AY/edit?usp=sharing&ouid=114168757246374587176&rtpof=true&sd=true";
+  // Updated Google Drive direct download link
+  const cvFileUrl = "https://docs.google.com/document/d/1W2Hp_dSe9thAS5oaYEVgmZ23OzAifH-P/edit?usp=drive_link&ouid=114168757246374587176&rtpof=true&sd=true";
 
   return (
     <section className="space-y-8">

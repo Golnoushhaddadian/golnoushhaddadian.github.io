@@ -4,13 +4,13 @@ import { Card, CardContent, CardDescription, CardFooter } from "@/components/ui/
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { CONFERENCES } from "@/data/researchData";
+import { conferenceProceedings } from "@/data/researchData";
 import { ConferenceProceeding } from '@/types/research';
 
 export const ConferencesTab = () => {
   return (
     <div className="space-y-6">
-      {CONFERENCES.map((conference: ConferenceProceeding, index: number) => (
+      {conferenceProceedings.map((conference: ConferenceProceeding, index: number) => (
         <Card key={index} className="overflow-hidden">
           <CardContent className="p-6">
             <div className="mb-3 flex gap-2">
@@ -25,7 +25,6 @@ export const ConferencesTab = () => {
             <CardDescription className="text-sm text-muted-foreground">
               {conference.conference}, {conference.year}
             </CardDescription>
-            {/* Remove references to the doi property which doesn't exist in the type */}
           </CardContent>
           <CardFooter className="bg-muted/50 px-6 py-3">
             {conference.url && (
