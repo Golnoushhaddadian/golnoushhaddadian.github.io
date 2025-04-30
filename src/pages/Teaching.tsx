@@ -87,12 +87,6 @@ const Teaching = () => {
     }
   ];
 
-  const philosophy = [
-    "I believe in creating an inclusive learning environment that encourages critical thinking and intellectual curiosity. My teaching approach emphasizes active learning strategies that engage students in the material beyond memorization.",
-    "My courses integrate theoretical foundations with practical applications, preparing students for real-world challenges in the field. I incorporate current research and emerging trends to ensure relevance.",
-    "I strive to meet diverse learning needs by providing multiple pathways to understanding complex concepts. This includes visual learning aids, hands-on activities, and opportunities for collaborative problem-solving."
-  ];
-
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -118,20 +112,6 @@ const Teaching = () => {
         <p className="text-lg text-muted-foreground">
           My teaching philosophy and experience across various institutions.
         </p>
-      </div>
-
-      <div className="space-y-6">
-        <div className="flex items-center gap-2 mb-4">
-          <BookOpen className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-semibold">Teaching Philosophy</h2>
-        </div>
-        <Card className="border-l-4 border-primary overflow-hidden">
-          <CardContent className="pt-6 space-y-4">
-            {philosophy.map((paragraph, index) => (
-              <p key={index} className="text-muted-foreground">{paragraph}</p>
-            ))}
-          </CardContent>
-        </Card>
       </div>
 
       <div className="space-y-6">
