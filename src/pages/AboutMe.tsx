@@ -1,6 +1,8 @@
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const AboutMe = () => {
   return (
@@ -18,7 +20,15 @@ const AboutMe = () => {
             </div>
           </div>
           <div className="md:w-2/3">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Golnoush (Lia) Haddadian</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+              Golnoush (Lia) Haddadian
+              <Button variant="ghost" size="sm" className="ml-2" asChild>
+                <a href="https://namedrop.io/golnoushhaddadian" target="_blank" rel="noopener noreferrer">
+                  <ExternalLink size={16} className="mr-1" />
+                  <span className="text-sm">Pronounce my name</span>
+                </a>
+              </Button>
+            </h1>
             <p className="text-xl text-muted-foreground mb-4">Ph.D. Candidate in Learning Sciences</p>
             <p className="mb-6">
               Graduate Research Associate at Georgia State University, College of Education and Human Development,
@@ -31,13 +41,13 @@ const AboutMe = () => {
           <h2 className="text-2xl font-semibold mb-6">Welcome to My Personal Website</h2>
           <div className="prose max-w-none text-muted-foreground">
             <p>
-              I am Golnoush (Lia) Haddadian, and I am thrilled to share my journey with you. As a passionate advocate for the transformative power of education and technology, I have dedicated my career to creating inclusive, innovative learning environments that empower all learners. From my early days designing interactive learning tools in high school to my current work as a Ph.D. candidate in Educational Technology at Georgia State University, my mission has always been to bridge gaps in education and open new pathways to success.
+              I am Golnoush (Lia) Haddadian (pronounce my name: <a href="https://namedrop.io/golnoushhaddadian" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">https://namedrop.io/golnoushhaddadian</a>), and I am thrilled to share my journey with you. As a passionate advocate for the transformative power of education and technology, I am dedicated to creating inclusive, innovative learning environments that empower all learners. From my early days designing interactive learning tools in high school to my current work as a Ph.D. candidate in Learning Sciences at Georgia State University, my mission has always been to bridge gaps in education and open new pathways to success.
             </p>
             <p>
-              Here, you will find insights into my work at the intersection of learning sciences, artificial intelligence, and educational access. I am especially committed to supporting adult learners, advancing global literacy, and building scalable, accessible learning solutions for all.
+              Here, you will find insights into my work at the intersection of learning sciences and artificial intelligence. I am especially committed to supporting adult learners, advancing global literacy, and building scalable, accessible learning solutions for all.
             </p>
             <p>
-              I invite you to explore my projects, publications, and initiatives aimed at making education more equitable and effective worldwide. Thank you for visiting and joining me on this journey of learning, innovation, and positive change. I hope my work inspires you as much as the pursuit of knowledge continues to inspire me.
+              I invite you to explore my projects, publications, and initiatives aimed at making education more equitable and effective. Thank you for visiting and joining me on this journey of learning, innovation, and positive change. I hope my work inspires you as much as the pursuit of knowledge continues to inspire me.
             </p>
           </div>
         </section>
