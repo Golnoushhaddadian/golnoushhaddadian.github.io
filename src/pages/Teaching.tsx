@@ -155,6 +155,22 @@ const Teaching = () => {
                         </p>
                       </div>
                     )}
+                    
+                    {course.institution === "Andisheh Moein Institute of Higher Education" && (
+                      <div className="mb-4 rounded-md overflow-hidden">
+                        <AspectRatio ratio={16/9} className="bg-muted">
+                          <img 
+                            src="/lovable-uploads/ba0542ca-5316-4653-9f33-ee4015633c1c.png" 
+                            alt="MBA English course at Andisheh Moein Institute of Higher Education" 
+                            className="object-cover w-full h-full rounded-md"
+                          />
+                        </AspectRatio>
+                        <p className="text-xs text-muted-foreground mt-1 italic text-center">
+                          Graduate students attending the MBA English course at Andisheh Moein Institute
+                        </p>
+                      </div>
+                    )}
+                    
                     <p className="text-sm text-muted-foreground">{course.description}</p>
                   </CardContent>
                 )}
