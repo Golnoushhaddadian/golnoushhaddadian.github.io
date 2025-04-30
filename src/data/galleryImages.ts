@@ -1,11 +1,72 @@
+
 import { GalleryImage } from "@/types/gallery";
 
 export const galleryImages: GalleryImage[] = [
-  // Teaching images - keeping only one
+  // Teaching images - adding all 11 new images
   { 
-    src: "/lovable-uploads/a23fd0a3-6057-45eb-ae13-68e9a74814e2.png", 
-    alt: "Group photo with purple background",
-    description: "Teaching session with graduate students",
+    src: "/lovable-uploads/8f235add-3a31-41d2-9153-0f9448c1ce07.png", 
+    alt: "Teacher presenting to students with yellow slides about important terms",
+    description: "Teaching session with students discussing important terminology",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/c96f6e7b-a66f-4be9-ab2c-310d0a2ecd16.png", 
+    alt: "Students working with colorful papers at a table",
+    description: "Collaborative learning session with language students",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/a9ffe560-5750-4804-8502-7bbcf6cdaf27.png", 
+    alt: "Teacher presenting to students with slides about application forms",
+    description: "Teaching session about application processes and requirements",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/6f39bc33-869c-429c-a7f6-034576250793.png", 
+    alt: "Group photo of students and teacher in front of blackboard",
+    description: "TESOL training group at RadGuyesh Haddadian Institute",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/70f81980-cf30-49ac-afa7-401ac9b4a301.png", 
+    alt: "Students working with colored flashcards and learning materials",
+    description: "Interactive vocabulary learning session with EFL students",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/5b19d816-6d3c-4143-bfd8-eb23b2df42df.png", 
+    alt: "Two women holding teaching certificates",
+    description: "TESOL certification ceremony for language instructors",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/945eb0df-87bb-45cc-85f6-0ff9313615a9.png", 
+    alt: "Group selfie of language teaching staff",
+    description: "Teaching team at English language institute",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/9c3dec9b-d3a3-48c0-9e2d-57e3b67149ee.png", 
+    alt: "Group photo of language teaching students",
+    description: "Graduate TESOL certification program participants",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/f8737d99-3abe-47c2-8c3e-b10f85489f46.png", 
+    alt: "Close-up of student working with colorful vocabulary cards",
+    description: "Vocabulary acquisition activity with color-coding technique",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/a74abdfb-e915-43ac-b66d-5e0bda32d7ff.png", 
+    alt: "Educational consultation meeting in lounge area with city view",
+    description: "Educational consultation session with prospective students",
+    category: "teaching"
+  },
+  { 
+    src: "/lovable-uploads/315574e7-217a-4108-b1c3-3b5af8fcbcd9.png", 
+    alt: "Educational consultation meeting with scenic evening view",
+    description: "Academic advising session for international students",
     category: "teaching"
   },
   

@@ -5,7 +5,7 @@ import { GalleryTabs } from "@/components/gallery/GalleryTabs";
 import { galleryImages } from "@/data/galleryImages";
 
 const Gallery = () => {
-  const [activeTab, setActiveTab] = useState("awards");
+  const [activeTab, setActiveTab] = useState("teaching");
 
   return (
     <div className="space-y-8">
