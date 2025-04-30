@@ -66,7 +66,7 @@ export const galleryImages: GalleryImage[] = [
   { 
     src: "/lovable-uploads/315574e7-217a-4108-b1c3-3b5af8fcbcd9.png", 
     alt: "Educational consultation meeting with scenic evening view",
-    description: "Academic advising session for international students",
+    description: "Academic advising session for TOEFL preparation classes",
     category: "teaching"
   },
   
