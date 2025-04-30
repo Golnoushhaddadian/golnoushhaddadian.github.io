@@ -1,4 +1,3 @@
-
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { School, BookOpen, Users, GraduationCap } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -126,10 +125,7 @@ const Teaching = () => {
           <h2 className="text-2xl font-semibold">Teaching Philosophy</h2>
         </div>
         <Card className="border-l-4 border-primary overflow-hidden">
-          <CardHeader className="bg-primary/5">
-            <CardTitle>Philosophy & Approach</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="pt-6 space-y-4">
             {philosophy.map((paragraph, index) => (
               <p key={index} className="text-muted-foreground">{paragraph}</p>
             ))}
