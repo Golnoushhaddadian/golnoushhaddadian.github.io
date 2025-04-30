@@ -50,22 +50,19 @@ const Research = () => {
         </TabsContent>
         
         <TabsContent value="journals" className="mt-6">
-          <JournalsTab publications={journalPublications} />
+          <JournalsTab />
         </TabsContent>
 
         <TabsContent value="conferences" className="mt-6">
-          <ConferencesTab proceedings={conferenceProceedings} />
+          <ConferencesTab />
         </TabsContent>
 
         <TabsContent value="other" className="space-y-6 mt-6">
-          <OtherPublicationsTab 
-            nonRefereedPublications={nonRefereedPublications} 
-            workUnderReview={workUnderReview} 
-          />
+          <OtherPublicationsTab />
         </TabsContent>
 
         <TabsContent value="upcoming" className="mt-6">
-          <WorkInProgressTab workInProgress={workInProgress} />
+          <WorkInProgressTab />
         </TabsContent>
       </Tabs>
     </section>
