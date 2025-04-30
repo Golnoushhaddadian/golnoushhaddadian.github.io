@@ -41,7 +41,7 @@ const AboutMe = () => {
           <h2 className="text-2xl font-semibold mb-6">Welcome to My Personal Website</h2>
           <div className="prose max-w-none text-muted-foreground">
             <p>
-              I am Golnoush (Lia) Haddadian (<a href="https://namedrop.io/golnoushhaddadian" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">pronounce my name</a>), and I am thrilled to share my journey with you. As a passionate advocate for the transformative power of education and technology, I am dedicated to creating inclusive, innovative learning environments that empower all learners. From my early days designing interactive learning tools in high school to my current work as a Ph.D. candidate in Learning Sciences at Georgia State University, my mission has always been to bridge gaps in education and open new pathways to success.
+              Greetings! I am Golnoush (Lia) Haddadian, and I am thrilled to share my journey with you. As a passionate advocate for the transformative power of education and technology, I am dedicated to creating inclusive, innovative learning environments that empower all learners. From my early days designing interactive learning tools in high school to my current work as a Ph.D. candidate in Learning Sciences at Georgia State University, my mission has always been to bridge gaps in education and open new pathways to success.
             </p>
             <p>
               Here, you will find insights into my work at the intersection of learning sciences and artificial intelligence. I am especially committed to supporting adult learners, advancing global literacy, and building scalable, accessible learning solutions for all.
