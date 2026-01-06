@@ -176,7 +176,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/b55f53a7-d436-458c-ba89-aeeee09230cb.png",
     alt: "Students in classroom with projector during research study",
-    description: "",
+    description: "Workshop on Navigating the University Application Process: A Step-by-Step Guide, January 2019 — Tehran, Iran",
     category: "research"
   },
   
