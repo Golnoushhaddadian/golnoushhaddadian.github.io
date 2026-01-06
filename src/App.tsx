@@ -10,7 +10,6 @@ import Layout from "@/components/Layout";
 // Page components
 import Welcome from "@/pages/Welcome";
 
-import Awards from "@/pages/Awards";
 import CurriculumVitae from "@/pages/CurriculumVitae";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
@@ -28,8 +27,7 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<Welcome />} />
-              
-              <Route path="/awards" element={<Awards />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/cv" element={<CurriculumVitae />} />
               <Route path="/contact" element={<Contact />} />
