@@ -158,7 +158,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/ff7e9711-b669-42a3-abb0-f4401802e6d9.png",
     alt: "Researcher giving presentation with colorful research slides",
-    description: "",
+    description: "NSF SaTC Project: Pilot Test, June 25, 2022 — Georgia State University",
     category: "research"
   },
   {
