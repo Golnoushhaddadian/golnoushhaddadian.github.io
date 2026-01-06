@@ -11,7 +11,6 @@ import Layout from "@/components/Layout";
 import Welcome from "@/pages/Welcome";
 
 import Awards from "@/pages/Awards";
-import Projects from "@/pages/Projects";
 import CurriculumVitae from "@/pages/CurriculumVitae";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
@@ -31,7 +30,6 @@ const App = () => (
               <Route path="/" element={<Welcome />} />
               
               <Route path="/awards" element={<Awards />} />
-              <Route path="/projects" element={<Projects />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/cv" element={<CurriculumVitae />} />
               <Route path="/contact" element={<Contact />} />
