@@ -134,7 +134,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/f49465bf-cc45-4487-81f6-20f6757d6db9.png",
     alt: "AI-ALOE Institute research team group photo with green logo",
-    description: "",
+    description: "National AI Institute for Adult Learning and Online Education (AI-ALOE) External Advisory Board (EAB) Meeting, May 18–19, 2023 — Georgia Institute of Technology, Atlanta, Georgia",
     category: "research"
   },
   {
