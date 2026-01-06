@@ -29,10 +29,9 @@ const AboutMe = () => {
                 </a>
               </Button>
             </h1>
-            <p className="text-xl text-muted-foreground mb-4">Ph.D. Candidate in Learning Sciences</p>
+            <p className="text-xl text-muted-foreground mb-4">Ph.D. in Learning Sciences</p>
             <p className="mb-6">
-              Graduate Research Associate at Georgia State University, College of Education and Human Development,
-              Department of Learning Sciences.
+              Postdoctoral Associate, Georgia State University, University of Memphis, and Educational Testing Services.
             </p>
           </div>
         </div>
