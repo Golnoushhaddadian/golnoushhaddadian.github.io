@@ -110,7 +110,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/ce144f88-d4b2-4005-b6e6-156bcaf449a1.png",
     alt: "Researcher at AERA 2023 Annual Meeting registration area",
-    description: "",
+    description: "AERA Annual Meeting, April 13-16, 2023 — Chicago, Illinois",
     category: "research"
   },
   {
