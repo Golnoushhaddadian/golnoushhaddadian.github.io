@@ -126,6 +126,12 @@ export const galleryImages: GalleryImage[] = [
     category: "research"
   },
   {
+    src: "/lovable-uploads/airial-dr-erik-voss.jpg",
+    alt: "With Dr. Erik Voss at AIRiAL Conference",
+    description: "With dear Dr. Erik Voss at Artificial Intelligence Research in Applied Linguistics (AIRiAL) Conference, September 27-28, 2024 — Teachers College, Columbia University, New York",
+    category: "research"
+  },
+  {
     src: "/lovable-uploads/a75afbd3-406d-464d-a46f-0f4457805f19.png",
     alt: "Researcher presenting to audience in a conference room with large display screen",
     description: "National AI Institute for Adult Learning and Online Education (AI-ALOE) Full-day NSF Visit, 2022 — Georgia Institute of Technology, Atlanta, Georgia",
