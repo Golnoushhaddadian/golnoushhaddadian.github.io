@@ -72,6 +72,12 @@ export const galleryImages: GalleryImage[] = [
   
   // Research images (kept unchanged)
   {
+    src: "/lovable-uploads/nsf-aivo-ai4ed-symposium.jpg",
+    alt: "NSF AIVO AI4Ed Summer Research Fellowship Symposium group photo",
+    description: "NSF AI Institutes Virtual Organization (NSF AIVO) AI4Ed Summer Research Fellowship Symposium, funded by the NSF and Google.org — August 18–19, 2025, the Illini Center, Chicago, Illinois",
+    category: "research"
+  },
+  {
     src: "/lovable-uploads/defense-session-dr-kim.jpg",
     alt: "Defense session with Dr. Min Kyu Kim",
     description: "Defense session, December 1, 2025 — With my dear advisor Dr. Min Kyu Kim, College of Education and Human Development (CEHD), Georgia State University (GSU), Atlanta, Georgia",
