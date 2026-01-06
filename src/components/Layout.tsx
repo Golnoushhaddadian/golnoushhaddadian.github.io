@@ -41,7 +41,8 @@ const Layout = ({ children }: LayoutProps) => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
 
   const navLinks = [
-    { path: '/', label: 'About' },
+    { path: '/', label: 'Welcome' },
+    { path: '/about', label: 'About' },
     { path: '/projects', label: 'Projects' },
     { path: '/awards', label: 'Awards' },
     { path: '/research', label: 'Research' },
