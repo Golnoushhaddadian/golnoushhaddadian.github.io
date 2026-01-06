@@ -104,7 +104,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/fdc1799c-3c0e-4bf5-b1d3-813b11a1ca1c.png",
     alt: "Researcher explaining Private AI curriculum poster at academic conference",
-    description: "",
+    description: "ISLS Annual Meeting, June 10–14, 2024 — Buffalo, New York",
     category: "research"
   },
   {
