@@ -16,6 +16,7 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
         <TabsTrigger value="awards">Awards</TabsTrigger>
         <TabsTrigger value="research">Research</TabsTrigger>
         <TabsTrigger value="teaching">Teaching</TabsTrigger>
+        <TabsTrigger value="community">Community</TabsTrigger>
       </TabsList>
       
       <TabsContent value="awards" className="mt-0 space-y-4">
@@ -31,6 +32,10 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
       
       <TabsContent value="teaching" className="mt-0">
         <GalleryGrid images={images.filter(image => image.category === "teaching")} />
+      </TabsContent>
+      
+      <TabsContent value="community" className="mt-0">
+        <GalleryGrid images={images.filter(image => image.category === "community")} />
       </TabsContent>
     </Tabs>
   );
