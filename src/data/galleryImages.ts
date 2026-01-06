@@ -72,6 +72,12 @@ export const galleryImages: GalleryImage[] = [
   
   // Research images (kept unchanged)
   {
+    src: "/lovable-uploads/atlanta-visualization-meetup-2025.jpg",
+    alt: "Atlanta Visualization Meet-Up 2025 group photo at Georgia Tech",
+    description: "Atlanta Visualization Meet-Up 2025 — Georgia Institute of Technology, Atlanta, Georgia",
+    category: "research"
+  },
+  {
     src: "/lovable-uploads/airial-conference-columbia-2024.png",
     alt: "Speaking at AIRiAL Conference at Columbia University",
     description: "Artificial Intelligence Research in Applied Linguistics (AIRiAL) Conference, September 27-28, 2024 — Teachers College, Columbia University, New York",
