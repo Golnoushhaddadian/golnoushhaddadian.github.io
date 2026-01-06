@@ -228,5 +228,13 @@ export const galleryImages: GalleryImage[] = [
     alt: "Award ceremony with two men presenting award to woman on stage",
     description: "",
     category: "awards"
+  },
+  
+  // Community images
+  {
+    src: "/lovable-uploads/amis-thanksgiving-2024.jpg",
+    alt: "AMIS Thanksgiving gathering group photo",
+    description: "Atlanta Ministry with International Students (AMIS) Thanksgiving gathering, hosted by Irene Wong, Executive Director of AMIS, December 28, 2024 — Atlanta, Georgia",
+    category: "community"
   }
 ];
