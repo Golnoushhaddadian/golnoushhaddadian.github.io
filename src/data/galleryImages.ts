@@ -122,7 +122,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/f218bae5-c8c6-49f7-b0a0-d361b555f43a.png",
     alt: "Researcher presenting about AI and Machine Learning with colorful diagram on screen",
-    description: "",
+    description: "Artificial Intelligence Research in Applied Linguistics (AIRiAL) Conference, September 27-28, 2024 — Teachers College, Columbia University, New York",
     category: "research"
   },
   {
