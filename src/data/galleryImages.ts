@@ -146,7 +146,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/f41ffdb7-ebdd-49c1-8529-e63d93cba58d.png",
     alt: "Research team presenting posters at Georgia Tech with city view in background",
-    description: "",
+    description: "Comprehensive Exam, October 31, 2023 — College of Education and Human Development (CEHD), Georgia State University (GSU), Atlanta, Georgia",
     category: "research"
   },
   {
