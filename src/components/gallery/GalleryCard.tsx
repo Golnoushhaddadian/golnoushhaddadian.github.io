@@ -20,7 +20,7 @@ export const GalleryCard = ({ image }: GalleryCardProps) => {
         </AspectRatio>
       </div>
       <CardContent className="p-4">
-        <p className="text-sm text-muted-foreground h-6">{image.description}</p>
+        <p className="text-sm text-muted-foreground">{image.description}</p>
       </CardContent>
     </Card>
   );
