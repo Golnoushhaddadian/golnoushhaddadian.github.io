@@ -152,7 +152,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/a0b4a16a-0f4d-4b8c-8e25-a41d7e6c20f5.png",
     alt: "Conference presentation with audience and AI-ALOE slides",
-    description: "",
+    description: "ISLS Annual Meeting, June 10–14, 2024 — Buffalo, New York",
     category: "research"
   },
   {
