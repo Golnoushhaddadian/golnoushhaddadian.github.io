@@ -72,6 +72,12 @@ export const galleryImages: GalleryImage[] = [
   
   // Research images (kept unchanged)
   {
+    src: "/lovable-uploads/ai-aloe-eab-dr-dede.jpg",
+    alt: "With Dr. Chris Dede at AI-ALOE EAB Meeting",
+    description: "With dear Dr. Chris Dede, National AI Institute for Adult Learning and Online Education (AI-ALOE) External Advisory Board (EAB) Meeting, 2025 — Georgia Institute of Technology, Atlanta, Georgia",
+    category: "research"
+  },
+  {
     src: "/lovable-uploads/air-quest-program.jpg",
     alt: "AIR QUEST program group photo",
     description: "American Institutes for Research (AIR)'s fully funded Quantitative Evidence Synthesis program (QUEST) — August 2025, Chicago, Illinois",
