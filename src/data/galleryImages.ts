@@ -98,7 +98,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/4a4d93b3-b05c-4482-84cf-40dda6f9660c.png",
     alt: "Researcher presenting research findings and data visualization",
-    description: "",
+    description: "National AI Institute for Adult Learning and Online Education (AI-ALOE) Full-day NSF Visit, 2022 — Georgia Institute of Technology, Atlanta, Georgia",
     category: "research"
   },
   {
