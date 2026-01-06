@@ -134,13 +134,13 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/f49465bf-cc45-4487-81f6-20f6757d6db9.png",
     alt: "AI-ALOE Institute research team group photo with green logo",
-    description: "",
+    description: "National AI Institute for Adult Learning and Online Education (AI-ALOE) External Advisory Board (EAB) Meeting, May 18–19, 2023 — Georgia Institute of Technology, Atlanta, Georgia",
     category: "research"
   },
   {
     src: "/lovable-uploads/2b6e6c4c-e99b-4398-838b-1ce6431dfa93.png",
     alt: "AI-ALOE Institute faculty and staff group photo",
-    description: "National AI Institute for Adult Learning and Online Education (AI-ALOE) External Advisory Board (EAB) Meeting, May 18–19, 2023 — Georgia Institute of Technology, Atlanta, Georgia",
+    description: "Comprehensive Exam Defense Session, October, 2023 — College of Education and Human Development (CEHD), Georgia State University (GSU), Atlanta, Georgia",
     category: "research"
   },
   {
