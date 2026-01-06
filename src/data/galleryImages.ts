@@ -140,7 +140,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/2b6e6c4c-e99b-4398-838b-1ce6431dfa93.png",
     alt: "AI-ALOE Institute faculty and staff group photo",
-    description: "",
+    description: "Comprehensive Exam Defense Session, October, 2023 — College of Education and Human Development (CEHD), Georgia State University (GSU), Atlanta, Georgia",
     category: "research"
   },
   {
