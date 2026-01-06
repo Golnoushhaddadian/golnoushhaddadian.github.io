@@ -72,6 +72,12 @@ export const galleryImages: GalleryImage[] = [
   
   // Research images (kept unchanged)
   {
+    src: "/lovable-uploads/air-quest-program.jpg",
+    alt: "AIR QUEST program group photo",
+    description: "American Institutes for Research (AIR)'s fully funded Quantitative Evidence Synthesis program (QUEST) — August 2025, Chicago, Illinois",
+    category: "research"
+  },
+  {
     src: "/lovable-uploads/nsf-aivo-ai4ed-symposium.jpg",
     alt: "NSF AIVO AI4Ed Summer Research Fellowship Symposium group photo",
     description: "NSF AI Institutes Virtual Organization (NSF AIVO) AI4Ed Summer Research Fellowship Symposium, funded by the NSF and Google.org — August 18–19, 2025, the Illini Center, Chicago, Illinois",
