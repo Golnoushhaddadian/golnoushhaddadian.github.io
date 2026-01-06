@@ -236,5 +236,11 @@ export const galleryImages: GalleryImage[] = [
     alt: "AMIS Thanksgiving gathering group photo",
     description: "Atlanta Ministry with International Students (AMIS) Thanksgiving gathering, hosted by Irene Wong, Executive Director of AMIS, December 28, 2024 — Atlanta, Georgia",
     category: "community"
+  },
+  {
+    src: "/lovable-uploads/dls-welcome-back-2023.jpg",
+    alt: "Welcome Back Party group photo at Department of Learning Sciences",
+    description: "Welcome Back Party— Department of Learning Sciences, Georgia State University (GSU), 2023 — Atlanta, Georgia",
+    category: "community"
   }
 ];
