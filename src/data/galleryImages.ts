@@ -72,6 +72,12 @@ export const galleryImages: GalleryImage[] = [
   
   // Research images (kept unchanged)
   {
+    src: "/lovable-uploads/defense-session-dr-kim.jpg",
+    alt: "Defense session with Dr. Min Kyu Kim",
+    description: "Defense session, December 1, 2025 — With my dear advisor Dr. Min Kyu Kim, College of Education and Human Development (CEHD), Georgia State University (GSU), Atlanta, Georgia",
+    category: "research"
+  },
+  {
     src: "/lovable-uploads/c8f7c099-bd71-4ca8-8021-1cfb168f9d5a.png",
     alt: "Research team at conference with orange background and artistic display",
     description: "ISLS Annual Meeting, June 10–14, 2024 — Buffalo, New York",
