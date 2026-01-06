@@ -168,12 +168,6 @@ export const galleryImages: GalleryImage[] = [
     category: "research"
   },
   {
-    src: "/lovable-uploads/a2a3ce7b-78fa-4a39-900d-484680a04ec6.png",
-    alt: "Classroom full of students participating in research study",
-    description: "NSF SaTC Project: Pilot Test, June 25, 2022 — Georgia State University",
-    category: "research"
-  },
-  {
     src: "/lovable-uploads/b55f53a7-d436-458c-ba89-aeeee09230cb.png",
     alt: "Students in classroom with projector during research study",
     description: "Workshop on Navigating the University Application Process: A Step-by-Step Guide, January 2019 — Tehran, Iran",
