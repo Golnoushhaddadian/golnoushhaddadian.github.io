@@ -80,7 +80,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/7637ee2e-3b6b-4d7d-a6f3-86a2fcfcaba8.png",
     alt: "Research team at AECT conference with balloon decorations",
-    description: "",
+    description: "AECT International Convention, October 15-19, 2023 — Orlando, Florida",
     category: "research"
   },
   {
