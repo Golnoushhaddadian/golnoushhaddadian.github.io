@@ -9,7 +9,7 @@ import Layout from "@/components/Layout";
 
 // Page components
 import Welcome from "@/pages/Welcome";
-import About from "@/pages/About";
+
 import Awards from "@/pages/Awards";
 import Projects from "@/pages/Projects";
 import Research from "@/pages/Research";
@@ -33,7 +33,7 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<Welcome />} />
-              <Route path="/about" element={<About />} />
+              
               <Route path="/awards" element={<Awards />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/research" element={<Research />} />
