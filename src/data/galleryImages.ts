@@ -72,6 +72,12 @@ export const galleryImages: GalleryImage[] = [
   
   // Research images (kept unchanged)
   {
+    src: "/lovable-uploads/airial-conference-columbia-2024.png",
+    alt: "Speaking at AIRiAL Conference at Columbia University",
+    description: "Artificial Intelligence Research in Applied Linguistics (AIRiAL) Conference, September 27-28, 2024 — Teachers College, Columbia University, New York",
+    category: "research"
+  },
+  {
     src: "/lovable-uploads/ai-aloe-eab-dr-dede.jpg",
     alt: "With Dr. Chris Dede at AI-ALOE EAB Meeting",
     description: "With dear Dr. Chris Dede, National AI Institute for Adult Learning and Online Education (AI-ALOE) External Advisory Board (EAB) Meeting, 2025 — Georgia Institute of Technology, Atlanta, Georgia",
