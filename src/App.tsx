@@ -12,7 +12,6 @@ import Welcome from "@/pages/Welcome";
 
 import Awards from "@/pages/Awards";
 import Projects from "@/pages/Projects";
-import Research from "@/pages/Research";
 import Teaching from "@/pages/Teaching";
 import Service from "@/pages/Service";
 import ProfessionalAffiliations from "@/pages/ProfessionalAffiliations";
@@ -36,7 +35,6 @@ const App = () => (
               
               <Route path="/awards" element={<Awards />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/research" element={<Research />} />
               <Route path="/teaching" element={<Teaching />} />
               <Route path="/service" element={<Service />} />
               <Route path="/gallery" element={<Gallery />} />
