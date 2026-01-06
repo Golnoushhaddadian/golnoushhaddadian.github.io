@@ -116,7 +116,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/21082eac-6384-443f-8100-fe4fe60caac7.png",
     alt: "Researcher at AAAL 2025 Annual Conference in Denver",
-    description: "",
+    description: "AAAL Conference, March 22–25, 2025 — Denver, Colorado",
     category: "research"
   },
   {
