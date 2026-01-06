@@ -164,7 +164,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/7830c47d-1774-4aef-9c7d-70b6f899bdfa.png",
     alt: "Research team with academic poster on Private AI Curriculum",
-    description: "",
+    description: "NSF SaTC Project: Pilot Test, June 25, 2022 — Georgia State University",
     category: "research"
   },
   {
