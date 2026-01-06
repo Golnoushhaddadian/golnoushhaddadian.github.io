@@ -38,15 +38,24 @@ const AboutMe = () => {
 
         <section>
           <h2 className="text-2xl font-semibold mb-6">Welcome to My Personal Website</h2>
-          <div className="prose max-w-none text-muted-foreground">
+          <div className="prose max-w-none text-muted-foreground space-y-4">
             <p>
-              Greetings! I am Golnoush (Lia) Haddadian, and I am thrilled to share my journey with you. As a passionate advocate for the transformative power of education and technology, I am dedicated to creating inclusive, innovative learning environments that empower all learners. From my early days designing interactive learning tools in high school to my current work as a Ph.D. candidate in Learning Sciences at Georgia State University, my mission has always been to bridge gaps in education and open new pathways to success.
+              Hello and welcome! 😊✨ I'm Lia Haddadian.
             </p>
             <p>
-              Here, you will find insights into my work at the intersection of learning sciences and artificial intelligence. I am especially committed to supporting adult learners, advancing global literacy, and building scalable, accessible learning solutions for all.
+              My given name is Golnoush, and I adore it, but let's keep it simple. Please call me Lia.
             </p>
             <p>
-              I invite you to explore my projects, publications, and initiatives aimed at making education more equitable and effective. Thank you for visiting and joining me on this journey of learning, innovation, and positive change. I hope my work inspires you as much as the pursuit of knowledge continues to inspire me.
+              From my early experiences designing interactive learning tools during my high school years to my current appointment as a Postdoctoral Associate, my work has been driven by a strong commitment to addressing educational challenges through evidence-based design and expanding access to effective learning opportunities.
+            </p>
+            <p>
+              If you are looking for a concise overview of my work, my core focus areas include:
+            </p>
+            <p className="font-semibold text-foreground">
+              # AI in Education # Personalized Learning # Feedback # Assessment & Evaluation # Higher Education # Design & Development # Mixed-Methods # Design-Based Research
+            </p>
+            <p>
+              Please feel free to explore my website and reach out if you are interested in potential collaborations or would like to connect and learn more.
             </p>
           </div>
         </section>
