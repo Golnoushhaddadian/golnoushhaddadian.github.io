@@ -16,6 +16,15 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Secure and Trustworthy Cyberspace (SaTC): Private Artificial Intelligence (AI)",
+    position: "Graduate Research Associate",
+    period: "August 2021 – May 2025",
+    mentors: "Drs. Kim, M. K., Takabi, D.",
+    funding: "National Science Foundation (NSF)",
+    description: "This interdisciplinary project focused on AI and privacy (private AI), supported by the Secure and Trustworthy Cyberspace (SaTC) program. Aligned with the Federal Cybersecurity Research and Development Strategic Plan and the National Privacy Research Strategy, it aimed to protect the benefits of cyber systems while ensuring security and privacy. The project developed instructional materials and hands-on labs to train students in trustworthy AI. It aimed to address the fast-growing demand for skilled researchers by integrating technical knowledge with ethical and privacy-focused practices in AI.",
+    image: "/lovable-uploads/nsf2-satc.png"
+  },
+  {
     title: "AI Institute for Adult Learning and Online Education (ALOE)",
     position: "Graduate Research Associate",
     period: "January 2022 – December 2025",
