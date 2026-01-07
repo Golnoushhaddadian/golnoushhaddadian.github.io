@@ -47,13 +47,13 @@ const AboutMe = () => {
                 className="hover:scale-110 transition-transform duration-200"
                 aria-label="Google Scholar"
               >
-                <svg width={iconSize} height={iconSize} viewBox="0 0 512 512" fill="none">
-                  <circle cx="256" cy="256" r="256" fill="#4285F4"/>
-                  <path d="M213 392h86v-86h-86v86zm0-300v128l128 86-128 86" fill="none" stroke="white" strokeWidth="40" strokeLinejoin="round"/>
-                  <circle cx="256" cy="326" r="90" fill="white"/>
-                  <circle cx="256" cy="326" r="55" fill="#4285F4"/>
-                  <path d="M115 210l141-95 141 95" fill="none" stroke="white" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <img 
+                  src="/lovable-uploads/google-scholar-icon.png" 
+                  alt="Google Scholar" 
+                  width={iconSize} 
+                  height={iconSize}
+                  className="rounded-full"
+                />
               </a>
               <a
                 href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf"
