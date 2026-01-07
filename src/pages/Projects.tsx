@@ -103,16 +103,17 @@ const Projects = () => {
       >
         {projects.map((project, index) => (
           <motion.div key={index} variants={item}>
-            <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
+            <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-card group hover:scale-[1.01]">
               <CardContent className="p-0">
                 <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
                   {/* Image Section */}
-                  <div className="lg:w-2/5 relative">
-                    <div className="aspect-[4/3] lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                  <div className="lg:w-2/5 relative overflow-hidden">
+                    <div className="aspect-[4/3] lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/5 via-primary/10 to-accent/10 flex items-center justify-center relative">
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-contain lg:absolute lg:inset-0 p-4"
+                        className="w-full h-full object-contain lg:absolute lg:inset-0 p-6 transition-transform duration-500 group-hover:scale-105"
                         style={{ minHeight: '300px', maxHeight: '400px', objectPosition: 'center center' }}
                       />
                     </div>
