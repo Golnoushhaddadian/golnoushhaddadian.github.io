@@ -99,62 +99,62 @@ const Projects = () => {
         variants={container}
         initial="hidden"
         animate="show"
-        className="space-y-8"
+        className="space-y-6"
       >
         {projects.map((project, index) => (
           <motion.div key={index} variants={item}>
-            <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-card group hover:scale-[1.01]">
+            <Card className="overflow-hidden border border-primary/10 shadow-lg hover:shadow-2xl hover:border-primary/30 transition-all duration-500 bg-gradient-to-br from-card via-card to-accent/5 group hover:scale-[1.005]">
               <CardContent className="p-0">
                 <div className={`flex flex-col ${project.image ? (index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse') : ''}`}>
                   {/* Image Section */}
                   {project.image && (
-                    <div className="lg:w-2/5 relative overflow-hidden">
-                      <div className="aspect-[4/3] lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/5 via-primary/10 to-accent/10 flex items-center justify-center relative">
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="lg:w-1/3 relative overflow-hidden">
+                      <div className="aspect-square lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-contain lg:absolute lg:inset-0 p-6 transition-transform duration-500 group-hover:scale-105"
-                          style={{ minHeight: '300px', maxHeight: '400px', objectPosition: 'center center' }}
+                          className="w-full h-full object-contain lg:absolute lg:inset-0 p-4 transition-transform duration-500 group-hover:scale-110"
+                          style={{ minHeight: '200px', maxHeight: '280px', objectPosition: 'center center' }}
                         />
                       </div>
                     </div>
                   )}
 
                   {/* Content Section */}
-                  <div className={`${project.image ? 'lg:w-3/5' : 'w-full'} p-6 lg:p-8 flex flex-col justify-center`}>
+                  <div className={`${project.image ? 'lg:w-2/3' : 'w-full'} p-5 lg:p-6 flex flex-col justify-center`}>
                     {/* Badges */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <Badge variant="default" className="bg-primary/90 hover:bg-primary">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      <Badge variant="default" className="bg-primary/90 hover:bg-primary text-xs">
                         <Lightbulb className="w-3 h-3 mr-1" />
                         {project.position}
                       </Badge>
-                      <Badge variant="outline" className="border-primary/30">
+                      <Badge variant="outline" className="border-primary/30 text-xs">
                         <Calendar className="w-3 h-3 mr-1" />
                         {project.period}
                       </Badge>
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-xl lg:text-2xl font-bold mb-3 text-foreground leading-tight">
+                    <h2 className="text-lg lg:text-xl font-bold mb-2 text-foreground leading-tight">
                       {project.title}
                     </h2>
 
                     {/* Funding */}
                     {project.funding && (
-                      <p className="text-sm text-primary font-medium mb-3">
+                      <p className="text-xs text-primary font-medium mb-2">
                         Funded by {project.funding}
                       </p>
                     )}
 
                     {/* Mentors */}
-                    <div className="flex items-center gap-2 mb-4 text-muted-foreground">
-                      <Users className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium">Mentors: {project.mentors}</span>
+                    <div className="flex items-center gap-2 mb-3 text-muted-foreground">
+                      <Users className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-xs font-medium">Mentors: {project.mentors}</span>
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
+                    <p className="text-muted-foreground leading-relaxed text-xs lg:text-sm line-clamp-4 lg:line-clamp-none">
                       {project.description}
                     </p>
                   </div>
