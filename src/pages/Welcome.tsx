@@ -49,8 +49,10 @@ const AboutMe = () => {
               >
                 <svg width={iconSize} height={iconSize} viewBox="0 0 512 512" fill="none">
                   <circle cx="256" cy="256" r="256" fill="#4285F4"/>
-                  <path d="M256 411c-85.5 0-155-69.5-155-155s69.5-155 155-155 155 69.5 155 155-69.5 155-155 155zm0-55c55.2 0 100-44.8 100-100s-44.8-100-100-100-100 44.8-100 100 44.8 100 100 100z" fill="white"/>
-                  <path d="M256 96L96 256h64v160h192V256h64L256 96z" fill="white"/>
+                  <path d="M213 392h86v-86h-86v86zm0-300v128l128 86-128 86" fill="none" stroke="white" strokeWidth="40" strokeLinejoin="round"/>
+                  <circle cx="256" cy="326" r="90" fill="white"/>
+                  <circle cx="256" cy="326" r="55" fill="#4285F4"/>
+                  <path d="M115 210l141-95 141 95" fill="none" stroke="white" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
               <a
