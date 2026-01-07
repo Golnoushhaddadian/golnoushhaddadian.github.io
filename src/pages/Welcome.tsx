@@ -1,9 +1,11 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ExternalLink, Linkedin } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const AboutMe = () => {
+  const iconSize = 32;
+  
   return (
     <div className="min-h-screen flex flex-col items-center py-8 px-4">
       <div className="w-full max-w-4xl">
@@ -22,37 +24,46 @@ const AboutMe = () => {
               </AspectRatio>
             </div>
             {/* Social Profile Links */}
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-5 mt-5">
               <a
                 href="https://www.linkedin.com/in/g-hdn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="hover:scale-110 transition-transform duration-200"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={24} />
+                <img 
+                  src="/lovable-uploads/linkedin-icon.png" 
+                  alt="LinkedIn" 
+                  width={iconSize} 
+                  height={iconSize}
+                  className="rounded-full"
+                />
               </a>
               <a
                 href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="hover:scale-110 transition-transform duration-200"
                 aria-label="Google Scholar"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm0-2a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/>
-                  <path d="M0 12L12 0l12 12h-6v12H6V12H0Z"/>
+                <svg width={iconSize} height={iconSize} viewBox="0 0 512 512" fill="none">
+                  <circle cx="256" cy="256" r="256" fill="#4285F4"/>
+                  <path d="M256 411c-85.5 0-155-69.5-155-155s69.5-155 155-155 155 69.5 155 155-69.5 155-155 155zm0-55c55.2 0 100-44.8 100-100s-44.8-100-100-100-100 44.8-100 100 44.8 100 100 100z" fill="white"/>
+                  <path d="M256 96L96 256h64v160h192V256h64L256 96z" fill="white"/>
                 </svg>
               </a>
               <a
                 href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="hover:scale-110 transition-transform duration-200"
                 aria-label="ResearchGate"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19.586 0c-1.476 0-2.67.87-2.67 2.3 0 1.13.62 1.87 1.778 2.18v.03c-.78.18-1.41.87-1.41 1.78 0 1.3 1.05 2.18 2.69 2.18 1.8 0 3.03-1.2 3.03-2.95 0-1.32-.78-2.2-2.09-2.56v-.03c.7-.32 1.2-.98 1.2-1.77 0-1.14-.92-2.14-2.52-2.14Zm-.08 1.18c.67 0 1.1.38 1.1.95 0 .52-.4.93-1.04.93-.67 0-1.1-.4-1.1-.93 0-.57.42-.95 1.04-.95Zm.05 3.46c.84 0 1.34.53 1.34 1.26 0 .77-.54 1.34-1.37 1.34-.82 0-1.34-.55-1.34-1.33 0-.74.5-1.27 1.37-1.27ZM7.89 3.83C3.53 3.83 0 7.35 0 11.72c0 4.37 3.53 7.9 7.89 7.9 4.35 0 7.88-3.53 7.88-7.9 0-4.37-3.53-7.89-7.88-7.89Zm.14 2.55h2.1c2.4 0 3.8 1.1 3.8 3.17 0 1.98-1.35 3.43-3.47 3.43h-1.33v3.2H7.03V6.38h1Zm1.1 1.37v3.86h.86c1.34 0 2.17-.67 2.17-1.93 0-1.3-.77-1.93-2.14-1.93h-.89Z"/>
+                <svg width={iconSize} height={iconSize} viewBox="0 0 512 512" fill="none">
+                  <circle cx="256" cy="256" r="256" fill="#00CCBB"/>
+                  <path d="M271 285h-30v52h-32V175h62c45 0 72 25 72 55 0 35-27 55-72 55zm-2-80h-28v52h28c25 0 40-12 40-26s-15-26-40-26z" fill="white"/>
+                  <path d="M355 285c0 35-25 60-60 60-15 0-28-5-38-13v-25c10 10 23 15 38 15 18 0 32-12 32-32 0-18-12-30-30-30h-15v-22h15c15 0 25-10 25-25 0-13-10-23-27-23-13 0-25 5-35 15v-27c12-8 27-13 42-13 30 0 50 18 50 45 0 18-10 32-25 40 20 8 28 25 28 35z" fill="white"/>
                 </svg>
               </a>
             </div>
