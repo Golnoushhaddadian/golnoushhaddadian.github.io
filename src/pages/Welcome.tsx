@@ -41,6 +41,20 @@ const AboutMe = () => {
                 />
               </a>
               <a
+                href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:scale-110 transition-transform duration-200"
+                aria-label="Google Scholar"
+              >
+                <img 
+                  src="/lovable-uploads/google-scholar-icon.png" 
+                  alt="Google Scholar" 
+                  width={iconSize} 
+                  height={iconSize}
+                />
+              </a>
+              <a
                 href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf"
                 target="_blank"
                 rel="noopener noreferrer"
