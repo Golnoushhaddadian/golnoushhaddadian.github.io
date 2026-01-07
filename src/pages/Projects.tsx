@@ -22,7 +22,7 @@ const projects: Project[] = [
     mentors: "Drs. Kim, M. K., Abdeen, M. S.",
     funding: "National Science Foundation (NSF)",
     description: "This project designs and implements AI-augmented formative assessment and feedback systems to help students build skills for in-classroom interactive problem-solving activities. The aim is to determine whether AI in education improves students' well-being inside and outside the classroom, with a focus on those traditionally underrepresented in STEM education. Extensive data collected in the final phase will examine the relationships among pre-classroom activities, in-classroom performance, self-efficacy, interest in physics, and student backgrounds, including gender, race, ethnicity, first-generation status, and English language learning.",
-    image: "/placeholder.svg"
+    image: "/lovable-uploads/nsf2.png"
   }
 ];
 
