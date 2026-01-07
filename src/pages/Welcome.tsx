@@ -70,6 +70,20 @@ const AboutMe = () => {
                   className="rounded-full"
                 />
               </a>
+              <a
+                href="https://www.ai2researchlab.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:scale-110 transition-transform duration-200"
+                aria-label="AI2 Research Lab"
+              >
+                <img 
+                  src="/lovable-uploads/ai2-research-lab-icon.png" 
+                  alt="AI2 Research Lab" 
+                  width={iconSize} 
+                  height={iconSize}
+                />
+              </a>
             </div>
           </div>
           <div className="md:w-2/3">
