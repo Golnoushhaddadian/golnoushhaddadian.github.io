@@ -16,6 +16,15 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Scenario-Based Assessment in the Age of Generative AI: Making Space in the Education Market for Alternative Assessment Paradigm",
+    position: "Postdoctoral Associate (Start Date: January 2026)",
+    period: "Starting January 2026",
+    mentors: "Drs. Cohen, J., & Magliano, J.",
+    funding: "Institute of Education Sciences (IES)",
+    description: "The purpose of this project is to create a Generative artificial intelligence (Gen-AI) enhanced authoring tool for scenario-based assessments (SBAs). Because SBAs are difficult to develop, college instructors struggle to develop and deploy SBAs in their courses. Recent advances in Gen-AI make it possible to scale up and democratize SBA development, enabling instructors to design and administer localized, personalized, and discipline-appropriate performance assessments that provide better feedback, higher levels of adaptivity, and richer diagnostic information.",
+    image: "/lovable-uploads/ies-sba-project.png"
+  },
+  {
     title: "RITA – Real-Time Intelligent Technology for Argumentative Writing",
     position: "Lead Researcher (Dissertation Project)",
     period: "Ongoing",
