@@ -16,6 +16,15 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "AI Institute for Adult Learning and Online Education (ALOE)",
+    position: "Graduate Research Associate",
+    period: "January 2022 – December 2025",
+    mentors: "Drs. Kim, M. K., Goel, A. K., Dede, C.",
+    funding: "National Science Foundation (NSF)",
+    description: "This interdisciplinary project aims to transform online adult learning through AI-driven models grounded in cognitive and social learning theories. It addresses the distinct needs of adult learners by developing intelligent virtual assistants and personalized learning systems. The initiative brings together a national network of universities, nonprofits, and industry partners to advance foundational research in areas such as cognitive-based AI, scalable personalization, human-AI collaboration, and ethical AI design. Using iterative learning engineering and mixed-methods evaluation, the project seeks to deliver scalable, equitable, and effective solutions for adult education.",
+    image: "/lovable-uploads/nsf2-aloe.png"
+  },
+  {
     title: "IUSE-Engaged Student Learning (Level 1): AI-Scaffolded Pre-Classroom Learning for Large/Introductory Undergraduate Physics Courses",
     position: "Graduate Student Researcher",
     period: "August 2024 - present",
@@ -127,17 +136,6 @@ const Projects = () => {
         ))}
       </motion.div>
 
-      {/* Empty State for Future Projects */}
-      {projects.length === 1 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12 py-8 border-2 border-dashed border-muted-foreground/20 rounded-xl"
-        >
-          <p className="text-muted-foreground italic">More projects coming soon...</p>
-        </motion.div>
-      )}
     </div>
   );
 };
