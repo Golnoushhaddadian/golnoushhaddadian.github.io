@@ -62,11 +62,13 @@ const AboutMe = () => {
                 className="hover:scale-110 transition-transform duration-200"
                 aria-label="ResearchGate"
               >
-                <svg width={iconSize} height={iconSize} viewBox="0 0 512 512" fill="none">
-                  <circle cx="256" cy="256" r="256" fill="#00CCBB"/>
-                  <path d="M271 285h-30v52h-32V175h62c45 0 72 25 72 55 0 35-27 55-72 55zm-2-80h-28v52h28c25 0 40-12 40-26s-15-26-40-26z" fill="white"/>
-                  <path d="M355 285c0 35-25 60-60 60-15 0-28-5-38-13v-25c10 10 23 15 38 15 18 0 32-12 32-32 0-18-12-30-30-30h-15v-22h15c15 0 25-10 25-25 0-13-10-23-27-23-13 0-25 5-35 15v-27c12-8 27-13 42-13 30 0 50 18 50 45 0 18-10 32-25 40 20 8 28 25 28 35z" fill="white"/>
-                </svg>
+                <img 
+                  src="/lovable-uploads/researchgate-icon.png" 
+                  alt="ResearchGate" 
+                  width={iconSize} 
+                  height={iconSize}
+                  className="rounded-full"
+                />
               </a>
             </div>
           </div>
