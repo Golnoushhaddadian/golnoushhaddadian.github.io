@@ -21,7 +21,7 @@ const projects: Project[] = [
     period: "Ongoing",
     mentors: "Drs. Kim, M. K., Motevali, S.",
     description: "RITA is an AI-powered Automated Writing Evaluation (AWE) system designed and developed to assess and scaffold students' argumentative writing. As the initial phase of DBR, we are centering our efforts on the development and validation of RITA's automated essay scoring (AES) engine, which is a fundamental step in any AWE development. This stage serves as the foundation for subsequent system components. Building on this, the next phase will empirically validate RITA's formative feedback mechanisms, examining how they can become increasingly responsive to and adapted to the evolving needs of each individual learner across different stages of argumentative writing development. This line of research will be extended to additional empirical lines of research. This involves, but is not limited to, advancing RITA's adaptive feedback mechanisms, investigating learners' feedback‐uptake processes, examining longitudinal patterns of writing development supported by AI-powered scaffolds, and conducting classroom-based deployment to understand how RITA integrates into authentic instructional ecologies. Together, these interconnected strands aim to advance a robust, theoretically grounded, and methodologically rigorous line of research to inform the next generation of AI-powered writing support systems.",
-    image: "/lovable-uploads/rita-logo.png"
+    image: ""
   },
   {
     title: "LANGCASTX: An AI-Augmented Personalized Podcast Platform to Advance Language-science Competence for Speech-language Pathologists",
@@ -105,22 +105,24 @@ const Projects = () => {
           <motion.div key={index} variants={item}>
             <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-card group hover:scale-[1.01]">
               <CardContent className="p-0">
-                <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+                <div className={`flex flex-col ${project.image ? (index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse') : ''}`}>
                   {/* Image Section */}
-                  <div className="lg:w-2/5 relative overflow-hidden">
-                    <div className="aspect-[4/3] lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/5 via-primary/10 to-accent/10 flex items-center justify-center relative">
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-contain lg:absolute lg:inset-0 p-6 transition-transform duration-500 group-hover:scale-105"
-                        style={{ minHeight: '300px', maxHeight: '400px', objectPosition: 'center center' }}
-                      />
+                  {project.image && (
+                    <div className="lg:w-2/5 relative overflow-hidden">
+                      <div className="aspect-[4/3] lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/5 via-primary/10 to-accent/10 flex items-center justify-center relative">
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-contain lg:absolute lg:inset-0 p-6 transition-transform duration-500 group-hover:scale-105"
+                          style={{ minHeight: '300px', maxHeight: '400px', objectPosition: 'center center' }}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Content Section */}
-                  <div className="lg:w-3/5 p-6 lg:p-8 flex flex-col justify-center">
+                  <div className={`${project.image ? 'lg:w-3/5' : 'w-full'} p-6 lg:p-8 flex flex-col justify-center`}>
                     {/* Badges */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       <Badge variant="default" className="bg-primary/90 hover:bg-primary">
