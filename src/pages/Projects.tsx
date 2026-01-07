@@ -112,8 +112,8 @@ const Projects = () => {
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover lg:absolute lg:inset-0"
-                        style={{ minHeight: '300px', maxHeight: '400px' }}
+                        className="w-full h-full object-contain lg:absolute lg:inset-0 p-4"
+                        style={{ minHeight: '300px', maxHeight: '400px', objectPosition: 'center center' }}
                       />
                     </div>
                   </div>
