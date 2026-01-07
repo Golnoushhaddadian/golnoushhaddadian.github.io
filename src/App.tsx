@@ -9,8 +9,8 @@ import Layout from "@/components/Layout";
 
 // Page components
 import Welcome from "@/pages/Welcome";
-
 import CurriculumVitae from "@/pages/CurriculumVitae";
+import Projects from "@/pages/Projects";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import Gallery from "@/pages/Gallery";
@@ -27,9 +27,9 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<Welcome />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/gallery" element={<Gallery />} />
               <Route path="/cv" element={<CurriculumVitae />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
