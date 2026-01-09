@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Calendar, Lightbulb } from "lucide-react";
+import catwrvImage from "@/assets/catwrv-project.png";
 
 interface Project {
   title: string;
@@ -67,6 +68,14 @@ const projects: Project[] = [
     funding: "National Science Foundation (NSF)",
     description: "This project designs and implements AI-augmented formative assessment and feedback systems to help students build skills for in-classroom interactive problem-solving activities. The aim is to determine whether AI in education improves students' well-being inside and outside the classroom, with a focus on those traditionally underrepresented in STEM education. Extensive data collected in the final phase will examine the relationships among pre-classroom activities, in-classroom performance, self-efficacy, interest in physics, and student backgrounds, including gender, race, ethnicity, first-generation status, and English language learning.",
     image: "/lovable-uploads/nsf2.png"
+  },
+  {
+    title: "Design and Development of a Computer-Adaptive Prototype to Measure Written Receptive Vocabulary Knowledge of English Language Learners",
+    position: "Lead Researcher (Master's Thesis)",
+    period: "October 2012 – October 2014",
+    mentors: "Dr. Salehi, M.",
+    description: "This project examines the design and development of a computerized adaptive assessment prototype for measuring the written receptive vocabulary knowledge of learners of English as a foreign language. Building on the paper-based Vocabulary Size Test (VST; Nation & Beglar, 2007), the study applies Item Response Theory (IRT) to transform the instrument into an adaptive digital format, enabling more efficient and individualized estimation of learners' vocabulary size. The resulting system, referred to as CATWRV, is intended to function as an alternative mode of administration to the traditional paper-and-pencil test.",
+    image: catwrvImage
   }
 ];
 
