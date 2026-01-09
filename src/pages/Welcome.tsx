@@ -111,6 +111,24 @@ const AboutMe = () => {
             </p>
           </div>
         </section>
+
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold mb-6">Latest Publications</h2>
+          <div className="prose max-w-none text-muted-foreground space-y-4">
+            <p>
+              <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (2025). A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education. <em>Research Synthesis in Applied Linguistics</em>, 1-51.{" "}
+              <a href="https://doi.org/10.1080/29984475.2025.2598266" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                https://doi.org/10.1080/29984475.2025.2598266
+              </a>
+            </p>
+            <p>
+              Noroozi, O., <strong>Haddadian, G.</strong>, Gao, X., Schunn, C., Alqassab, M., & Banihashem, S. K. (2025). The value of GenAI for peer feedback provision: student perceptions and impacts. <em>International Journal of Educational Technology in Higher Education</em>, 22(1), 61.{" "}
+              <a href="https://doi.org/10.1186/s41239-025-00558-6" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                https://doi.org/10.1186/s41239-025-00558-6
+              </a>
+            </p>
+          </div>
+        </section>
       </div>
     </div>
   );
