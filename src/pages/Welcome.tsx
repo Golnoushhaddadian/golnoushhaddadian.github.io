@@ -100,7 +100,7 @@ const AboutMe = () => {
               educational challenges through evidence-based design and expanding access to effective learning
               opportunities.
             </p>
-            <p>If you are looking for a concise overview of my work, my core focus areas include:</p>
+            <p>My core research areas include:</p>
             <p className="font-semibold text-foreground">
               # AI in Education # Personalized Learning # Feedback # Assessment & Evaluation # Higher Education # Design
               & Development # Mixed-Methods # Design-Based Research
