@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Calendar, Lightbulb } from "lucide-react";
-import catwrvImage from "@/assets/catwrv-project.png";
+import catwrvImage from "@/assets/catwrv-project.jpg";
 
 interface Project {
   title: string;
