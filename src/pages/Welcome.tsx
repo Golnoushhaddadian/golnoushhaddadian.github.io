@@ -127,6 +127,24 @@ const AboutMe = () => {
                 https://doi.org/10.1186/s41239-025-00558-6
               </a>
             </p>
+            <p>
+              <strong>Haddadian, G.</strong>, Panzade, P., Takabi, D., & Kim, M. K. (2025). Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum. <em>International Journal of Technology in Education</em>, 8(2), 220-245.{" "}
+              <a href="https://doi.org/10.46328/ijte.1071" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                https://doi.org/10.46328/ijte.1071
+              </a>
+            </p>
+            <p>
+              <strong>Haddadian, G.</strong>, Han, H., Kim, J., Abdeen, M. S., & Kim, M. K. (2025). Exploring AI-Generated Expert Models: Instructor Interaction and Learner Perceptions in a Physics Class. In <em>Proceedings of the 19th International Conference of the Learning Sciences-ICLS 2025</em>, pp. 1684-1688. International Society of the Learning Sciences.{" "}
+              <a href="https://doi.org/10.22318/icls2025.213524" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                https://doi.org/10.22318/icls2025.213524
+              </a>
+            </p>
+            <p>
+              Greisel, M., Hornstein, J., Kollar, I., Noroozi, O., <strong>Haddadian, G.</strong>, Gao, X., ... & Rummel, N. (2025). Enhancing Peer Feedback Practices with Generative AI. In <em>Proceedings of the 18th International Conference on Computer-Supported Collaborative Learning-CSCL 2025</em>, pp. 490-498. International Society of the Learning Sciences.{" "}
+              <a href="https://doi.org/10.22318/cscl2025.921873" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                https://doi.org/10.22318/cscl2025.921873
+              </a>
+            </p>
           </div>
         </section>
       </div>
