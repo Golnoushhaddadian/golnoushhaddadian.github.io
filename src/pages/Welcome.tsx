@@ -2,84 +2,33 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 const AboutMe = () => {
   const iconSize = 32;
-  
-  return (
-    <div className="min-h-screen flex flex-col items-center py-8 px-4">
+  return <div className="min-h-screen flex flex-col items-center py-8 px-4">
       <div className="w-full max-w-4xl">
         <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="md:w-1/3 flex flex-col items-center">
             <div className="w-64 h-64">
               <AspectRatio ratio={1 / 1} className="rounded-lg overflow-hidden">
                 <Avatar className="h-full w-full">
-                  <AvatarImage
-                    src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png"
-                    alt="Golnoush (Lia) Haddadian"
-                    className="object-cover"
-                  />
+                  <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" className="object-cover" />
                   <AvatarFallback className="text-2xl">GH</AvatarFallback>
                 </Avatar>
               </AspectRatio>
             </div>
             {/* Social Profile Links */}
             <div className="flex items-center gap-5 mt-5">
-              <a
-                href="https://www.linkedin.com/in/g-hdn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform duration-200"
-                aria-label="LinkedIn"
-              >
-                <img 
-                  src="/lovable-uploads/linkedin-icon.png" 
-                  alt="LinkedIn" 
-                  width={iconSize} 
-                  height={iconSize}
-                  className="rounded-full"
-                />
+              <a href="https://www.linkedin.com/in/g-hdn" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="LinkedIn">
+                <img src="/lovable-uploads/linkedin-icon.png" alt="LinkedIn" width={iconSize} height={iconSize} className="rounded-full" />
               </a>
-              <a
-                href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform duration-200"
-                aria-label="Google Scholar"
-              >
-                <img 
-                  src="/lovable-uploads/google-scholar-icon.png" 
-                  alt="Google Scholar" 
-                  width={iconSize} 
-                  height={iconSize}
-                />
+              <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="Google Scholar">
+                <img src="/lovable-uploads/google-scholar-icon.png" alt="Google Scholar" width={iconSize} height={iconSize} />
               </a>
-              <a
-                href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform duration-200"
-                aria-label="ResearchGate"
-              >
-                <img 
-                  src="/lovable-uploads/researchgate-icon.png" 
-                  alt="ResearchGate" 
-                  width={iconSize} 
-                  height={iconSize}
-                  className="rounded-full"
-                />
+              <a href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="ResearchGate">
+                <img src="/lovable-uploads/researchgate-icon.png" alt="ResearchGate" width={iconSize} height={iconSize} className="rounded-full" />
               </a>
-              <a
-                href="mailto:ghaddadian1@gsu.edu"
-                className="hover:scale-110 transition-transform duration-200"
-                aria-label="Email"
-              >
-                <img 
-                  src="/lovable-uploads/gmail-icon.png" 
-                  alt="Email" 
-                  width={iconSize} 
-                  height={iconSize}
-                />
+              <a href="mailto:ghaddadian1@gsu.edu" className="hover:scale-110 transition-transform duration-200" aria-label="Email">
+                
               </a>
             </div>
           </div>
@@ -160,8 +109,6 @@ const AboutMe = () => {
           </div>
         </section>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AboutMe;
