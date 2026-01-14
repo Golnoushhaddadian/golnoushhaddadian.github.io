@@ -41,7 +41,8 @@ const projects: Project[] = [
     mentors: "Drs. Kim, M. K., Xiong, J., Hadley, P., Lane, H. C.",
     funding: "Google.org (2025), NSF AI Institutes Virtual Organization (AIVO), AI4Ed Summer Program",
     description: "As part of a larger initiative involving five national AI research institutes in the United States (i.e., AI-ALOE, AI4ExceptionalEd, ENGAGE AI, iSAT, and INVITE), our interdisciplinary team brought together researchers from two of them—the National AI Institute for Exceptional Education (AI4ExceptionalEd) and the National AI Institute for Adult Learning and Online Education (AI-ALOE)—to advance the shared vision and mission of both AI institutes and to foster innovation at the intersection of AI and education. Through this collaboration, we aimed to address a real-world problem experienced by practicing Speech-Language Pathologists (SLPs) who treat children with language disorders. Existing research highlights a critical gap in language science knowledge among SLPs, which poses a substantial barrier to the effective implementation of evidence-based assessment and intervention practices. Thus, we designed and developed an AI-augmented platform to offer personalized learning episodes adapted to the daily questions and challenges of Speech-Language Pathologists (SLPs).",
-    image: "/lovable-uploads/langcastx-logo.png"
+    image: "/lovable-uploads/langcastx-logo.png",
+    link: { label: "Learn More about AIVO", url: "http://aiinstitutes.org/ai-for-education/" }
   },
   {
     title: "Secure and Trustworthy Cyberspace (SaTC): Private Artificial Intelligence (AI)",
