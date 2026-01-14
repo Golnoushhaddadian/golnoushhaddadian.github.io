@@ -75,7 +75,7 @@ const AboutMe = () => {
                 aria-label="Email"
               >
                 <img 
-                  src="/lovable-uploads/gmail-icon.png" 
+                  " 
                   alt="Email" 
                   width={iconSize} 
                   height={iconSize}
