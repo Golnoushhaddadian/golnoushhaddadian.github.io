@@ -13,6 +13,7 @@ interface Project {
   description: string;
   image: string;
   funding?: string;
+  link?: { label: string; url: string };
 }
 
 const projects: Project[] = [
@@ -58,7 +59,8 @@ const projects: Project[] = [
     mentors: "Drs. Kim, M. K., Goel, A. K., Dede, C.",
     funding: "National Science Foundation (NSF)",
     description: "This interdisciplinary project aims to transform online adult learning through AI-driven models grounded in cognitive and social learning theories. It addresses the distinct needs of adult learners by developing intelligent virtual assistants and personalized learning systems. The initiative brings together a national network of universities, nonprofits, and industry partners to advance foundational research in areas such as cognitive-based AI, scalable personalization, human-AI collaboration, and ethical AI design. Using iterative learning engineering and mixed-methods evaluation, the project seeks to deliver scalable, equitable, and effective solutions for adult education.",
-    image: "/lovable-uploads/nsf2-aloe.png"
+    image: "/lovable-uploads/nsf2-aloe.png",
+    link: { label: "Learn More about AI-ALOE", url: "https://aialoe.org/" }
   },
   {
     title: "IUSE-Engaged Student Learning (Level 1): AI-Scaffolded Pre-Classroom Learning for Large/Introductory Undergraduate Physics Courses",
@@ -175,6 +177,18 @@ const Projects = () => {
                     <p className="text-muted-foreground leading-relaxed text-xs lg:text-sm line-clamp-4 lg:line-clamp-none">
                       {project.description}
                     </p>
+
+                    {/* Learn More Link */}
+                    {project.link && (
+                      <a
+                        href={project.link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 mt-3 text-xs text-primary hover:text-primary/80 hover:underline transition-colors font-medium"
+                      >
+                        {project.link.label} →
+                      </a>
+                    )}
                   </div>
                 </div>
               </CardContent>
