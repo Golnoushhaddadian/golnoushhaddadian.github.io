@@ -74,7 +74,7 @@ const projects: Project[] = [
     position: "Lead Researcher (Master's Thesis)",
     period: "October 2012 – October 2014",
     mentors: "Dr. Salehi, M.",
-    description: "This project examines the design and development of a computerized adaptive assessment prototype for measuring the written receptive vocabulary knowledge of learners of English as a foreign language. Building on the paper-based Vocabulary Size Test (VST; Nation & Beglar, 2007), the study applies Item Response Theory (IRT) to transform the instrument into an adaptive digital format, enabling more efficient and individualized estimation of learners' vocabulary size. The resulting system, referred to as CATWRV, is intended to function as an alternative mode of administration to the traditional paper-and-pencil test.",
+    description: "This project focuses on the design and development of a Computerized Adaptive Test (CAT) version of the paper-based Vocabulary Size Test (VST; Nation & Beglar, 2007) to measure the written receptive vocabulary knowledge of English as a foreign language learners. The system, referred to as CATWRV, is intended to serve as an alternative mode of administration to the traditional paper-and-pencil VST. Using Item Response Theory (IRT), the system selects subsequent items of appropriate difficulty based on learners' responses. Through this process, the system dynamically adapts to each examinee's estimated ability level in real time, enabling more precise scoring with fewer test items and reduced testing time. The project aims to support more efficient and personalized estimation of learners' vocabulary size.",
     image: catwrvImage
   }
 ];
