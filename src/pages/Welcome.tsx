@@ -69,19 +69,6 @@ const AboutMe = () => {
                   className="rounded-full"
                 />
               </a>
-              <a
-                href="mailto:ghaddadian1@gsu.edu"
-                className="hover:scale-110 transition-transform duration-200"
-                aria-label="Email"
-              >
-                <img 
-                  src="/lovable-uploads/gmail-icon.png" 
-                  alt="Email" 
-                  width={iconSize} 
-                  height={iconSize}
-                  className="rounded-full"
-                />
-              </a>
             </div>
           </div>
           <div className="md:w-2/3">
