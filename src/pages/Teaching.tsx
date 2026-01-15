@@ -189,6 +189,62 @@ const Teaching = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Haddadian Training Center Section */}
+      <Card className="overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <GraduationCap className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <Badge variant="secondary" className="mb-2">Coach & Trainer</Badge>
+              <CardTitle className="text-2xl">Haddadian Training Center</CardTitle>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <div className="flex flex-wrap gap-4 mb-6">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Calendar className="h-4 w-4" />
+              <span>2019 - 2021</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <MapPin className="h-4 w-4" />
+              <span>Tehran, Iran</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <BookOpen className="h-4 w-4" />
+              <span>Haddadian Training Center</span>
+            </div>
+          </div>
+
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-4">
+              <img 
+                src="/lovable-uploads/haddadian-training-center-logo.png" 
+                alt="Haddadian Training Center logo"
+                className="h-24 w-auto"
+              />
+            </div>
+          </div>
+          
+          <div className="prose prose-sm dark:prose-invert max-w-none">
+            <h4 className="text-lg font-semibold mb-3">Courses:</h4>
+            <ul className="space-y-2 text-foreground/90">
+              <li className="flex items-start gap-2">
+                <span className="text-primary mt-1">•</span>
+                <span>Test of English as a Foreign Language (TOEFL) & Graduate Record Examination (GRE) Coach</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary mt-1">•</span>
+                <span>Teaching English to Speakers of Other Languages (TESOL) Trainer</span>
+              </li>
+            </ul>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
