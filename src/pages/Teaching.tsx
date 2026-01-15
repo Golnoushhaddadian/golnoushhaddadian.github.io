@@ -101,7 +101,7 @@ const Teaching = () => {
             </div>
 
             {/* Featured Image */}
-            <div className="rounded-lg overflow-hidden border shadow-sm">
+            <div className="mx-auto max-w-2xl rounded-lg overflow-hidden border shadow-sm">
               <img 
                 src="/lovable-uploads/inventing-to-learn-thank-a-teacher.png" 
                 alt="Thank-A-Teacher Program recognition letter from CETLOE for Inventing to Learn course"
@@ -200,7 +200,7 @@ const Teaching = () => {
             </div>
 
             {/* Featured Image */}
-            <div className="rounded-lg overflow-hidden border shadow-sm">
+            <div className="mx-auto max-w-2xl rounded-lg overflow-hidden border shadow-sm">
               <img 
                 src="/lovable-uploads/computer-skills-thank-a-teacher.png" 
                 alt="Thank-A-Teacher Program recognition letter from CETLOE for Computer Skills course"
@@ -294,7 +294,7 @@ const Teaching = () => {
               </div>
             </div>
 
-            <Carousel className="w-full">
+            <Carousel className="w-full max-w-3xl mx-auto">
               <CarouselContent>
                 {htcSliderImages.map((image, index) => (
                   <CarouselItem key={index}>
@@ -302,7 +302,7 @@ const Teaching = () => {
                       <img 
                         src={image.src} 
                         alt={image.alt}
-                        className="w-full h-[400px] object-cover"
+                        className="w-full h-[500px] object-cover"
                       />
                     </div>
                   </CarouselItem>
