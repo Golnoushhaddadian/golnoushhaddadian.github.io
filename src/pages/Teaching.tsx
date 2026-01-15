@@ -46,6 +46,17 @@ const Teaching = () => {
               <span>Georgia State University</span>
             </div>
           </div>
+
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-4">
+              <img 
+                src="/lovable-uploads/gsu-logo.jpg" 
+                alt="Georgia State University logo"
+                className="h-24 w-auto"
+              />
+            </div>
+          </div>
           
           <div className="prose prose-sm dark:prose-invert max-w-none">
             <p className="text-foreground/90 leading-relaxed">
@@ -127,6 +138,17 @@ const Teaching = () => {
             <div className="flex items-center gap-2 text-muted-foreground">
               <BookOpen className="h-4 w-4" />
               <span>Georgia State University</span>
+            </div>
+          </div>
+
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-4">
+              <img 
+                src="/lovable-uploads/gsu-logo.jpg" 
+                alt="Georgia State University logo"
+                className="h-24 w-auto"
+              />
             </div>
           </div>
           
