@@ -24,7 +24,8 @@ const projects: Project[] = [
     mentors: "Drs. Cohen, J., & Magliano, J.",
     funding: "Institute of Education Sciences (IES)",
     description: "The purpose of this project is to create a Generative artificial intelligence (Gen-AI) enhanced authoring tool for scenario-based assessments (SBAs). Because SBAs are difficult to develop, college instructors struggle to develop and deploy SBAs in their courses. Recent advances in Gen-AI make it possible to scale up and democratize SBA development, enabling instructors to design and administer localized, personalized, and discipline-appropriate performance assessments that provide better feedback, higher levels of adaptivity, and richer diagnostic information.",
-    image: "/lovable-uploads/ies-sba-project.png"
+    image: "/lovable-uploads/ies-sba-project.png",
+    link: { label: "Learn More about the Grant", url: "https://ies.ed.gov/use-work/awards/scenario-based-assessment-age-generative-ai-making-space-education-market-alternative-assessment" }
   },
   {
     title: "RITA – Real-Time Intelligent Technology for Argumentative Writing",
