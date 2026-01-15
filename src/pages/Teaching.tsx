@@ -213,23 +213,13 @@ const Teaching = () => {
       {/* Haddadian Training Center Section */}
       <Card className="overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <GraduationCap className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <Badge variant="secondary" className="mb-2">Coach & Trainer</Badge>
-                <CardTitle className="text-2xl">TOEFL & GRE Coach | TESOL Trainer</CardTitle>
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <GraduationCap className="h-6 w-6 text-primary" />
             </div>
-            {/* Logo */}
-            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-3 shrink-0">
-              <img 
-                src="/lovable-uploads/haddadian-training-center-logo.png" 
-                alt="Haddadian Training Center logo"
-                className="h-16 w-auto"
-              />
+            <div>
+              <Badge variant="secondary" className="mb-2">Coach & Trainer</Badge>
+              <CardTitle className="text-2xl">TOEFL & GRE Coach | TESOL Trainer</CardTitle>
             </div>
           </div>
         </CardHeader>
