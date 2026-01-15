@@ -34,6 +34,7 @@ const htcSliderImages = [
   { src: "/lovable-uploads/htc-slider-14.jpg", alt: "University application workshop" },
   { src: "/lovable-uploads/htc-slider-15.jpg", alt: "Classroom instruction" },
   { src: "/lovable-uploads/htc-slider-16.jpg", alt: "HTC group photo" },
+  { src: "/lovable-uploads/htc-slider-17.jpg", alt: "TESOL certification graduates" },
 ];
 
 const Teaching = () => {
@@ -320,12 +321,13 @@ const Teaching = () => {
               <CarouselContent>
                 {htcSliderImages.map((image, index) => (
                   <CarouselItem key={index}>
-                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                    <div className="rounded-lg overflow-hidden border shadow-sm relative">
                       <img 
                         src={image.src} 
                         alt={image.alt}
                         className="w-full h-[500px] object-cover"
                       />
+                      <div className="absolute inset-0 bg-black/10" />
                     </div>
                   </CarouselItem>
                 ))}
