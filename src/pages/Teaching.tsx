@@ -23,7 +23,7 @@ const Teaching = () => {
               <GraduationCap className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <Badge variant="secondary" className="mb-2">Codesigner</Badge>
+              <Badge variant="secondary" className="mb-2">Codesigner & Co-instructor</Badge>
               <CardTitle className="text-2xl">Inventing to Learn</CardTitle>
             </div>
           </div>
