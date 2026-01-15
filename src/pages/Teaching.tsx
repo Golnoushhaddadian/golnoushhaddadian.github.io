@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { BookOpen, Calendar, MapPin, GraduationCap, Award, Heart } from "lucide-react";
+import { BookOpen, Calendar, MapPin, GraduationCap, Award } from "lucide-react";
 
 const Teaching = () => {
   return (
@@ -94,22 +94,14 @@ const Teaching = () => {
               />
             </div>
 
-            {/* Image Caption - More engaging format */}
-            <div className="flex gap-4 p-4 bg-muted/30 rounded-lg">
-              <Heart className="h-5 w-5 text-rose-500 flex-shrink-0 mt-0.5" />
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-foreground">
-                  A Moment of Gratitude 💙
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Every May, during Teacher Appreciation Week, educators are celebrated for their year-round dedication. 
-                  This heartfelt note represents the meaningful student feedback I've been honored to receive throughout 
-                  my teaching journey at Georgia State University's College of Education & Human Development.
-                </p>
-                <p className="text-sm text-muted-foreground italic">
-                  I'm deeply grateful for each student's kind words and for the privilege of being part of their learning experience.
-                </p>
-              </div>
+            {/* Image Caption */}
+            <div className="p-5 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+              <p className="text-sm text-foreground/80 leading-relaxed">
+                Teacher Appreciation Week, celebrated annually in May, is a dedicated time to recognize educators 
+                for their contributions throughout the academic year. This note is an example of the student feedback 
+                I have received during my teaching journey at Georgia State University's College of Education & Human Development. 
+                I am grateful for each student's appreciation and for the opportunity to be a part of their learning experience.
+              </p>
             </div>
           </div>
         </CardContent>
