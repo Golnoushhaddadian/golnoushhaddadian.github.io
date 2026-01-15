@@ -51,6 +51,32 @@ const Teaching = () => {
               that uses making to enhance student learning, and is offered at both undergraduate and graduate levels.
             </p>
           </div>
+
+          {/* Student Feedback Highlight - Subsection */}
+          <Separator className="my-8" />
+          
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-accent/20 rounded-lg">
+                <Award className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold">
+                  The Center for Excellence in Teaching, Learning, and Online Education (CETLOE): Thank-A-Teacher Program
+                </h3>
+                <p className="text-sm text-muted-foreground">Student Feedback Highlight</p>
+              </div>
+            </div>
+
+            {/* Featured Image */}
+            <div className="rounded-lg overflow-hidden border shadow-sm">
+              <img 
+                src="/lovable-uploads/inventing-to-learn-thank-a-teacher.png" 
+                alt="Thank-A-Teacher Program recognition letter from CETLOE for Inventing to Learn course"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
         </CardContent>
       </Card>
 
