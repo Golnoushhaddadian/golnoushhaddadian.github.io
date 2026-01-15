@@ -16,9 +16,6 @@ const Teaching = () => {
       {/* Header Section */}
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold tracking-tight">Teaching</h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          Dedicated to empowering students with essential skills for success in today's data-driven world
-        </p>
       </div>
 
       {/* Inventing to Learn Section */}
