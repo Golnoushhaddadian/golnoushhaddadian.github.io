@@ -57,17 +57,6 @@ const Teaching = () => {
             </p>
           </div>
 
-          {/* Skills Covered */}
-          <div className="mt-6 pt-6 border-t">
-            <h3 className="font-semibold mb-3 text-sm uppercase tracking-wide text-muted-foreground">Skills Covered</h3>
-            <div className="flex flex-wrap gap-2">
-              {["Word Processing", "Spreadsheets", "Databases", "Presentation Skills", "Web Development", "Data Analysis", "Digital Literacy"].map((skill) => (
-                <Badge key={skill} variant="outline" className="bg-background">
-                  {skill}
-                </Badge>
-              ))}
-            </div>
-          </div>
 
           {/* Student Feedback Highlight - Now a subsection */}
           <Separator className="my-8" />
