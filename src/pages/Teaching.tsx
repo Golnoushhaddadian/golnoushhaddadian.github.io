@@ -27,6 +27,13 @@ const htcSliderImages = [
   { src: "/lovable-uploads/htc-slider-7.jpg", alt: "TOEFL preparation" },
   { src: "/lovable-uploads/htc-slider-8.jpg", alt: "Group learning session" },
   { src: "/lovable-uploads/htc-slider-9.jpg", alt: "Collaborative learning" },
+  { src: "/lovable-uploads/htc-slider-10.jpg", alt: "ELA balloon activity" },
+  { src: "/lovable-uploads/htc-slider-11.jpg", alt: "Cambridge TOEFL preparation book" },
+  { src: "/lovable-uploads/htc-slider-12.jpg", alt: "TOEFL study materials" },
+  { src: "/lovable-uploads/htc-slider-13.jpg", alt: "Student with Cambridge TOEFL book" },
+  { src: "/lovable-uploads/htc-slider-14.jpg", alt: "University application workshop" },
+  { src: "/lovable-uploads/htc-slider-15.jpg", alt: "Classroom instruction" },
+  { src: "/lovable-uploads/htc-slider-16.jpg", alt: "HTC group photo" },
 ];
 
 const Teaching = () => {
