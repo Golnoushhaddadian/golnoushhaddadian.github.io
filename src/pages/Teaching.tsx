@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { BookOpen, Calendar, MapPin, GraduationCap, Award } from "lucide-react";
+import { BookOpen, Calendar, MapPin, GraduationCap, Award, Camera } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +9,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+const htcSliderImages = [
+  { src: "/lovable-uploads/htc-slider-1.jpg", alt: "HTC Training Center activity" },
+  { src: "/lovable-uploads/htc-slider-2.jpg", alt: "English learning materials" },
+  { src: "/lovable-uploads/htc-slider-3.jpg", alt: "Classroom group activity" },
+  { src: "/lovable-uploads/htc-slider-4.jpg", alt: "Student with school bus" },
+  { src: "/lovable-uploads/htc-slider-5.jpg", alt: "Presentation session" },
+  { src: "/lovable-uploads/htc-slider-6.jpg", alt: "Student studying" },
+  { src: "/lovable-uploads/htc-slider-7.jpg", alt: "TOEFL preparation" },
+  { src: "/lovable-uploads/htc-slider-8.jpg", alt: "Group learning session" },
+  { src: "/lovable-uploads/htc-slider-9.jpg", alt: "Collaborative learning" },
+];
 
 const Teaching = () => {
   return (
@@ -259,6 +278,39 @@ const Teaching = () => {
             <p className="text-foreground/90 leading-relaxed mt-4">
               Building on this work, I served as a Teaching English to Speakers of Other Languages (TESOL) trainer, delivering pedagogy-focused training for instructors, mentoring teachers in classroom practice, and supporting the development of effective, learner-centered approaches to English language instruction. In addition, I acted as an academic advisor, guiding students through their educational pathways and helping them align language learning, test preparation, and long-term academic goals.
             </p>
+          </div>
+
+          {/* Image Slider */}
+          <Separator className="my-8" />
+          
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-accent/20 rounded-lg">
+                <Camera className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold">Highlights from HTC</h3>
+                <p className="text-sm text-muted-foreground">Training sessions and student activities</p>
+              </div>
+            </div>
+
+            <Carousel className="w-full">
+              <CarouselContent>
+                {htcSliderImages.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                      <img 
+                        src={image.src} 
+                        alt={image.alt}
+                        className="w-full h-[400px] object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
           </div>
         </CardContent>
       </Card>
