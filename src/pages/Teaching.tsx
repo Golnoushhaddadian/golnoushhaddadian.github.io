@@ -327,7 +327,7 @@ const Teaching = () => {
                         alt={image.alt}
                         className="w-full h-[500px] object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/10" />
+                      <div className="absolute inset-0 bg-black/20" />
                     </div>
                   </CarouselItem>
                 ))}
