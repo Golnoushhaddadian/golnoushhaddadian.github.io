@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/carousel";
 
 const htcSliderImages = [
-  { src: "/lovable-uploads/htc-slider-1.jpg", alt: "HTC Training Center activity" },
   { src: "/lovable-uploads/htc-slider-2.jpg", alt: "English learning materials" },
+  { src: "/lovable-uploads/htc-slider-1.jpg", alt: "HTC Training Center activity" },
   { src: "/lovable-uploads/htc-slider-3.jpg", alt: "Classroom group activity" },
   { src: "/lovable-uploads/htc-slider-4.jpg", alt: "Student with school bus" },
   { src: "/lovable-uploads/htc-slider-5.jpg", alt: "Presentation session" },
@@ -317,7 +317,7 @@ const Teaching = () => {
               </div>
             </div>
 
-            <Carousel className="w-full max-w-3xl mx-auto">
+            <Carousel className="w-full max-w-3xl mx-auto" opts={{ loop: true }}>
               <CarouselContent>
                 {htcSliderImages.map((image, index) => (
                   <CarouselItem key={index}>
