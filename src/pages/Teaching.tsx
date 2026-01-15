@@ -82,6 +82,24 @@ const Teaching = () => {
                 className="w-full h-auto"
               />
             </div>
+
+            {/* Learn More Link */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-sm font-medium transition-colors cursor-pointer border border-primary/20">
+                  <Award className="h-4 w-4" />
+                  Learn more about "Thank-A-Teacher Program"
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-lg">
+                <DialogHeader>
+                  <DialogTitle className="text-lg">The Center for Excellence in Teaching, Learning, and Online Education (CETLOE): Thank-A-Teacher Program</DialogTitle>
+                </DialogHeader>
+                <p className="text-muted-foreground leading-relaxed">
+                  Teacher Appreciation Week is a dedicated time to recognize educators for their contributions throughout the academic year. This note is an example of the student feedback my brilliant mentor, Dr. Cohen, and I have received during my teaching journey at Georgia State University's College of Education & Human Development. I am grateful and honored for each student's appreciation and for the opportunity to be a part of their learning experience.
+                </p>
+              </DialogContent>
+            </Dialog>
           </div>
         </CardContent>
       </Card>
@@ -145,23 +163,6 @@ const Teaching = () => {
               </div>
             </div>
 
-            {/* Learn More Link */}
-            <Dialog>
-              <DialogTrigger asChild>
-                <button className="text-primary hover:underline text-sm font-medium cursor-pointer">
-                  Learn more about "Thank-A-Teacher Program"
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Thank-A-Teacher Program</DialogTitle>
-                </DialogHeader>
-                <p className="text-muted-foreground leading-relaxed">
-                  Teacher Appreciation Week is a dedicated time to recognize educators for their contributions throughout the academic year. This note is an example of the student feedback I have received during my teaching journey at Georgia State University's College of Education & Human Development. I am grateful and honored for each student's appreciation and for the opportunity to be a part of their learning experience.
-                </p>
-              </DialogContent>
-            </Dialog>
-
             {/* Featured Image */}
             <div className="rounded-lg overflow-hidden border shadow-sm">
               <img 
@@ -170,6 +171,24 @@ const Teaching = () => {
                 className="w-full h-auto"
               />
             </div>
+
+            {/* Learn More Link */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-sm font-medium transition-colors cursor-pointer border border-primary/20">
+                  <Award className="h-4 w-4" />
+                  Learn more about "Thank-A-Teacher Program"
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-lg">
+                <DialogHeader>
+                  <DialogTitle className="text-lg">The Center for Excellence in Teaching, Learning, and Online Education (CETLOE): Thank-A-Teacher Program</DialogTitle>
+                </DialogHeader>
+                <p className="text-muted-foreground leading-relaxed">
+                  Teacher Appreciation Week is a dedicated time to recognize educators for their contributions throughout the academic year. This note is an example of the student feedback I have received during my teaching journey at Georgia State University's College of Education & Human Development. I am grateful and honored for each student's appreciation and for the opportunity to be a part of their learning experience.
+                </p>
+              </DialogContent>
+            </Dialog>
           </div>
         </CardContent>
       </Card>
