@@ -21,13 +21,23 @@ const Teaching = () => {
       {/* Inventing to Learn Section */}
       <Card className="overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <GraduationCap className="h-6 w-6 text-primary" />
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <GraduationCap className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <Badge variant="secondary" className="mb-2">Co-designer & Co-instructor</Badge>
+                <CardTitle className="text-2xl">Inventing to Learn</CardTitle>
+              </div>
             </div>
-            <div>
-              <Badge variant="secondary" className="mb-2">Co-designer & Co-instructor</Badge>
-              <CardTitle className="text-2xl">Inventing to Learn</CardTitle>
+            {/* Logo */}
+            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-3 shrink-0">
+              <img 
+                src="/lovable-uploads/gsu-logo.jpg" 
+                alt="Georgia State University logo"
+                className="h-16 w-auto"
+              />
             </div>
           </div>
         </CardHeader>
@@ -44,17 +54,6 @@ const Teaching = () => {
             <div className="flex items-center gap-2 text-muted-foreground">
               <BookOpen className="h-4 w-4" />
               <span>Georgia State University</span>
-            </div>
-          </div>
-
-          {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-4">
-              <img 
-                src="/lovable-uploads/gsu-logo.jpg" 
-                alt="Georgia State University logo"
-                className="h-24 w-auto"
-              />
             </div>
           </div>
           
@@ -115,13 +114,23 @@ const Teaching = () => {
       {/* Computer Skills Section */}
       <Card className="overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <GraduationCap className="h-6 w-6 text-primary" />
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <GraduationCap className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <Badge variant="secondary" className="mb-2">Instructor of Record</Badge>
+                <CardTitle className="text-2xl">Computer Skills for the Information Age</CardTitle>
+              </div>
             </div>
-            <div>
-              <Badge variant="secondary" className="mb-2">Instructor of Record</Badge>
-              <CardTitle className="text-2xl">Computer Skills for the Information Age</CardTitle>
+            {/* Logo */}
+            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-3 shrink-0">
+              <img 
+                src="/lovable-uploads/gsu-logo.jpg" 
+                alt="Georgia State University logo"
+                className="h-16 w-auto"
+              />
             </div>
           </div>
         </CardHeader>
@@ -138,17 +147,6 @@ const Teaching = () => {
             <div className="flex items-center gap-2 text-muted-foreground">
               <BookOpen className="h-4 w-4" />
               <span>Georgia State University</span>
-            </div>
-          </div>
-
-          {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-4">
-              <img 
-                src="/lovable-uploads/gsu-logo.jpg" 
-                alt="Georgia State University logo"
-                className="h-24 w-auto"
-              />
             </div>
           </div>
           
@@ -215,13 +213,23 @@ const Teaching = () => {
       {/* Haddadian Training Center Section */}
       <Card className="overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <GraduationCap className="h-6 w-6 text-primary" />
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <GraduationCap className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <Badge variant="secondary" className="mb-2">Coach & Trainer</Badge>
+                <CardTitle className="text-2xl">TOEFL & GRE Coach | TESOL Trainer</CardTitle>
+              </div>
             </div>
-            <div>
-              <Badge variant="secondary" className="mb-2">Coach & Trainer</Badge>
-              <CardTitle className="text-2xl">TOEFL & GRE Coach | TESOL Trainer</CardTitle>
+            {/* Logo */}
+            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-3 shrink-0">
+              <img 
+                src="/lovable-uploads/haddadian-training-center-logo.png" 
+                alt="Haddadian Training Center logo"
+                className="h-16 w-auto"
+              />
             </div>
           </div>
         </CardHeader>
@@ -238,17 +246,6 @@ const Teaching = () => {
             <div className="flex items-center gap-2 text-muted-foreground">
               <BookOpen className="h-4 w-4" />
               <span>HTC Haddadian Training Center</span>
-            </div>
-          </div>
-
-          {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-4">
-              <img 
-                src="/lovable-uploads/haddadian-training-center-logo.png" 
-                alt="Haddadian Training Center logo"
-                className="h-24 w-auto"
-              />
             </div>
           </div>
           
