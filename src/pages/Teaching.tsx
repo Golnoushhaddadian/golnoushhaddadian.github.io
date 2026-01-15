@@ -269,10 +269,25 @@ const Teaching = () => {
               <MapPin className="h-4 w-4" />
               <span>Tehran, Iran</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <BookOpen className="h-4 w-4" />
-              <span>HTC Haddadian Training Center</span>
-            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                  <BookOpen className="h-4 w-4" />
+                  <span className="underline decoration-dotted underline-offset-4">HTC Haddadian Training Center</span>
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-lg">
+                <DialogHeader>
+                  <DialogTitle className="text-lg">HTC Haddadian Training Center</DialogTitle>
+                </DialogHeader>
+                <p className="text-muted-foreground leading-relaxed">
+                  This multidisciplinary institute, based in Tehran, Iran, is dedicated to advancing education at the intersection of language learning and artificial intelligence. Its core mission is to support students in developing strong proficiency in English as a Foreign Language (EFL), with specialized preparation for high-stakes exams such as TOEFL and GRE, emphasizing academic language skills, critical thinking, and test strategies.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">
+                  In parallel, the institute offers a growing portfolio of AI-focused educational programs, designed to equip learners with foundational to advanced knowledge in artificial intelligence and related technologies. Through an integrated, future-oriented approach, the institute prepares students not only for academic and professional success in global contexts but also for active participation in the evolving AI-driven world.
+                </p>
+              </DialogContent>
+            </Dialog>
           </div>
           
           <div className="prose prose-sm dark:prose-invert max-w-none">
