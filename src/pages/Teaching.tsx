@@ -199,7 +199,7 @@ const Teaching = () => {
             </div>
             <div>
               <Badge variant="secondary" className="mb-2">Coach & Trainer</Badge>
-              <CardTitle className="text-2xl">Haddadian Training Center</CardTitle>
+              <CardTitle className="text-2xl">TOEFL & GRE Coach | TESOL Trainer</CardTitle>
             </div>
           </div>
         </CardHeader>
@@ -215,7 +215,7 @@ const Teaching = () => {
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <BookOpen className="h-4 w-4" />
-              <span>Haddadian Training Center</span>
+              <span>HTC Haddadian Training Center</span>
             </div>
           </div>
 
@@ -231,17 +231,15 @@ const Teaching = () => {
           </div>
           
           <div className="prose prose-sm dark:prose-invert max-w-none">
-            <h4 className="text-lg font-semibold mb-3">Courses:</h4>
-            <ul className="space-y-2 text-foreground/90">
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">•</span>
-                <span>Test of English as a Foreign Language (TOEFL) & Graduate Record Examination (GRE) Coach</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">•</span>
-                <span>Teaching English to Speakers of Other Languages (TESOL) Trainer</span>
-              </li>
-            </ul>
+            <p className="text-foreground/90 leading-relaxed">
+              I began my teaching career in April 2004 as an English as a Foreign Language (EFL) instructor and technology instructor, working as a private tutor with K–12 students and adult learners. Over time, I transitioned into teaching roles within private institutions and university-level courses, including appointments as a visiting instructor, where I continued to develop my professional expertise through 2019.
+            </p>
+            <p className="text-foreground/90 leading-relaxed mt-4">
+              In 2019, I established HTC Haddadian Training Center, where my primary role was as a Test of English as a Foreign Language (TOEFL) coach, working closely with students to develop the academic language skills and test-taking strategies required for success on high-stakes examinations. I also supported students preparing for the Graduate Record Examination (GRE), with a particular focus on verbal reasoning and academic writing.
+            </p>
+            <p className="text-foreground/90 leading-relaxed mt-4">
+              Building on this work, I served as a Teaching English to Speakers of Other Languages (TESOL) trainer, delivering pedagogy-focused training for instructors, mentoring teachers in classroom practice, and supporting the development of effective, learner-centered approaches to English language instruction. In addition, I acted as an academic advisor, guiding students through their educational pathways and helping them align language learning, test preparation, and long-term academic goals.
+            </p>
           </div>
         </CardContent>
       </Card>
