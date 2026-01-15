@@ -142,8 +142,8 @@ const Teaching = () => {
             {/* Featured Image */}
             <div className="rounded-lg overflow-hidden border shadow-sm">
               <img 
-                src="/lovable-uploads/thank-a-teacher-program.jpeg" 
-                alt="Thank-A-Teacher Program recognition letter from CETLOE"
+                src="/lovable-uploads/computer-skills-thank-a-teacher.png" 
+                alt="Thank-A-Teacher Program recognition letter from CETLOE for Computer Skills course"
                 className="w-full h-auto"
               />
             </div>
