@@ -1,8 +1,14 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { BookOpen, Calendar, MapPin, GraduationCap, Award } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Teaching = () => {
   return (
@@ -138,6 +144,23 @@ const Teaching = () => {
                 <p className="text-sm text-muted-foreground">Student Feedback Highlight</p>
               </div>
             </div>
+
+            {/* Learn More Link */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="text-primary hover:underline text-sm font-medium cursor-pointer">
+                  Learn more about "Thank-A-Teacher Program"
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Thank-A-Teacher Program</DialogTitle>
+                </DialogHeader>
+                <p className="text-muted-foreground leading-relaxed">
+                  Teacher Appreciation Week is a dedicated time to recognize educators for their contributions throughout the academic year. This note is an example of the student feedback I have received during my teaching journey at Georgia State University's College of Education & Human Development. I am grateful and honored for each student's appreciation and for the opportunity to be a part of their learning experience.
+                </p>
+              </DialogContent>
+            </Dialog>
 
             {/* Featured Image */}
             <div className="rounded-lg overflow-hidden border shadow-sm">
