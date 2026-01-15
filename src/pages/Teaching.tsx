@@ -15,7 +15,46 @@ const Teaching = () => {
         </p>
       </div>
 
-      {/* Teaching Role Section */}
+      {/* Inventing to Learn Section */}
+      <Card className="overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <GraduationCap className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <Badge variant="secondary" className="mb-2">Codesigner</Badge>
+              <CardTitle className="text-2xl">Inventing to Learn</CardTitle>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <div className="flex flex-wrap gap-4 mb-6">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Calendar className="h-4 w-4" />
+              <span>Aug 2025 - Dec 2025</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <MapPin className="h-4 w-4" />
+              <span>Atlanta, GA</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <BookOpen className="h-4 w-4" />
+              <span>Georgia State University</span>
+            </div>
+          </div>
+          
+          <div className="prose prose-sm dark:prose-invert max-w-none">
+            <p className="text-foreground/90 leading-relaxed">
+              This course equips educators to integrate maker tools such as 3D printers and microcontrollers into teaching. 
+              It emphasizes both technological skills and pedagogical approaches, enhancing confidence in designing curriculum 
+              that uses making to enhance student learning, and is offered at both undergraduate and graduate levels.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Computer Skills Section */}
       <Card className="overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
           <div className="flex items-center gap-3">
@@ -81,16 +120,6 @@ const Teaching = () => {
                 alt="Thank-A-Teacher Program recognition letter from CETLOE"
                 className="w-full h-auto"
               />
-            </div>
-
-            {/* Image Caption */}
-            <div className="p-5 bg-muted/30 rounded-lg border-l-4 border-primary/50">
-              <p className="text-sm text-foreground/80 leading-relaxed">
-                Teacher Appreciation Week, celebrated annually in May, is a dedicated time to recognize educators 
-                for their contributions throughout the academic year. This note is an example of the student feedback 
-                I have received during my teaching journey at Georgia State University's College of Education & Human Development. 
-                I am grateful for each student's appreciation and for the opportunity to be a part of their learning experience.
-              </p>
             </div>
           </div>
         </CardContent>
