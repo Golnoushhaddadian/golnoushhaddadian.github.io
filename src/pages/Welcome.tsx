@@ -4,11 +4,11 @@ import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 const AboutMe = () => {
   const iconSize = 32;
-  return <div className="min-h-screen flex flex-col items-center py-8 px-4">
+  return <div className="min-h-screen flex flex-col items-center py-4 sm:py-8 px-2 sm:px-4">
       <div className="w-full max-w-4xl">
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-8 mb-8 sm:mb-12">
           <div className="md:w-1/3 flex flex-col items-center">
-            <div className="w-64 h-64">
+            <div className="w-40 h-40 sm:w-64 sm:h-64">
               <AspectRatio ratio={1 / 1} className="rounded-lg overflow-hidden">
                 <Avatar className="h-full w-full">
                   <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" className="object-cover" />
@@ -17,15 +17,15 @@ const AboutMe = () => {
               </AspectRatio>
             </div>
             {/* Social Profile Links */}
-            <div className="flex items-center gap-5 mt-5">
+            <div className="flex items-center gap-3 sm:gap-5 mt-3 sm:mt-5">
               <a href="https://www.linkedin.com/in/g-hdn" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="LinkedIn">
-                <img src="/lovable-uploads/linkedin-icon.png" alt="LinkedIn" width={iconSize} height={iconSize} className="rounded-full" />
+                <img src="/lovable-uploads/linkedin-icon.png" alt="LinkedIn" width={24} height={24} className="rounded-full sm:w-8 sm:h-8" />
               </a>
               <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="Google Scholar">
-                <img src="/lovable-uploads/google-scholar-icon.png" alt="Google Scholar" width={iconSize} height={iconSize} />
+                <img src="/lovable-uploads/google-scholar-icon.png" alt="Google Scholar" width={24} height={24} className="sm:w-8 sm:h-8" />
               </a>
               <a href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="ResearchGate">
-                <img src="/lovable-uploads/researchgate-icon.png" alt="ResearchGate" width={iconSize} height={iconSize} className="rounded-full" />
+                <img src="/lovable-uploads/researchgate-icon.png" alt="ResearchGate" width={24} height={24} className="rounded-full sm:w-8 sm:h-8" />
               </a>
               <a href="mailto:ghaddadian1@gsu.edu" className="hover:scale-110 transition-transform duration-200" aria-label="Email">
                 
@@ -33,17 +33,17 @@ const AboutMe = () => {
             </div>
           </div>
           <div className="md:w-2/3 text-center md:text-left">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 flex flex-col sm:flex-row items-center sm:items-baseline gap-2">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 flex flex-col sm:flex-row items-center sm:items-baseline gap-1 sm:gap-2">
               <span>Golnoush (Lia) Haddadian</span>
-              <Button variant="ghost" size="sm" className="text-xs sm:text-sm" asChild>
+              <Button variant="ghost" size="sm" className="text-[10px] sm:text-xs h-6 sm:h-8 px-2" asChild>
                 <a href="https://namedrop.io/golnoushhaddadian" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink size={14} className="mr-1" />
+                  <ExternalLink size={12} className="mr-0.5 sm:mr-1" />
                   <span>Pronounce my name</span>
                 </a>
               </Button>
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground mb-3 md:mb-4">Ph.D. in Learning Sciences</p>
-            <p className="mb-4 md:mb-6 text-sm sm:text-base">
+            <p className="text-sm sm:text-lg md:text-xl text-muted-foreground mb-2 sm:mb-3 md:mb-4">Ph.D. in Learning Sciences</p>
+            <p className="mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-base">
               Postdoctoral Associate | Georgia State University, University of Memphis, and Educational Testing
               Services.
             </p>
@@ -51,8 +51,8 @@ const AboutMe = () => {
         </div>
 
         <section>
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Welcome to My Personal Website</h2>
-          <div className="prose max-w-none text-muted-foreground space-y-3 sm:space-y-4 text-sm sm:text-base">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Welcome to My Personal Website</h2>
+          <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base">
             <p>Hello and welcome! 😊✨ I'm Lia Haddadian.</p>
             <p>My given name is Golnoush, and I adore it, but let's keep it simple. Please call me Lia.</p>
             <p>
@@ -62,7 +62,7 @@ const AboutMe = () => {
               opportunities.
             </p>
             <p>My core research areas include:</p>
-            <p className="font-semibold text-foreground text-xs sm:text-sm leading-relaxed">
+            <p className="font-semibold text-foreground text-[10px] sm:text-xs md:text-sm leading-relaxed">
               # AI in Education # Personalized Learning # Feedback # Assessment & Evaluation # Higher Education # Design
               & Development # Mixed-Methods # Design-Based Research
             </p>
@@ -73,9 +73,9 @@ const AboutMe = () => {
           </div>
         </section>
 
-        <section className="mt-8 sm:mt-12">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Latest Publications</h2>
-          <div className="prose max-w-none text-muted-foreground space-y-3 sm:space-y-4 text-xs sm:text-sm">
+        <section className="mt-6 sm:mt-8 md:mt-12">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Publications</h2>
+          <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-[10px] sm:text-xs md:text-sm">
             <p>
               <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (2025). A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education. <em>Research Synthesis in Applied Linguistics</em>, 1-51.{" "}
               <a href="https://doi.org/10.1080/29984475.2025.2598266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">

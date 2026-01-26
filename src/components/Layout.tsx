@@ -51,29 +51,31 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b py-3 sm:py-4 px-4 sm:px-6 md:px-10 sticky top-0 bg-background/95 backdrop-blur-sm z-50">
+      <header className="border-b py-2 sm:py-3 md:py-4 px-3 sm:px-4 md:px-6 lg:px-10 sticky top-0 bg-background/95 backdrop-blur-sm z-50">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <Link to="/" className="text-base sm:text-lg font-medium hover:text-primary transition-colors z-50">
+          <Link to="/" className="text-sm sm:text-base md:text-lg font-medium hover:text-primary transition-colors z-50">
             Golnoush Haddadian
           </Link>
           
           {/* Mobile menu toggle */}
-          <div className="md:hidden flex items-center gap-1 z-50">
+          <div className="md:hidden flex items-center gap-0.5 z-50">
             <Button 
               variant="ghost" 
-              size="icon" 
+              size="icon"
+              className="h-8 w-8"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
             </Button>
             <Button 
               variant="ghost" 
-              size="icon" 
+              size="icon"
+              className="h-8 w-8"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
             </Button>
           </div>
           
@@ -137,11 +139,11 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       )}
       
-      <main className="flex-1 px-4 sm:px-6 md:px-10 py-6 sm:py-10 max-w-7xl w-full mx-auto page-transition">
+      <main className="flex-1 px-3 sm:px-4 md:px-6 lg:px-10 py-4 sm:py-6 md:py-10 max-w-7xl w-full mx-auto page-transition">
         {children}
       </main>
       
-      <footer className="border-t py-4 sm:py-6 px-4 sm:px-6 md:px-10 text-xs sm:text-sm text-muted-foreground">
+      <footer className="border-t py-3 sm:py-4 md:py-6 px-3 sm:px-4 md:px-6 lg:px-10 text-[10px] sm:text-xs md:text-sm text-muted-foreground">
         <div className="max-w-7xl mx-auto">
           <p>© {new Date().getFullYear()} Golnoush Haddadian. All rights reserved.</p>
         </div>
