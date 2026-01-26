@@ -51,18 +51,19 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b py-3 sm:py-4 px-4 sm:px-6 md:px-10 sticky top-0 bg-background/90 backdrop-blur-sm z-10">
+      <header className="border-b py-3 sm:py-4 px-4 sm:px-6 md:px-10 sticky top-0 bg-background/95 backdrop-blur-sm z-50">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <Link to="/" className="text-base sm:text-lg font-medium hover:text-primary transition-colors">Golnoush Haddadian</Link>
+          <Link to="/" className="text-base sm:text-lg font-medium hover:text-primary transition-colors z-50">
+            Golnoush Haddadian
+          </Link>
           
           {/* Mobile menu toggle */}
-          <div className="md:hidden flex items-center gap-2">
+          <div className="md:hidden flex items-center gap-1 z-50">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="mr-2"
             >
               {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </Button>
@@ -101,21 +102,30 @@ const Layout = ({ children }: LayoutProps) => {
             </ul>
           </nav>
         </div>
-        
-        {/* Mobile navigation overlay */}
-        {isMobileMenuOpen && (
-          <nav className="md:hidden fixed inset-0 bg-background pt-16 pb-6 px-6 animate-fade-in z-50">
-            <ul className="flex flex-col items-start space-y-2">
+      </header>
+
+      {/* Mobile navigation overlay - outside header for proper layering */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-40">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          
+          {/* Menu panel */}
+          <nav className="absolute top-14 left-0 right-0 bg-background border-b shadow-lg mx-4 rounded-lg overflow-hidden animate-in slide-in-from-top-2 duration-200">
+            <ul className="flex flex-col py-2">
               {navLinks.map((link) => (
-                <li key={link.path} className="w-full">
+                <li key={link.path}>
                   <Link 
                     to={link.path} 
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "block py-3 px-4 text-lg rounded-lg transition-colors",
+                      "flex items-center py-3.5 px-5 text-base font-medium transition-colors border-l-4",
                       location.pathname === link.path 
-                        ? "bg-primary/10 text-primary font-medium" 
-                        : "text-foreground/80 hover:bg-muted"
+                        ? "bg-primary/10 text-primary border-primary" 
+                        : "text-foreground/80 hover:bg-muted border-transparent hover:border-primary/30"
                     )}
                   >
                     {link.label}
@@ -124,8 +134,8 @@ const Layout = ({ children }: LayoutProps) => {
               ))}
             </ul>
           </nav>
-        )}
-      </header>
+        </div>
+      )}
       
       <main className="flex-1 px-4 sm:px-6 md:px-10 py-6 sm:py-10 max-w-7xl w-full mx-auto page-transition">
         {children}
