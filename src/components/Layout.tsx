@@ -114,15 +114,15 @@ const Layout = ({ children }: LayoutProps) => {
           />
           
           {/* Menu panel */}
-          <nav className="absolute top-14 left-0 right-0 bg-background border-b shadow-lg mx-4 rounded-lg overflow-hidden animate-in slide-in-from-top-2 duration-200">
-            <ul className="flex flex-col py-2">
+          <nav className="absolute top-12 left-0 right-0 bg-background border shadow-lg mx-3 rounded-md overflow-hidden animate-in slide-in-from-top-2 duration-200">
+            <ul className="flex flex-col py-1">
               {navLinks.map((link) => (
                 <li key={link.path}>
                   <Link 
                     to={link.path} 
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "flex items-center py-3.5 px-5 text-base font-medium transition-colors border-l-4",
+                      "flex items-center py-2.5 px-4 text-sm font-medium transition-colors border-l-2",
                       location.pathname === link.path 
                         ? "bg-primary/10 text-primary border-primary" 
                         : "text-foreground/80 hover:bg-muted border-transparent hover:border-primary/30"
