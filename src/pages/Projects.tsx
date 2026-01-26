@@ -1,8 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Users, Calendar, Lightbulb } from "lucide-react";
+import { ProjectCard } from "@/components/projects/ProjectCard";
 import catwrvImage from "@/assets/catwrv-project.png";
 
 interface Project {
@@ -125,76 +123,7 @@ const Projects = () => {
       >
         {projects.map((project, index) => (
           <motion.div key={index} variants={item}>
-            <Card className="overflow-hidden border border-primary/10 shadow-lg hover:shadow-2xl hover:border-primary/30 transition-all duration-500 bg-gradient-to-br from-card via-card to-accent/5 group hover:scale-[1.005]">
-              <CardContent className="p-0">
-                <div className={`flex flex-col ${project.image ? (index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse') : ''}`}>
-                  {/* Image Section */}
-                  {project.image && (
-                    <div className="lg:w-1/3 relative overflow-hidden">
-                      <div className="aspect-square lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-contain lg:absolute lg:inset-0 p-4 transition-transform duration-500 group-hover:scale-110"
-                          style={{ minHeight: '200px', maxHeight: '280px', objectPosition: 'center center' }}
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Content Section */}
-                  <div className={`${project.image ? 'lg:w-2/3' : 'w-full'} p-5 lg:p-6 flex flex-col justify-center`}>
-                    {/* Badges */}
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2 sm:mb-3">
-                      <Badge variant="default" className="bg-primary/90 hover:bg-primary text-[10px] sm:text-xs">
-                        <Lightbulb className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
-                        <span className="truncate max-w-[150px] sm:max-w-none">{project.position}</span>
-                      </Badge>
-                      <Badge variant="outline" className="border-primary/30 text-[10px] sm:text-xs">
-                        <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
-                        {project.period}
-                      </Badge>
-                    </div>
-
-                    {/* Title */}
-                    <h2 className="text-base sm:text-lg lg:text-xl font-bold mb-2 text-foreground leading-tight">
-                      {project.title}
-                    </h2>
-
-                    {/* Funding */}
-                    {project.funding && (
-                      <p className="text-xs text-primary font-medium mb-2">
-                        Funded by {project.funding}
-                      </p>
-                    )}
-
-                    {/* Mentors */}
-                    <div className="flex items-center gap-2 mb-3 text-muted-foreground">
-                      <Users className="w-3.5 h-3.5 text-primary" />
-                      <span className="text-xs font-medium">Mentors: {project.mentors}</span>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-muted-foreground leading-relaxed text-xs lg:text-sm line-clamp-4 lg:line-clamp-none">
-                      {project.description}
-                    </p>
-
-                    {/* Learn More Link */}
-                    {project.link && (
-                      <a
-                        href={project.link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 mt-3 text-xs text-primary hover:text-primary/80 hover:underline transition-colors font-medium"
-                      >
-                        {project.link.label} →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <ProjectCard project={project} index={index} />
           </motion.div>
         ))}
       </motion.div>
