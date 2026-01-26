@@ -41,45 +41,45 @@ const Teaching = () => {
   return (
     <div className="space-y-10">
       {/* Header Section */}
-      <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Teaching</h1>
+      <div className="text-center space-y-3 sm:space-y-4">
+        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight">Teaching</h1>
       </div>
 
       {/* Inventing to Learn Section */}
       <Card className="overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <GraduationCap className="h-6 w-6 text-primary" />
+        <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 border-b p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg">
+                <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
               <div>
-                <Badge variant="secondary" className="mb-2">Co-designer & Co-instructor</Badge>
-                <CardTitle className="text-2xl">Inventing to Learn</CardTitle>
+                <Badge variant="secondary" className="mb-1 sm:mb-2 text-xs">Co-designer & Co-instructor</Badge>
+                <CardTitle className="text-lg sm:text-2xl">Inventing to Learn</CardTitle>
               </div>
             </div>
             {/* Logo */}
-            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-3 shrink-0">
+            <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-2 sm:p-3 shrink-0 self-start sm:self-auto">
               <img 
                 src="/lovable-uploads/gsu-logo.jpg" 
                 alt="Georgia State University logo"
-                className="h-16 w-auto"
+                className="h-10 sm:h-16 w-auto"
               />
             </div>
           </div>
         </CardHeader>
-        <CardContent className="pt-6">
-          <div className="flex flex-wrap gap-4 mb-6">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Calendar className="h-4 w-4" />
+        <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6">
+          <div className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6 text-xs sm:text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground">
+              <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span>Aug 2025 - Dec 2025</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <MapPin className="h-4 w-4" />
+            <div className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground">
+              <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span>Atlanta, GA</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <BookOpen className="h-4 w-4" />
+            <div className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground">
+              <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span>Georgia State University</span>
             </div>
           </div>
@@ -325,7 +325,7 @@ const Teaching = () => {
                       <img 
                         src={image.src} 
                         alt={image.alt}
-                        className="w-full h-[500px] object-cover"
+                        className="w-full h-[250px] sm:h-[400px] md:h-[500px] object-cover"
                       />
                       <div className="absolute inset-0 bg-black/20" />
                     </div>

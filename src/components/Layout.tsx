@@ -51,9 +51,9 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b py-4 px-6 md:px-10 sticky top-0 bg-background/90 backdrop-blur-sm z-10">
+      <header className="border-b py-3 sm:py-4 px-4 sm:px-6 md:px-10 sticky top-0 bg-background/90 backdrop-blur-sm z-10">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="text-lg font-medium">Golnoush Haddadian</div>
+          <Link to="/" className="text-base sm:text-lg font-medium hover:text-primary transition-colors">Golnoush Haddadian</Link>
           
           {/* Mobile menu toggle */}
           <div className="md:hidden flex items-center gap-2">
@@ -104,26 +104,34 @@ const Layout = ({ children }: LayoutProps) => {
         
         {/* Mobile navigation overlay */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden fixed inset-0 bg-background pt-16 pb-6 px-6 animate-fade-in">
-            <ul className="flex flex-col items-start">
+          <nav className="md:hidden fixed inset-0 bg-background pt-16 pb-6 px-6 animate-fade-in z-50">
+            <ul className="flex flex-col items-start space-y-2">
               {navLinks.map((link) => (
-                <NavLink 
-                  key={link.path} 
-                  to={link.path} 
-                  label={link.label} 
-                  currentPath={location.pathname} 
-                  />
+                <li key={link.path} className="w-full">
+                  <Link 
+                    to={link.path} 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "block py-3 px-4 text-lg rounded-lg transition-colors",
+                      location.pathname === link.path 
+                        ? "bg-primary/10 text-primary font-medium" 
+                        : "text-foreground/80 hover:bg-muted"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </nav>
         )}
       </header>
       
-      <main className="flex-1 px-6 md:px-10 py-10 max-w-7xl w-full mx-auto page-transition">
+      <main className="flex-1 px-4 sm:px-6 md:px-10 py-6 sm:py-10 max-w-7xl w-full mx-auto page-transition">
         {children}
       </main>
       
-      <footer className="border-t py-6 px-6 md:px-10 text-sm text-muted-foreground">
+      <footer className="border-t py-4 sm:py-6 px-4 sm:px-6 md:px-10 text-xs sm:text-sm text-muted-foreground">
         <div className="max-w-7xl mx-auto">
           <p>© {new Date().getFullYear()} Golnoush Haddadian. All rights reserved.</p>
         </div>

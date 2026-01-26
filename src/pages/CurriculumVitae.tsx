@@ -25,9 +25,9 @@ const CurriculumVitae = () => {
 
   return (
     <section className="space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1>Curriculum Vitae</h1>
-        <Button size="sm" asChild>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+        <h1 className="text-2xl sm:text-3xl font-bold">Curriculum Vitae</h1>
+        <Button size="sm" className="w-full sm:w-auto" asChild>
           <a href={pdfUrl} download="CV_Golnoush_Haddadian.pdf">
             <Download className="mr-2 h-4 w-4" />
             Download CV
@@ -57,7 +57,7 @@ const CurriculumVitae = () => {
       </div>
 
       {/* PDF Viewer */}
-      <div className="flex justify-center overflow-auto border border-border rounded-lg bg-muted/50 p-4 min-h-[600px]">
+      <div className="flex justify-center overflow-auto border border-border rounded-lg bg-muted/50 p-2 sm:p-4 min-h-[400px] sm:min-h-[600px]">
         <Document
           file={pdfUrl}
           onLoadSuccess={onDocumentLoadSuccess}

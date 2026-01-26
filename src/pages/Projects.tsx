@@ -106,12 +106,12 @@ const Projects = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-12"
+        className="text-center mb-8 sm:mb-12 px-2"
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
           Research Projects
         </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto">
           Exploring innovative approaches to AI in education, learning technologies, and formative assessment systems.
         </p>
       </motion.div>
@@ -146,19 +146,19 @@ const Projects = () => {
                   {/* Content Section */}
                   <div className={`${project.image ? 'lg:w-2/3' : 'w-full'} p-5 lg:p-6 flex flex-col justify-center`}>
                     {/* Badges */}
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <Badge variant="default" className="bg-primary/90 hover:bg-primary text-xs">
-                        <Lightbulb className="w-3 h-3 mr-1" />
-                        {project.position}
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                      <Badge variant="default" className="bg-primary/90 hover:bg-primary text-[10px] sm:text-xs">
+                        <Lightbulb className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
+                        <span className="truncate max-w-[150px] sm:max-w-none">{project.position}</span>
                       </Badge>
-                      <Badge variant="outline" className="border-primary/30 text-xs">
-                        <Calendar className="w-3 h-3 mr-1" />
+                      <Badge variant="outline" className="border-primary/30 text-[10px] sm:text-xs">
+                        <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
                         {project.period}
                       </Badge>
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-lg lg:text-xl font-bold mb-2 text-foreground leading-tight">
+                    <h2 className="text-base sm:text-lg lg:text-xl font-bold mb-2 text-foreground leading-tight">
                       {project.title}
                     </h2>
 
