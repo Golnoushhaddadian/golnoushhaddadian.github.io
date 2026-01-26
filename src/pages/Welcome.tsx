@@ -32,18 +32,18 @@ const AboutMe = () => {
               </a>
             </div>
           </div>
-          <div className="md:w-2/3">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              Golnoush (Lia) Haddadian
-              <Button variant="ghost" size="sm" className="ml-2" asChild>
+          <div className="md:w-2/3 text-center md:text-left">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 flex flex-col sm:flex-row items-center sm:items-baseline gap-2">
+              <span>Golnoush (Lia) Haddadian</span>
+              <Button variant="ghost" size="sm" className="text-xs sm:text-sm" asChild>
                 <a href="https://namedrop.io/golnoushhaddadian" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink size={16} className="mr-1" />
-                  <span className="text-sm">Pronounce my name</span>
+                  <ExternalLink size={14} className="mr-1" />
+                  <span>Pronounce my name</span>
                 </a>
               </Button>
             </h1>
-            <p className="text-xl text-muted-foreground mb-4">Ph.D. in Learning Sciences</p>
-            <p className="mb-6">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-3 md:mb-4">Ph.D. in Learning Sciences</p>
+            <p className="mb-4 md:mb-6 text-sm sm:text-base">
               Postdoctoral Associate | Georgia State University, University of Memphis, and Educational Testing
               Services.
             </p>
@@ -51,8 +51,8 @@ const AboutMe = () => {
         </div>
 
         <section>
-          <h2 className="text-2xl font-semibold mb-6">Welcome to My Personal Website</h2>
-          <div className="prose max-w-none text-muted-foreground space-y-4">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Welcome to My Personal Website</h2>
+          <div className="prose max-w-none text-muted-foreground space-y-3 sm:space-y-4 text-sm sm:text-base">
             <p>Hello and welcome! 😊✨ I'm Lia Haddadian.</p>
             <p>My given name is Golnoush, and I adore it, but let's keep it simple. Please call me Lia.</p>
             <p>
@@ -62,7 +62,7 @@ const AboutMe = () => {
               opportunities.
             </p>
             <p>My core research areas include:</p>
-            <p className="font-semibold text-foreground">
+            <p className="font-semibold text-foreground text-xs sm:text-sm leading-relaxed">
               # AI in Education # Personalized Learning # Feedback # Assessment & Evaluation # Higher Education # Design
               & Development # Mixed-Methods # Design-Based Research
             </p>
@@ -73,9 +73,9 @@ const AboutMe = () => {
           </div>
         </section>
 
-        <section className="mt-12">
-          <h2 className="text-2xl font-semibold mb-6">Latest Publications</h2>
-          <div className="prose max-w-none text-muted-foreground space-y-4">
+        <section className="mt-8 sm:mt-12">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Latest Publications</h2>
+          <div className="prose max-w-none text-muted-foreground space-y-3 sm:space-y-4 text-xs sm:text-sm">
             <p>
               <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (2025). A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education. <em>Research Synthesis in Applied Linguistics</em>, 1-51.{" "}
               <a href="https://doi.org/10.1080/29984475.2025.2598266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
