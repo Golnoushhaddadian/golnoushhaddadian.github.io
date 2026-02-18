@@ -10,6 +10,7 @@ const Gallery = () => {
     title: 'Gallery — Golnoush Haddadian',
     description: 'Photo gallery showcasing research activities, conferences, teaching moments, and academic life of Golnoush Haddadian.',
     canonical: '/gallery',
+    noindex: true,
   });
   const [activeTab, setActiveTab] = useState("research");
 

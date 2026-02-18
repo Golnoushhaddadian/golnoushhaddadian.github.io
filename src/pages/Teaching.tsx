@@ -46,6 +46,7 @@ const Teaching = () => {
     title: 'Teaching Experience — Golnoush Haddadian',
     description: 'Teaching experience of Golnoush Haddadian including courses at Georgia State University, TOEFL coaching, TESOL training, and educational technology instruction.',
     canonical: '/teaching',
+    noindex: true,
   });
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
