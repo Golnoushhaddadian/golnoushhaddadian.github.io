@@ -4,8 +4,15 @@ import ContactIntro from '@/components/contact/ContactIntro';
 import ContactInfoCard from '@/components/contact/ContactInfoCard';
 import OfficeHours from '@/components/contact/OfficeHours';
 import ContactForm from '@/components/contact/ContactForm';
+import { useDocumentHead } from '@/hooks/useDocumentHead';
 
 const Contact = () => {
+  useDocumentHead({
+    title: 'Contact — Golnoush Haddadian',
+    description: 'Get in touch with Golnoush (Lia) Haddadian for research collaboration, academic inquiries, or CV requests.',
+    canonical: '/contact',
+  });
+
   return (
     <section className="space-y-8">
       <ContactIntro />
