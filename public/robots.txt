@@ -1,9 +1,19 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: Googlebot
 Allow: /
+Disallow: /cv
+Disallow: /projects
+Disallow: /teaching
+Disallow: /gallery
+Disallow: /contact
 
 User-agent: Bingbot
 Allow: /
+Disallow: /cv
+Disallow: /projects
+Disallow: /teaching
+Disallow: /gallery
+Disallow: /contact
 
 User-agent: Twitterbot
 Allow: /
@@ -13,5 +23,10 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /cv
+Disallow: /projects
+Disallow: /teaching
+Disallow: /gallery
+Disallow: /contact
 
 Sitemap: https://golnoushhaddadian.com/sitemap.xml

@@ -87,6 +87,7 @@ const Projects = () => {
     title: 'Research Projects — Golnoush Haddadian',
     description: 'Research projects by Golnoush Haddadian including NSF-funded AI in Education initiatives, private AI curriculum development, and adaptive learning technologies.',
     canonical: '/projects',
+    noindex: true,
   });
   const container = {
     hidden: { opacity: 0 },

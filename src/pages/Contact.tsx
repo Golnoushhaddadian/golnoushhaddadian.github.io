@@ -11,6 +11,7 @@ const Contact = () => {
     title: 'Contact — Golnoush Haddadian',
     description: 'Get in touch with Golnoush (Lia) Haddadian for research collaboration, academic inquiries, or CV requests.',
     canonical: '/contact',
+    noindex: true,
   });
 
   return (

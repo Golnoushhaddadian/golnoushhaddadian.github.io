@@ -4,11 +4,12 @@ interface DocumentHeadOptions {
   title: string;
   description: string;
   canonical?: string;
+  noindex?: boolean;
 }
 
 const BASE_URL = 'https://golnoushhaddadian.com';
 
-export const useDocumentHead = ({ title, description, canonical }: DocumentHeadOptions) => {
+export const useDocumentHead = ({ title, description, canonical, noindex }: DocumentHeadOptions) => {
   useEffect(() => {
     document.title = title;
 
@@ -28,6 +29,14 @@ export const useDocumentHead = ({ title, description, canonical }: DocumentHeadO
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
 
+    // Robots noindex
+    if (noindex) {
+      setMeta('name', 'robots', 'noindex, nofollow');
+    } else {
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) robotsMeta.remove();
+    }
+
     // Canonical link
     const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
     let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
@@ -41,8 +50,9 @@ export const useDocumentHead = ({ title, description, canonical }: DocumentHeadO
     }
 
     return () => {
-      // Reset to defaults on unmount
       document.title = 'Golnoush Haddadian';
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) robotsMeta.remove();
     };
-  }, [title, description, canonical]);
+  }, [title, description, canonical, noindex]);
 };
