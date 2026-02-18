@@ -6,7 +6,7 @@ const OfficeHours = () => {
     <div>
       <h3 className="text-lg font-medium mb-2">Office Hours</h3>
       <p className="text-sm text-muted-foreground mb-1">Monday & Wednesday: 2:00 PM - 4:00 PM</p>
-      <p className="text-sm text-muted-foreground">Or by appointment</p>
+      <p className="text-sm text-muted-foreground">By appointment</p>
     </div>
   );
 };
