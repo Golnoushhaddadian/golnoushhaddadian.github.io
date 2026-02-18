@@ -2,7 +2,13 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDocumentHead } from "@/hooks/useDocumentHead";
 const AboutMe = () => {
+  useDocumentHead({
+    title: 'Golnoush (Lia) Haddadian — AI in Education Researcher',
+    description: 'Academic portfolio of Dr. Golnoush (Lia) Haddadian. Postdoctoral Associate researching AI in Education, personalized learning, formative assessment, and automated writing evaluation.',
+    canonical: '/',
+  });
   const iconSize = 32;
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-8 px-2 sm:px-4">
       <div className="w-full max-w-4xl">
