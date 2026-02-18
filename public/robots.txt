@@ -14,4 +14,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://glow-personal-echo.lovable.app/sitemap.xml
+Sitemap: https://golnoushhaddadian.com/sitemap.xml
