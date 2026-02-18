@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDocumentHead } from "@/hooks/useDocumentHead";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -41,6 +42,11 @@ const htcSliderImages = [
 ];
 
 const Teaching = () => {
+  useDocumentHead({
+    title: 'Teaching Experience — Golnoush Haddadian',
+    description: 'Teaching experience of Golnoush Haddadian including courses at Georgia State University, TOEFL coaching, TESOL training, and educational technology instruction.',
+    canonical: '/teaching',
+  });
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   const toggleSection = (sectionId: string) => {

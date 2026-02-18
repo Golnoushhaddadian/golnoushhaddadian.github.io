@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import catwrvImage from "@/assets/catwrv-project.png";
+import { useDocumentHead } from "@/hooks/useDocumentHead";
 
 interface Project {
   title: string;
@@ -82,6 +83,11 @@ const projects: Project[] = [
 ];
 
 const Projects = () => {
+  useDocumentHead({
+    title: 'Research Projects — Golnoush Haddadian',
+    description: 'Research projects by Golnoush Haddadian including NSF-funded AI in Education initiatives, private AI curriculum development, and adaptive learning technologies.',
+    canonical: '/projects',
+  });
   const container = {
     hidden: { opacity: 0 },
     show: {
