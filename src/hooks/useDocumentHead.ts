@@ -6,7 +6,7 @@ interface DocumentHeadOptions {
   canonical?: string;
 }
 
-const BASE_URL = 'https://glow-personal-echo.lovable.app';
+const BASE_URL = 'https://golnoushhaddadian.com';
 
 export const useDocumentHead = ({ title, description, canonical }: DocumentHeadOptions) => {
   useEffect(() => {
