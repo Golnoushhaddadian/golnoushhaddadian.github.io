@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 const AboutMe = () => {
   useDocumentHead({
-    title: 'Golnoush (Lia) Haddadian — AI in Education Researcher',
-    description: 'Academic portfolio of Dr. Golnoush (Lia) Haddadian. Postdoctoral Associate researching AI in Education, personalized learning, formative assessment, and automated writing evaluation.',
+    title: 'Golnoush (Lia) Haddadian — AI in Education & Argumentative Writing Researcher',
+    description: 'Academic portfolio of Dr. Golnoush (Lia) Haddadian. Postdoctoral Associate researching AI in Education, argumentative writing, automated writing evaluation, personalized learning, and formative assessment.',
     canonical: '/',
   });
   const iconSize = 32;
