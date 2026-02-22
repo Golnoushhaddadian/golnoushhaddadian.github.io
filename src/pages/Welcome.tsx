@@ -59,13 +59,14 @@ const AboutMe = () => {
         <section>
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Welcome to My Personal Website</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base">
-            <p>Hello and welcome! 😊✨ I'm Lia Haddadian.</p>
-            <p>My given name is Golnoush, and I adore it, but let's keep it simple. Please call me Lia.</p>
+            <p>Hello and welcome to my personal website.</p>
             <p>
-              From my early experiences designing interactive learning tools during my high school years to my current
-              appointment as a Postdoctoral Associate, my work has been driven by a strong commitment to addressing
-              educational challenges through evidence-based design and expanding access to effective learning
-              opportunities.
+              My name is Golnoush, a{" "}
+              <a href="https://en.wikipedia.org/wiki/Persians" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Persian</a>
+              {" "}name that metaphorically signifies <em>enduring beauty</em>. Since its pronunciation can be challenging for non-Persian speakers, people often call me Lia, a name with Greek origins meaning <em>one who brings good news</em>.
+            </p>
+            <p>
+              I hold a Ph.D. in Learning Sciences from Georgia State University (2025, December). My research focuses on the design and development of state-of-the-art AI tools to support personalized, human-centered, and adaptive learning environments in higher education, grounded in robust theory-driven design and informed by mixed-methods approaches to address real-world educational challenges. From my early experiences designing interactive learning tools during my high school years to my current appointment as a Postdoctoral Associate, my work has been driven by a sustained commitment to addressing educational challenges through evidence-based design and expanding access to effective learning opportunities.
             </p>
             <p>My core research areas include:</p>
             <p className="font-semibold text-foreground text-[10px] sm:text-xs md:text-sm leading-relaxed">
