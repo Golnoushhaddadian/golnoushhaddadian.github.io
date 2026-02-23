@@ -63,7 +63,7 @@ const AboutMe = () => {
             <p>
               My name is Golnoush, a{" "}
               <a href="https://en.wikipedia.org/wiki/Persians" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Persian</a>
-              {" "}name that metaphorically signifies <em>enduring beauty</em>. Since its pronunciation can be challenging for non-Persian speakers, people often call me Lia, a name with Greek origins meaning <em>one who brings good news</em>.
+              {" "}name that metaphorically means <em>enduring beauty</em>. Since its pronunciation can be challenging for non-Persian speakers, people often call me Lia, a name with Greek origins meaning <em>one who brings good news</em>.
             </p>
             <p>
               I hold a Ph.D. in Learning Sciences from <a href="https://education.gsu.edu/ls/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Georgia State University</a> (2025, December). My research focuses on the design and development of state-of-the-art AI tools to support personalized, human-centered, and adaptive learning environments in higher education, grounded in robust theory-driven design and informed by mixed-methods approaches to address real-world educational challenges. From my early experiences designing interactive learning tools during my high school years to my current appointment as a Postdoctoral Associate, my work has been driven by a sustained commitment to addressing educational challenges through evidence-based design and expanding access to effective learning opportunities.
