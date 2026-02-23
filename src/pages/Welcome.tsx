@@ -17,7 +17,7 @@ const AboutMe = () => {
             <div className="w-40 h-40 sm:w-64 sm:h-64">
               <AspectRatio ratio={1 / 1} className="rounded-lg overflow-hidden">
                 <Avatar className="h-full w-full">
-                  <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" className="object-cover" />
+                  <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" className="object-cover" width={256} height={256} loading="eager" decoding="async" />
                   <AvatarFallback className="text-2xl">GH</AvatarFallback>
                 </Avatar>
               </AspectRatio>
@@ -25,13 +25,13 @@ const AboutMe = () => {
             {/* Social Profile Links */}
             <div className="flex items-center gap-3 sm:gap-5 mt-3 sm:mt-5">
               <a href="https://www.linkedin.com/in/g-hdn" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="LinkedIn">
-                <img src="/lovable-uploads/linkedin-icon.png" alt="LinkedIn" width={24} height={24} className="rounded-full sm:w-8 sm:h-8" />
+                <img src="/lovable-uploads/linkedin-icon.png" alt="LinkedIn" width={32} height={32} loading="lazy" decoding="async" className="rounded-full w-6 h-6 sm:w-8 sm:h-8" />
               </a>
               <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="Google Scholar">
-                <img src="/lovable-uploads/google-scholar-icon.png" alt="Google Scholar" width={24} height={24} className="sm:w-8 sm:h-8" />
+                <img src="/lovable-uploads/google-scholar-icon.png" alt="Google Scholar" width={32} height={32} loading="lazy" decoding="async" className="w-6 h-6 sm:w-8 sm:h-8" />
               </a>
               <a href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="ResearchGate">
-                <img src="/lovable-uploads/researchgate-icon.png" alt="ResearchGate" width={24} height={24} className="rounded-full sm:w-8 sm:h-8" />
+                <img src="/lovable-uploads/researchgate-icon.png" alt="ResearchGate" width={32} height={32} loading="lazy" decoding="async" className="rounded-full w-6 h-6 sm:w-8 sm:h-8" />
               </a>
               <a href="mailto:ghaddadian1@gsu.edu" className="hover:scale-110 transition-transform duration-200" aria-label="Email">
                 
