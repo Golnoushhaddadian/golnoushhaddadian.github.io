@@ -117,3 +117,13 @@
 .active-nav-link {
   @apply text-primary font-medium relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary;
 }
+
+/* Enhanced focus-visible styles for keyboard navigation */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-ring rounded-sm;
+}
+
+a:focus-visible,
+button:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary rounded-sm;
+}

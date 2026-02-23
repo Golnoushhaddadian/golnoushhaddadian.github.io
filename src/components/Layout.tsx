@@ -51,7 +51,14 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b py-2 sm:py-3 md:py-4 px-3 sm:px-4 md:px-6 lg:px-10 sticky top-0 bg-background/95 backdrop-blur-sm z-50">
+      {/* Skip to main content link for keyboard users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        Skip to main content
+      </a>
+      <header role="banner" className="border-b py-2 sm:py-3 md:py-4 px-3 sm:px-4 md:px-6 lg:px-10 sticky top-0 bg-background/95 backdrop-blur-sm z-50">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <Link to="/" className="text-sm sm:text-base md:text-lg font-medium hover:text-primary transition-colors z-50">
             Golnoush Haddadian
@@ -80,7 +87,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
           
           {/* Desktop navigation */}
-          <nav className="hidden md:block">
+          <nav className="hidden md:block" aria-label="Main navigation">
             <ul className="flex flex-row items-center">
               {navLinks.map((link) => (
                 <NavLink 
@@ -116,7 +123,7 @@ const Layout = ({ children }: LayoutProps) => {
           />
           
           {/* Menu panel */}
-          <nav className="absolute top-12 left-0 right-0 bg-background border shadow-lg mx-3 rounded-md overflow-hidden animate-in slide-in-from-top-2 duration-200">
+          <nav className="absolute top-12 left-0 right-0 bg-background border shadow-lg mx-3 rounded-md overflow-hidden animate-in slide-in-from-top-2 duration-200" aria-label="Mobile navigation">
             <ul className="flex flex-col py-1">
               {navLinks.map((link) => (
                 <li key={link.path}>
@@ -139,11 +146,11 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       )}
       
-      <main className="flex-1 px-3 sm:px-4 md:px-6 lg:px-10 py-4 sm:py-6 md:py-10 max-w-7xl w-full mx-auto page-transition">
+      <main id="main-content" role="main" className="flex-1 px-3 sm:px-4 md:px-6 lg:px-10 py-4 sm:py-6 md:py-10 max-w-7xl w-full mx-auto page-transition" tabIndex={-1}>
         {children}
       </main>
       
-      <footer className="border-t py-3 sm:py-4 md:py-6 px-3 sm:px-4 md:px-6 lg:px-10 text-[10px] sm:text-xs md:text-sm text-muted-foreground">
+      <footer role="contentinfo" className="border-t py-3 sm:py-4 md:py-6 px-3 sm:px-4 md:px-6 lg:px-10 text-[10px] sm:text-xs md:text-sm text-muted-foreground">
         <div className="max-w-7xl mx-auto">
           <p>© {new Date().getFullYear()} Golnoush Haddadian. All rights reserved.</p>
         </div>
