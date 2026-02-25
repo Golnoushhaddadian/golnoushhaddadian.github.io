@@ -15,16 +15,16 @@ const Contact = () => {
   });
 
   return (
-    <section className="space-y-8">
+    <section className="space-y-4 sm:space-y-6 md:space-y-8">
       <ContactIntro />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-1 space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        <div className="sm:col-span-2 md:col-span-1 space-y-4 sm:space-y-6">
           <ContactInfoCard />
           <OfficeHours />
         </div>
 
-        <div className="md:col-span-2">
+        <div className="sm:col-span-2 md:col-span-2">
           <ContactForm />
         </div>
       </div>

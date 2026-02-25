@@ -10,11 +10,11 @@ const AboutMe = () => {
     canonical: '/',
   });
   const iconSize = 32;
-  return <div className="min-h-screen flex flex-col items-center py-4 sm:py-8 px-2 sm:px-4">
+  return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-4xl">
-        <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-8 mb-8 sm:mb-12">
+        <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
           <div className="md:w-1/3 flex flex-col items-center">
-            <div className="w-40 h-40 sm:w-64 sm:h-64">
+            <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64">
               <AspectRatio ratio={1 / 1} className="rounded-lg overflow-hidden">
                 <Avatar className="h-full w-full">
                   <AvatarImage src="/lovable-uploads/e896fcf4-cdd3-4775-8e7c-da11ef961f00.png" alt="Golnoush (Lia) Haddadian" className="object-cover" width={256} height={256} loading="eager" decoding="async" />
