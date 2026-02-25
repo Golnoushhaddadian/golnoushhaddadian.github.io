@@ -12,7 +12,7 @@ interface GalleryTabsProps {
 export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProps) => {
   return (
     <Tabs defaultValue="research" value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <TabsList className="mb-6 w-full sm:w-auto">
+      <TabsList className="mb-4 sm:mb-5 md:mb-6 w-full sm:w-auto">
         <TabsTrigger value="research">Research</TabsTrigger>
         <TabsTrigger value="teaching">Teaching</TabsTrigger>
         <TabsTrigger value="awards">Awards</TabsTrigger>

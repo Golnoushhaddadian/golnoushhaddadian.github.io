@@ -27,16 +27,16 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
   return (
     <Card className="overflow-hidden border border-primary/10 shadow-lg hover:shadow-2xl hover:border-primary/30 transition-all duration-500 bg-gradient-to-br from-card via-card to-accent/5 group hover:scale-[1.005]">
       <CardContent className="p-0">
-        <div className={`flex flex-col ${project.image ? (index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse') : ''}`}>
+        <div className={`flex flex-col ${project.image ? (index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse') : ''}`}>
           {/* Image Section */}
           {project.image && (
-            <div className="lg:w-1/3 relative overflow-hidden">
-              <div className="aspect-video sm:aspect-square lg:aspect-auto lg:h-full bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
+            <div className="md:w-1/3 relative overflow-hidden">
+              <div className="aspect-video sm:aspect-square md:aspect-auto md:h-full bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-contain lg:absolute lg:inset-0 p-4 transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-contain md:absolute md:inset-0 p-4 transition-transform duration-500 group-hover:scale-110"
                   style={{ minHeight: '150px', maxHeight: '220px', objectPosition: 'center center' }}
                 />
               </div>
@@ -44,7 +44,7 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
           )}
 
           {/* Content Section */}
-          <div className={`${project.image ? 'lg:w-2/3' : 'w-full'} p-3 sm:p-5 lg:p-6 flex flex-col justify-center`}>
+          <div className={`${project.image ? 'md:w-2/3' : 'w-full'} p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col justify-center`}>
             {/* Badges */}
             <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2">
               <Badge variant="default" className="bg-primary/90 hover:bg-primary text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5">
@@ -58,7 +58,7 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
             </div>
 
             {/* Title */}
-            <h2 className="text-sm sm:text-base lg:text-xl font-bold mb-1.5 sm:mb-2 text-foreground leading-tight">
+            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-1.5 sm:mb-2 text-foreground leading-tight">
               {project.title}
             </h2>
 
@@ -79,8 +79,8 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
             <div className="relative">
               <p 
                 className={cn(
-                  "text-muted-foreground leading-relaxed text-[10px] sm:text-xs lg:text-sm",
-                  !isExpanded && "line-clamp-3 sm:line-clamp-4 lg:line-clamp-none"
+                  "text-muted-foreground leading-relaxed text-[10px] sm:text-xs md:text-sm",
+                  !isExpanded && "line-clamp-3 sm:line-clamp-4 md:line-clamp-6 lg:line-clamp-none"
                 )}
               >
                 {project.description}
@@ -91,7 +91,7 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="lg:hidden mt-1 h-6 px-2 text-[10px] sm:text-xs text-primary hover:text-primary/80 p-0"
+                className="lg:hidden mt-1 h-6 px-2 text-[10px] sm:text-xs md:text-xs text-primary hover:text-primary/80 p-0"
               >
                 {isExpanded ? (
                   <>
