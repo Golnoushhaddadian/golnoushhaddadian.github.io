@@ -25,11 +25,8 @@ const Awards = () => {
     <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-4xl">
         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 md:mb-6">
-          Awards & Honors
+          Selected Awards
         </h1>
-        <p className="text-muted-foreground text-xs sm:text-sm md:text-base mb-4 sm:mb-6 md:mb-8">
-          A selection of academic awards, fellowships, and honors received throughout my career.
-        </p>
 
         <ul className="list-disc list-outside pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-muted-foreground">
           {awards.map((award, idx) => (
