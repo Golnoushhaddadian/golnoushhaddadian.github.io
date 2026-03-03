@@ -42,6 +42,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   const navLinks = [
     { path: '/', label: 'Welcome' },
+    { path: '/awards', label: 'Awards' },
     { path: '/cv', label: 'CV' },
     { path: '/projects', label: 'Projects' },
     { path: '/teaching', label: 'Teaching' },

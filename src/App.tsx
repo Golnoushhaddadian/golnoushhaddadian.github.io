@@ -15,6 +15,7 @@ import Teaching from "@/pages/Teaching";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import Gallery from "@/pages/Gallery";
+import Awards from "@/pages/Awards";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<Welcome />} />
+              <Route path="/awards" element={<Awards />} />
               <Route path="/cv" element={<CurriculumVitae />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/teaching" element={<Teaching />} />
