@@ -1,5 +1,4 @@
 import { useDocumentHead } from '@/hooks/useDocumentHead';
-import { Separator } from '@/components/ui/separator';
 
 const awards = [
   { title: '$12,500 Fellowship Award (NSF & Google.org)', org: 'AI Institutes Virtual Organization (AIVO)' },
@@ -32,18 +31,10 @@ const Awards = () => {
           A selection of academic awards, fellowships, and honors received throughout my career.
         </p>
 
-        <ul className="space-y-0">
+        <ul className="list-disc list-outside pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-muted-foreground">
           {awards.map((award, idx) => (
-            <li key={idx}>
-              <div className="py-2.5 sm:py-3 md:py-4 pl-3 sm:pl-4 border-l-2 border-primary/30">
-                <p className="text-xs sm:text-sm md:text-base font-medium text-foreground leading-snug">
-                  {award.title}
-                </p>
-                <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-0.5">
-                  {award.org}
-                </p>
-              </div>
-              {idx < awards.length - 1 && <Separator />}
+            <li key={idx} className="leading-relaxed">
+              <span className="font-medium text-foreground">{award.title}</span>, {award.org}
             </li>
           ))}
         </ul>
