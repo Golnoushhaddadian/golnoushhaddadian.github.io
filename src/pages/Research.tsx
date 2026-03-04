@@ -1,9 +1,10 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, FileText, BookOpen, Quote } from 'lucide-react';
+import { ExternalLink, FileText, Quote, Copy, Check } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 type Publication = {
   title: string;
@@ -90,6 +91,26 @@ const groupByYear = (pubs: Publication[]) => {
     .map(([year, items]) => ({ year: Number(year), items }));
 };
 
+const linkClass = "inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200";
+
+const CopyButton = ({ text }: { text: string }) => {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="ml-auto shrink-0 p-1 rounded hover:bg-muted transition-colors"
+      aria-label="Copy APA citation"
+    >
+      {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} className="text-muted-foreground" />}
+    </button>
+  );
+};
+
 const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) => {
   const renderAuthors = (authors: string) => {
     const parts = authors.split(/(Haddadian, G\.)/);
@@ -104,60 +125,72 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -12 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="group relative pl-5 py-5 border-l-2 border-border/60 hover:border-primary/60 transition-colors duration-300"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
+      className="group relative py-6 first:pt-2"
     >
-      {/* Dot on timeline */}
-      <div className="absolute -left-[5px] top-6 w-2 h-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-300" />
+      {/* Card-like container with subtle hover */}
+      <div className="relative pl-5 sm:pl-7 border-l-[3px] border-border/40 group-hover:border-primary/50 transition-colors duration-500">
+        {/* Timeline dot */}
+        <div className="absolute -left-[7px] top-1 w-[11px] h-[11px] rounded-full border-2 border-border bg-background group-hover:border-primary group-hover:bg-primary/10 transition-all duration-500" />
 
-      <h3 className="text-sm sm:text-base md:text-lg font-semibold leading-snug mb-1.5 group-hover:text-primary/90 transition-colors duration-300">
-        {pub.title}
-      </h3>
-      <p className="text-xs sm:text-sm text-muted-foreground mb-1">
-        {renderAuthors(pub.authors)}
-      </p>
-      <p className="text-xs sm:text-sm text-muted-foreground/70 italic mb-2.5">
-        {pub.venue} ({pub.year})
-      </p>
-      <div className="flex items-center gap-4">
-        {pub.doi && (
-          <a
-            href={pub.doi}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
-          >
-            <ExternalLink size={13} />
-            DOI
-          </a>
-        )}
-        {pub.pdf && (
-          <a
-            href={pub.pdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
-          >
-            <FileText size={13} />
-            PDF
-          </a>
-        )}
-        {pub.apa && (
-          <Popover>
-            <PopoverTrigger asChild>
-              <button className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200">
-                <Quote size={13} />
-                APA
-              </button>
-            </PopoverTrigger>
-            <PopoverContent className="w-96 text-xs sm:text-sm leading-relaxed text-muted-foreground" side="top">
-              {pub.apa}
-            </PopoverContent>
-          </Popover>
-        )}
+        {/* Title */}
+        <h3 className="text-sm sm:text-base md:text-[1.1rem] font-semibold leading-[1.4] mb-2 text-foreground/90 group-hover:text-foreground transition-colors duration-300">
+          {pub.title}
+        </h3>
+
+        {/* Authors */}
+        <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 leading-relaxed">
+          {renderAuthors(pub.authors)}
+        </p>
+
+        {/* Venue */}
+        <p className="text-xs sm:text-[0.8rem] text-muted-foreground/60 mb-3.5 leading-relaxed">
+          <span className="italic">{pub.venue}</span>
+          <span className="mx-1.5 text-border">·</span>
+          <span>{pub.year}</span>
+        </p>
+
+        {/* Action links row */}
+        <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+          {pub.doi && (
+            <a href={pub.doi} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <ExternalLink size={13} />
+              DOI
+            </a>
+          )}
+          {pub.pdf && (
+            <a href={pub.pdf} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <FileText size={13} />
+              PDF
+            </a>
+          )}
+          {pub.apa && (
+            <Popover>
+              <PopoverTrigger asChild>
+                <button className={linkClass}>
+                  <Quote size={13} />
+                  APA
+                </button>
+              </PopoverTrigger>
+              <PopoverContent
+                className="w-[min(24rem,calc(100vw-2rem))] text-xs sm:text-sm leading-relaxed text-muted-foreground border-primary/20"
+                side="top"
+                align="start"
+              >
+                <div className="flex items-start gap-2">
+                  <p className="flex-1 select-all">{pub.apa}</p>
+                  <CopyButton text={pub.apa} />
+                </div>
+              </PopoverContent>
+            </Popover>
+          )}
+        </div>
       </div>
+
+      {/* Separator line between entries */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-border/30" />
     </motion.div>
   );
 };
@@ -169,26 +202,33 @@ const Research = () => {
   return (
     <div className="max-w-5xl mx-auto">
       <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">Research</h1>
-      <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
+      <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed mb-10">
         Refereed journal publications, conference proceedings, and ongoing work.
       </p>
 
       <section className="mb-12">
-        <div className="mb-8">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">
-            Refereed Journal Publications
-            <span className="ml-2 text-sm font-normal text-muted-foreground align-middle">
-              ({journalPublications.length})
+        {/* Section header */}
+        <div className="mb-10 pb-4 border-b border-border/50">
+          <div className="flex items-baseline gap-3">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground tracking-tight">
+              Refereed Journal Publications
+            </h2>
+            <span className="text-xs sm:text-sm font-medium text-muted-foreground/60 bg-muted/50 px-2.5 py-0.5 rounded-full">
+              {journalPublications.length}
             </span>
-          </h2>
+          </div>
         </div>
 
         {grouped.map(({ year, items }) => (
-          <div key={year} className="mb-10">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-2xl sm:text-3xl font-bold text-primary/20">{year}</span>
-              <div className="flex-1 h-px bg-border/60" />
+          <div key={year} className="mb-12 last:mb-0">
+            {/* Year marker */}
+            <div className="flex items-center gap-4 mb-2">
+              <h3 className="text-3xl sm:text-4xl font-black tracking-tighter text-primary/15 select-none">
+                {year}
+              </h3>
+              <div className="flex-1 h-px bg-gradient-to-r from-border/50 to-transparent" />
             </div>
+
             <div>
               {items.map((pub) => {
                 const idx = globalIndex++;
