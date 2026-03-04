@@ -1,5 +1,11 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import {
+  journalPublications,
+  conferenceProceedings,
+  nonRefereedPublications,
+  workUnderReview,
+  workInProgress,
+} from "@/data/researchData";
 
 interface CoauthorNode {
   id: string;
@@ -19,41 +25,73 @@ interface CoauthorLink {
   weight: number;
 }
 
-interface CoauthorData { name: string; count: number; }
-interface InterLink { source: string; target: string; weight: number; }
+const SELF_PATTERNS = ["Haddadian, G.", "Haddadian, G"];
 
-const FALLBACK_DATA: CoauthorData[] = [
-  { name: "MK Kim", count: 10 }, { name: "J Kim", count: 7 }, { name: "Y Bae", count: 5 },
-  { name: "N Haddadian", count: 4 }, { name: "O Noroozi", count: 3 }, { name: "CD Schunn", count: 3 },
-  { name: "M Alqassab", count: 3 }, { name: "SK Banihashem", count: 3 }, { name: "P Panzade", count: 3 },
-  { name: "D Takabi", count: 3 }, { name: "H Han", count: 3 }, { name: "A Heidari", count: 2 },
-  { name: "S Radmanesh", count: 2 }, { name: "M Salehi", count: 2 }, { name: "F Mashhadi", count: 2 },
-  { name: "S Kavoshian", count: 2 }, { name: "X Gao", count: 2 },
-];
+function isSelf(name: string): boolean {
+  const n = name.trim();
+  return SELF_PATTERNS.some(p => n.startsWith(p));
+}
 
-const FALLBACK_INTERLINKS: InterLink[] = [
-  { source: "MK Kim", target: "J Kim", weight: 5 },
-  { source: "MK Kim", target: "Y Bae", weight: 4 },
-  { source: "J Kim", target: "Y Bae", weight: 4 },
-  { source: "MK Kim", target: "P Panzade", weight: 3 },
-  { source: "MK Kim", target: "D Takabi", weight: 3 },
-  { source: "P Panzade", target: "D Takabi", weight: 3 },
-  { source: "O Noroozi", target: "CD Schunn", weight: 2 },
-  { source: "O Noroozi", target: "M Alqassab", weight: 2 },
-  { source: "O Noroozi", target: "SK Banihashem", weight: 2 },
-  { source: "CD Schunn", target: "M Alqassab", weight: 2 },
-  { source: "CD Schunn", target: "SK Banihashem", weight: 2 },
-  { source: "M Alqassab", target: "SK Banihashem", weight: 2 },
-  { source: "MK Kim", target: "H Han", weight: 2 },
-  { source: "J Kim", target: "H Han", weight: 2 },
-  { source: "MK Kim", target: "A Heidari", weight: 1 },
-  { source: "J Kim", target: "MK Kim", weight: 5 },
-  { source: "O Noroozi", target: "X Gao", weight: 2 },
-  { source: "X Gao", target: "CD Schunn", weight: 1 },
-  { source: "X Gao", target: "M Alqassab", weight: 1 },
-  { source: "X Gao", target: "SK Banihashem", weight: 1 },
-  { source: "F Mashhadi", target: "S Kavoshian", weight: 2 },
-];
+function normalizeAuthor(name: string): string {
+  return name.trim().replace(/\s+/g, " ");
+}
+
+function linkKey(a: string, b: string): string {
+  return [a, b].sort().join("|||");
+}
+
+function buildNetworkData() {
+  // Collect all author lists from all publication types
+  const allAuthorLists: string[][] = [];
+
+  const sources = [
+    ...journalPublications.map(p => p.authors),
+    ...conferenceProceedings.map(p => p.authors),
+    ...nonRefereedPublications.map(p => p.authors),
+    ...workUnderReview.map(p => p.authors),
+    ...workInProgress.map(p => p.authors),
+  ];
+
+  for (const authors of sources) {
+    if (authors && authors.length > 0) {
+      allAuthorLists.push(authors.map(normalizeAuthor));
+    }
+  }
+
+  const coauthorCounts: Record<string, number> = {};
+  const pairCounts: Record<string, number> = {};
+
+  for (const authors of allAuthorLists) {
+    const hasSelf = authors.some(isSelf);
+    if (!hasSelf) continue;
+
+    const coauthors = authors.filter(a => !isSelf(a) && a.length > 1);
+
+    for (const ca of coauthors) {
+      coauthorCounts[ca] = (coauthorCounts[ca] || 0) + 1;
+    }
+
+    // Inter-coauthor links
+    for (let i = 0; i < coauthors.length; i++) {
+      for (let j = i + 1; j < coauthors.length; j++) {
+        const key = linkKey(coauthors[i], coauthors[j]);
+        pairCounts[key] = (pairCounts[key] || 0) + 1;
+      }
+    }
+  }
+
+  const coauthors = Object.entries(coauthorCounts)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
+
+  const interLinks = Object.entries(pairCounts)
+    .map(([key, weight]) => {
+      const [source, target] = key.split("|||");
+      return { source, target, weight };
+    });
+
+  return { coauthors, interLinks };
+}
 
 const CoauthorshipNetwork = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -65,67 +103,10 @@ const CoauthorshipNetwork = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const dragNode = useRef<string | null>(null);
-  const [coauthorData, setCoauthorData] = useState<CoauthorData[]>([]);
-  const [interLinks, setInterLinks] = useState<InterLink[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [source, setSource] = useState<"live" | "cached" | "fallback">("fallback");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const cached = localStorage.getItem("coauthor-network-cache-v2");
-        if (cached) {
-          const { data, links: cachedLinks, timestamp } = JSON.parse(cached);
-          if (Date.now() - timestamp < 24 * 60 * 60 * 1000 && data?.length > 0) {
-            setCoauthorData(data);
-            setInterLinks(cachedLinks || []);
-            setSource("cached");
-            setLoading(false);
-            fetchFromEdge(data);
-            return;
-          }
-        }
-        await fetchFromEdge();
-      } catch {
-        setCoauthorData(FALLBACK_DATA);
-        setInterLinks(FALLBACK_INTERLINKS);
-        setSource("fallback");
-        setLoading(false);
-      }
-    };
+  const { coauthors, interLinks } = useMemo(() => buildNetworkData(), []);
 
-    const fetchFromEdge = async (currentData?: CoauthorData[]) => {
-      try {
-        const { data, error } = await supabase.functions.invoke("google-scholar-coauthors");
-        if (error) throw error;
-        if (data?.success && data.coauthors?.length > 0) {
-          setCoauthorData(data.coauthors);
-          setInterLinks(data.interLinks || []);
-          setSource("live");
-          localStorage.setItem("coauthor-network-cache-v2", JSON.stringify({
-            data: data.coauthors,
-            links: data.interLinks || [],
-            timestamp: Date.now(),
-          }));
-        } else if (!currentData) {
-          setCoauthorData(FALLBACK_DATA);
-          setInterLinks(FALLBACK_INTERLINKS);
-          setSource("fallback");
-        }
-      } catch {
-        if (!currentData) {
-          setCoauthorData(FALLBACK_DATA);
-          setInterLinks(FALLBACK_INTERLINKS);
-          setSource("fallback");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  // Responsive sizing
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
@@ -138,9 +119,9 @@ const CoauthorshipNetwork = () => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  // Initialize nodes and ALL links (center + inter-coauthor)
+  // Initialize nodes and links
   useEffect(() => {
-    if (coauthorData.length === 0) return;
+    if (coauthors.length === 0) return;
     const { width, height } = dimensions;
     const cx = width / 2, cy = height / 2;
 
@@ -153,8 +134,8 @@ const CoauthorshipNetwork = () => {
     const allLinks: CoauthorLink[] = [];
     const nodeIds = new Set<string>(["haddadian"]);
 
-    coauthorData.forEach((co, i) => {
-      const angle = (2 * Math.PI * i) / coauthorData.length;
+    coauthors.forEach((co, i) => {
+      const angle = (2 * Math.PI * i) / coauthors.length;
       const dist = 140 + Math.random() * 60;
       const r = Math.max(6, Math.min(18, 4 + co.count * 2));
       nodes.push({
@@ -167,16 +148,15 @@ const CoauthorshipNetwork = () => {
       allLinks.push({ source: "haddadian", target: co.name, weight: co.count });
     });
 
-    // Add inter-coauthor links (only if both nodes exist)
     for (const il of interLinks) {
       if (nodeIds.has(il.source) && nodeIds.has(il.target)) {
-        allLinks.push({ source: il.source, target: il.target, weight: il.weight });
+        allLinks.push(il);
       }
     }
 
     nodesRef.current = nodes;
     linksRef.current = allLinks;
-  }, [coauthorData, interLinks, dimensions]);
+  }, [coauthors, interLinks, dimensions]);
 
   // Force simulation + render
   useEffect(() => {
@@ -196,45 +176,32 @@ const CoauthorshipNetwork = () => {
     const tick = () => {
       const nodes = nodesRef.current;
       const links = linksRef.current;
-      if (nodes.length === 0) {
-        ctx.clearRect(0, 0, width, height);
-        if (loading) {
-          ctx.font = "14px system-ui, sans-serif";
-          ctx.fillStyle = "#94a3b8";
-          ctx.textAlign = "center";
-          ctx.fillText("Loading from Google Scholar...", width / 2, height / 2);
-        }
-        animationRef.current = requestAnimationFrame(tick);
-        return;
-      }
+      if (nodes.length === 0) { animationRef.current = requestAnimationFrame(tick); return; }
 
       alpha *= 0.995;
       if (alpha < 0.001) alpha = 0.001;
 
-      // Center gravity
       for (const n of nodes) {
         if (n.isCenter || dragNode.current === n.id) continue;
         n.vx += (width / 2 - n.x) * 0.0004;
         n.vy += (height / 2 - n.y) * 0.0004;
       }
 
-      // Link spring force (all links including inter-coauthor)
       for (const l of links) {
-        const s = nodes.find((n) => n.id === l.source);
-        const t = nodes.find((n) => n.id === l.target);
+        const s = nodes.find(n => n.id === l.source);
+        const t = nodes.find(n => n.id === l.target);
         if (!s || !t) continue;
         const dx = t.x - s.x, dy = t.y - s.y;
         const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        const isInterLink = l.source !== "haddadian" && l.target !== "haddadian";
-        const targetDist = isInterLink ? 80 + (1 / l.weight) * 30 : 110 + (1 / l.weight) * 50;
-        const strength = isInterLink ? 0.001 : 0.003;
+        const isInter = l.source !== "haddadian" && l.target !== "haddadian";
+        const targetDist = isInter ? 80 + (1 / l.weight) * 30 : 110 + (1 / l.weight) * 50;
+        const strength = isInter ? 0.001 : 0.003;
         const force = (dist - targetDist) * strength * alpha;
         const fx = (dx / dist) * force, fy = (dy / dist) * force;
         if (!s.isCenter && dragNode.current !== s.id) { s.vx += fx; s.vy += fy; }
         if (!t.isCenter && dragNode.current !== t.id) { t.vx -= fx; t.vy -= fy; }
       }
 
-      // Repulsion
       for (let i = 1; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i], b = nodes[j];
@@ -257,7 +224,6 @@ const CoauthorshipNetwork = () => {
         n.y = Math.max(n.radius + 20, Math.min(height - n.radius - 20, n.y));
       }
 
-      // Draw
       ctx.clearRect(0, 0, width, height);
       const isDark = document.documentElement.classList.contains("dark");
       const primaryColor = isDark ? "hsl(210, 60%, 60%)" : "hsl(210, 60%, 45%)";
@@ -269,10 +235,9 @@ const CoauthorshipNetwork = () => {
       const nodeBg = isDark ? "#1e293b" : "#ffffff";
       const nodeBorder = isDark ? "#334155" : "#cbd5e1";
 
-      // Draw links
       for (const l of links) {
-        const s = nodes.find((n) => n.id === l.source);
-        const t = nodes.find((n) => n.id === l.target);
+        const s = nodes.find(n => n.id === l.source);
+        const t = nodes.find(n => n.id === l.target);
         if (!s || !t) continue;
         const isCenter = l.source === "haddadian" || l.target === "haddadian";
         const isHovered = hoveredNode && (hoveredNode === l.source || hoveredNode === l.target);
@@ -284,7 +249,6 @@ const CoauthorshipNetwork = () => {
         ctx.stroke();
       }
 
-      // Draw nodes
       for (const n of nodes) {
         const isHovered = hoveredNode === n.id;
         ctx.beginPath();
@@ -316,7 +280,7 @@ const CoauthorshipNetwork = () => {
 
     animationRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animationRef.current);
-  }, [dimensions, hoveredNode, loading, coauthorData]);
+  }, [dimensions, hoveredNode]);
 
   const getNodeAt = useCallback(
     (mx: number, my: number): CoauthorNode | null => {
@@ -334,7 +298,7 @@ const CoauthorshipNetwork = () => {
       if (!rect) return;
       const mx = e.clientX - rect.left, my = e.clientY - rect.top;
       if (isDragging.current && dragNode.current) {
-        const node = nodesRef.current.find((n) => n.id === dragNode.current);
+        const node = nodesRef.current.find(n => n.id === dragNode.current);
         if (node) { node.x = mx; node.y = my; node.vx = 0; node.vy = 0; }
         return;
       }
@@ -376,10 +340,7 @@ const CoauthorshipNetwork = () => {
         onMouseLeave={handleMouseUp}
       />
       <p className="text-[10px] text-muted-foreground/50 mt-2 text-center">
-        {source === "live" && "Live data from Google Scholar. "}
-        {source === "cached" && "Cached data (updates daily). "}
-        {source === "fallback" && !loading && "Using offline data. "}
-        Line width corresponds to the number of co-authorships. Drag nodes to rearrange.
+        Built from publication data. Line width corresponds to the number of co-authorships. Drag nodes to rearrange.
       </p>
     </div>
   );
