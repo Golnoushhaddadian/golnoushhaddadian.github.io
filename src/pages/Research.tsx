@@ -50,6 +50,7 @@ const journalPublications: Publication[] = [
     venue: "The Journal of Applied Instructional Design, 13(2)",
     year: 2024,
     doi: "https://doi.org/10.59668/1269.15640",
+    pdf: "/papers/haddadian-2024-grammarly-speaking.pdf",
   },
   {
     title: "Comparing the Effects of Teacher Feedback, Automated Feedback, and Integrative Feedback on EFL Learners' Writing Accuracy and Writing Apprehension",
