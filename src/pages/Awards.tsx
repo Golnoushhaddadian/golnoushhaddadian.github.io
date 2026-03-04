@@ -28,7 +28,7 @@ const Awards = () => {
           Selected Awards
         </h1>
         <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">
-          Academic awards, honors, and fellowships received throughout my career.
+          Academic awards, honors, and fellowships received throughout my journey.
         </p>
 
         <ul className="list-disc list-outside pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-muted-foreground">
