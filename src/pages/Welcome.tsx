@@ -50,9 +50,9 @@ const AboutMe = () => {
     canonical: '/',
   });
 
-  const citations = useCountUp(43);
-  const publications = useCountUp(28);
-  const hIndex = useCountUp(5, 1000);
+  const citations = useCountUp(43, 800);
+  const publications = useCountUp(28, 800);
+  const hIndex = useCountUp(5, 500);
 
   const iconSize = 32;
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
