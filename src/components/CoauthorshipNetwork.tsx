@@ -548,6 +548,9 @@ const CoauthorshipNetwork = () => {
           </span>
         </div>
 
+        <p className="text-[9px] sm:text-[10px] text-muted-foreground/40 mt-1">
+          (The visualization was generated using data collected through Google Scholar crawling; therefore, its coverage and accuracy may be limited.)
+        </p>
       </div>
     </div>
   );
