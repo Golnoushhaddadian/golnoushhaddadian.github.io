@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ExternalLink, FileText, BookOpen, Quote } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { motion } from 'framer-motion';
@@ -94,7 +95,7 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
     const parts = authors.split(/(Haddadian, G\.)/);
     return parts.map((part, i) =>
       part === "Haddadian, G." ? (
-        <span key={i} className="font-semibold text-primary">{part}</span>
+        <Link key={i} to="/" className="font-semibold text-primary underline decoration-primary/40 decoration-1 underline-offset-2 hover:decoration-primary transition-all duration-200">{part}</Link>
       ) : (
         <span key={i}>{part}</span>
       )
@@ -173,10 +174,7 @@ const Research = () => {
       </p>
 
       <section className="mb-12">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10">
-            <BookOpen size={18} className="text-primary" />
-          </div>
+        <div className="mb-8">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">
             Refereed Journal Publications
             <span className="ml-2 text-sm font-normal text-muted-foreground align-middle">
