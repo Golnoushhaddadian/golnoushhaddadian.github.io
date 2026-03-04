@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
+import CoauthorshipNetwork from "@/components/CoauthorshipNetwork";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 import { useEffect, useRef, useState } from "react";
@@ -207,6 +208,15 @@ const AboutMe = () => {
             </a>
             {" "}· Updated Mar 2026
           </p>
+        </section>
+
+        {/* Co-authorship Network */}
+        <section className="mt-12 sm:mt-16 md:mt-20">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Collaborators</h2>
+          <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6 max-w-2xl">
+            A network visualization of my published co-authorships. Line width corresponds to the number of co-authorships. Numbers inside nodes show collaboration count.
+          </p>
+          <CoauthorshipNetwork />
         </section>
       </div>
     </div>;
