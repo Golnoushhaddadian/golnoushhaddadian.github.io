@@ -89,6 +89,15 @@ const journalPublications: Publication[] = [
     apa: "Haddadian, G. (2024). Comparing the effects of teacher feedback, automated feedback, and integrative feedback on EFL learners' writing accuracy and writing apprehension. Computer-Assisted Language Learning Electronic Journal, 25(3), 124-147.",
   },
   {
+    title: "Evaluating Private Artificial Intelligence (AI) Curriculum in Computer Science (CS) Education: Insights for Advancing Student-Centered CS Learning",
+    authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.",
+    venue: "Proceedings of the 18th International Conference of the Learning Sciences - ICLS 2024 (pp. 2271-2272). International Society of the Learning Sciences",
+    year: 2024,
+    doi: "https://doi.org/10.22318/icls2024.141269",
+    pdf: "/papers/haddadian-et-al-2024-private-ai-curriculum.pdf",
+    apa: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K. (2024). Evaluating Private Artificial Intelligence (AI) Curriculum in Computer Science (CS) Education: Insights for Advancing Student-Centered CS Learning. In Proceedings of the 18th International Conference of the Learning Sciences-ICLS 2024, pp. 2271-2272. International Society of the Learning Sciences.",
+  },
+  {
     title: "Conversational Repairs in Persian Dramatic Discourse: Akbar Radi's Pellekân (The Steps)",
     authors: "Haddadian, G., & Mahmoodi-Bakhtiari, B.",
     venue: "Persian Literary Studies Journal, 7(11), 65-82",
