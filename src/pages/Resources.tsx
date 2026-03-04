@@ -28,6 +28,16 @@ const resources: Resource[] = [
     embedUrl: "https://whimsical.com/embed/dy5XNBK5mVWkAFXygFvUA",
   },
   {
+    title: "Things I Wish I Knew About the Learning Sciences",
+    subtitle: "Living Document",
+    description:
+      "A practical guide grounded in research that introduces key theories, frameworks, and influential scholars in the learning sciences—well suited for newcomers seeking foundational concepts, major citations, and methodological overviews in education research.",
+    link: "https://docs.google.com/document/d/1FJQ4H9y1M8vuPmn6oCDm8T_fZRFQplm4Lmce-2ZlhOM",
+    citation:
+      "Vickery, M. (2019–present). Things I wish I knew about the learning sciences [Living document].",
+    image: "/lovable-uploads/things-i-wish-i-knew-preview.png",
+  },
+  {
     title: "Interactive Literature Database for JLS",
     subtitle: "Web Application",
     description:
