@@ -29,6 +29,7 @@ const journalPublications: Publication[] = [
     year: 2025,
     doi: "https://doi.org/10.1186/s41239-025-00558-6",
     pdf: "/papers/noroozi-et-al-2025-genai-peer-feedback.pdf",
+    apa: "Noroozi, O., Haddadian, G., Gao, X., Schunn, C., Alqassab, M., & Banihashem, S. K. (2025). The value of GenAI for peer feedback provision: student perceptions and impacts. International Journal of Educational Technology in Higher Education, 22(1), 61.",
   },
   {
     title: "Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum",
