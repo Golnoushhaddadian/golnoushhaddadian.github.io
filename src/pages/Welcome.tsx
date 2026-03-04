@@ -177,7 +177,7 @@ const AboutMe = () => {
         </section>
 
         {/* Google Scholar Stats */}
-        <section className="mt-8 sm:mt-10 md:mt-14">
+        <section className="mt-16 sm:mt-20 md:mt-28">
           <div className="flex items-center justify-between max-w-xl mx-auto">
             <div ref={citations.ref} className="text-center">
               <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
