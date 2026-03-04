@@ -55,7 +55,7 @@ const resources: Resource[] = [
     citation:
       "Vickery, M. (n.d.). Academic website template [GitHub Pages template]. GitHub. https://github.com/morganavickery/academic-website-template",
     image: "/lovable-uploads/academic-website-template.jpg",
-    imageAttribution: { text: "Image by Freepik", url: "https://www.freepik.com/free-photo/3d-rendering-website-hosting-concept_28645200.htm" },
+    imageAttribution: { text: "Image Attribution", url: "https://www.freepik.com/free-photo/3d-rendering-website-hosting-concept_28645200.htm" },
   },
 ];
 
