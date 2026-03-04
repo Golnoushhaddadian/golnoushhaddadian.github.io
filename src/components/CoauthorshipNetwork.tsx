@@ -157,7 +157,7 @@ const CoauthorshipNetwork = () => {
     const up = () => {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth;
-      setDims({ w, h: Math.min(Math.max(w * 0.72, 420), 640) });
+      setDims({ w, h: Math.min(Math.max(w * 0.85, 500), 800) });
     };
     up();
     window.addEventListener("resize", up);
