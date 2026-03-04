@@ -35,7 +35,6 @@ const resources: Resource[] = [
     link: "https://morganavickery.github.io/JLS-interactive-database/",
     citation:
       "Vickery, M. (2025). Journal of the Learning Sciences: Interactive literature database [Web application]. https://morganavickery.github.io/JLS-interactive-database/",
-    image: "/lovable-uploads/jls-database-preview.png",
   },
   {
     title: "Publication Venue Guide",
@@ -45,7 +44,6 @@ const resources: Resource[] = [
     link: "https://publication-guide.notion.site/",
     citation:
       "Vickery, M. (2025). Publication venue guide [Web application]. https://publication-guide.notion.site/",
-    image: "/lovable-uploads/publication-venue-guide-preview.png",
   },
   {
     title: "Academic Website Template",
