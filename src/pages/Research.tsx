@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useDocumentHead } from '@/hooks/useDocumentHead';
 import { Link } from 'react-router-dom';
 import { ExternalLink, FileText, Quote, Copy, Check } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -311,6 +312,11 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
 };
 
 const Research = () => {
+  useDocumentHead({
+    title: 'Research & Publications — Golnoush Haddadian',
+    description: 'Published research by Golnoush Haddadian in AI in Education, automated writing evaluation, peer feedback, and learning sciences.',
+    canonical: '/research',
+  });
   const grouped = groupByYear(journalPublications);
   let globalIndex = 0;
 

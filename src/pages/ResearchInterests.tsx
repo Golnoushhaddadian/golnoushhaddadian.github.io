@@ -6,8 +6,14 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useDocumentHead } from "@/hooks/useDocumentHead";
 
 const ResearchInterests = () => {
+  useDocumentHead({
+    title: 'Research Interests — Golnoush Haddadian',
+    description: 'Research interests of Golnoush Haddadian spanning educational technology, AI in education, assessment, and language learning.',
+    canonical: '/research-interests',
+  });
   const interestCategories = [
     {
       title: "Educational Technology",
