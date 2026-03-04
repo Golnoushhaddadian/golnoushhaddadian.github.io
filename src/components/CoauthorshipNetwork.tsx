@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface CoauthorNode {
   id: string;
   label: string;
-  count: number; // number of co-authorships with Haddadian
+  count: number;
   x: number;
   y: number;
   vx: number;
@@ -18,43 +19,19 @@ interface CoauthorLink {
   weight: number;
 }
 
-const COAUTHOR_DATA: { name: string; count: number }[] = [
-  { name: "Kim, M. K.", count: 10 },
-  { name: "Kim, J.", count: 7 },
-  { name: "Bae, Y.", count: 5 },
-  { name: "Haddadian, N.", count: 4 },
-  { name: "Noroozi, O.", count: 3 },
-  { name: "Schunn, C. D.", count: 3 },
-  { name: "Alqassab, M.", count: 3 },
-  { name: "Banihashem, S. K.", count: 3 },
-  { name: "Panzade, P.", count: 3 },
-  { name: "Takabi, D.", count: 3 },
-  { name: "Han, H.", count: 3 },
-  { name: "Heidari, A.", count: 2 },
-  { name: "Radmanesh, S.", count: 2 },
-  { name: "Salehi, M.", count: 2 },
-  { name: "Mashhadi, F.", count: 2 },
-  { name: "Kavoshian, S.", count: 2 },
-  { name: "Gao, X.", count: 2 },
-  { name: "Abdeen, M. S.", count: 1 },
-  { name: "Davis, A.", count: 1 },
-  { name: "Morris, W.", count: 1 },
-  { name: "Crossely, S.", count: 1 },
-  { name: "Holmes, L.", count: 1 },
-  { name: "Daneshvar Ghorbani, B.", count: 1 },
-  { name: "Mahmoodi-Bakhtiari, B.", count: 1 },
-  { name: "Masoumi, V.", count: 1 },
-  { name: "Veisi, H.", count: 1 },
-  { name: "Kim, N.", count: 1 },
-  { name: "Haddadian, M.", count: 1 },
-  { name: "Heidari, F.", count: 1 },
-  { name: "Greisel, M.", count: 1 },
-  { name: "Kollar, I.", count: 1 },
-  { name: "Hornstein, J.", count: 1 },
-  { name: "Rummel, N.", count: 1 },
-  { name: "Stravelakis, J.", count: 1 },
-  { name: "Ranjbar, V.", count: 1 },
-  { name: "Sahebdel, M.", count: 1 },
+interface CoauthorData {
+  name: string;
+  count: number;
+}
+
+// Fallback data in case Google Scholar is unreachable
+const FALLBACK_DATA: CoauthorData[] = [
+  { name: "MK Kim", count: 10 }, { name: "J Kim", count: 7 }, { name: "Y Bae", count: 5 },
+  { name: "N Haddadian", count: 4 }, { name: "O Noroozi", count: 3 }, { name: "CD Schunn", count: 3 },
+  { name: "M Alqassab", count: 3 }, { name: "SK Banihashem", count: 3 }, { name: "P Panzade", count: 3 },
+  { name: "D Takabi", count: 3 }, { name: "H Han", count: 3 }, { name: "A Heidari", count: 2 },
+  { name: "S Radmanesh", count: 2 }, { name: "M Salehi", count: 2 }, { name: "F Mashhadi", count: 2 },
+  { name: "S Kavoshian", count: 2 }, { name: "X Gao", count: 2 },
 ];
 
 const CoauthorshipNetwork = () => {
@@ -67,6 +44,66 @@ const CoauthorshipNetwork = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const dragNode = useRef<string | null>(null);
+  const [coauthorData, setCoauthorData] = useState<CoauthorData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [source, setSource] = useState<"live" | "cached" | "fallback">("fallback");
+
+  // Fetch co-author data from edge function
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Check localStorage cache (cache for 24 hours)
+        const cached = localStorage.getItem("coauthor-network-cache");
+        if (cached) {
+          const { data, timestamp } = JSON.parse(cached);
+          const age = Date.now() - timestamp;
+          if (age < 24 * 60 * 60 * 1000 && data?.length > 0) {
+            setCoauthorData(data);
+            setSource("cached");
+            setLoading(false);
+            // Still try to refresh in background
+            fetchFromEdge(data);
+            return;
+          }
+        }
+
+        await fetchFromEdge();
+      } catch (err) {
+        console.error("Failed to load coauthor data:", err);
+        setCoauthorData(FALLBACK_DATA);
+        setSource("fallback");
+        setLoading(false);
+      }
+    };
+
+    const fetchFromEdge = async (currentData?: CoauthorData[]) => {
+      try {
+        const { data, error } = await supabase.functions.invoke("google-scholar-coauthors");
+        if (error) throw error;
+        if (data?.success && data.coauthors?.length > 0) {
+          setCoauthorData(data.coauthors);
+          setSource("live");
+          localStorage.setItem("coauthor-network-cache", JSON.stringify({
+            data: data.coauthors,
+            timestamp: Date.now(),
+          }));
+        } else if (!currentData) {
+          setCoauthorData(FALLBACK_DATA);
+          setSource("fallback");
+        }
+      } catch (err) {
+        console.error("Edge function error:", err);
+        if (!currentData) {
+          setCoauthorData(FALLBACK_DATA);
+          setSource("fallback");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // Responsive sizing
   useEffect(() => {
@@ -81,8 +118,9 @@ const CoauthorshipNetwork = () => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  // Initialize nodes and links
+  // Initialize nodes and links when data changes
   useEffect(() => {
+    if (coauthorData.length === 0) return;
     const { width, height } = dimensions;
     const cx = width / 2;
     const cy = height / 2;
@@ -91,10 +129,7 @@ const CoauthorshipNetwork = () => {
       id: "haddadian",
       label: "Haddadian, G.",
       count: 0,
-      x: cx,
-      y: cy,
-      vx: 0,
-      vy: 0,
+      x: cx, y: cy, vx: 0, vy: 0,
       radius: 22,
       isCenter: true,
     };
@@ -102,8 +137,8 @@ const CoauthorshipNetwork = () => {
     const nodes: CoauthorNode[] = [center];
     const links: CoauthorLink[] = [];
 
-    COAUTHOR_DATA.forEach((co, i) => {
-      const angle = (2 * Math.PI * i) / COAUTHOR_DATA.length;
+    coauthorData.forEach((co, i) => {
+      const angle = (2 * Math.PI * i) / coauthorData.length;
       const dist = 120 + Math.random() * 80;
       const r = Math.max(6, Math.min(16, 4 + co.count * 2));
       nodes.push({
@@ -112,8 +147,7 @@ const CoauthorshipNetwork = () => {
         count: co.count,
         x: cx + Math.cos(angle) * dist + (Math.random() - 0.5) * 40,
         y: cy + Math.sin(angle) * dist + (Math.random() - 0.5) * 40,
-        vx: 0,
-        vy: 0,
+        vx: 0, vy: 0,
         radius: r,
       });
       links.push({ source: "haddadian", target: co.name, weight: co.count });
@@ -121,7 +155,7 @@ const CoauthorshipNetwork = () => {
 
     nodesRef.current = nodes;
     linksRef.current = links;
-  }, [dimensions]);
+  }, [coauthorData, dimensions]);
 
   // Force simulation + render
   useEffect(() => {
@@ -142,6 +176,14 @@ const CoauthorshipNetwork = () => {
       const nodes = nodesRef.current;
       const links = linksRef.current;
       if (nodes.length === 0) {
+        // Draw loading state
+        ctx.clearRect(0, 0, width, height);
+        if (loading) {
+          ctx.font = "14px system-ui, sans-serif";
+          ctx.fillStyle = "#94a3b8";
+          ctx.textAlign = "center";
+          ctx.fillText("Loading from Google Scholar...", width / 2, height / 2);
+        }
         animationRef.current = requestAnimationFrame(tick);
         return;
       }
@@ -150,15 +192,12 @@ const CoauthorshipNetwork = () => {
       if (alpha < 0.001) alpha = 0.001;
 
       // Forces
-      // Center gravity
       for (const n of nodes) {
-        if (n.isCenter) continue;
-        if (dragNode.current === n.id) continue;
+        if (n.isCenter || dragNode.current === n.id) continue;
         n.vx += (width / 2 - n.x) * 0.0005;
         n.vy += (height / 2 - n.y) * 0.0005;
       }
 
-      // Link spring force
       for (const l of links) {
         const s = nodes.find((n) => n.id === l.source)!;
         const t = nodes.find((n) => n.id === l.target)!;
@@ -173,46 +212,30 @@ const CoauthorshipNetwork = () => {
         if (!t.isCenter) { t.vx -= fx; t.vy -= fy; }
       }
 
-      // Repulsion between non-center nodes
       for (let i = 1; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i];
-          const b = nodes[j];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
+          const a = nodes[i], b = nodes[j];
+          const dx = b.x - a.x, dy = b.y - a.y;
           const dist = Math.sqrt(dx * dx + dy * dy) || 1;
           if (dist < 60) {
             const force = ((60 - dist) / dist) * 0.5;
-            const fx = dx * force;
-            const fy = dy * force;
-            if (dragNode.current !== a.id) { a.vx -= fx; a.vy -= fy; }
-            if (dragNode.current !== b.id) { b.vx += fx; b.vy += fy; }
+            if (dragNode.current !== a.id) { a.vx -= dx * force; a.vy -= dy * force; }
+            if (dragNode.current !== b.id) { b.vx += dx * force; b.vy += dy * force; }
           }
         }
       }
 
-      // Apply velocity
       for (const n of nodes) {
-        if (n.isCenter) {
-          n.x = width / 2;
-          n.y = height / 2;
-          continue;
-        }
+        if (n.isCenter) { n.x = width / 2; n.y = height / 2; continue; }
         if (dragNode.current === n.id) continue;
-        n.vx *= 0.85;
-        n.vy *= 0.85;
-        n.x += n.vx;
-        n.y += n.vy;
-        // Bounds
+        n.vx *= 0.85; n.vy *= 0.85;
+        n.x += n.vx; n.y += n.vy;
         n.x = Math.max(n.radius + 30, Math.min(width - n.radius - 30, n.x));
         n.y = Math.max(n.radius + 15, Math.min(height - n.radius - 15, n.y));
       }
 
       // Draw
       ctx.clearRect(0, 0, width, height);
-
-      // Get computed styles for theme awareness
-      const style = getComputedStyle(document.documentElement);
       const isDark = document.documentElement.classList.contains("dark");
       const primaryColor = isDark ? "hsl(210, 60%, 60%)" : "hsl(210, 60%, 45%)";
       const textColor = isDark ? "#e2e8f0" : "#1e293b";
@@ -222,7 +245,6 @@ const CoauthorshipNetwork = () => {
       const nodeBg = isDark ? "#1e293b" : "#ffffff";
       const nodeBorder = isDark ? "#334155" : "#cbd5e1";
 
-      // Links
       for (const l of links) {
         const s = nodes.find((n) => n.id === l.source)!;
         const t = nodes.find((n) => n.id === l.target)!;
@@ -235,24 +257,16 @@ const CoauthorshipNetwork = () => {
         ctx.stroke();
       }
 
-      // Nodes
       for (const n of nodes) {
         const isHovered = hoveredNode === n.id;
-
-        // Node circle
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius + (isHovered ? 2 : 0), 0, Math.PI * 2);
-        if (n.isCenter) {
-          ctx.fillStyle = primaryColor;
-        } else {
-          ctx.fillStyle = nodeBg;
-        }
+        ctx.fillStyle = n.isCenter ? primaryColor : nodeBg;
         ctx.fill();
         ctx.strokeStyle = n.isCenter ? primaryColor : isHovered ? primaryColor : nodeBorder;
         ctx.lineWidth = n.isCenter ? 2 : isHovered ? 2 : 1;
         ctx.stroke();
 
-        // Label
         const fontSize = n.isCenter ? 11 : Math.max(8, Math.min(10, 6 + n.count));
         ctx.font = `${n.isCenter ? "600" : "400"} ${fontSize}px system-ui, -apple-system, sans-serif`;
         ctx.fillStyle = n.isCenter ? "#ffffff" : isHovered ? textColor : mutedText;
@@ -263,9 +277,8 @@ const CoauthorshipNetwork = () => {
           ctx.fillText(n.label, n.x, n.y);
         } else {
           ctx.fillText(n.label, n.x, n.y + n.radius + 12);
-          // Count inside node
           ctx.font = `600 ${Math.max(8, n.radius - 1)}px system-ui, sans-serif`;
-          ctx.fillStyle = n.isCenter ? "#ffffff" : isHovered ? primaryColor : mutedText;
+          ctx.fillStyle = isHovered ? primaryColor : mutedText;
           ctx.fillText(String(n.count), n.x, n.y);
         }
       }
@@ -275,45 +288,32 @@ const CoauthorshipNetwork = () => {
 
     animationRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animationRef.current);
-  }, [dimensions, hoveredNode]);
+  }, [dimensions, hoveredNode, loading, coauthorData]);
 
   const getNodeAt = useCallback(
     (mx: number, my: number): CoauthorNode | null => {
       for (const n of nodesRef.current) {
-        const dx = mx - n.x;
-        const dy = my - n.y;
+        const dx = mx - n.x, dy = my - n.y;
         if (dx * dx + dy * dy < (n.radius + 4) ** 2) return n;
       }
       return null;
-    },
-    []
+    }, []
   );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
       const rect = canvasRef.current?.getBoundingClientRect();
       if (!rect) return;
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
-
+      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
       if (isDragging.current && dragNode.current) {
         const node = nodesRef.current.find((n) => n.id === dragNode.current);
-        if (node) {
-          node.x = mx;
-          node.y = my;
-          node.vx = 0;
-          node.vy = 0;
-        }
+        if (node) { node.x = mx; node.y = my; node.vx = 0; node.vy = 0; }
         return;
       }
-
       const node = getNodeAt(mx, my);
       setHoveredNode(node?.id || null);
-      if (canvasRef.current) {
-        canvasRef.current.style.cursor = node ? "grab" : "default";
-      }
-    },
-    [getNodeAt]
+      if (canvasRef.current) canvasRef.current.style.cursor = node ? "grab" : "default";
+    }, [getNodeAt]
   );
 
   const handleMouseDown = useCallback(
@@ -326,8 +326,7 @@ const CoauthorshipNetwork = () => {
         dragNode.current = node.id;
         if (canvasRef.current) canvasRef.current.style.cursor = "grabbing";
       }
-    },
-    [getNodeAt]
+    }, [getNodeAt]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -349,6 +348,9 @@ const CoauthorshipNetwork = () => {
         onMouseLeave={handleMouseUp}
       />
       <p className="text-[10px] text-muted-foreground/50 mt-2 text-center">
+        {source === "live" && "Live data from Google Scholar. "}
+        {source === "cached" && "Cached data (updates daily). "}
+        {source === "fallback" && !loading && "Using offline data. "}
         Line width corresponds to the number of co-authorships. Drag nodes to rearrange.
       </p>
     </div>
