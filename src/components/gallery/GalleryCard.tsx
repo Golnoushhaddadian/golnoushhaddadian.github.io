@@ -15,7 +15,7 @@ export const GalleryCard = ({ image }: GalleryCardProps) => {
           <img
             src={image.src}
             alt={image.alt}
-            className="object-cover w-full h-full rounded-md transition-transform duration-500 ease-out group-hover:scale-150 group-hover:shadow-2xl relative"
+            className="object-cover w-full h-full rounded-md transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-150 group-hover:shadow-2xl group-hover:rounded-lg relative"
           />
         </AspectRatio>
       </div>
