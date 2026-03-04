@@ -93,6 +93,10 @@ export default {
 				'page-transition-out': {
 					'0%': { opacity: '1', transform: 'translateY(0)' },
 					'100%': { opacity: '0', transform: 'translateY(-20px)' }
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '200% 0' },
+					'100%': { backgroundPosition: '-200% 0' },
 				}
 			},
 			animation: {
@@ -101,7 +105,8 @@ export default {
 				'fade-in': 'fade-in 0.3s ease-out',
 				'fade-out': 'fade-out 0.3s ease-out',
 				'page-in': 'page-transition-in 0.4s ease-out',
-				'page-out': 'page-transition-out 0.4s ease-out'
+				'page-out': 'page-transition-out 0.4s ease-out',
+				'shimmer': 'shimmer 2s ease-in-out infinite'
 			}
 		}
 	},
