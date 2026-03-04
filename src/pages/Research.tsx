@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { ExternalLink, FileText, BookOpen } from 'lucide-react';
+import { ExternalLink, FileText, BookOpen, Quote } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { motion } from 'framer-motion';
 
 type Publication = {
@@ -10,6 +11,7 @@ type Publication = {
   year: number;
   doi?: string;
   pdf?: string;
+  apa?: string;
 };
 
 const journalPublications: Publication[] = [
@@ -43,6 +45,7 @@ const journalPublications: Publication[] = [
     year: 2024,
     doi: "https://doi.org/10.1186/s40468-024-00303-2",
     pdf: "/papers/haddadian-et-al-2024-cfal-questionnaire.pdf",
+    apa: "Haddadian, G., Radmanesh, S., & Haddadian, N. (2024). Construction and validation of a Computerized Formative Assessment Literacy (CFAL) questionnaire for language teachers: an exploratory sequential mixed-methods investigation. Language Testing in Asia, 14(1), 33.",
   },
   {
     title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking: Learners' Perceptions and Transformative Engagement Experiences in Focus",
@@ -133,6 +136,19 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
             <FileText size={13} />
             PDF
           </a>
+        )}
+        {pub.apa && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <button className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200">
+                <Quote size={13} />
+                APA
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-96 text-xs sm:text-sm leading-relaxed text-muted-foreground" side="top">
+              {pub.apa}
+            </PopoverContent>
+          </Popover>
         )}
       </div>
     </motion.div>
