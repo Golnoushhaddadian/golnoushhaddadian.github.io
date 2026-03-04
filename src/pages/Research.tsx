@@ -201,10 +201,7 @@ const Research = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">Research</h1>
-      <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed mb-10">
-        Refereed journal publications, conference proceedings, and ongoing work.
-      </p>
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-center">Research</h1>
 
       <section className="mb-12">
         {/* Section header */}
