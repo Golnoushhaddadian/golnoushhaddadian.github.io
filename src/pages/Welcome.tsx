@@ -105,7 +105,7 @@ const AboutMe = () => {
         <section>
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Hello Amazing People! Welcome to My Personal Website</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base">
-            <p>Hello and welcome to my personal website.</p>
+            
             <p>
               My name is <em>Golnoush</em>, a{" "}
               <a href="https://en.wikipedia.org/wiki/Persians" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Persian</a>
