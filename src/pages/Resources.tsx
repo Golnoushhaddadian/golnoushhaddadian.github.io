@@ -28,7 +28,7 @@ const resources: Resource[] = [
     embedUrl: "https://whimsical.com/embed/dy5XNBK5mVWkAFXygFvUA",
   },
   {
-    title: "Journal of the Learning Sciences - Interactive Literature Database",
+    title: "Interactive Literature Database for JLS",
     subtitle: "Web Application",
     description:
       "An interactive repository of JLS publications identified through a systematic review, with search and filtering options by research method, theoretical perspective, pedagogical approach, construct, context, technology, content domain, and population.",
