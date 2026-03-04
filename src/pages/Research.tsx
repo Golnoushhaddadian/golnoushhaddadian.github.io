@@ -113,6 +113,15 @@ const journalPublications: Publication[] = [
     doi: "http://doi.org/10.22099/jps.2019.31124.1088",
     apa: "Haddadian, G., & Mahmoodi-Bakhtiari, B. (2018). Conversational Repairs in Persian Dramatic Discourse: Akbar Radi's Pellekân (The Steps). Persian Literary Studies Journal, 7(11), 65-82.",
   },
+  {
+    title: "An Investigation of Knowledge-Based AI vs. Human Evaluation in the Context of Academic Summary Evaluation: Similarities, Dissimilarities, and Being Toward Mutual Understandings",
+    authors: "Kim, J., Haddadian, G., & Kim, M. K.",
+    venue: "Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023 (pp. 994-997). International Society of the Learning Sciences",
+    year: 2023,
+    doi: "https://doi.org/10.22318/icls2023.633243",
+    pdf: "/papers/kim-et-al-2023-ai-vs-human-evaluation.pdf",
+    apa: "Kim, J., Haddadian, G., & Kim, M. K. (2023). An Investigation of Knowledge-Based AI vs. Human Evaluation in the Context of Academic Summary Evaluation: Similarities, Dissimilarities, and Being Toward Mutual Understandings. In Proceedings of the 17th International Conference of the Learning Sciences-ICLS 2023, pp. 994-997. International Society of the Learning Sciences.",
+  },
 ];
 
 const groupByYear = (pubs: Publication[]) => {
