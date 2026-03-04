@@ -95,6 +95,27 @@ const AboutMe = () => {
           </div>
         </section>
 
+        {/* Google Scholar Stats */}
+        <section className="mt-6 sm:mt-8 md:mt-12">
+          <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-xl mx-auto md:mx-0">
+            <div className="text-center">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">43</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Citations</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">28</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Publications</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">5</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">H-Index</p>
+            </div>
+          </div>
+          <p className="text-[10px] sm:text-xs text-muted-foreground/60 mt-2 text-center md:text-left max-w-xl mx-auto md:mx-0">
+            Data sourced from <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:underline">Google Scholar</a>. Last updated: 2026-03-04
+          </p>
+        </section>
+
         <section className="mt-6 sm:mt-8 md:mt-12">
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Publications</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-[10px] sm:text-xs md:text-sm">
