@@ -21,6 +21,7 @@ const journalPublications: Publication[] = [
     venue: "Research Synthesis in Applied Linguistics",
     year: 2025,
     doi: "https://doi.org/10.1080/29984475.2025.2598266",
+    apa: "Haddadian, G., Kim, M. K., & Haddadian, N. (2025). A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education. Research Synthesis in Applied Linguistics, 1-51.",
   },
   {
     title: "The value of GenAI for peer feedback provision: student perceptions and impacts",
