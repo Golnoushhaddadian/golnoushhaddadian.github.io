@@ -54,6 +54,7 @@ const journalPublications: Publication[] = [
     year: 2024,
     doi: "https://doi.org/10.59668/1269.15640",
     pdf: "/papers/haddadian-2024-grammarly-speaking.pdf",
+    apa: "Haddadian, G., & Haddadian, N. (2024). Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking: Learners' Perceptions and Transformative Engagement Experiences in Focus. The Journal of Applied Instructional Design, 13(2).",
   },
   {
     title: "Comparing the Effects of Teacher Feedback, Automated Feedback, and Integrative Feedback on EFL Learners' Writing Accuracy and Writing Apprehension",
