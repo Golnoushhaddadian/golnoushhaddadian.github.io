@@ -69,10 +69,25 @@ const AboutMe = () => {
               I hold a Ph.D. in Learning Sciences from <a href="https://education.gsu.edu/ls/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Georgia State University</a> (2025, December). My research focuses on the design and development of state-of-the-art AI tools to support personalized, human-centered, and adaptive learning environments in higher education, grounded in robust theory-driven design and informed by mixed-methods approaches to address real-world educational challenges. From my early experiences designing interactive learning tools during my high school years to my current appointment as a Postdoctoral Associate, my work has been driven by a sustained commitment to addressing educational challenges through evidence-based design and expanding access to effective learning opportunities.
             </p>
             <p>My core research areas include:</p>
-            <p className="font-semibold text-foreground text-[10px] sm:text-xs md:text-sm leading-relaxed">
-              # AI in Education # Personalized Learning # Feedback # Assessment & Evaluation # Higher Education # Design
-              & Development # Mixed-Methods # Design-Based Research
-            </p>
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-1">
+              {[
+                'AI in Education',
+                'Personalized Learning',
+                'Feedback',
+                'Assessment & Evaluation',
+                'Higher Education',
+                'Design & Development',
+                'Mixed-Methods',
+                'Design-Based Research',
+              ].map((keyword) => (
+                <span
+                  key={keyword}
+                  className="inline-block border border-primary/60 text-primary text-[10px] sm:text-xs md:text-sm font-medium px-2.5 py-1 rounded-md hover:bg-primary/10 transition-colors duration-200"
+                >
+                  {keyword}
+                </span>
+              ))}
+            </div>
             <p>
               Please feel free to explore my website and reach out if you are interested in potential collaborations or
               would like to connect and learn more.
