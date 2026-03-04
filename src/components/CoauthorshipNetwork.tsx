@@ -157,7 +157,7 @@ const CoauthorshipNetwork = () => {
     const up = () => {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth;
-      setDims({ w, h: Math.min(Math.max(w * 0.85, 500), 800) });
+      setDims({ w, h: Math.min(Math.max(w * 0.72, 420), 640) });
     };
     up();
     window.addEventListener("resize", up);
@@ -169,7 +169,7 @@ const CoauthorshipNetwork = () => {
     if (!coauthors.length) return;
     const { w, h } = dims;
     const cx = w / 2, cy = h / 2;
-    const cR = Math.max(50, Math.min(64, w * 0.075));
+    const cR = Math.max(55, Math.min(72, w * 0.09));
 
     const nodes: Node[] = [{
       id: "_center", label: "Golnoush\nHaddadian", count: 0,
@@ -181,7 +181,7 @@ const CoauthorshipNetwork = () => {
     // Uniform small radius for coauthors — count shown as label, not encoded in radius
     coauthors.forEach((co, i) => {
       const a = (2 * Math.PI * i) / coauthors.length;
-      const d = cR + 110 + Math.random() * 40;
+      const d = cR + 80 + Math.random() * 30;
       const r = 12 + Math.min(co.count, 8) * 3; // scale with collaboration count
       nodes.push({
         id: co.name, label: co.name, count: co.count,
@@ -279,8 +279,8 @@ const CoauthorshipNetwork = () => {
         if (dragId.current === n.id) continue;
         n.vx *= 0.86; n.vy *= 0.86;
         n.x += n.vx; n.y += n.vy;
-        n.x = Math.max(n.r + 50, Math.min(w - n.r - 50, n.x));
-        n.y = Math.max(n.r + 30, Math.min(h - n.r - 30, n.y));
+        n.x = Math.max(n.r + 20, Math.min(w - n.r - 20, n.x));
+        n.y = Math.max(n.r + 16, Math.min(h - n.r - 16, n.y));
       }
 
       // ── DRAW ──
