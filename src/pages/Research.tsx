@@ -110,9 +110,9 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
           href={pub.doi}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-primary/80 hover:text-primary transition-colors duration-200 group/link"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
         >
-          <ExternalLink size={13} className="group-hover/link:translate-x-0.5 transition-transform duration-200" />
+          <ExternalLink size={13} />
           DOI
         </a>
       )}
