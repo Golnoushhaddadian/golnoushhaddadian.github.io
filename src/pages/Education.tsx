@@ -72,7 +72,8 @@ const EducationItem = ({ edu }: { edu: any }) => {
           <img
             src={edu.hoverImage}
             alt={edu.university}
-            className="w-full h-48 sm:h-56 md:h-64 object-cover object-top rounded-lg"
+            className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
+            style={{ objectPosition: 'center 30%' }}
           />
         </div>
       )}
