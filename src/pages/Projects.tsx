@@ -116,8 +116,8 @@ const Projects = () => {
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
           Research Projects
         </h1>
-        <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-          Exploring innovative approaches to AI in education, learning technologies, and formative assessment systems.
+        <p className="text-sm sm:text-lg text-muted-foreground max-w-4xl mx-auto">
+          Throughout my academic training, I have engaged in a range of research projects, some of which were federally funded by the National Science Foundation (NSF) and the Institute of Education Sciences (IES). Below is a selected list of these projects.
         </p>
       </motion.div>
 
