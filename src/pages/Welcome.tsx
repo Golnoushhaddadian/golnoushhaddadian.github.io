@@ -112,7 +112,7 @@ const AboutMe = () => {
               {" "}name that metaphorically means <em>enduring beauty</em>. Since its pronunciation can be challenging for non-Persian speakers, people often call me <em>Lia</em>, a name with Greek origins meaning <em>one who brings good news</em>.
             </p>
             <p
-              className="cursor-default italic text-muted-foreground transition-all duration-700 hover:text-primary hover:[text-shadow:0_0_8px_hsl(var(--primary)/0.4),0_0_20px_hsl(var(--primary)/0.2)]"
+              className="cursor-default text-muted-foreground transition-all duration-700 hover:text-primary hover:[text-shadow:0_0_8px_hsl(var(--primary)/0.4),0_0_20px_hsl(var(--primary)/0.2)]"
             >
               I believe technology exists to expand human potential, to amplify abilities, deepen thinking, and empower what humans can become, never to replace them.
             </p>
