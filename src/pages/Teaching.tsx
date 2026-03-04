@@ -58,7 +58,7 @@ const Teaching = () => {
     <div className="space-y-4 sm:space-y-6 md:space-y-10">
       {/* Header Section */}
       <div className="text-center space-y-2 sm:space-y-3">
-        <h1 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-tight">Teaching</h1>
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">Teaching</h1>
         <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-5xl mx-auto leading-relaxed">
           The following section presents a selection of my most recent teaching experiences. I started teaching in 2004. For a complete record of my teaching activities, please refer to the CV section.
         </p>
