@@ -69,7 +69,7 @@ const AboutMe = () => {
               I hold a Ph.D. in Learning Sciences from <a href="https://education.gsu.edu/ls/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Georgia State University</a> (2025, December). My research focuses on the design and development of state-of-the-art AI tools to support personalized, human-centered, and adaptive learning environments in higher education, grounded in robust theory-driven design and informed by mixed-methods approaches to address real-world educational challenges. From my early experiences designing interactive learning tools during my high school years to my current appointment as a Postdoctoral Associate, my work has been driven by a sustained commitment to addressing educational challenges through evidence-based design and expanding access to effective learning opportunities.
             </p>
             <p>My core research areas include:</p>
-            <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-1">
+            <div className="flex flex-wrap justify-center gap-2 mt-1">
               {[
                 'AI in Education',
                 'Personalized Learning',
