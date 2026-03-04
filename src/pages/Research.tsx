@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 type Publication = {
   title: string;
@@ -8,7 +9,6 @@ type Publication = {
   venue: string;
   year: number;
   doi?: string;
-  doiLabel?: string;
 };
 
 const journalPublications: Publication[] = [
@@ -63,7 +63,6 @@ const journalPublications: Publication[] = [
   },
 ];
 
-// Group publications by year
 const groupByYear = (pubs: Publication[]) => {
   const grouped: Record<number, Publication[]> = {};
   pubs.forEach((pub) => {
@@ -75,13 +74,12 @@ const groupByYear = (pubs: Publication[]) => {
     .map(([year, items]) => ({ year: Number(year), items }));
 };
 
-const PublicationEntry = ({ pub }: { pub: Publication }) => {
-  // Bold "Haddadian, G." in the authors string
+const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) => {
   const renderAuthors = (authors: string) => {
     const parts = authors.split(/(Haddadian, G\.)/);
     return parts.map((part, i) =>
       part === "Haddadian, G." ? (
-        <span key={i} className="font-semibold text-foreground">{part}</span>
+        <span key={i} className="font-semibold text-primary">{part}</span>
       ) : (
         <span key={i}>{part}</span>
       )
@@ -89,14 +87,22 @@ const PublicationEntry = ({ pub }: { pub: Publication }) => {
   };
 
   return (
-    <div className="py-4 border-b border-border/40 last:border-b-0">
-      <h3 className="text-sm sm:text-base md:text-lg font-semibold leading-snug mb-1">
+    <motion.div
+      initial={{ opacity: 0, x: -12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+      className="group relative pl-5 py-5 border-l-2 border-border/60 hover:border-primary/60 transition-colors duration-300"
+    >
+      {/* Dot on timeline */}
+      <div className="absolute -left-[5px] top-6 w-2 h-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-300" />
+
+      <h3 className="text-sm sm:text-base md:text-lg font-semibold leading-snug mb-1.5 group-hover:text-primary/90 transition-colors duration-300">
         {pub.title}
       </h3>
       <p className="text-xs sm:text-sm text-muted-foreground mb-1">
         {renderAuthors(pub.authors)}
       </p>
-      <p className="text-xs sm:text-sm text-muted-foreground italic mb-2">
+      <p className="text-xs sm:text-sm text-muted-foreground/70 italic mb-2.5">
         {pub.venue} ({pub.year})
       </p>
       {pub.doi && (
@@ -104,18 +110,19 @@ const PublicationEntry = ({ pub }: { pub: Publication }) => {
           href={pub.doi}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs sm:text-sm text-primary hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-primary/80 hover:text-primary transition-colors duration-200 group/link"
         >
-          <ExternalLink size={14} />
+          <ExternalLink size={13} className="group-hover/link:translate-x-0.5 transition-transform duration-200" />
           DOI
         </a>
       )}
-    </div>
+    </motion.div>
   );
 };
 
 const Research = () => {
   const grouped = groupByYear(journalPublications);
+  let globalIndex = 0;
 
   return (
     <div className="max-w-5xl mx-auto">
@@ -125,19 +132,29 @@ const Research = () => {
       </p>
 
       <section className="mb-12">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 text-primary">
-          Refereed Journal Publications ({journalPublications.length})
-        </h2>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10">
+            <BookOpen size={18} className="text-primary" />
+          </div>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">
+            Refereed Journal Publications
+            <span className="ml-2 text-sm font-normal text-muted-foreground align-middle">
+              ({journalPublications.length})
+            </span>
+          </h2>
+        </div>
 
         {grouped.map(({ year, items }) => (
-          <div key={year} className="mb-8">
-            <h3 className="text-base sm:text-lg md:text-xl font-bold mb-3 text-foreground/80">
-              {year}
-            </h3>
+          <div key={year} className="mb-10">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-2xl sm:text-3xl font-bold text-primary/20">{year}</span>
+              <div className="flex-1 h-px bg-border/60" />
+            </div>
             <div>
-              {items.map((pub, i) => (
-                <PublicationEntry key={i} pub={pub} />
-              ))}
+              {items.map((pub) => {
+                const idx = globalIndex++;
+                return <PublicationEntry key={idx} pub={pub} index={idx} />;
+              })}
             </div>
           </div>
         ))}
