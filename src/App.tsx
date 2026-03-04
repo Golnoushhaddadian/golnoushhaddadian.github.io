@@ -18,6 +18,7 @@ import Gallery from "@/pages/Gallery";
 import Awards from "@/pages/Awards";
 import Education from "@/pages/Education";
 import Research from "@/pages/Research";
+import Resources from "@/pages/Resources";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
               <Route path="/cv" element={<CurriculumVitae />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/teaching" element={<Teaching />} />
+              <Route path="/resources" element={<Resources />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
