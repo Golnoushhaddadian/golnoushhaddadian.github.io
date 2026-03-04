@@ -102,7 +102,7 @@ const Resources = () => {
     <section className="space-y-6 sm:space-y-8">
       <div className="text-center space-y-2">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">Open-Access Resources</h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
           This page presents a curated collection of resources valuable for teaching, learning, and research. Please ensure that the original sources are properly cited if these materials are used.
         </p>
       </div>
