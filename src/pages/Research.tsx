@@ -161,6 +161,15 @@ const journalPublications: Publication[] = [
     year: 2023,
     apa: "Kim, J., Bae, Y., Haddadian, G., Morris, W., Crossely, S., Holmes, L., Stravelakis, J., & Kim, M. (2023). AI-augmented summarization: Impact on online adult learners' concept learning, discussion quality, and achievement. 2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL.",
   },
+  {
+    title: "TeleCrowd: A Crowdsourcing Approach to Create Informal to Formal Text Corpora",
+    authors: "Masoumi, V., Salehi, M., Veisi, H., Haddadian, G., Ranjbar, V., & Sahebdel, M.",
+    venue: "arXiv:2004.11771",
+    year: 2020,
+    doi: "https://arxiv.org/abs/2004.11771",
+    pdf: "/papers/masoumi-et-al-2020-telecrowd.pdf",
+    apa: "Masoumi, V., Salehi, M., Veisi, H., Haddadian, G., Ranjbar, V., & Sahebdel, M. (2020). Telecrowd: A crowdsourcing approach to create informal to formal text corpora. arXiv preprint arXiv:2004.11771.",
+  },
 ];
 
 const groupByYear = (pubs: Publication[]) => {
