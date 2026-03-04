@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ExternalLink, BookOpen } from 'lucide-react';
+import { ExternalLink, FileText, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 type Publication = {
@@ -9,6 +9,7 @@ type Publication = {
   venue: string;
   year: number;
   doi?: string;
+  pdf?: string;
 };
 
 const journalPublications: Publication[] = [
@@ -25,6 +26,7 @@ const journalPublications: Publication[] = [
     venue: "International Journal of Educational Technology in Higher Education, 22(1), 61",
     year: 2025,
     doi: "https://doi.org/10.1186/s41239-025-00558-6",
+    pdf: "/papers/noroozi-et-al-2025-genai-peer-feedback.pdf",
   },
   {
     title: "Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum",
@@ -105,17 +107,30 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
       <p className="text-xs sm:text-sm text-muted-foreground/70 italic mb-2.5">
         {pub.venue} ({pub.year})
       </p>
-      {pub.doi && (
-        <a
-          href={pub.doi}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
-        >
-          <ExternalLink size={13} />
-          DOI
-        </a>
-      )}
+      <div className="flex items-center gap-4">
+        {pub.pdf && (
+          <a
+            href={pub.pdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
+          >
+            <FileText size={13} />
+            PDF
+          </a>
+        )}
+        {pub.doi && (
+          <a
+            href={pub.doi}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
+          >
+            <ExternalLink size={13} />
+            DOI
+          </a>
+        )}
+      </div>
     </motion.div>
   );
 };
