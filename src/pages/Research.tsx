@@ -198,7 +198,7 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
               <PopoverTrigger asChild>
                 <button className={linkClass}>
                   <Quote size={13} />
-                  APA
+                   Cite
                 </button>
               </PopoverTrigger>
               <PopoverContent
