@@ -9,13 +9,13 @@ interface GalleryCardProps {
 
 export const GalleryCard = ({ image }: GalleryCardProps) => {
   return (
-    <Card className="overflow-hidden transition-all duration-300 ease-out hover:shadow-xl hover:scale-105 cursor-pointer">
+    <Card className="overflow-hidden transition-shadow duration-300 hover:shadow-xl cursor-pointer group">
       <div className="p-2">
         <AspectRatio ratio={4/3} className="bg-muted rounded-md overflow-hidden">
           <img
             src={image.src}
             alt={image.alt}
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full transition-transform duration-500 ease-out group-hover:scale-110"
           />
         </AspectRatio>
       </div>
