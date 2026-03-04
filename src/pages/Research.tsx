@@ -62,6 +62,7 @@ const journalPublications: Publication[] = [
     year: 2024,
     doi: "https://callej.org/index.php/journal/article/view/436",
     pdf: "/papers/haddadian-2024-feedback-comparison.pdf",
+    apa: "Haddadian, G. (2024). Comparing the effects of teacher feedback, automated feedback, and integrative feedback on EFL learners' writing accuracy and writing apprehension. Computer-Assisted Language Learning Electronic Journal, 25(3), 124-147.",
   },
   {
     title: "Conversational Repairs in Persian Dramatic Discourse: Akbar Radi's Pellekân (The Steps)",
