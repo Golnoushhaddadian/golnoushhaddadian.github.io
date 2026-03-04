@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
-import { ExternalLink, Quote, Copy, Check, ArrowRight } from 'lucide-react';
+import { ExternalLink, Quote, Copy, Check, ArrowRight, ImageIcon } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { motion } from 'framer-motion';
 
@@ -12,6 +12,8 @@ type Resource = {
   link: string;
   citation: string;
   embedUrl?: string;
+  image?: string;
+  imageAttribution?: { text: string; url: string };
 };
 
 const resources: Resource[] = [
@@ -43,6 +45,17 @@ const resources: Resource[] = [
     link: "https://publication-guide.notion.site/",
     citation:
       "Vickery, M. (2025). Publication venue guide [Web application]. https://publication-guide.notion.site/",
+  },
+  {
+    title: "Academic Website Template",
+    subtitle: "GitHub Pages Template",
+    description:
+      "Looking to create an academic website but unsure where to start? This template provides a free, simple, and easily editable option designed specifically for scholars seeking a low-maintenance web presence.",
+    link: "https://github.com/morganavickery/academic-website-template",
+    citation:
+      "Vickery, M. (n.d.). Academic website template [GitHub Pages template]. GitHub. https://github.com/morganavickery/academic-website-template",
+    image: "/lovable-uploads/academic-website-template.jpg",
+    imageAttribution: { text: "Image by Freepik", url: "https://www.freepik.com/free-photo/3d-rendering-website-hosting-concept_28645200.htm" },
   },
 ];
 
@@ -108,12 +121,33 @@ const Resources = () => {
                   />
                 </div>
               )}
+              {resource.image && (
+                <div className="mb-3 rounded-lg overflow-hidden border border-border/50">
+                  <img
+                    src={resource.image}
+                    alt={resource.title}
+                    className="w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {resource.description}
               </p>
             </div>
 
-            <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50">
+            <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50 flex-wrap gap-2">
+              {resource.imageAttribution && (
+                <a
+                  href={resource.imageAttribution.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={citeClass}
+                >
+                  <ImageIcon size={13} />
+                  {resource.imageAttribution.text}
+                </a>
+              )}
               <Popover>
                 <PopoverTrigger asChild>
                   <button className={citeClass}>
