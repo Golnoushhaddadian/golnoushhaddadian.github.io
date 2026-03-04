@@ -1,10 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { GraduationCap } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import gsuCampus from '@/assets/gsu-campus.jpeg';
 
 const educationData = [
   {
     university: "Georgia State University",
+    hoverImage: gsuCampus,
     location: "Atlanta, Georgia",
     degree: "Ph.D., Learning Sciences",
     dates: "Aug 2021–Dec 2025",
@@ -40,6 +43,61 @@ const educationData = [
   },
 ];
 
+const EducationItem = ({ edu }: { edu: any }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="relative pl-8 border-l-2 border-primary/30"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
+        <GraduationCap size={14} className="text-primary" />
+      </div>
+
+      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+        <div>
+          <h2 className="text-base sm:text-lg md:text-xl font-semibold">{edu.university}</h2>
+          {edu.subInstitution && (
+            <p className="text-xs sm:text-sm text-muted-foreground">{edu.subInstitution}</p>
+          )}
+        </div>
+        <span className="text-xs sm:text-sm text-muted-foreground shrink-0">{edu.location}</span>
+      </div>
+
+      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-3">
+        <p className="text-sm sm:text-base font-medium text-primary">{edu.degree}</p>
+        <span className="text-xs sm:text-sm text-muted-foreground shrink-0">{edu.dates}</span>
+      </div>
+
+      {edu.hoverImage && (
+        <div
+          className={cn(
+            "overflow-hidden rounded-lg mb-3 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
+            hovered ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          )}
+        >
+          <img
+            src={edu.hoverImage}
+            alt={edu.university}
+            className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
+          />
+        </div>
+      )}
+
+      <ul className="space-y-2">
+        {edu.details.map((detail: any, i: number) => (
+          <li key={i} className="text-xs sm:text-sm md:text-base leading-relaxed">
+            <span className="font-semibold">{detail.label}:</span>{" "}
+            <span className="text-muted-foreground">{detail.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 const Education = () => {
   return (
     <div className="max-w-5xl mx-auto">
@@ -50,35 +108,7 @@ const Education = () => {
 
       <div className="space-y-10">
         {educationData.map((edu, index) => (
-          <div key={index} className="relative pl-8 border-l-2 border-primary/30">
-            <div className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
-              <GraduationCap size={14} className="text-primary" />
-            </div>
-
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
-              <div>
-                <h2 className="text-base sm:text-lg md:text-xl font-semibold">{edu.university}</h2>
-                {edu.subInstitution && (
-                  <p className="text-xs sm:text-sm text-muted-foreground">{edu.subInstitution}</p>
-                )}
-              </div>
-              <span className="text-xs sm:text-sm text-muted-foreground shrink-0">{edu.location}</span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-3">
-              <p className="text-sm sm:text-base font-medium text-primary">{edu.degree}</p>
-              <span className="text-xs sm:text-sm text-muted-foreground shrink-0">{edu.dates}</span>
-            </div>
-
-            <ul className="space-y-2">
-              {edu.details.map((detail, i) => (
-                <li key={i} className="text-xs sm:text-sm md:text-base leading-relaxed">
-                  <span className="font-semibold">{detail.label}:</span>{" "}
-                  <span className="text-muted-foreground">{detail.text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <EducationItem key={index} edu={edu} />
         ))}
       </div>
     </div>
