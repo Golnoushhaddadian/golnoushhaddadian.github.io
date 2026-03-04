@@ -102,8 +102,8 @@ const Resources = () => {
     <section className="space-y-6 sm:space-y-8">
       <div className="text-center space-y-2">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">Open-Access Resources</h1>
-        <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
-          A curated collection of resources I have found valuable for teaching, learning, and research. I share them here in hopes they may be useful to others.
+        <p className="text-lg text-muted-foreground">
+          This page presents a curated collection of resources valuable for teaching, learning, and research. Please ensure that the original sources are properly cited if these materials are used.
         </p>
       </div>
 
