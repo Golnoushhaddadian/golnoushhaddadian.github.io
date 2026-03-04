@@ -44,14 +44,8 @@ const educationData = [
 ];
 
 const EducationItem = ({ edu }: { edu: any }) => {
-  const [hovered, setHovered] = useState(false);
-
   return (
-    <div
-      className="relative pl-8 border-l-2 border-primary/30"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <div className="relative pl-8 border-l-2 border-primary/30">
       <div className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
         <GraduationCap size={14} className="text-primary" />
       </div>
@@ -72,12 +66,7 @@ const EducationItem = ({ edu }: { edu: any }) => {
       </div>
 
       {edu.hoverImage && (
-        <div
-          className={cn(
-            "overflow-hidden rounded-lg mb-3 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
-            hovered ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
+        <div className="overflow-hidden rounded-lg mb-3">
           <img
             src={edu.hoverImage}
             alt={edu.university}
