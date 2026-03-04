@@ -128,7 +128,7 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
-      className="group relative py-6 first:pt-2"
+      className="group relative py-4 first:pt-1"
     >
       {/* Card-like container with subtle hover */}
       <div className="relative pl-5 sm:pl-7 border-l-[3px] border-border/40 group-hover:border-primary/50 transition-colors duration-500">
@@ -220,7 +220,7 @@ const Research = () => {
         </div>
 
         {grouped.map(({ year, items }) => (
-          <div key={year} className="mb-12 last:mb-0">
+          <div key={year} className="mb-8 last:mb-0">
             {/* Year marker */}
             <div className="flex items-center gap-4 mb-2">
               <h3 className="text-3xl sm:text-4xl font-black tracking-tighter text-primary/15 select-none">
