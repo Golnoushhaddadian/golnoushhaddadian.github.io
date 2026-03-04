@@ -38,8 +38,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSidebarVisible, setSidebarVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { path: '/', label: 'Welcome' },
@@ -69,72 +68,44 @@ const Layout = ({ children }: LayoutProps) => {
             Golnoush Haddadian
           </Link>
           
-          {/* Mobile menu toggle */}
-          <div className="md:hidden flex items-center gap-0.5 z-50">
+          <div className="flex items-center gap-0.5 z-50">
             <Button 
               variant="ghost" 
               size="icon"
-              className="h-8 w-8"
+              className="h-8 w-8 sm:h-9 sm:w-9"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
             </Button>
             <Button 
               variant="ghost" 
               size="icon"
-              className="h-8 w-8"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="h-8 w-8 sm:h-9 sm:w-9"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+              {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </Button>
           </div>
-          
-          {/* Desktop navigation */}
-          <nav className="hidden md:block" aria-label="Main navigation">
-            <ul className="flex flex-row items-center">
-              {navLinks.map((link) => (
-                <NavLink 
-                  key={link.path} 
-                  to={link.path} 
-                  label={link.label} 
-                  currentPath={location.pathname} 
-                />
-              ))}
-              <li>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={toggleTheme}
-                  aria-label="Toggle theme"
-                  className="ml-2"
-                >
-                  {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-                </Button>
-              </li>
-            </ul>
-          </nav>
         </div>
       </header>
 
-      {/* Mobile navigation overlay - outside header for proper layering */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40">
-          {/* Backdrop */}
+      {/* Navigation overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40">
           <div 
             className="absolute inset-0 bg-background/80 backdrop-blur-sm"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => setIsMenuOpen(false)}
           />
           
-          {/* Menu panel */}
-          <nav className="absolute top-12 left-0 right-0 bg-background border shadow-lg mx-3 rounded-md overflow-hidden animate-in slide-in-from-top-2 duration-200" aria-label="Mobile navigation">
+          <nav className="absolute top-12 sm:top-14 right-3 sm:right-6 lg:right-10 bg-background border shadow-lg rounded-md overflow-hidden animate-in slide-in-from-top-2 duration-200 w-56" aria-label="Main navigation">
             <ul className="flex flex-col py-1">
               {navLinks.map((link) => (
                 <li key={link.path}>
                   <Link 
                     to={link.path} 
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => setIsMenuOpen(false)}
                     className={cn(
                       "flex items-center py-2.5 px-4 text-sm font-medium transition-colors border-l-2",
                       location.pathname === link.path 
