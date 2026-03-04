@@ -1,14 +1,59 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Quote, BookOpen, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
+import { useEffect, useRef, useState } from "react";
+
+const useCountUp = (end: number, duration = 1800, startOnView = true) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!startOnView) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasStarted, startOnView]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    let start = 0;
+    const increment = end / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [hasStarted, end, duration]);
+
+  return { count, ref };
+};
+
 const AboutMe = () => {
   useDocumentHead({
     title: 'Golnoush (Lia) Haddadian — AI in Education & Argumentative Writing Researcher',
     description: 'Academic portfolio of Dr. Golnoush (Lia) Haddadian. Postdoctoral Associate researching AI in Education, argumentative writing, automated writing evaluation, personalized learning, and formative assessment.',
     canonical: '/',
   });
+
+  const citations = useCountUp(43);
+  const publications = useCountUp(28);
+  const hIndex = useCountUp(5, 1000);
+
   const iconSize = 32;
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-4xl">
@@ -95,27 +140,6 @@ const AboutMe = () => {
           </div>
         </section>
 
-        {/* Google Scholar Stats */}
-        <section className="mt-6 sm:mt-8 md:mt-12">
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-xl mx-auto md:mx-0">
-            <div className="text-center">
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">43</p>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Citations</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">28</p>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Publications</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">5</p>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-1">H-Index</p>
-            </div>
-          </div>
-          <p className="text-[10px] sm:text-xs text-muted-foreground/60 mt-2 text-center md:text-left max-w-xl mx-auto md:mx-0">
-            Data sourced from <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:underline">Google Scholar</a>. Last updated: 2026-03-04
-          </p>
-        </section>
-
         <section className="mt-6 sm:mt-8 md:mt-12">
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Publications</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-[10px] sm:text-xs md:text-sm">
@@ -148,6 +172,48 @@ const AboutMe = () => {
               <a href="https://doi.org/10.22318/cscl2025.921873" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                 https://doi.org/10.22318/cscl2025.921873
               </a>
+            </p>
+          </div>
+        </section>
+
+        {/* Google Scholar Stats */}
+        <section className="mt-8 sm:mt-10 md:mt-14">
+          <div className="relative rounded-xl border border-border/50 bg-muted/30 backdrop-blur-sm p-6 sm:p-8 md:p-10">
+            <div className="grid grid-cols-3 gap-6 sm:gap-8 md:gap-12 max-w-2xl mx-auto">
+              <div ref={citations.ref} className="text-center space-y-1 sm:space-y-2">
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 mb-2 sm:mb-3">
+                  <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                </div>
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
+                  {citations.count}
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Citations</p>
+              </div>
+              <div ref={publications.ref} className="text-center space-y-1 sm:space-y-2">
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 mb-2 sm:mb-3">
+                  <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                </div>
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
+                  {publications.count}
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Publications</p>
+              </div>
+              <div ref={hIndex.ref} className="text-center space-y-1 sm:space-y-2">
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 mb-2 sm:mb-3">
+                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                </div>
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
+                  {hIndex.count}
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">H-Index</p>
+              </div>
+            </div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground/50 mt-5 sm:mt-6 text-center">
+              Data sourced from{" "}
+              <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-muted-foreground/70 transition-colors">
+                Google Scholar
+              </a>
+              . Last updated: 2026-03-04
             </p>
           </div>
         </section>
