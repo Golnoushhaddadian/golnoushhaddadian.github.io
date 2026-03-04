@@ -45,7 +45,7 @@ const Awards = () => {
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: idx * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
-              className="group relative flex gap-4 sm:gap-5 items-start py-0.5 sm:py-1"
+              className="group relative flex gap-4 sm:gap-5 items-start py-px"
             >
               {/* Accent bar */}
               <div
@@ -58,7 +58,7 @@ const Awards = () => {
                 <p className="text-sm sm:text-base md:text-[1.1rem] font-semibold leading-snug text-foreground/90 group-hover:text-foreground transition-colors duration-300">
                   {award.title}
                 </p>
-                <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1">
+                <p className="text-xs sm:text-sm text-muted-foreground/60 mt-0.5">
                   {award.org}
                 </p>
               </div>
