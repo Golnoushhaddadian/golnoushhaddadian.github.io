@@ -45,6 +45,7 @@ const resources: Resource[] = [
     link: "https://publication-guide.notion.site/",
     citation:
       "Vickery, M. (2025). Publication venue guide [Web application]. https://publication-guide.notion.site/",
+    image: "/lovable-uploads/publication-venue-guide-preview.png",
   },
   {
     title: "Academic Website Template",
@@ -121,12 +122,12 @@ const Resources = () => {
                   />
                 </div>
               )}
-              {resource.image && (
-                <div className="mb-3 rounded-lg overflow-hidden border border-border/50">
+              {resource.image && !resource.embedUrl && (
+                <div className="mb-3 rounded-lg overflow-hidden border border-border/50 aspect-video">
                   <img
                     src={resource.image}
                     alt={resource.title}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
