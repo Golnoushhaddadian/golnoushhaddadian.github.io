@@ -204,26 +204,31 @@ const Research = () => {
       <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-center">Research</h1>
 
       <section className="mb-12">
-        {/* Section header */}
-        <div className="mb-3 pb-3">
-          <div className="flex items-baseline gap-3">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground tracking-tight">
-              Refereed Journal Publications
-            </h2>
-            <span className="text-xs sm:text-sm font-medium text-muted-foreground/60 bg-muted/50 px-2.5 py-0.5 rounded-full">
-              {journalPublications.length}
-            </span>
-          </div>
-        </div>
+        {grouped.map(({ year, items }, groupIdx) => {
+          const yearColors = [
+            'text-[hsl(200,60%,65%)]',   // soft blue
+            'text-[hsl(340,50%,65%)]',    // soft rose
+            'text-[hsl(160,45%,55%)]',    // soft teal
+            'text-[hsl(270,45%,65%)]',    // soft lavender
+            'text-[hsl(30,60%,60%)]',     // soft amber
+          ];
+          const lineColors = [
+            'from-[hsl(200,60%,65%)]/30',
+            'from-[hsl(340,50%,65%)]/30',
+            'from-[hsl(160,45%,55%)]/30',
+            'from-[hsl(270,45%,65%)]/30',
+            'from-[hsl(30,60%,60%)]/30',
+          ];
+          const colorClass = yearColors[groupIdx % yearColors.length];
+          const lineClass = lineColors[groupIdx % lineColors.length];
 
-        {grouped.map(({ year, items }) => (
+          return (
           <div key={year} className="mb-8 last:mb-0">
-            {/* Year marker */}
             <div className="flex items-center gap-4 mb-2">
-              <h3 className="text-3xl sm:text-4xl font-black tracking-tighter text-primary/15 select-none">
+              <h3 className={`text-3xl sm:text-4xl font-black tracking-tighter select-none ${colorClass}`}>
                 {year}
               </h3>
-              <div className="flex-1 h-px bg-gradient-to-r from-border/50 to-transparent" />
+              <div className={`flex-1 h-px bg-gradient-to-r ${lineClass} to-transparent`} />
             </div>
 
             <div>
@@ -233,7 +238,8 @@ const Research = () => {
               })}
             </div>
           </div>
-        ))}
+          );
+        })}
       </section>
     </div>
   );
