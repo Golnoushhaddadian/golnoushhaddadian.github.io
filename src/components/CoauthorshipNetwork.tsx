@@ -548,20 +548,6 @@ const CoauthorshipNetwork = () => {
           </span>
         </div>
 
-        {/* Cluster colors */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <span className="text-[10px] sm:text-xs text-muted-foreground/50">Clusters:</span>
-          {clusterLegend.map(({ index }) => {
-            const color = dk ? PAL[index % PAL.length].d : PAL[index % PAL.length].l;
-            return (
-              <span
-                key={index}
-                className="inline-block w-2.5 h-2.5 rounded-full"
-                style={{ backgroundColor: color }}
-              />
-            );
-          })}
-        </div>
       </div>
     </div>
   );
