@@ -58,7 +58,7 @@ const Awards = () => {
                 <p className="text-sm sm:text-base md:text-[1.1rem] font-semibold leading-snug text-foreground/90 group-hover:text-foreground transition-colors duration-300">
                   {award.title}
                 </p>
-                <p className="text-xs sm:text-sm text-muted-foreground/60 -mt-0.5 leading-tight">
+                <p className="text-xs sm:text-sm text-muted-foreground/60 -mt-1.5 leading-none">
                   {award.org}
                 </p>
               </div>
