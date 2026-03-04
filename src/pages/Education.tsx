@@ -97,7 +97,7 @@ const Education = () => {
     <div className="max-w-5xl mx-auto">
       <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-center">Education</h1>
 
-      <div className="space-y-10">
+      <div className="space-y-14">
         {educationData.map((edu, index) => (
           <EducationItem key={index} edu={edu} />
         ))}
