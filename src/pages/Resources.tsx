@@ -44,6 +44,7 @@ const resources: Resource[] = [
     link: "https://publication-guide.notion.site/",
     citation:
       "Vickery, M. (2025). Publication venue guide [Web application]. https://publication-guide.notion.site/",
+    image: "/lovable-uploads/publication-venue-guide-preview.png",
   },
   {
     title: "Academic Website Template",
