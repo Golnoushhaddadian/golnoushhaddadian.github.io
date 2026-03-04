@@ -30,6 +30,7 @@ const educationData = [
   },
   {
     university: "Emam Khomeiny International University",
+    subInstitution: "Kar Institute of Higher Education",
     location: "Qazvin, Iran",
     degree: "B.A., English Translation Studies",
     dates: "Feb 2008–Jun 2012",
@@ -55,7 +56,12 @@ const Education = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
-              <h2 className="text-base sm:text-lg md:text-xl font-semibold">{edu.university}</h2>
+              <div>
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold">{edu.university}</h2>
+                {edu.subInstitution && (
+                  <p className="text-xs sm:text-sm text-muted-foreground">{edu.subInstitution}</p>
+                )}
+              </div>
               <span className="text-xs sm:text-sm text-muted-foreground shrink-0">{edu.location}</span>
             </div>
 
