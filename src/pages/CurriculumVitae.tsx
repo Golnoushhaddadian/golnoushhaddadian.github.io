@@ -2,8 +2,16 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Lock, Mail } from "lucide-react";
+import { useDocumentHead } from "@/hooks/useDocumentHead";
 
 const CurriculumVitae = () => {
+  useDocumentHead({
+    title: 'Curriculum Vitae — Golnoush Haddadian',
+    description: 'Request access to the curriculum vitae of Golnoush Haddadian.',
+    canonical: '/cv',
+    noindex: true,
+  });
+
   return (
     <section className="space-y-4 sm:space-y-6">
       <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">Curriculum Vitae</h1>

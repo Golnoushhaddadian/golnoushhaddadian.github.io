@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useDocumentHead } from '@/hooks/useDocumentHead';
 import gsuCampus from '@/assets/gsu-campus.jpeg';
 import sharifCampus from '@/assets/sharif-campus.jpeg';
 import emamKhomeinyCampus from '@/assets/emam-khomeiny-campus.jpeg';
@@ -74,6 +75,8 @@ const EducationItem = ({ edu }: { edu: any }) => {
           <img
             src={edu.hoverImage}
             alt={edu.university}
+            loading="lazy"
+            decoding="async"
             className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
             style={{ objectPosition: 'center 30%' }}
           />
@@ -93,6 +96,12 @@ const EducationItem = ({ edu }: { edu: any }) => {
 };
 
 const Education = () => {
+  useDocumentHead({
+    title: 'Education — Golnoush Haddadian',
+    description: 'Educational background of Golnoush Haddadian including Ph.D. in Learning Sciences from Georgia State University and M.A. from Sharif University of Technology.',
+    canonical: '/education',
+  });
+
   return (
     <div className="max-w-5xl mx-auto">
       <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-center">Education</h1>
