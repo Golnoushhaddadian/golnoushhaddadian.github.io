@@ -28,19 +28,57 @@ interface Link {
 
 const SELF = ["Haddadian, G.", "Haddadian, G"];
 const isSelf = (n: string) => SELF.some(p => n.trim().startsWith(p));
-const norm = (n: string) => n.trim().replace(/\s+/g, " ");
 const lk = (a: string, b: string) => [a, b].sort().join("|||");
 
-// Soft, academic, pastel-ish palette matching the site's timeline accents
+// Merge name variants to canonical form
+const NAME_ALIASES: Record<string, string> = {
+  "Schunn, C": "Schunn, C. D.",
+  "Schunn, C.": "Schunn, C. D.",
+  "Schunn, C, Alqassab, M.": "Schunn, C. D.", // data artifact
+  "Kim, M.": "Kim, M. K.",
+  "Kim, M": "Kim, M. K.",
+  "Kim, M. Kim, J.": "Kim, M. K.", // data artifact — will also add Kim, J. separately
+  "Kim, M. Haddadian, G.": "Kim, M. K.",
+  "Banihashem, K.": "Banihashem, S. K.",
+};
+
+function norm(name: string): string {
+  const n = name.trim().replace(/\s+/g, " ");
+  return NAME_ALIASES[n] || n;
+}
+
+// Fix malformed author entries in data
+function cleanAuthors(authors: string[]): string[] {
+  const result: string[] = [];
+  for (const a of authors) {
+    const trimmed = a.trim().replace(/\s+/g, " ");
+    // Handle "Kim, M. Kim, J." → two authors
+    if (trimmed === "Kim, M. Kim, J.") {
+      result.push("Kim, M. K.");
+      result.push("Kim, J.");
+    } else if (trimmed === "Kim, M. Haddadian, G.") {
+      result.push("Kim, M. K.");
+      result.push("Haddadian, G.");
+    } else if (trimmed === "Schunn, C, Alqassab, M.") {
+      result.push("Schunn, C. D.");
+      result.push("Alqassab, M.");
+    } else {
+      result.push(norm(trimmed));
+    }
+  }
+  return result;
+}
+
+// Soft, academic palette matching the site's timeline accents
 const PAL = [
-  { l: "hsl(210,48%,58%)", d: "hsl(210,55%,68%)" },   // soft blue
-  { l: "hsl(350,45%,62%)", d: "hsl(350,50%,70%)" },   // soft rose
-  { l: "hsl(165,38%,48%)", d: "hsl(165,42%,58%)" },   // teal
-  { l: "hsl(270,35%,60%)", d: "hsl(270,40%,70%)" },   // lavender
-  { l: "hsl(35,55%,58%)",  d: "hsl(35,55%,65%)" },    // amber
-  { l: "hsl(195,40%,52%)", d: "hsl(195,45%,62%)" },   // cyan
-  { l: "hsl(140,32%,50%)", d: "hsl(140,36%,58%)" },   // sage
-  { l: "hsl(20,50%,58%)",  d: "hsl(20,50%,66%)" },    // peach
+  { l: "hsl(210,48%,58%)", d: "hsl(210,55%,68%)", bg_l: "hsla(210,48%,58%,0.06)", bg_d: "hsla(210,55%,68%,0.08)" },
+  { l: "hsl(350,45%,62%)", d: "hsl(350,50%,70%)", bg_l: "hsla(350,45%,62%,0.06)", bg_d: "hsla(350,50%,70%,0.08)" },
+  { l: "hsl(165,38%,48%)", d: "hsl(165,42%,58%)", bg_l: "hsla(165,38%,48%,0.06)", bg_d: "hsla(165,42%,58%,0.08)" },
+  { l: "hsl(270,35%,60%)", d: "hsl(270,40%,70%)", bg_l: "hsla(270,35%,60%,0.06)", bg_d: "hsla(270,40%,70%,0.08)" },
+  { l: "hsl(35,55%,58%)",  d: "hsl(35,55%,65%)",  bg_l: "hsla(35,55%,58%,0.06)",  bg_d: "hsla(35,55%,65%,0.08)" },
+  { l: "hsl(195,40%,52%)", d: "hsl(195,45%,62%)", bg_l: "hsla(195,40%,52%,0.06)", bg_d: "hsla(195,45%,62%,0.08)" },
+  { l: "hsl(140,32%,50%)", d: "hsl(140,36%,58%)", bg_l: "hsla(140,32%,50%,0.06)", bg_d: "hsla(140,36%,58%,0.08)" },
+  { l: "hsl(20,50%,58%)",  d: "hsl(20,50%,66%)",  bg_l: "hsla(20,50%,58%,0.06)",  bg_d: "hsla(20,50%,66%,0.08)" },
 ];
 
 function build() {
@@ -52,7 +90,7 @@ function build() {
     ...workUnderReview.map(p => p.authors),
     ...workInProgress.map(p => p.authors),
   ]) {
-    if (a?.length) all.push(a.map(norm));
+    if (a?.length) all.push(cleanAuthors(a));
   }
 
   const counts: Record<string, number> = {};
@@ -254,6 +292,53 @@ const CoauthorshipNetwork = () => {
       ctx.fillRect(0, 0, w, h);
 
       const pal = (ci: number) => dk ? PAL[ci % PAL.length].d : PAL[ci % PAL.length].l;
+      const palBg = (ci: number) => dk ? PAL[ci % PAL.length].bg_d : PAL[ci % PAL.length].bg_l;
+
+      // ── CLUSTER HULLS ── draw soft background blobs behind each cluster
+      const clusterMap = new Map<number, Node[]>();
+      for (const n of ns) {
+        if (n.isCenter) continue;
+        const arr = clusterMap.get(n.cluster) || [];
+        arr.push(n);
+        clusterMap.set(n.cluster, arr);
+      }
+      for (const [ci, members] of clusterMap) {
+        if (members.length < 2) continue; // no hull for singletons
+        // Compute centroid
+        let cx2 = 0, cy2 = 0;
+        for (const m of members) { cx2 += m.x; cy2 += m.y; }
+        cx2 /= members.length; cy2 /= members.length;
+        // Sort by angle from centroid for convex-ish blob
+        const sorted = [...members].sort((a, b) =>
+          Math.atan2(a.y - cy2, a.x - cx2) - Math.atan2(b.y - cy2, b.x - cx2)
+        );
+        // Draw smooth blob with padding
+        const pad = 32;
+        ctx.beginPath();
+        for (let i = 0; i < sorted.length; i++) {
+          const curr = sorted[i];
+          const next = sorted[(i + 1) % sorted.length];
+          const dx = curr.x - cx2, dy = curr.y - cy2;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          const px = curr.x + (dx / dist) * pad;
+          const py = curr.y + (dy / dist) * pad;
+          if (i === 0) ctx.moveTo(px, py);
+          const ndx = next.x - cx2, ndy = next.y - cy2;
+          const ndist = Math.sqrt(ndx * ndx + ndy * ndy) || 1;
+          const npx = next.x + (ndx / ndist) * pad;
+          const npy = next.y + (ndy / ndist) * pad;
+          const cpx = cx2 + ((px + npx) / 2 - cx2) * 1.1;
+          const cpy = cy2 + ((py + npy) / 2 - cy2) * 1.1;
+          ctx.quadraticCurveTo(cpx, cpy, npx, npy);
+        }
+        ctx.closePath();
+        ctx.fillStyle = palBg(ci);
+        ctx.fill();
+        // Subtle border
+        ctx.strokeStyle = pal(ci).replace("hsl(", "hsla(").replace(")", ",0.12)");
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
 
       // Connected to hovered
       const hovLinks = new Set<string>();
