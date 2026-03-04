@@ -18,6 +18,15 @@ type Publication = {
 
 const journalPublications: Publication[] = [
   {
+    title: "Exploring AI-Generated Expert Models: Instructor Interaction and Learner Perceptions in a Physics Class",
+    authors: "Haddadian, G., Han, H., Kim, J., Abdeen, M. S., & Kim, M. K.",
+    venue: "Proceedings of the 19th International Conference of the Learning Sciences - ICLS 2025 (pp. 1684-1688). International Society of the Learning Sciences",
+    year: 2025,
+    doi: "https://doi.org/10.22318/icls2025.213524",
+    pdf: "/papers/haddadian-et-al-2025-ai-expert-models.pdf",
+    apa: "Haddadian, G., Han, H., Kim, J., Abdeen, M. S., & Kim, M. K. (2025). Exploring AI-Generated Expert Models: Instructor Interaction and Learner Perceptions in a Physics Class. In Proceedings of the 19th International Conference of the Learning Sciences-ICLS 2025, pp. 1684-1688. International Society of the Learning Sciences.",
+  },
+  {
     title: "Enhancing Peer Feedback Practices With Generative AI",
     authors: "Greisel, M., Hornstein, J., Kollar, I., Noroozi, O., Haddadian, G., Gao, X., Alqassab, M., Banihashem, K., Khosravi, H., Pozdniakov, S., Schunn, C. D., Yu, Q., & Rummel, N.",
     venue: "Proceedings of the 18th International Conference on Computer-Supported Collaborative Learning - CSCL 2025 (pp. 490-498). International Society of the Learning Sciences",
