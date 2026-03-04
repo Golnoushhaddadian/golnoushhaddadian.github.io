@@ -1,6 +1,6 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ExternalLink, Quote, BookOpen, Award } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 import { useEffect, useRef, useState } from "react";
@@ -178,44 +178,35 @@ const AboutMe = () => {
 
         {/* Google Scholar Stats */}
         <section className="mt-8 sm:mt-10 md:mt-14">
-          <div className="relative rounded-xl border border-border/50 bg-muted/30 backdrop-blur-sm p-6 sm:p-8 md:p-10">
-            <div className="grid grid-cols-3 gap-6 sm:gap-8 md:gap-12 max-w-2xl mx-auto">
-              <div ref={citations.ref} className="text-center space-y-1 sm:space-y-2">
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 mb-2 sm:mb-3">
-                  <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                </div>
-                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
-                  {citations.count}
-                </p>
-                <p className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Citations</p>
-              </div>
-              <div ref={publications.ref} className="text-center space-y-1 sm:space-y-2">
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 mb-2 sm:mb-3">
-                  <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                </div>
-                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
-                  {publications.count}
-                </p>
-                <p className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Publications</p>
-              </div>
-              <div ref={hIndex.ref} className="text-center space-y-1 sm:space-y-2">
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 mb-2 sm:mb-3">
-                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                </div>
-                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
-                  {hIndex.count}
-                </p>
-                <p className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">H-Index</p>
-              </div>
+          <div className="flex items-center justify-between max-w-xl mx-auto">
+            <div ref={citations.ref} className="text-center">
+              <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
+                {citations.count}
+              </p>
+              <p className="text-[10px] sm:text-xs font-medium text-muted-foreground mt-1 tracking-wider uppercase">Citations</p>
             </div>
-            <p className="text-[10px] sm:text-xs text-muted-foreground/50 mt-5 sm:mt-6 text-center">
-              Data sourced from{" "}
-              <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-muted-foreground/70 transition-colors">
-                Google Scholar
-              </a>
-              . Last updated: 2026-03-04
-            </p>
+            <div className="w-px h-12 sm:h-16 bg-border" aria-hidden="true" />
+            <div ref={publications.ref} className="text-center">
+              <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
+                {publications.count}
+              </p>
+              <p className="text-[10px] sm:text-xs font-medium text-muted-foreground mt-1 tracking-wider uppercase">Publications</p>
+            </div>
+            <div className="w-px h-12 sm:h-16 bg-border" aria-hidden="true" />
+            <div ref={hIndex.ref} className="text-center">
+              <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
+                {hIndex.count}
+              </p>
+              <p className="text-[10px] sm:text-xs font-medium text-muted-foreground mt-1 tracking-wider uppercase">H-Index</p>
+            </div>
           </div>
+          <p className="text-[10px] sm:text-xs text-muted-foreground/40 mt-4 sm:mt-5 text-center">
+            Via{" "}
+            <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-muted-foreground/60 transition-colors">
+              Google Scholar
+            </a>
+            {" "}· Updated Mar 2026
+          </p>
         </section>
       </div>
     </div>;
