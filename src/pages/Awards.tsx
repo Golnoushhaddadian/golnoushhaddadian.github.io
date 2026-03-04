@@ -45,7 +45,7 @@ const Awards = () => {
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: idx * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
-              className="group relative flex gap-4 sm:gap-5 items-start py-3.5 sm:py-4"
+              className="group relative flex gap-4 sm:gap-5 items-start py-1.5 sm:py-2"
             >
               {/* Accent bar */}
               <div
