@@ -1,11 +1,15 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, FileText, Quote, Copy, Check } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 type Publication = {
   title: string;
@@ -240,13 +244,11 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
               side="right"
               align="start"
               sideOffset={12}
-              className="w-[280px] sm:w-[340px] h-[360px] sm:h-[440px] p-0 overflow-hidden border-primary/20"
+              className="w-[280px] sm:w-[340px] p-2 overflow-hidden border-primary/20"
             >
-              <iframe
-                src={`${pub.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
-                className="w-full h-full"
-                title={`Preview: ${pub.title}`}
-              />
+              <Document file={pub.pdf} loading={<div className="flex items-center justify-center h-[300px] text-xs text-muted-foreground">Loading...</div>}>
+                <Page pageNumber={1} width={260} renderTextLayer={false} renderAnnotationLayer={false} />
+              </Document>
             </HoverCardContent>
           </HoverCard>
         ) : (
