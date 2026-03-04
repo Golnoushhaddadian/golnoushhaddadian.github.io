@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      visitor_sessions: {
+        Row: {
+          browser: string | null
+          city: string | null
+          country: string | null
+          created_at: string | null
+          device: string | null
+          duration_seconds: number | null
+          email_sent: boolean | null
+          first_page: string | null
+          id: string
+          ip_address: string | null
+          last_active_at: string | null
+          latitude: number | null
+          longitude: number | null
+          os: string | null
+          pages_visited: Json | null
+          referrer: string | null
+          region: string | null
+          session_id: string
+          started_at: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          device?: string | null
+          duration_seconds?: number | null
+          email_sent?: boolean | null
+          first_page?: string | null
+          id?: string
+          ip_address?: string | null
+          last_active_at?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          os?: string | null
+          pages_visited?: Json | null
+          referrer?: string | null
+          region?: string | null
+          session_id: string
+          started_at?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          device?: string | null
+          duration_seconds?: number | null
+          email_sent?: boolean | null
+          first_page?: string | null
+          id?: string
+          ip_address?: string | null
+          last_active_at?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          os?: string | null
+          pages_visited?: Json | null
+          referrer?: string | null
+          region?: string | null
+          session_id?: string
+          started_at?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
