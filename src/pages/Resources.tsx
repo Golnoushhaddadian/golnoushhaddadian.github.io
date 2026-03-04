@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
-import { ExternalLink, Quote, Copy, Check } from 'lucide-react';
+import { ExternalLink, Quote, Copy, Check, ArrowRight } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { motion } from 'framer-motion';
 
 type Resource = {
   title: string;
+  subtitle: string;
   description: string;
   link: string;
   citation: string;
@@ -15,6 +16,7 @@ type Resource = {
 const resources: Resource[] = [
   {
     title: "The Learning Theory Map",
+    subtitle: "Made via Whimsical · 2023–2025",
     description:
       "A concise reference guide to major learning theories, developed by my colleague Morgan Vickery for her undergraduate course Learning Theories for Teachers. The resource is designed to provide students with a clear and accessible first introduction to key theoretical perspectives on learning.",
     link: "https://whimsical.com/s25-theory-map-dy5XNBK5mVWkAFXygFvUA",
@@ -41,7 +43,7 @@ const CopyButton = ({ text }: { text: string }) => {
   );
 };
 
-const linkClass =
+const citeClass =
   "inline-flex items-center gap-1 text-[hsl(175,50%,40%)] hover:text-[hsl(175,50%,30%)] underline underline-offset-2 decoration-[hsl(175,50%,40%)]/40 text-xs sm:text-sm transition-colors";
 
 const Resources = () => {
@@ -53,38 +55,36 @@ const Resources = () => {
 
   return (
     <section className="space-y-6 sm:space-y-8">
-      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center">Open Resources</h1>
+      <div className="text-center space-y-2">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">Open-Access Resources</h1>
+        <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
+          A curated collection of resources I have found valuable for teaching, learning, and research. I share them here in hopes they may be useful to others.
+        </p>
+      </div>
 
-      <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto text-center">
-        A curated collection of resources I have found valuable for teaching, learning, and research. I share them here in hopes they may be useful to others.
-      </p>
-
-      <div className="space-y-4 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {resources.map((resource, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: i * 0.08 }}
-            className="relative border rounded-lg p-5 sm:p-6 bg-card"
+            transition={{ duration: 0.35, delay: i * 0.07 }}
+            className="group relative flex flex-col justify-between rounded-xl border bg-card p-5 sm:p-6 hover:shadow-md hover:border-primary/30 transition-all duration-300"
           >
-            <h2 className="text-base sm:text-lg font-semibold mb-2">{resource.title}</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              {resource.description}
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={resource.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkClass}
-              >
-                <ExternalLink size={13} />
-                Visit Resource
-              </a>
+            <div>
+              <h2 className="text-base sm:text-lg font-semibold text-primary mb-1 group-hover:underline underline-offset-2">
+                {resource.title}
+              </h2>
+              <p className="text-xs text-muted-foreground mb-3">{resource.subtitle}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {resource.description}
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50">
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className={linkClass}>
+                  <button className={citeClass}>
                     <Quote size={13} />
                     Cite
                   </button>
@@ -100,6 +100,15 @@ const Resources = () => {
                   </div>
                 </PopoverContent>
               </Popover>
+
+              <a
+                href={resource.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:gap-2 transition-all duration-200"
+              >
+                Visit <ArrowRight size={15} />
+              </a>
             </div>
           </motion.div>
         ))}
