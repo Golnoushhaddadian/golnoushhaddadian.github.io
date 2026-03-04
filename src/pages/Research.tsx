@@ -98,6 +98,14 @@ const journalPublications: Publication[] = [
     apa: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K. (2024). Evaluating Private Artificial Intelligence (AI) Curriculum in Computer Science (CS) Education: Insights for Advancing Student-Centered CS Learning. In Proceedings of the 18th International Conference of the Learning Sciences-ICLS 2024, pp. 2271-2272. International Society of the Learning Sciences.",
   },
   {
+    title: "An Investigation of ELT Teachers' Online Self-efficacy: Does Teachers' Level of Agency Matter?",
+    authors: "Haddadian, G., & Haddadian, N.",
+    venue: "Proceedings of Society for Information Technology & Teacher Education International Conference (pp. 1607-1615). Las Vegas, Nevada: Association for the Advancement of Computing in Education (AACE)",
+    year: 2024,
+    doi: "https://www.learntechlib.org/primary/p/224179/",
+    apa: "Haddadian, G., & Haddadian, N. (2024, March). An Investigation of ELT Teachers' Online Self-efficacy: Does Teachers' Level of Agency Matter?. In Society for Information Technology & Teacher Education International Conference (pp. 1607-1615). Association for the Advancement of Computing in Education (AACE).",
+  },
+  {
     title: "Conversational Repairs in Persian Dramatic Discourse: Akbar Radi's Pellekân (The Steps)",
     authors: "Haddadian, G., & Mahmoodi-Bakhtiari, B.",
     venue: "Persian Literary Studies Journal, 7(11), 65-82",
