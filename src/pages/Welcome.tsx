@@ -103,16 +103,19 @@ const AboutMe = () => {
         </div>
 
         <section>
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Hello Amazing People! Welcome to My Personal Website</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2">Hello Amazing People!</h2>
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground/60 mb-3 sm:mb-4 md:mb-6">Welcome to My Personal Website</p>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base">
-            
             <p>
               My name is <em>Golnoush</em>, a{" "}
               <a href="https://en.wikipedia.org/wiki/Persians" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Persian</a>
               {" "}name that metaphorically means <em>enduring beauty</em>. Since its pronunciation can be challenging for non-Persian speakers, people often call me <em>Lia</em>, a name with Greek origins meaning <em>one who brings good news</em>.
             </p>
             <p>
-              I hold a Ph.D. in Learning Sciences from <a href="https://education.gsu.edu/ls/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Georgia State University</a> (2025, December). My research focuses on the design and development of state-of-the-art AI tools to support personalized, human-centered, and adaptive learning environments in higher education, grounded in robust theory-driven design and informed by mixed-methods approaches to address real-world educational challenges. From my early experiences designing interactive learning tools during my high school years to my current appointment as a Postdoctoral Associate, my work has been driven by a sustained commitment to addressing educational challenges through evidence-based design and expanding access to effective learning opportunities.
+              I believe technology exists to expand human potential, to amplify abilities, deepen thinking, and empower what humans can become, never to replace them.
+            </p>
+            <p>
+              As a researcher, teacher, designer, and innovator, my work sits at the intersection of AI and learning, focusing on the design of human-centered AI systems that enhance student learning, strengthen teaching practices, and support personalized learning and teaching experiences. Grounded in theories of learning and guided by design-based research and mixed-methods approaches, my work aims to develop responsible AI innovations that address real-world challenges in education and create meaningful societal impact.
             </p>
             <p>My core research areas include:</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-1">
