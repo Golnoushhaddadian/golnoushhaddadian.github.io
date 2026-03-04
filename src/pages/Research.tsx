@@ -122,6 +122,15 @@ const journalPublications: Publication[] = [
     pdf: "/papers/kim-et-al-2023-ai-vs-human-evaluation.pdf",
     apa: "Kim, J., Haddadian, G., & Kim, M. K. (2023). An Investigation of Knowledge-Based AI vs. Human Evaluation in the Context of Academic Summary Evaluation: Similarities, Dissimilarities, and Being Toward Mutual Understandings. In Proceedings of the 17th International Conference of the Learning Sciences-ICLS 2023, pp. 994-997. International Society of the Learning Sciences.",
   },
+  {
+    title: "A Design Study of Problem-Centered Instruction (PCI) for Private Artificial Intelligence (AI) Curriculum Development",
+    authors: "Haddadian, G., Takabi, D., Panzade, P., & Kim, M. K.",
+    venue: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL",
+    year: 2023,
+    doi: "https://par.nsf.gov/servlets/purl/10582484",
+    pdf: "/papers/haddadian-et-al-2023-pci-private-ai.pdf",
+    apa: "Haddadian, G., Takabi, D., Panzade, P., Kim, M. (2023). A Design Study of Problem-Centered Instruction (PCI) for Private Artificial Intelligence (AI) Curriculum Development. 2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL.",
+  },
 ];
 
 const groupByYear = (pubs: Publication[]) => {
