@@ -205,7 +205,7 @@ const Research = () => {
 
       <section className="mb-12">
         {/* Section header */}
-        <div className="mb-3 pb-3 border-b border-border/50">
+        <div className="mb-3 pb-3">
           <div className="flex items-baseline gap-3">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground tracking-tight">
               Refereed Journal Publications
