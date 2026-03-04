@@ -42,6 +42,7 @@ const journalPublications: Publication[] = [
     venue: "Language Testing in Asia, 14(33)",
     year: 2024,
     doi: "https://doi.org/10.1186/s40468-024-00303-2",
+    pdf: "/papers/haddadian-et-al-2024-cfal-questionnaire.pdf",
   },
   {
     title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking: Learners' Perceptions and Transformative Engagement Experiences in Focus",
