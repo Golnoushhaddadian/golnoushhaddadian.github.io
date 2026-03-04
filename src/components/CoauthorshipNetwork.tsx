@@ -27,7 +27,9 @@ interface Link {
 }
 
 const SELF = ["Haddadian, G.", "Haddadian, G"];
+const EXCLUDED = ["Kavoshian, S.", "Mashhadi, F."];
 const isSelf = (n: string) => SELF.some(p => n.trim().startsWith(p));
+const isExcluded = (n: string) => EXCLUDED.some(p => n.trim().startsWith(p));
 const lk = (a: string, b: string) => [a, b].sort().join("|||");
 
 // Merge name variants to canonical form
@@ -98,7 +100,7 @@ function build() {
 
   for (const authors of all) {
     if (!authors.some(isSelf)) continue;
-    const cas = authors.filter(a => !isSelf(a) && a.length > 1);
+    const cas = authors.filter(a => !isSelf(a) && !isExcluded(a) && a.length > 1);
     for (const c of cas) counts[c] = (counts[c] || 0) + 1;
     for (let i = 0; i < cas.length; i++)
       for (let j = i + 1; j < cas.length; j++)
