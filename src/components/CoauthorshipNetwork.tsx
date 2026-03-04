@@ -498,8 +498,28 @@ const CoauthorshipNetwork = () => {
 
   const onUp = useCallback(() => { dragging.current = false; dragId.current = null; }, []);
 
+  // Build cluster legend data
+  const clusterLegend = useMemo(() => {
+    if (!coauthors.length) return [];
+    const clusterMap: Record<number, string[]> = {};
+    coauthors.forEach(co => {
+      const ci = clusters[co.name] ?? 0;
+      if (!clusterMap[ci]) clusterMap[ci] = [];
+      clusterMap[ci].push(co.name.split(",")[0]);
+    });
+    return Object.entries(clusterMap)
+      .map(([ci, members]) => ({
+        index: Number(ci),
+        label: `Cluster ${Number(ci) + 1}`,
+        members,
+      }))
+      .slice(0, PAL.length);
+  }, [coauthors, clusters]);
+
+  const dk = typeof document !== "undefined" && document.documentElement.classList.contains("dark");
+
   return (
-    <div ref={containerRef} className="w-full space-y-2">
+    <div ref={containerRef} className="w-full space-y-3">
       <canvas
         ref={canvasRef}
         style={{ width: dims.w, height: dims.h }}
@@ -509,9 +529,41 @@ const CoauthorshipNetwork = () => {
         onMouseUp={onUp}
         onMouseLeave={() => { onUp(); setHovered(null); }}
       />
-      <p className="text-[10px] text-muted-foreground/40 px-1">
-        Numbers = shared publications · Colors = research clusters · Hover to explore · Drag to rearrange
-      </p>
+
+      {/* Visual Legend */}
+      <div className="flex flex-col gap-3 px-1">
+        {/* Interaction hints */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[10px] sm:text-xs text-muted-foreground/60">
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-5 h-5 rounded-full border-2 border-muted-foreground/30 bg-muted/40 text-[8px] flex items-center justify-center font-bold text-muted-foreground/50">3</span>
+            <span>Number = shared publications</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-6 h-0.5 bg-muted-foreground/30 rounded" />
+            <span>Line thickness = collaboration frequency</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 14 14" className="opacity-50"><path d="M7 1l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" fill="currentColor"/></svg>
+            <span>Hover to explore · Drag to rearrange</span>
+          </span>
+        </div>
+
+        {/* Cluster colors */}
+        <div className="flex flex-wrap items-start gap-x-4 gap-y-1.5">
+          {clusterLegend.map(({ index, members }) => {
+            const color = dk ? PAL[index % PAL.length].d : PAL[index % PAL.length].l;
+            return (
+              <span key={index} className="flex items-center gap-1.5 text-[10px] sm:text-xs text-muted-foreground/70">
+                <span
+                  className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
+                  style={{ backgroundColor: color }}
+                />
+                <span>{members.slice(0, 3).join(", ")}{members.length > 3 ? ` +${members.length - 3}` : ""}</span>
+              </span>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
