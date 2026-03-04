@@ -18,6 +18,15 @@ type Publication = {
 
 const journalPublications: Publication[] = [
   {
+    title: "Enhancing Peer Feedback Practices With Generative AI",
+    authors: "Greisel, M., Hornstein, J., Kollar, I., Noroozi, O., Haddadian, G., Gao, X., Alqassab, M., Banihashem, K., Khosravi, H., Pozdniakov, S., Schunn, C. D., Yu, Q., & Rummel, N.",
+    venue: "Proceedings of the 18th International Conference on Computer-Supported Collaborative Learning - CSCL 2025 (pp. 490-498). International Society of the Learning Sciences",
+    year: 2025,
+    doi: "https://doi.org/10.22318/cscl2025.921873",
+    pdf: "/papers/greisel-et-al-2025-peer-feedback-genai.pdf",
+    apa: "Greisel, M., Hornstein, J., Kollar, I., Noroozi, O., Haddadian, G., Gao, X., ... & Rummel, N. (2025). Enhancing Peer Feedback Practices with Generative AI. In Proceedings of the 18th International Conference on Computer-Supported Collaborative Learning-CSCL 2025, pp. 490-498. International Society of the Learning Sciences.",
+  },
+  {
     title: "A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education",
     authors: "Haddadian, G., Kim, M. K., & Haddadian, N.",
     venue: "Research Synthesis in Applied Linguistics",
