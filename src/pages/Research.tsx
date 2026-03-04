@@ -131,6 +131,15 @@ const journalPublications: Publication[] = [
     pdf: "/papers/haddadian-et-al-2023-pci-private-ai.pdf",
     apa: "Haddadian, G., Takabi, D., Panzade, P., Kim, M. (2023). A Design Study of Problem-Centered Instruction (PCI) for Private Artificial Intelligence (AI) Curriculum Development. 2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL.",
   },
+  {
+    title: "A Test of Learning Progress Models Using an AI-Enabled Knowledge Representation System",
+    authors: "Kim, M. K., Kim, N. J., Haddadian, G., & Heidari, A.",
+    venue: "Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023 (pp. 986-989). International Society of the Learning Sciences",
+    year: 2023,
+    doi: "https://doi.org/10.22318/icls2023.200138",
+    pdf: "/papers/kim-et-al-2023-learning-progress-models.pdf",
+    apa: "Kim, M. K., Kim, N. J., Haddadian, G., & Heidari, A. (2023). A test of learning progress models using an AI-enabled knowledge representation system. In Proceedings of the 17th International Conference of the Learning Sciences-ICLS 2023, pp. 986-989. International Society of the Learning Sciences.",
+  },
 ];
 
 const groupByYear = (pubs: Publication[]) => {
