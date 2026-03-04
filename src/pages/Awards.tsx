@@ -42,23 +42,23 @@ const Awards = () => {
           return (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: idx * 0.04, ease: [0.25, 0.1, 0.25, 1] }}
-              className="group flex items-start gap-3 sm:gap-4 py-3.5 sm:py-4"
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: idx * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+              className="group relative flex gap-4 sm:gap-5 items-start py-3.5 sm:py-4"
             >
-              {/* Dot accent */}
+              {/* Accent bar */}
               <div
-                className="shrink-0 mt-[7px] w-2 h-2 rounded-full opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"
+                className="shrink-0 w-[3px] rounded-full self-stretch opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ backgroundColor: color }}
               />
 
               {/* Content */}
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm md:text-base font-semibold leading-snug text-foreground/90 group-hover:text-foreground transition-colors duration-300">
+                <p className="text-sm sm:text-base md:text-[1.1rem] font-semibold leading-snug text-foreground/90 group-hover:text-foreground transition-colors duration-300">
                   {award.title}
                 </p>
-                <p className="text-[11px] sm:text-xs text-muted-foreground/60 mt-0.5">
+                <p className="text-xs sm:text-sm text-muted-foreground/60 mt-1">
                   {award.org}
                 </p>
               </div>
