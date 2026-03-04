@@ -4,8 +4,7 @@ const corsHeaders = {
 };
 
 const SCHOLAR_USER_ID = '8MQCFZQAAAAJ';
-const SELF_NAME = 'G Haddadian';
-const SELF_ALIASES = ['G Haddadian', 'Golnoush Haddadian', 'G. Haddadian', 'Haddadian G', 'GH Haddadian'];
+const SELF_ALIASES = ['g haddadian', 'golnoush haddadian', 'g. haddadian', 'haddadian g', 'gh haddadian'];
 
 function normalizeName(name: string): string {
   return name.trim().replace(/\s+/g, ' ');
@@ -13,7 +12,11 @@ function normalizeName(name: string): string {
 
 function isSelf(name: string): boolean {
   const normalized = normalizeName(name).toLowerCase();
-  return SELF_ALIASES.some(alias => normalized.includes(alias.toLowerCase()));
+  return SELF_ALIASES.some(alias => normalized.includes(alias));
+}
+
+function linkKey(a: string, b: string): string {
+  return [a, b].sort().join('|||');
 }
 
 async function fetchScholarPage(start: number): Promise<string> {
@@ -25,30 +28,22 @@ async function fetchScholarPage(start: number): Promise<string> {
       'Accept-Language': 'en-US,en;q=0.9',
     },
   });
-  if (!resp.ok) {
-    throw new Error(`Google Scholar returned ${resp.status}`);
-  }
+  if (!resp.ok) throw new Error(`Google Scholar returned ${resp.status}`);
   return resp.text();
 }
 
 function extractAuthorsFromHTML(html: string): string[][] {
-  // Each publication row has class "gsc_a_tr"
-  // Inside each row, author info is in the second <div class="gs_gray">
-  // Pattern: <td class="gsc_a_t">...<div class="gs_gray">AUTHORS</div><div class="gs_gray">JOURNAL</div>
   const publications: string[][] = [];
-  
-  // Match all author lines - they appear as the first gs_gray div after the title link
   const rowRegex = /<tr class="gsc_a_tr">[\s\S]*?<\/tr>/g;
   let match;
   while ((match = rowRegex.exec(html)) !== null) {
     const row = match[0];
-    // Extract gs_gray divs - first one is authors, second is venue
     const grayRegex = /<div class="gs_gray">(.*?)<\/div>/g;
     const firstGray = grayRegex.exec(row);
     if (firstGray) {
       const authorStr = firstGray[1].replace(/<[^>]*>/g, '').trim();
       if (authorStr && authorStr !== '...') {
-        const authors = authorStr.split(',').map(a => normalizeName(a)).filter(a => a.length > 0);
+        const authors = authorStr.split(',').map(a => normalizeName(a)).filter(a => a.length > 1);
         publications.push(authors);
       }
     }
@@ -63,17 +58,13 @@ Deno.serve(async (req) => {
 
   try {
     console.log('Fetching Google Scholar profile...');
-    
-    // Fetch first page (up to 100 publications)
     const html1 = await fetchScholarPage(0);
     let allPublications = extractAuthorsFromHTML(html1);
-    
-    // Check if there are more pages (if we got close to 100 results)
+
     if (allPublications.length >= 95) {
       try {
         const html2 = await fetchScholarPage(100);
-        const more = extractAuthorsFromHTML(html2);
-        allPublications = allPublications.concat(more);
+        allPublications = allPublications.concat(extractAuthorsFromHTML(html2));
       } catch (e) {
         console.log('Could not fetch page 2:', e);
       }
@@ -81,35 +72,49 @@ Deno.serve(async (req) => {
 
     console.log(`Found ${allPublications.length} publications`);
 
-    // Count co-authorships
+    // Count co-authorships with self
     const coauthorCounts: Record<string, number> = {};
-    
+    // Count co-author to co-author links
+    const pairCounts: Record<string, number> = {};
+
     for (const authors of allPublications) {
-      // Check if self is in this publication
       const hasSelf = authors.some(a => isSelf(a));
       if (!hasSelf) continue;
-      
-      for (const author of authors) {
-        if (isSelf(author)) continue;
-        if (author === '...' || author.length < 2) continue;
-        
-        // Normalize: try to merge similar names
-        const key = author;
-        coauthorCounts[key] = (coauthorCounts[key] || 0) + 1;
+
+      const coauthors = authors.filter(a => !isSelf(a) && a.length > 1);
+
+      for (const ca of coauthors) {
+        coauthorCounts[ca] = (coauthorCounts[ca] || 0) + 1;
+      }
+
+      // Build inter-co-author links (pairs who co-authored together on this paper)
+      for (let i = 0; i < coauthors.length; i++) {
+        for (let j = i + 1; j < coauthors.length; j++) {
+          const key = linkKey(coauthors[i], coauthors[j]);
+          pairCounts[key] = (pairCounts[key] || 0) + 1;
+        }
       }
     }
 
-    // Sort by count descending
     const coauthors = Object.entries(coauthorCounts)
       .map(([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count);
 
-    console.log(`Found ${coauthors.length} unique co-authors`);
+    // Build inter-links array
+    const interLinks = Object.entries(pairCounts)
+      .map(([key, weight]) => {
+        const [source, target] = key.split('|||');
+        return { source, target, weight };
+      })
+      .sort((a, b) => b.weight - a.weight);
+
+    console.log(`Found ${coauthors.length} co-authors, ${interLinks.length} inter-links`);
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        coauthors, 
+      JSON.stringify({
+        success: true,
+        coauthors,
+        interLinks,
         totalPublications: allPublications.length,
         scholarId: SCHOLAR_USER_ID,
       }),
@@ -118,8 +123,8 @@ Deno.serve(async (req) => {
   } catch (error) {
     console.error('Error crawling Google Scholar:', error);
     return new Response(
-      JSON.stringify({ 
-        success: false, 
+      JSON.stringify({
+        success: false,
         error: error instanceof Error ? error.message : 'Failed to crawl Google Scholar',
       }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
