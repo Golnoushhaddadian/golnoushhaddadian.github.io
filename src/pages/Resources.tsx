@@ -25,6 +25,16 @@ const resources: Resource[] = [
       "Vickery, M. (2025). The learning theory map [Interactive concept map]. Whimsical. https://whimsical.com/s25-theory-map-dy5XNBK5mVWkAFXygFvUA",
     embedUrl: "https://whimsical.com/embed/dy5XNBK5mVWkAFXygFvUA",
   },
+  {
+    title: "Journal of the Learning Sciences - Interactive Literature Database",
+    subtitle: "Web Application",
+    description:
+      "An interactive repository of JLS publications identified through a systematic review, with search and filtering options by research method, theoretical perspective, pedagogical approach, construct, context, technology, content domain, and population.",
+    link: "https://morganavickery.github.io/JLS-interactive-database/",
+    citation:
+      "Vickery, M. (2025). Journal of the Learning Sciences: Interactive literature database [Web application]. https://morganavickery.github.io/JLS-interactive-database/",
+    embedUrl: "https://morganavickery.github.io/JLS-interactive-database/",
+  },
 ];
 
 const CopyButton = ({ text }: { text: string }) => {
