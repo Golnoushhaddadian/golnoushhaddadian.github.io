@@ -58,6 +58,7 @@ const journalPublications: Publication[] = [
     venue: "Computer-Assisted Language Learning Electronic Journal, 25(3), 124-147",
     year: 2024,
     doi: "https://callej.org/index.php/journal/article/view/436",
+    pdf: "/papers/haddadian-2024-feedback-comparison.pdf",
   },
   {
     title: "Conversational Repairs in Persian Dramatic Discourse: Akbar Radi's Pellekân (The Steps)",
