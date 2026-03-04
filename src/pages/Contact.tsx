@@ -32,9 +32,10 @@ const Contact = () => {
       {/* Schedule a Meeting */}
       <div className="pt-6 sm:pt-10 md:pt-14">
         <div className="border-t border-border pt-6 sm:pt-10 md:pt-14">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Schedule a Meeting</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-1">Schedule a Meeting</h2>
+          <p className="text-base sm:text-lg text-muted-foreground font-medium mb-2">Book with Calendly</p>
           <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
-            If you'd like to discuss potential collaborations, research opportunities, or have any questions, feel free to book a 30-minute meeting at a time that works for you.
+            Feel free to schedule a virtual meeting through Calendly to connect on Google Meet. You can view my availability and select a convenient time.
           </p>
           <div className="rounded-xl border border-border overflow-hidden bg-card">
             <iframe
