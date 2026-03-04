@@ -229,9 +229,31 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
         <div className="absolute -left-[7px] top-1 w-[11px] h-[11px] rounded-full border-2 border-border bg-background group-hover:border-primary group-hover:bg-primary/10 transition-all duration-500" />
 
         {/* Title */}
-        <h3 className="text-sm sm:text-base md:text-[1.1rem] font-semibold leading-[1.4] mb-2 text-foreground/90 group-hover:text-foreground transition-colors duration-300">
-          {pub.title}
-        </h3>
+        {pub.pdf ? (
+          <HoverCard openDelay={300} closeDelay={200}>
+            <HoverCardTrigger asChild>
+              <h3 className="text-sm sm:text-base md:text-[1.1rem] font-semibold leading-[1.4] mb-2 text-foreground/90 group-hover:text-foreground transition-colors duration-300 cursor-pointer">
+                {pub.title}
+              </h3>
+            </HoverCardTrigger>
+            <HoverCardContent
+              side="right"
+              align="start"
+              sideOffset={12}
+              className="w-[280px] sm:w-[340px] h-[360px] sm:h-[440px] p-0 overflow-hidden border-primary/20"
+            >
+              <iframe
+                src={`${pub.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                className="w-full h-full"
+                title={`Preview: ${pub.title}`}
+              />
+            </HoverCardContent>
+          </HoverCard>
+        ) : (
+          <h3 className="text-sm sm:text-base md:text-[1.1rem] font-semibold leading-[1.4] mb-2 text-foreground/90 group-hover:text-foreground transition-colors duration-300">
+            {pub.title}
+          </h3>
+        )}
 
         {/* Authors */}
         <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 leading-relaxed">
@@ -254,25 +276,10 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
             </a>
           )}
           {pub.pdf && (
-            <HoverCard openDelay={300} closeDelay={200}>
-              <HoverCardTrigger asChild>
-                <a href={pub.pdf} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                  <FileText size={13} />
-                  PDF
-                </a>
-              </HoverCardTrigger>
-              <HoverCardContent
-                side="top"
-                align="start"
-                className="w-[280px] sm:w-[340px] h-[360px] sm:h-[440px] p-0 overflow-hidden border-primary/20"
-              >
-                <iframe
-                  src={`${pub.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
-                  className="w-full h-full"
-                  title={`Preview: ${pub.title}`}
-                />
-              </HoverCardContent>
-            </HoverCard>
+            <a href={pub.pdf} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <FileText size={13} />
+              PDF
+            </a>
           )}
           {pub.apa && (
             <Popover>
