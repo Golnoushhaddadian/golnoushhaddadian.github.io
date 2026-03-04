@@ -166,7 +166,7 @@ export const conferenceProceedings: ConferenceProceeding[] = [
     conference: "WEI International Academic Conference on Education, Teaching, and Learning (WEI-ETL-Barcelona), Barcelona, Spain, February 2020"
   },
   {
-    authors: ["Haddadian, G.", "Salehi, M."],
+    authors: ["Haddadian, G.", "Salehi, Mohammad"],
     year: "2015",
     title: "Design and Development of a Computer-Adaptive Prototype to Measure Written Receptive Vocabulary Knowledge of English Language Learners",
     conference: "Thesis. Sharif University of Technology, Tehran, Iran, 2014"
@@ -175,7 +175,7 @@ export const conferenceProceedings: ConferenceProceeding[] = [
 
 export const nonRefereedPublications: NonRefereedPublication[] = [
   {
-    authors: ["Masoumi, V.", "Salehi, M.", "Veisi, H.", "Haddadian, G.", "Ranjbar, V.", "Sahebdel, M."],
+    authors: ["Masoumi, V.", "Salehi, Mostafa", "Veisi, H.", "Haddadian, G.", "Ranjbar, V.", "Sahebdel, M."],
     year: "2020",
     title: "TeleCrowd: A Crowdsourcing Approach to Create Informal to Formal Text Corpora",
     journal: "arXiv preprint arXiv:2004.11771",
