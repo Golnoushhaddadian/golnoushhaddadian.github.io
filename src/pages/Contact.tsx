@@ -21,7 +21,6 @@ const Contact = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
         <div className="sm:col-span-2 md:col-span-1 space-y-4 sm:space-y-6">
           <ContactInfoCard />
-          <OfficeHours />
         </div>
 
         <div className="sm:col-span-2 md:col-span-2">
@@ -34,7 +33,7 @@ const Contact = () => {
         <div className="border-t border-border pt-6 sm:pt-10 md:pt-14">
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-1">Schedule a Meeting</h2>
           <p className="text-base sm:text-lg text-muted-foreground font-medium mb-2">Book with Calendly</p>
-          <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+          <p className="text-sm text-muted-foreground mb-6 whitespace-nowrap">
             Feel free to schedule a virtual meeting through Calendly to connect on Google Meet. You can view my availability and select a convenient time.
           </p>
           <div className="rounded-xl border border-border overflow-hidden bg-card">
@@ -48,6 +47,13 @@ const Contact = () => {
               loading="lazy"
             />
           </div>
+        </div>
+      </div>
+
+      {/* Office Hours - at the bottom */}
+      <div className="pt-6 sm:pt-10 md:pt-14">
+        <div className="border-t border-border pt-6 sm:pt-10 md:pt-14">
+          <OfficeHours />
         </div>
       </div>
     </section>
