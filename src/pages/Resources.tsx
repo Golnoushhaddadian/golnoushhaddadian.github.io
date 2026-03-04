@@ -35,6 +35,15 @@ const resources: Resource[] = [
       "Vickery, M. (2025). Journal of the Learning Sciences: Interactive literature database [Web application]. https://morganavickery.github.io/JLS-interactive-database/",
     embedUrl: "https://morganavickery.github.io/JLS-interactive-database/",
   },
+  {
+    title: "Publication Venue Guide",
+    subtitle: "Notion Board",
+    description:
+      "Having difficulty identifying an appropriate journal for a manuscript? This resource provides a searchable, tagged database (Notion board) of publication outlets relevant to education researchers, particularly those in the learning sciences.",
+    link: "https://publication-guide.notion.site/",
+    citation:
+      "Vickery, M. (2025). Publication venue guide [Web application]. https://publication-guide.notion.site/",
+  },
 ];
 
 const CopyButton = ({ text }: { text: string }) => {
