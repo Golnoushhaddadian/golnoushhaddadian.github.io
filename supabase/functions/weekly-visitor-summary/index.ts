@@ -116,8 +116,8 @@ Deno.serve(async (req) => {
     const sortedBrowsers = Object.entries(browsers).sort((a, b) => b[1] - a[1]);
     const sortedReferrers = Object.entries(referrers).sort((a, b) => b[1] - a[1]);
 
-    // Build detailed visitor table (last 20)
-    const recentSessions = sessions.slice(0, 20);
+    // Build detailed visitor table (all sessions)
+    const recentSessions = sessions;
     const visitorRows = recentSessions.map((s: any) => {
       const location = [s.city, s.region, s.country].filter(Boolean).join(', ');
       const dur = fmtDur(s.duration_seconds || 0);
@@ -182,7 +182,7 @@ Deno.serve(async (req) => {
           <tbody>${visitorRows}</tbody>
         </table>
 
-        ${totalVisitors > 20 ? `<p style="color:#888;font-size:12px;">Showing 20 of ${totalVisitors} sessions.</p>` : ''}
+        <p style="color:#888;font-size:12px;">Total: ${totalVisitors} sessions.</p>
       </div>
     `;
 
