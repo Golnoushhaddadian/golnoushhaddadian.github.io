@@ -28,6 +28,27 @@ const Contact = () => {
           <ContactForm />
         </div>
       </div>
+
+      {/* Schedule a Meeting */}
+      <div className="pt-6 sm:pt-10 md:pt-14">
+        <div className="border-t border-border pt-6 sm:pt-10 md:pt-14">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Schedule a Meeting</h2>
+          <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+            If you'd like to discuss potential collaborations, research opportunities, or have any questions, feel free to book a 30-minute meeting at a time that works for you.
+          </p>
+          <div className="rounded-xl border border-border overflow-hidden bg-card">
+            <iframe
+              src="https://calendly.com/liahaddadian/30min"
+              title="Schedule a meeting with Lia Haddadian"
+              width="100%"
+              height="700"
+              frameBorder="0"
+              className="w-full"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
