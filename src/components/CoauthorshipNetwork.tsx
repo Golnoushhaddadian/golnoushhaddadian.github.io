@@ -284,7 +284,7 @@ const CoauthorshipNetwork = () => {
       // ── DRAW ──
       ctx.clearRect(0, 0, w, h);
       const dk = document.documentElement.classList.contains("dark");
-      const bg = dk ? "#0c1425" : "#f8f9fc";
+      const bg = dk ? "#0c1425" : "#f0f1f4";
       const txt = dk ? "#c8d6e5" : "#374151";
       const txtMuted = dk ? "#6b7d95" : "#9ca3af";
 
