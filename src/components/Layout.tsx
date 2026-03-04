@@ -5,6 +5,7 @@ import { Sun, Moon, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/ThemeProvider';
 import { cn } from '@/lib/utils';
+import ChatWidget from '@/components/ChatWidget';
 
 type NavLinkProps = {
   to: string;
@@ -158,6 +159,7 @@ const Layout = ({ children }: LayoutProps) => {
           <p>© {new Date().getFullYear()} Golnoush Haddadian. All rights reserved.</p>
         </div>
       </footer>
+      <ChatWidget />
     </div>
   );
 };
