@@ -41,7 +41,7 @@ const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { path: '/', label: 'Welcome' },
+    { path: '/', label: 'Home' },
     { path: '/education', label: 'Education' },
     { path: '/research', label: 'Research' },
     { path: '/awards', label: 'Awards' },
