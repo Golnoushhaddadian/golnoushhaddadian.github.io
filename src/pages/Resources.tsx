@@ -28,7 +28,7 @@ const resources: Resource[] = [
     embedUrl: "https://whimsical.com/embed/dy5XNBK5mVWkAFXygFvUA",
   },
   {
-    title: "Things I Wish I Knew About the Learning Sciences",
+    title: "Learning Sciences: What I Wish I Knew",
     subtitle: "Living Document",
     description:
       "A practical guide grounded in research that introduces key theories, frameworks, and influential scholars in the learning sciences—well suited for newcomers seeking foundational concepts, major citations, and methodological overviews in education research.",
