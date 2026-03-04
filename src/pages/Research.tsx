@@ -70,6 +70,7 @@ const journalPublications: Publication[] = [
     venue: "Persian Literary Studies Journal, 7(11), 65-82",
     year: 2018,
     doi: "http://doi.org/10.22099/jps.2019.31124.1088",
+    apa: "Haddadian, G., & Mahmoodi-Bakhtiari, B. (2018). Conversational Repairs in Persian Dramatic Discourse: Akbar Radi's Pellekân (The Steps). Persian Literary Studies Journal, 7(11), 65-82.",
   },
 ];
 
