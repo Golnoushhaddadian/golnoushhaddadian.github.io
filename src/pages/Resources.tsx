@@ -11,6 +11,7 @@ type Resource = {
   description: string;
   link: string;
   citation: string;
+  embedUrl?: string;
 };
 
 const resources: Resource[] = [
@@ -22,6 +23,7 @@ const resources: Resource[] = [
     link: "https://whimsical.com/s25-theory-map-dy5XNBK5mVWkAFXygFvUA",
     citation:
       "Vickery, M. (2025). The learning theory map [Interactive concept map]. Whimsical. https://whimsical.com/s25-theory-map-dy5XNBK5mVWkAFXygFvUA",
+    embedUrl: "https://whimsical.com/embed/dy5XNBK5mVWkAFXygFvUA",
   },
 ];
 
@@ -76,6 +78,17 @@ const Resources = () => {
                 {resource.title}
               </h2>
               <p className="text-xs text-muted-foreground mb-3">{resource.subtitle}</p>
+              {resource.embedUrl && (
+                <div className="mb-3 rounded-lg overflow-hidden border border-border/50 aspect-video">
+                  <iframe
+                    src={resource.embedUrl}
+                    title={resource.title}
+                    className="w-full h-full"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                </div>
+              )}
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {resource.description}
               </p>
