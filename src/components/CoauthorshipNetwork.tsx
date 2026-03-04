@@ -27,41 +27,31 @@ interface CoauthorLink {
 }
 
 const SELF_PATTERNS = ["Haddadian, G.", "Haddadian, G"];
+function isSelf(name: string) { return SELF_PATTERNS.some(p => name.trim().startsWith(p)); }
+function normalizeAuthor(name: string) { return name.trim().replace(/\s+/g, " "); }
+function linkKey(a: string, b: string) { return [a, b].sort().join("|||"); }
 
-function isSelf(name: string): boolean {
-  const n = name.trim();
-  return SELF_PATTERNS.some(p => n.startsWith(p));
-}
-
-function normalizeAuthor(name: string): string {
-  return name.trim().replace(/\s+/g, " ");
-}
-
-function linkKey(a: string, b: string): string {
-  return [a, b].sort().join("|||");
-}
-
-// Cluster colors — distinct, accessible palette
-const CLUSTER_COLORS_LIGHT = [
-  "hsl(210, 65%, 50%)",  // blue
-  "hsl(340, 60%, 50%)",  // rose
-  "hsl(160, 55%, 40%)",  // teal
-  "hsl(35, 70%, 50%)",   // amber
-  "hsl(270, 50%, 55%)",  // purple
-  "hsl(190, 60%, 45%)",  // cyan
-  "hsl(15, 65%, 50%)",   // orange
-  "hsl(130, 45%, 45%)",  // green
+// Refined, muted but distinguishable academic palette
+const PALETTE = [
+  { fill: "#3B6B9E", glow: "rgba(59,107,158,0.18)" },   // steel blue
+  { fill: "#C06858", glow: "rgba(192,104,88,0.18)" },    // terracotta
+  { fill: "#5A9E78", glow: "rgba(90,158,120,0.18)" },    // sage green
+  { fill: "#B08D57", glow: "rgba(176,141,87,0.18)" },    // warm gold
+  { fill: "#8B6BB0", glow: "rgba(139,107,176,0.18)" },   // muted violet
+  { fill: "#4A9B9B", glow: "rgba(74,155,155,0.18)" },    // teal
+  { fill: "#C87D5A", glow: "rgba(200,125,90,0.18)" },    // copper
+  { fill: "#6B8EAE", glow: "rgba(107,142,174,0.18)" },   // slate
 ];
 
-const CLUSTER_COLORS_DARK = [
-  "hsl(210, 70%, 65%)",
-  "hsl(340, 65%, 65%)",
-  "hsl(160, 55%, 55%)",
-  "hsl(35, 75%, 60%)",
-  "hsl(270, 55%, 70%)",
-  "hsl(190, 65%, 60%)",
-  "hsl(15, 70%, 60%)",
-  "hsl(130, 50%, 55%)",
+const PALETTE_DARK = [
+  { fill: "#6BA3D6", glow: "rgba(107,163,214,0.2)" },
+  { fill: "#E08878", glow: "rgba(224,136,120,0.2)" },
+  { fill: "#7CC09A", glow: "rgba(124,192,154,0.2)" },
+  { fill: "#D4AD6F", glow: "rgba(212,173,111,0.2)" },
+  { fill: "#B090D0", glow: "rgba(176,144,208,0.2)" },
+  { fill: "#6CC0C0", glow: "rgba(108,192,192,0.2)" },
+  { fill: "#E09A74", glow: "rgba(224,154,116,0.2)" },
+  { fill: "#8EB0D0", glow: "rgba(142,176,208,0.2)" },
 ];
 
 function buildNetworkData() {
@@ -102,7 +92,7 @@ function buildNetworkData() {
       return { source, target, weight };
     });
 
-  // Simple community detection: group authors who frequently co-publish together
+  // Community detection via BFS on inter-coauthor links
   const names = coauthors.map(c => c.name);
   const adjacency: Record<string, Set<string>> = {};
   for (const n of names) adjacency[n] = new Set();
@@ -114,11 +104,13 @@ function buildNetworkData() {
   }
 
   const clusters: Record<string, number> = {};
+  const clusterSizes: number[] = [];
   const visited = new Set<string>();
   let clusterIdx = 0;
 
-  // BFS-based clustering on inter-coauthor links
-  for (const name of names) {
+  // Sort by most connected first for better color assignment
+  const sortedNames = [...names].sort((a, b) => (adjacency[b]?.size || 0) - (adjacency[a]?.size || 0));
+  for (const name of sortedNames) {
     if (visited.has(name)) continue;
     const queue = [name];
     visited.add(name);
@@ -127,17 +119,15 @@ function buildNetworkData() {
       const current = queue.shift()!;
       members.push(current);
       for (const neighbor of adjacency[current]) {
-        if (!visited.has(neighbor)) {
-          visited.add(neighbor);
-          queue.push(neighbor);
-        }
+        if (!visited.has(neighbor)) { visited.add(neighbor); queue.push(neighbor); }
       }
     }
     for (const m of members) clusters[m] = clusterIdx;
+    clusterSizes.push(members.length);
     clusterIdx++;
   }
 
-  return { coauthors, interLinks, clusters };
+  return { coauthors, interLinks, clusters, clusterSizes };
 }
 
 const CoauthorshipNetwork = () => {
@@ -146,18 +136,17 @@ const CoauthorshipNetwork = () => {
   const nodesRef = useRef<CoauthorNode[]>([]);
   const linksRef = useRef<CoauthorLink[]>([]);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [dimensions, setDimensions] = useState({ width: 700, height: 500 });
+  const [dimensions, setDimensions] = useState({ width: 700, height: 550 });
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const dragNode = useRef<string | null>(null);
-
   const { coauthors, interLinks, clusters } = useMemo(() => buildNetworkData(), []);
 
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
         const w = containerRef.current.clientWidth;
-        setDimensions({ width: w, height: Math.min(w * 0.75, 600) });
+        setDimensions({ width: w, height: Math.min(Math.max(w * 0.7, 400), 620) });
       }
     };
     updateSize();
@@ -170,9 +159,10 @@ const CoauthorshipNetwork = () => {
     const { width, height } = dimensions;
     const cx = width / 2, cy = height / 2;
 
+    const centerRadius = Math.max(48, Math.min(60, width * 0.07));
     const center: CoauthorNode = {
-      id: "haddadian", label: "Haddadian, G.", count: 0,
-      x: cx, y: cy, vx: 0, vy: 0, radius: 40, isCenter: true, cluster: -1,
+      id: "haddadian", label: "Golnoush Haddadian", count: 0,
+      x: cx, y: cy, vx: 0, vy: 0, radius: centerRadius, isCenter: true, cluster: -1,
     };
 
     const nodes: CoauthorNode[] = [center];
@@ -181,12 +171,12 @@ const CoauthorshipNetwork = () => {
 
     coauthors.forEach((co, i) => {
       const angle = (2 * Math.PI * i) / coauthors.length;
-      const dist = 160 + Math.random() * 60;
-      const r = Math.max(7, Math.min(18, 4 + co.count * 2));
+      const dist = centerRadius + 100 + Math.random() * 50;
+      const r = Math.max(8, Math.min(20, 5 + co.count * 2.5));
       nodes.push({
         id: co.name, label: co.name, count: co.count,
-        x: cx + Math.cos(angle) * dist + (Math.random() - 0.5) * 30,
-        y: cy + Math.sin(angle) * dist + (Math.random() - 0.5) * 30,
+        x: cx + Math.cos(angle) * dist + (Math.random() - 0.5) * 20,
+        y: cy + Math.sin(angle) * dist + (Math.random() - 0.5) * 20,
         vx: 0, vy: 0, radius: r,
         cluster: clusters[co.name] ?? 0,
       });
@@ -221,27 +211,27 @@ const CoauthorshipNetwork = () => {
       const links = linksRef.current;
       if (nodes.length === 0) { animationRef.current = requestAnimationFrame(tick); return; }
 
-      alpha *= 0.995;
-      if (alpha < 0.001) alpha = 0.001;
+      alpha *= 0.994;
+      if (alpha < 0.0005) alpha = 0.0005;
 
-      // Center gravity
+      // Forces
       for (const n of nodes) {
         if (n.isCenter || dragNode.current === n.id) continue;
-        n.vx += (width / 2 - n.x) * 0.0004;
-        n.vy += (height / 2 - n.y) * 0.0004;
+        n.vx += (width / 2 - n.x) * 0.00035;
+        n.vy += (height / 2 - n.y) * 0.00035;
       }
 
-      // Cluster attraction: same-cluster nodes gently attract
+      // Cluster cohesion
       for (let i = 1; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i], b = nodes[j];
           if (a.cluster === b.cluster && a.cluster >= 0) {
             const dx = b.x - a.x, dy = b.y - a.y;
             const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-            if (dist > 40) {
-              const force = 0.0003 * alpha;
-              if (dragNode.current !== a.id) { a.vx += dx * force; a.vy += dy * force; }
-              if (dragNode.current !== b.id) { b.vx -= dx * force; b.vy -= dy * force; }
+            if (dist > 35) {
+              const f = 0.00025 * alpha;
+              if (dragNode.current !== a.id) { a.vx += dx * f; a.vy += dy * f; }
+              if (dragNode.current !== b.id) { b.vx -= dx * f; b.vy -= dy * f; }
             }
           }
         }
@@ -255,8 +245,8 @@ const CoauthorshipNetwork = () => {
         const dx = t.x - s.x, dy = t.y - s.y;
         const dist = Math.sqrt(dx * dx + dy * dy) || 1;
         const isInter = l.source !== "haddadian" && l.target !== "haddadian";
-        const targetDist = isInter ? 70 + (1 / l.weight) * 25 : 120 + (1 / l.weight) * 50;
-        const strength = isInter ? 0.0015 : 0.003;
+        const targetDist = isInter ? 65 + (1 / l.weight) * 20 : (s.radius + t.radius) + 60 + (1 / l.weight) * 40;
+        const strength = isInter ? 0.0012 : 0.0025;
         const force = (dist - targetDist) * strength * alpha;
         const fx = (dx / dist) * force, fy = (dy / dist) * force;
         if (!s.isCenter && dragNode.current !== s.id) { s.vx += fx; s.vy += fy; }
@@ -264,15 +254,16 @@ const CoauthorshipNetwork = () => {
       }
 
       // Repulsion
-      for (let i = 1; i < nodes.length; i++) {
+      for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i], b = nodes[j];
           const dx = b.x - a.x, dy = b.y - a.y;
           const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          if (dist < 55) {
-            const force = ((55 - dist) / dist) * 0.4;
-            if (dragNode.current !== a.id) { a.vx -= dx * force; a.vy -= dy * force; }
-            if (dragNode.current !== b.id) { b.vx += dx * force; b.vy += dy * force; }
+          const minDist = a.radius + b.radius + 15;
+          if (dist < minDist) {
+            const force = ((minDist - dist) / dist) * 0.5;
+            if (!a.isCenter && dragNode.current !== a.id) { a.vx -= dx * force; a.vy -= dy * force; }
+            if (!b.isCenter && dragNode.current !== b.id) { b.vx += dx * force; b.vy += dy * force; }
           }
         }
       }
@@ -280,79 +271,140 @@ const CoauthorshipNetwork = () => {
       for (const n of nodes) {
         if (n.isCenter) { n.x = width / 2; n.y = height / 2; continue; }
         if (dragNode.current === n.id) continue;
-        n.vx *= 0.85; n.vy *= 0.85;
+        n.vx *= 0.86; n.vy *= 0.86;
         n.x += n.vx; n.y += n.vy;
-        n.x = Math.max(n.radius + 35, Math.min(width - n.radius - 35, n.x));
-        n.y = Math.max(n.radius + 20, Math.min(height - n.radius - 20, n.y));
+        n.x = Math.max(n.radius + 40, Math.min(width - n.radius - 40, n.x));
+        n.y = Math.max(n.radius + 25, Math.min(height - n.radius - 25, n.y));
       }
 
-      // Draw
+      // ── RENDER ──
       ctx.clearRect(0, 0, width, height);
       const isDark = document.documentElement.classList.contains("dark");
-      const colors = isDark ? CLUSTER_COLORS_DARK : CLUSTER_COLORS_LIGHT;
-      const textColor = isDark ? "#e2e8f0" : "#1e293b";
-      const mutedText = isDark ? "#94a3b8" : "#64748b";
-      const hoverLinkColor = isDark ? "rgba(148,163,184,0.6)" : "rgba(100,116,139,0.5)";
+      const pal = isDark ? PALETTE_DARK : PALETTE;
+      const bgCard = isDark ? "#0f172a" : "#fafbfd";
+      const textMain = isDark ? "#e2e8f0" : "#1e293b";
+      const textMuted = isDark ? "#7c8da6" : "#7a8599";
+      const centerFill = isDark ? "#2563eb" : "#1d4ed8";
+      const centerGlow = isDark ? "rgba(37,99,235,0.25)" : "rgba(29,78,216,0.15)";
 
-      // Links
+      // Subtle background
+      ctx.fillStyle = bgCard;
+      ctx.fillRect(0, 0, width, height);
+
+      // ── LINKS ──
       for (const l of links) {
         const s = nodes.find(n => n.id === l.source);
         const t = nodes.find(n => n.id === l.target);
         if (!s || !t) continue;
-        const isHovered = hoveredNode && (hoveredNode === l.source || hoveredNode === l.target);
         const isCenter = l.source === "haddadian" || l.target === "haddadian";
-        // Color link by cluster of the non-center node
+        const isHovered = hoveredNode && (hoveredNode === l.source || hoveredNode === l.target);
+        const dimmed = hoveredNode && !isHovered;
+
         const clusterNode = s.isCenter ? t : t.isCenter ? s : s;
-        const clusterColor = colors[clusterNode.cluster % colors.length] || colors[0];
-        const baseAlpha = isCenter ? 0.25 : 0.15;
+        const ci = clusterNode.cluster % pal.length;
+
         ctx.beginPath();
         ctx.moveTo(s.x, s.y);
         ctx.lineTo(t.x, t.y);
-        if (isHovered) {
-          ctx.strokeStyle = hoverLinkColor;
+
+        if (dimmed) {
+          ctx.strokeStyle = isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)";
+          ctx.lineWidth = 1;
+        } else if (isHovered) {
+          ctx.strokeStyle = pal[ci].fill + (isDark ? "99" : "77");
+          ctx.lineWidth = isCenter ? Math.min(l.weight * 1.8, 7) : Math.min(l.weight * 1.2, 4);
         } else {
-          // Parse hsl and add alpha
-          ctx.strokeStyle = clusterColor.replace(")", `, ${baseAlpha})`).replace("hsl(", "hsla(");
+          const baseOpacity = isCenter ? (isDark ? "22" : "1A") : (isDark ? "15" : "10");
+          ctx.strokeStyle = pal[ci].fill + baseOpacity;
+          ctx.lineWidth = isCenter ? Math.min(l.weight * 1.2, 5) : Math.min(l.weight * 0.7, 2.5);
         }
-        ctx.lineWidth = isCenter ? Math.min(l.weight * 1.2, 6) : Math.min(l.weight * 0.8, 3);
         ctx.stroke();
       }
 
-      // Nodes
+      // ── NODES ──
       for (const n of nodes) {
         const isHovered = hoveredNode === n.id;
-        const color = n.isCenter ? (isDark ? "hsl(210, 60%, 55%)" : "hsl(210, 60%, 42%)") : colors[n.cluster % colors.length];
+        const dimmed = hoveredNode && !isHovered &&
+          !links.some(l => (l.source === hoveredNode && l.target === n.id) || (l.target === hoveredNode && l.source === n.id)) &&
+          hoveredNode !== "haddadian" && n.id !== "haddadian";
 
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius + (isHovered ? 3 : 0), 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.fill();
-        if (isHovered) {
-          ctx.strokeStyle = textColor;
+        if (n.isCenter) {
+          // Glow ring
+          const grad = ctx.createRadialGradient(n.x, n.y, n.radius * 0.8, n.x, n.y, n.radius * 1.6);
+          grad.addColorStop(0, centerGlow);
+          grad.addColorStop(1, "transparent");
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius * 1.6, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Main circle
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+          ctx.fillStyle = centerFill;
+          ctx.fill();
+
+          // Subtle border
+          ctx.strokeStyle = isDark ? "rgba(96,165,250,0.4)" : "rgba(29,78,216,0.3)";
           ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Name — two lines
+          ctx.fillStyle = "#ffffff";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.font = "bold 13px system-ui, -apple-system, sans-serif";
+          ctx.fillText("Golnoush", n.x, n.y - 7);
+          ctx.font = "600 12px system-ui, -apple-system, sans-serif";
+          ctx.fillText("Haddadian", n.x, n.y + 9);
+          continue;
+        }
+
+        const ci = n.cluster % pal.length;
+        const color = pal[ci];
+        const opacity = dimmed ? 0.2 : 1;
+
+        ctx.globalAlpha = opacity;
+
+        // Hover glow
+        if (isHovered) {
+          const hGrad = ctx.createRadialGradient(n.x, n.y, n.radius * 0.6, n.x, n.y, n.radius * 2);
+          hGrad.addColorStop(0, color.glow);
+          hGrad.addColorStop(1, "transparent");
+          ctx.fillStyle = hGrad;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius * 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Node fill
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius + (isHovered ? 2 : 0), 0, Math.PI * 2);
+        ctx.fillStyle = color.fill;
+        ctx.fill();
+
+        // Subtle border on hover
+        if (isHovered) {
+          ctx.strokeStyle = isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.15)";
+          ctx.lineWidth = 1.5;
           ctx.stroke();
         }
 
-        // Labels
-        if (n.isCenter) {
-          ctx.font = "bold 13px system-ui, -apple-system, sans-serif";
-          ctx.fillStyle = "#ffffff";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText("Haddadian, G.", n.x, n.y);
-        } else {
-          // Name below node
-          const fontSize = Math.max(8, Math.min(10, 6 + n.count));
-          ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
-          ctx.fillStyle = isHovered ? textColor : mutedText;
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(n.label, n.x, n.y + n.radius + 12);
-          // Count inside node
-          ctx.font = `600 ${Math.max(8, n.radius - 1)}px system-ui, sans-serif`;
-          ctx.fillStyle = "#ffffff";
-          ctx.fillText(String(n.count), n.x, n.y);
-        }
+        // Count inside
+        const countSize = Math.max(8, Math.min(12, n.radius - 1));
+        ctx.font = `600 ${countSize}px system-ui, sans-serif`;
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(String(n.count), n.x, n.y);
+
+        // Name label below
+        const labelSize = Math.max(8, Math.min(11, 7 + n.count * 0.5));
+        ctx.font = `${isHovered ? "500" : "400"} ${labelSize}px system-ui, -apple-system, sans-serif`;
+        ctx.fillStyle = isHovered ? textMain : textMuted;
+        ctx.fillText(n.label, n.x, n.y + n.radius + 13);
+
+        ctx.globalAlpha = 1;
       }
 
       animationRef.current = requestAnimationFrame(tick);
@@ -366,7 +418,7 @@ const CoauthorshipNetwork = () => {
     (mx: number, my: number): CoauthorNode | null => {
       for (const n of nodesRef.current) {
         const dx = mx - n.x, dy = my - n.y;
-        if (dx * dx + dy * dy < (n.radius + 4) ** 2) return n;
+        if (dx * dx + dy * dy < (n.radius + 5) ** 2) return n;
       }
       return null;
     }, []
@@ -406,22 +458,36 @@ const CoauthorshipNetwork = () => {
     dragNode.current = null;
   }, []);
 
+  // Build legend from unique clusters
+  const legendItems = useMemo(() => {
+    const seen = new Map<number, string>();
+    for (const co of coauthors) {
+      const c = clusters[co.name] ?? 0;
+      if (!seen.has(c)) seen.set(c, co.name);
+    }
+    return Array.from(seen.entries())
+      .slice(0, 8)
+      .map(([cluster]) => ({ cluster, color: PALETTE[cluster % PALETTE.length].fill }));
+  }, [coauthors, clusters]);
+
   return (
-    <div ref={containerRef} className="w-full">
+    <div ref={containerRef} className="w-full space-y-3">
       <canvas
         ref={canvasRef}
         width={dimensions.width}
         height={dimensions.height}
         style={{ width: dimensions.width, height: dimensions.height }}
-        className="w-full rounded-xl border border-border bg-card"
+        className="w-full rounded-xl border border-border"
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        onMouseLeave={() => { handleMouseUp(); setHoveredNode(null); }}
       />
-      <p className="text-[10px] text-muted-foreground/50 mt-2 text-center">
-        Colors represent co-authorship clusters. Line width corresponds to the number of co-authorships. Drag nodes to rearrange.
-      </p>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-1">
+        <p className="text-[10px] text-muted-foreground/40">
+          Node size = co-authorships · Line width = shared publications · Colors = research clusters · Drag to rearrange
+        </p>
+      </div>
     </div>
   );
 };
