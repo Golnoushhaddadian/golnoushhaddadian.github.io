@@ -37,6 +37,7 @@ const journalPublications: Publication[] = [
     year: 2025,
     doi: "https://doi.org/10.46328/ijte.1071",
     pdf: "/papers/haddadian-et-al-2025-problem-centered-cs.pdf",
+    apa: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K. (2025). Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum. International Journal of Technology in Education, 8(2), 220-245.",
   },
   {
     title: "Construction and validation of a Computerized Formative Assessment Literacy (CFAL) questionnaire for language teachers: An exploratory sequential mixed-methods investigation",
