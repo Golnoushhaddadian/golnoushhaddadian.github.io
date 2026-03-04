@@ -48,7 +48,7 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/projects', label: 'Projects' },
     { path: '/teaching', label: 'Teaching' },
     { path: '/cv', label: 'Curriculum Vitae' },
-    { path: '/resources', label: 'Resources' },
+    { path: '/resources', label: 'Useful Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
   ];
