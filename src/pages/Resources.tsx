@@ -17,7 +17,7 @@ type Resource = {
 const resources: Resource[] = [
   {
     title: "The Learning Theory Map",
-    subtitle: "Made via Whimsical · 2023–2025",
+    subtitle: "Made via Whimsical",
     description:
       "A concise reference guide to major learning theories, developed by my colleague Morgan Vickery for her undergraduate course Learning Theories for Teachers. The resource is designed to provide students with a clear and accessible first introduction to key theoretical perspectives on learning.",
     link: "https://whimsical.com/s25-theory-map-dy5XNBK5mVWkAFXygFvUA",
