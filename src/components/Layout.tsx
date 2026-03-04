@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/ThemeProvider';
 import { cn } from '@/lib/utils';
 import ChatWidget from '@/components/ChatWidget';
+import { useVisitorTracking } from '@/hooks/useVisitorTracking';
 
 type NavLinkProps = {
   to: string;
@@ -39,6 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  useVisitorTracking();
 
   const navLinks = [
     { path: '/', label: 'Home' },
