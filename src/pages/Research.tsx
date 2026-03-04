@@ -34,6 +34,7 @@ const journalPublications: Publication[] = [
     venue: "International Journal of Technology in Education (IJTE), 8(2), 1-26",
     year: 2025,
     doi: "https://doi.org/10.46328/ijte.1071",
+    pdf: "/papers/haddadian-et-al-2025-problem-centered-cs.pdf",
   },
   {
     title: "Construction and validation of a Computerized Formative Assessment Literacy (CFAL) questionnaire for language teachers: An exploratory sequential mixed-methods investigation",
@@ -108,17 +109,6 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
         {pub.venue} ({pub.year})
       </p>
       <div className="flex items-center gap-4">
-        {pub.pdf && (
-          <a
-            href={pub.pdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
-          >
-            <FileText size={13} />
-            PDF
-          </a>
-        )}
         {pub.doi && (
           <a
             href={pub.doi}
@@ -128,6 +118,17 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
           >
             <ExternalLink size={13} />
             DOI
+          </a>
+        )}
+        {pub.pdf && (
+          <a
+            href={pub.pdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[hsl(175,50%,40%)] underline decoration-[hsl(175,50%,40%)]/40 decoration-1 underline-offset-2 hover:decoration-[hsl(175,50%,40%)] transition-all duration-200"
+          >
+            <FileText size={13} />
+            PDF
           </a>
         )}
       </div>
