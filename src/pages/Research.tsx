@@ -140,6 +140,27 @@ const journalPublications: Publication[] = [
     pdf: "/papers/kim-et-al-2023-learning-progress-models.pdf",
     apa: "Kim, M. K., Kim, N. J., Haddadian, G., & Heidari, A. (2023). A test of learning progress models using an AI-enabled knowledge representation system. In Proceedings of the 17th International Conference of the Learning Sciences-ICLS 2023, pp. 986-989. International Society of the Learning Sciences.",
   },
+  {
+    title: "The Impact of an AI-Based Educational Tool, with a Focus on Technology Acceptance and Metacognitive Awareness of Adult Learners",
+    authors: "Bae, Y., Kim, J., Haddadian, G., Davis, A., & Kim, M. K.",
+    venue: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL",
+    year: 2023,
+    apa: "Bae, Y., Kim, J., Haddadian, G., Davis, A., & Kim, M. (2023). The impact of an AI-based educational tool, with a focus on technology acceptance and metacognitive awareness of adult learners. 2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL.",
+  },
+  {
+    title: "Leveraging Machine Learning to Automatically Evaluate Cognitive Engagement in Asynchronous Online Discussions",
+    authors: "Kim, J., Bae, Y., Haddadian, G., & Kim, M. K.",
+    venue: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL",
+    year: 2023,
+    apa: "Kim, J., Bae, Y., Haddadian, G., & Kim, M. (2023). Leveraging machine learning to automatically evaluate cognitive engagement in asynchronous online discussions. 2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL.",
+  },
+  {
+    title: "AI-Augmented Summarization: Impact on Online Adult Learners' Concept Learning, Discussion Quality, and Achievement",
+    authors: "Kim, J., Bae, Y., Haddadian, G., Morris, W., Crossely, S., Holmes, L., Stravelakis, J., & Kim, M. K.",
+    venue: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL",
+    year: 2023,
+    apa: "Kim, J., Bae, Y., Haddadian, G., Morris, W., Crossely, S., Holmes, L., Stravelakis, J., & Kim, M. (2023). AI-augmented summarization: Impact on online adult learners' concept learning, discussion quality, and achievement. 2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL.",
+  },
 ];
 
 const groupByYear = (pubs: Publication[]) => {
