@@ -180,7 +180,7 @@ const CoauthorshipNetwork = () => {
     coauthors.forEach((co, i) => {
       const a = (2 * Math.PI * i) / coauthors.length;
       const d = cR + 110 + Math.random() * 40;
-      const r = 14; // uniform size — clean, no confusion
+      const r = 12 + Math.min(co.count, 8) * 3; // scale with collaboration count
       nodes.push({
         id: co.name, label: co.name, count: co.count,
         x: cx + Math.cos(a) * d + (Math.random() - 0.5) * 20,
@@ -262,7 +262,7 @@ const CoauthorshipNetwork = () => {
           const a = ns[i], b = ns[j];
           const dx = b.x - a.x, dy = b.y - a.y;
           const d = Math.sqrt(dx * dx + dy * dy) || 1;
-          const minD = a.r + b.r + 32; // extra spacing for labels
+          const minD = a.r + b.r + 38; // extra spacing for labels
           if (d < minD) {
             const f = ((minD - d) / d) * 0.45;
             if (!a.isCenter && dragId.current !== a.id) { a.vx -= dx * f; a.vy -= dy * f; }
@@ -401,7 +401,7 @@ const CoauthorshipNetwork = () => {
           // Circle
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-          ctx.fillStyle = dk ? "hsl(220,55%,38%)" : "hsl(220,55%,35%)";
+          ctx.fillStyle = dk ? "hsl(220,55%,38%)" : "hsl(220,18%,28%)";
           ctx.fill();
           ctx.strokeStyle = dk ? "rgba(96,165,250,0.3)" : "rgba(37,99,235,0.2)";
           ctx.lineWidth = 2;
@@ -447,9 +447,9 @@ const CoauthorshipNetwork = () => {
         ctx.fillText(String(n.count), n.x, n.y);
 
         // Label below — positioned to avoid overlap
-        ctx.font = `${isHov ? "500" : "400"} 9px system-ui, -apple-system, sans-serif`;
+        ctx.font = `${isHov ? "600" : "500"} 11px system-ui, -apple-system, sans-serif`;
         ctx.fillStyle = isHov ? txt : txtMuted;
-        ctx.fillText(n.label, n.x, n.y + n.r + 11);
+        ctx.fillText(n.label, n.x, n.y + n.r + 13);
 
         ctx.globalAlpha = 1;
       }
