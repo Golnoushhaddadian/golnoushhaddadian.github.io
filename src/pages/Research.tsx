@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, FileText, Quote, Copy, Check } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
@@ -253,10 +254,25 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
             </a>
           )}
           {pub.pdf && (
-            <a href={pub.pdf} target="_blank" rel="noopener noreferrer" className={linkClass}>
-              <FileText size={13} />
-              PDF
-            </a>
+            <HoverCard openDelay={300} closeDelay={200}>
+              <HoverCardTrigger asChild>
+                <a href={pub.pdf} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                  <FileText size={13} />
+                  PDF
+                </a>
+              </HoverCardTrigger>
+              <HoverCardContent
+                side="top"
+                align="start"
+                className="w-[280px] sm:w-[340px] h-[360px] sm:h-[440px] p-0 overflow-hidden border-primary/20"
+              >
+                <iframe
+                  src={`${pub.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                  className="w-full h-full"
+                  title={`Preview: ${pub.title}`}
+                />
+              </HoverCardContent>
+            </HoverCard>
           )}
           {pub.apa && (
             <Popover>
