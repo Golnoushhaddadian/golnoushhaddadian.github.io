@@ -73,7 +73,7 @@ function cleanAuthors(authors: string[]): string[] {
 
 // Soft, academic palette matching the site's timeline accents
 const PAL = [
-  { l: "hsl(225,50%,58%)", d: "hsl(225,55%,68%)", bg_l: "hsla(225,50%,58%,0.06)", bg_d: "hsla(225,55%,68%,0.08)" },
+  { l: "hsl(215,55%,55%)", d: "hsl(215,58%,65%)", bg_l: "hsla(215,55%,55%,0.06)", bg_d: "hsla(215,58%,65%,0.08)" },
   { l: "hsl(350,45%,62%)", d: "hsl(350,50%,70%)", bg_l: "hsla(350,45%,62%,0.06)", bg_d: "hsla(350,50%,70%,0.08)" },
   { l: "hsl(165,38%,48%)", d: "hsl(165,42%,58%)", bg_l: "hsla(165,38%,48%,0.06)", bg_d: "hsla(165,42%,58%,0.08)" },
   { l: "hsl(270,35%,60%)", d: "hsl(270,40%,70%)", bg_l: "hsla(270,35%,60%,0.06)", bg_d: "hsla(270,40%,70%,0.08)" },
