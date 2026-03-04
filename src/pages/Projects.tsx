@@ -113,10 +113,10 @@ const Projects = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-8 sm:mb-12 px-2"
       >
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">
           Research Projects
         </h1>
-        <p className="text-sm sm:text-lg text-muted-foreground max-w-4xl mx-auto">
+        <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-5xl mx-auto leading-relaxed">
           Throughout my academic training, I have engaged in a range of research projects, some of which were federally funded by the National Science Foundation (NSF) and the Institute of Education Sciences (IES). Below is a selected list of these projects.
         </p>
       </motion.div>
