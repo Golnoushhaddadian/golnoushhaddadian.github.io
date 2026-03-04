@@ -4,6 +4,7 @@ import { GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import gsuCampus from '@/assets/gsu-campus.jpeg';
 import sharifCampus from '@/assets/sharif-campus.jpeg';
+import emamKhomeinyCampus from '@/assets/emam-khomeiny-campus.jpeg';
 
 const educationData = [
   {
@@ -35,6 +36,7 @@ const educationData = [
   },
   {
     university: "Emam Khomeiny International University",
+    hoverImage: emamKhomeinyCampus,
     subInstitution: "Kar Institute of Higher Education",
     location: "Qazvin, Iran",
     degree: "B.A., English Translation Studies",
