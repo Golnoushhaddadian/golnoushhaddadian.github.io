@@ -1,4 +1,5 @@
 import { useDocumentHead } from '@/hooks/useDocumentHead';
+import { Award } from 'lucide-react';
 
 const awards = [
   { title: '$12,500 Fellowship Award (NSF & Google.org)', org: 'AI Institutes Virtual Organization (AIVO)' },
@@ -24,17 +25,21 @@ const Awards = () => {
   return (
     <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-4xl">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-center">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 text-center">
           Selected Awards
         </h1>
 
-        <ul className="list-disc list-outside pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-muted-foreground">
+        <div className="relative border-l-2 border-primary/30 pl-6 sm:pl-8 space-y-4 sm:space-y-5">
           {awards.map((award, idx) => (
-            <li key={idx} className="leading-relaxed">
-              <span className="font-medium text-foreground">{award.title}</span>, {award.org}
-            </li>
+            <div key={idx} className="relative">
+              <div className="absolute -left-[calc(1.5rem+5px)] sm:-left-[calc(2rem+5px)] top-0.5 w-[10px] h-[10px] rounded-full bg-primary/10 border-2 border-primary" />
+              <p className="text-xs sm:text-sm md:text-base leading-relaxed">
+                <span className="font-semibold text-foreground">{award.title}</span>
+                <span className="text-muted-foreground">, {award.org}</span>
+              </p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
