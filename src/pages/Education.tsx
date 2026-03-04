@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import gsuCampus from '@/assets/gsu-campus.jpeg';
+import sharifCampus from '@/assets/sharif-campus.jpeg';
 
 const educationData = [
   {
@@ -21,6 +22,7 @@ const educationData = [
   },
   {
     university: "Sharif University of Technology",
+    hoverImage: sharifCampus,
     location: "Tehran, Iran",
     degree: "M.A., Applied Linguistics",
     dates: "Sep 2012–Sep 2014",
