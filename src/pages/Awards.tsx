@@ -1,5 +1,5 @@
 import { useDocumentHead } from '@/hooks/useDocumentHead';
-import { Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const awards = [
   { title: '$12,500 Fellowship Award (NSF & Google.org)', org: 'AI Institutes Virtual Organization (AIVO)' },
@@ -15,6 +15,14 @@ const awards = [
   { title: 'Distinguished Student Researcher Award', org: 'Young Researchers and Elite Club' },
 ];
 
+const accentColors = [
+  'hsl(200, 60%, 65%)',
+  'hsl(340, 50%, 65%)',
+  'hsl(160, 45%, 55%)',
+  'hsl(270, 45%, 65%)',
+  'hsl(30, 60%, 60%)',
+];
+
 const Awards = () => {
   useDocumentHead({
     title: 'Awards & Honors — Golnoush Haddadian',
@@ -25,20 +33,39 @@ const Awards = () => {
   return (
     <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-4xl">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 text-center">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 sm:mb-10 text-center">
           Selected Awards
         </h1>
 
-        <div className="relative border-l-2 border-primary/30 pl-6 sm:pl-8 space-y-4 sm:space-y-5">
-          {awards.map((award, idx) => (
-            <div key={idx} className="relative">
-              <div className="absolute -left-[calc(1.5rem+5px)] sm:-left-[calc(2rem+5px)] top-0.5 w-[10px] h-[10px] rounded-full bg-primary/10 border-2 border-primary" />
-              <p className="text-xs sm:text-sm md:text-base leading-relaxed">
-                <span className="font-semibold text-foreground">{award.title}</span>
-                <span className="text-muted-foreground">, {award.org}</span>
-              </p>
-            </div>
-          ))}
+        <div className="space-y-3 sm:space-y-4">
+          {awards.map((award, idx) => {
+            const color = accentColors[idx % accentColors.length];
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: idx * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+                className="group relative flex gap-4 sm:gap-5 items-start"
+              >
+                {/* Accent bar */}
+                <div
+                  className="shrink-0 w-[3px] rounded-full self-stretch opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ backgroundColor: color }}
+                />
+
+                {/* Content */}
+                <div className="py-2 sm:py-2.5">
+                  <p className="text-sm sm:text-base md:text-[1.05rem] font-semibold leading-snug text-foreground/90 group-hover:text-foreground transition-colors duration-300">
+                    {award.title}
+                  </p>
+                  <p className="text-xs sm:text-sm text-muted-foreground/70 mt-1">
+                    {award.org}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>
