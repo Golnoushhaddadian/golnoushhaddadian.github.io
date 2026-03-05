@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Lock, Users, Clock, Globe, Monitor, ArrowRight, Link2, Search } from "lucide-react";
+import { Lock, Users, Clock, Globe, Monitor, ArrowRight, Link2, Search, Trash2 } from "lucide-react";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 
 const ADMIN_PASSWORD = "LiaAdmin2026!";
@@ -112,6 +112,16 @@ export default function AdminAnalytics() {
         setLoading(false);
       });
   }, [authenticated]);
+
+  const handleDelete = async (id: string) => {
+    const { error } = await supabase.from("visitor_sessions").delete().eq("id", id);
+    if (error) {
+      console.error("Delete failed:", error);
+      return;
+    }
+    setSessions(prev => prev.filter(s => s.id !== id));
+    if (selectedSession?.id === id) setSelectedSession(null);
+  };
 
   const summary = useMemo(() => {
     if (!sessions.length) return null;
@@ -257,9 +267,12 @@ export default function AdminAnalytics() {
                   <td className="py-2 pr-3">{s.device} · {s.browser}</td>
                   <td className="py-2 pr-3">{formatDuration(s.duration_seconds)}</td>
                   <td className="py-2 pr-3">{s.first_page || "/"}</td>
-                  <td className="py-2">
+                  <td className="py-2 flex items-center gap-1">
                     <Button variant="ghost" size="sm" onClick={() => setSelectedSession(selectedSession?.id === s.id ? null : s)}>
                       {selectedSession?.id === s.id ? "Hide" : "View"}
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => handleDelete(s.id)} title="Delete session">
+                      <Trash2 size={14} />
                     </Button>
                   </td>
                 </tr>
