@@ -20,9 +20,12 @@ Deno.serve(async (req) => {
       || req.headers.get('cf-connecting-ip')
       || 'unknown';
 
-    // Skip tracking for owner IPs or lovable preview
+    // Skip tracking for owner IPs or lovable preview/refresh
     const referrer = req.headers.get('referer') || '';
-    if ((ownerIPs.length > 0 && ownerIPs.includes(ip)) || referrer.includes('lovable.app')) {
+    const origin = req.headers.get('origin') || '';
+    const isLovable = referrer.includes('lovable.app') || referrer.includes('lovable.dev') 
+      || origin.includes('lovable.app') || origin.includes('lovable.dev');
+    if ((ownerIPs.length > 0 && ownerIPs.includes(ip)) || isLovable) {
       return new Response(JSON.stringify({ success: true, skipped: true }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
