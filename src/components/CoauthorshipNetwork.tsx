@@ -153,11 +153,16 @@ const CoauthorshipNetwork = () => {
 
   const { coauthors, interLinks, clusters } = useMemo(build, []);
 
+  // Responsive scale factor based on container width
+  const scale = useMemo(() => Math.max(0.55, Math.min(1, dims.w / 700)), [dims.w]);
+
   useEffect(() => {
     const up = () => {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth;
-      setDims({ w, h: Math.min(Math.max(w * 0.72, 420), 640) });
+      // Taller aspect ratio on mobile for more vertical room
+      const aspectRatio = w < 500 ? 1.0 : w < 700 ? 0.85 : 0.72;
+      setDims({ w, h: Math.min(Math.max(w * aspectRatio, 380), 640) });
     };
     up();
     window.addEventListener("resize", up);
@@ -169,7 +174,7 @@ const CoauthorshipNetwork = () => {
     if (!coauthors.length) return;
     const { w, h } = dims;
     const cx = w / 2, cy = h / 2;
-    const cR = Math.max(55, Math.min(72, w * 0.09));
+    const cR = Math.max(36 * scale, Math.min(72, w * 0.09));
 
     const nodes: Node[] = [{
       id: "_center", label: "Golnoush\nHaddadian", count: 0,
@@ -178,15 +183,15 @@ const CoauthorshipNetwork = () => {
     const links: Link[] = [];
     const ids = new Set(["_center"]);
 
-    // Uniform small radius for coauthors — count shown as label, not encoded in radius
+    // Scale coauthor node sizes with screen
     coauthors.forEach((co, i) => {
       const a = (2 * Math.PI * i) / coauthors.length;
-      const d = cR + 80 + Math.random() * 30;
-      const r = 12 + Math.min(co.count, 8) * 3; // scale with collaboration count
+      const d = cR + (50 + Math.random() * 20) * scale + 30;
+      const r = (10 + Math.min(co.count, 8) * 2.5) * Math.max(0.7, scale);
       nodes.push({
         id: co.name, label: co.name, count: co.count,
-        x: cx + Math.cos(a) * d + (Math.random() - 0.5) * 20,
-        y: cy + Math.sin(a) * d + (Math.random() - 0.5) * 20,
+        x: cx + Math.cos(a) * d + (Math.random() - 0.5) * 15,
+        y: cy + Math.sin(a) * d + (Math.random() - 0.5) * 15,
         vx: 0, vy: 0, r, cluster: clusters[co.name] ?? 0,
       });
       ids.add(co.name);
@@ -199,7 +204,7 @@ const CoauthorshipNetwork = () => {
 
     nodesRef.current = nodes;
     linksRef.current = links;
-  }, [coauthors, interLinks, clusters, dims]);
+  }, [coauthors, interLinks, clusters, dims, scale]);
 
   // Simulation + render
   useEffect(() => {
@@ -264,7 +269,7 @@ const CoauthorshipNetwork = () => {
           const a = ns[i], b = ns[j];
           const dx = b.x - a.x, dy = b.y - a.y;
           const d = Math.sqrt(dx * dx + dy * dy) || 1;
-          const minD = a.r + b.r + 38; // extra spacing for labels
+          const minD = a.r + b.r + 28 * scale + 10; // scaled spacing for labels
           if (d < minD) {
             const f = ((minD - d) / d) * 0.45;
             if (!a.isCenter && dragId.current !== a.id) { a.vx -= dx * f; a.vy -= dy * f; }
@@ -413,10 +418,12 @@ const CoauthorshipNetwork = () => {
           ctx.fillStyle = "#ffffff";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          ctx.font = "bold 14px system-ui, -apple-system, sans-serif";
-          ctx.fillText("Golnoush", n.x, n.y - 8);
-          ctx.font = "600 13px system-ui, -apple-system, sans-serif";
-          ctx.fillText("Haddadian", n.x, n.y + 10);
+          const centerFontLg = Math.max(10, Math.round(14 * scale));
+          const centerFontSm = Math.max(9, Math.round(13 * scale));
+          ctx.font = `bold ${centerFontLg}px system-ui, -apple-system, sans-serif`;
+          ctx.fillText("Golnoush", n.x, n.y - 8 * scale);
+          ctx.font = `600 ${centerFontSm}px system-ui, -apple-system, sans-serif`;
+          ctx.fillText("Haddadian", n.x, n.y + 10 * scale);
 
           ctx.globalAlpha = 1;
           continue;
@@ -442,16 +449,18 @@ const CoauthorshipNetwork = () => {
         ctx.fill();
 
         // Count inside — white
-        ctx.font = `600 10px system-ui, sans-serif`;
+        const countFont = Math.max(8, Math.round(10 * scale));
+        ctx.font = `600 ${countFont}px system-ui, sans-serif`;
         ctx.fillStyle = "#fff";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(String(n.count), n.x, n.y);
 
         // Label below — positioned to avoid overlap
-        ctx.font = `${isHov ? "600" : "500"} 11px system-ui, -apple-system, sans-serif`;
+        const labelFont = Math.max(8, Math.round(11 * scale));
+        ctx.font = `${isHov ? "600" : "500"} ${labelFont}px system-ui, -apple-system, sans-serif`;
         ctx.fillStyle = isHov ? txt : txtMuted;
-        ctx.fillText(n.label, n.x, n.y + n.r + 13);
+        ctx.fillText(n.label, n.x, n.y + n.r + 10 * scale + 3);
 
         ctx.globalAlpha = 1;
       }
@@ -498,6 +507,40 @@ const CoauthorshipNetwork = () => {
 
   const onUp = useCallback(() => { dragging.current = false; dragId.current = null; }, []);
 
+  // Touch event handlers for mobile/tablet
+  const getTouch = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
+    const r = canvasRef.current?.getBoundingClientRect();
+    if (!r || !e.touches.length) return null;
+    return { mx: e.touches[0].clientX - r.left, my: e.touches[0].clientY - r.top };
+  }, []);
+
+  const onTouchStart = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
+    const pos = getTouch(e);
+    if (!pos) return;
+    const n = nodeAt(pos.mx, pos.my);
+    if (n && !n.isCenter) {
+      e.preventDefault();
+      dragging.current = true;
+      dragId.current = n.id;
+    }
+    setHovered(n?.id || null);
+  }, [nodeAt, getTouch]);
+
+  const onTouchMove = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (!dragging.current || !dragId.current) return;
+    e.preventDefault();
+    const pos = getTouch(e);
+    if (!pos) return;
+    const n = nodesRef.current.find(n => n.id === dragId.current);
+    if (n) { n.x = pos.mx; n.y = pos.my; n.vx = 0; n.vy = 0; }
+  }, [getTouch]);
+
+  const onTouchEnd = useCallback(() => {
+    dragging.current = false;
+    dragId.current = null;
+    setHovered(null);
+  }, []);
+
   // Build cluster legend data
   const clusterLegend = useMemo(() => {
     if (!coauthors.length) return [];
@@ -522,12 +565,15 @@ const CoauthorshipNetwork = () => {
     <div ref={containerRef} className="w-full space-y-3">
       <canvas
         ref={canvasRef}
-        style={{ width: dims.w, height: dims.h }}
+        style={{ width: dims.w, height: dims.h, touchAction: "none" }}
         className="w-full rounded-xl border border-border"
         onMouseMove={onMove}
         onMouseDown={onDown}
         onMouseUp={onUp}
         onMouseLeave={() => { onUp(); setHovered(null); }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       />
 
       {/* Visual Legend */}
