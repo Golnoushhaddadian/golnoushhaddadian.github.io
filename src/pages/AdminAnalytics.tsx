@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Lock, Users, Clock, Globe, Monitor, ArrowRight } from "lucide-react";
+import { Lock, Users, Clock, Globe, Monitor, ArrowRight, Link2, Search } from "lucide-react";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 
 const ADMIN_PASSWORD = "LiaAdmin2026!";
@@ -26,6 +26,47 @@ type Session = {
   started_at: string | null;
   last_active_at: string | null;
 };
+
+function parseSource(referrer: string | null): { label: string; type: "search" | "social" | "direct" | "website"; query?: string } {
+  if (!referrer || referrer === "") return { label: "Direct Visit", type: "direct" };
+  try {
+    const url = new URL(referrer);
+    const host = url.hostname.toLowerCase();
+    const params = url.searchParams;
+    // Search engines
+    if (host.includes("google.")) {
+      const q = params.get("q") || params.get("query");
+      return { label: "Google Search", type: "search", query: q || undefined };
+    }
+    if (host.includes("bing.com")) {
+      const q = params.get("q");
+      return { label: "Bing Search", type: "search", query: q || undefined };
+    }
+    if (host.includes("yahoo.com")) {
+      const q = params.get("p") || params.get("q");
+      return { label: "Yahoo Search", type: "search", query: q || undefined };
+    }
+    if (host.includes("duckduckgo.com")) {
+      const q = params.get("q");
+      return { label: "DuckDuckGo Search", type: "search", query: q || undefined };
+    }
+    if (host.includes("scholar.google")) {
+      const q = params.get("q");
+      return { label: "Google Scholar", type: "search", query: q || undefined };
+    }
+    // Social media
+    if (host.includes("linkedin.com")) return { label: "LinkedIn", type: "social" };
+    if (host.includes("twitter.com") || host.includes("x.com")) return { label: "X / Twitter", type: "social" };
+    if (host.includes("facebook.com")) return { label: "Facebook", type: "social" };
+    if (host.includes("instagram.com")) return { label: "Instagram", type: "social" };
+    if (host.includes("reddit.com")) return { label: "Reddit", type: "social" };
+    if (host.includes("researchgate.net")) return { label: "ResearchGate", type: "social" };
+    // Other websites
+    return { label: host, type: "website" };
+  } catch {
+    return { label: referrer, type: "website" };
+  }
+}
 
 function formatDuration(secs: number | null) {
   if (!secs) return "0s";
@@ -81,6 +122,8 @@ export default function AdminAnalytics() {
     const devices: Record<string, number> = {};
     const browsers: Record<string, number> = {};
     const pages: Record<string, number> = {};
+    const sources: Record<string, number> = {};
+    const searchQueries: Record<string, number> = {};
     sessions.forEach((s) => {
       const loc = [s.city, s.country].filter(Boolean).join(", ") || "Unknown";
       countries[loc] = (countries[loc] || 0) + 1;
@@ -89,8 +132,13 @@ export default function AdminAnalytics() {
       (s.pages_visited || []).forEach((p: any) => {
         pages[p.page] = (pages[p.page] || 0) + 1;
       });
+      const src = parseSource(s.referrer);
+      sources[src.label] = (sources[src.label] || 0) + 1;
+      if (src.query) {
+        searchQueries[src.query] = (searchQueries[src.query] || 0) + 1;
+      }
     });
-    return { total, totalDuration, avg, countries, devices, browsers, pages };
+    return { total, totalDuration, avg, countries, devices, browsers, pages, sources, searchQueries };
   }, [sessions]);
 
   if (!authenticated) {
@@ -116,6 +164,8 @@ export default function AdminAnalytics() {
 
   const sortedCountries = summary ? Object.entries(summary.countries).sort((a, b) => b[1] - a[1]) : [];
   const sortedPages = summary ? Object.entries(summary.pages).sort((a, b) => b[1] - a[1]).slice(0, 10) : [];
+  const sortedSources = summary ? Object.entries(summary.sources).sort((a, b) => b[1] - a[1]) : [];
+  const sortedQueries = summary ? Object.entries(summary.searchQueries).sort((a, b) => b[1] - a[1]) : [];
 
   return (
     <div className="space-y-6">
@@ -151,6 +201,30 @@ export default function AdminAnalytics() {
             </CardContent>
           </Card>
         </div>
+       )}
+
+      {/* Traffic Sources & Search Queries */}
+      {summary && (
+        <div className="grid md:grid-cols-2 gap-4">
+          <Card>
+            <CardHeader><CardTitle className="text-sm flex items-center gap-2"><Link2 size={16} /> Traffic Sources</CardTitle></CardHeader>
+            <CardContent className="space-y-1">
+              {sortedSources.map(([src, count]) => (
+                <div key={src} className="flex justify-between text-sm"><span className="text-muted-foreground">{src}</span><Badge variant="secondary">{count}</Badge></div>
+              ))}
+              {sortedSources.length === 0 && <p className="text-xs text-muted-foreground">No data yet</p>}
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader><CardTitle className="text-sm flex items-center gap-2"><Search size={16} /> Search Keywords</CardTitle></CardHeader>
+            <CardContent className="space-y-1">
+              {sortedQueries.map(([q, count]) => (
+                <div key={q} className="flex justify-between text-sm"><span className="text-muted-foreground">"{q}"</span><Badge variant="secondary">{count}</Badge></div>
+              ))}
+              {sortedQueries.length === 0 && <p className="text-xs text-muted-foreground">Most search engines hide keywords, but they'll appear here when available</p>}
+            </CardContent>
+          </Card>
+        </div>
       )}
 
       {/* Individual Sessions Table */}
@@ -162,6 +236,7 @@ export default function AdminAnalytics() {
               <tr className="border-b text-left text-muted-foreground">
                 <th className="py-2 pr-3">Time</th>
                 <th className="py-2 pr-3">Location</th>
+                <th className="py-2 pr-3">Source</th>
                 <th className="py-2 pr-3">Device</th>
                 <th className="py-2 pr-3">Duration</th>
                 <th className="py-2 pr-3">First Page</th>
@@ -169,10 +244,16 @@ export default function AdminAnalytics() {
               </tr>
             </thead>
             <tbody>
-              {sessions.map((s) => (
+              {sessions.map((s) => {
+                const src = parseSource(s.referrer);
+                return (
                 <tr key={s.id} className="border-b border-border/50 hover:bg-muted/50">
                   <td className="py-2 pr-3 whitespace-nowrap">{formatDate(s.started_at)}</td>
                   <td className="py-2 pr-3">{[s.city, s.country].filter(Boolean).join(", ") || "Unknown"}</td>
+                  <td className="py-2 pr-3">
+                    <span className="whitespace-nowrap">{src.label}</span>
+                    {src.query && <span className="block text-xs text-muted-foreground">"{src.query}"</span>}
+                  </td>
                   <td className="py-2 pr-3">{s.device} · {s.browser}</td>
                   <td className="py-2 pr-3">{formatDuration(s.duration_seconds)}</td>
                   <td className="py-2 pr-3">{s.first_page || "/"}</td>
@@ -182,7 +263,8 @@ export default function AdminAnalytics() {
                     </Button>
                   </td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
           </table>
           {sessions.length === 0 && <p className="text-center text-muted-foreground py-4">No sessions recorded yet.</p>}
