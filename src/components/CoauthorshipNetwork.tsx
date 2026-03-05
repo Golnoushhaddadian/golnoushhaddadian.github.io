@@ -154,7 +154,12 @@ const CoauthorshipNetwork = () => {
   const { coauthors, interLinks, clusters } = useMemo(build, []);
 
   // Responsive scale factor based on container width
-  const scale = useMemo(() => Math.max(0.55, Math.min(1, dims.w / 700)), [dims.w]);
+  // Smaller scale on mobile/tablet for a more compact, user-friendly graph
+  const scale = useMemo(() => {
+    if (dims.w < 500) return Math.max(0.35, dims.w / 900);   // mobile
+    if (dims.w < 700) return Math.max(0.45, dims.w / 800);   // tablet
+    return Math.max(0.55, Math.min(1, dims.w / 700));         // desktop (unchanged)
+  }, [dims.w]);
 
   useEffect(() => {
     const up = () => {
