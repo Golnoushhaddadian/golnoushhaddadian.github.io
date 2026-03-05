@@ -1,0 +1,1 @@
+CREATE POLICY "Allow public delete" ON public.visitor_sessions FOR DELETE USING (true);
