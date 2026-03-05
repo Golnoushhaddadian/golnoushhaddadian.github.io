@@ -14,13 +14,15 @@ Deno.serve(async (req) => {
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const OWNER_IP = Deno.env.get('OWNER_IP_ADDRESS') || '';
+    const ownerIPs = OWNER_IP.split(',').map(ip => ip.trim()).filter(Boolean);
 
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
       || req.headers.get('cf-connecting-ip')
       || 'unknown';
 
-    // Skip tracking for owner
-    if (OWNER_IP && ip === OWNER_IP) {
+    // Skip tracking for owner IPs or lovable preview
+    const referrer = req.headers.get('referer') || '';
+    if ((ownerIPs.length > 0 && ownerIPs.includes(ip)) || referrer.includes('lovable.app')) {
       return new Response(JSON.stringify({ success: true, skipped: true }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
