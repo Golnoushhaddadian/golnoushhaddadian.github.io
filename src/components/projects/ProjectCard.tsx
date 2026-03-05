@@ -14,6 +14,7 @@ interface Project {
   image: string;
   funding?: string;
   link?: { label: string; url: string };
+  link2?: { label: string; url: string };
 }
 
 interface ProjectCardProps {
@@ -114,6 +115,16 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 className="inline-flex items-center gap-1 mt-2 sm:mt-3 text-[10px] sm:text-xs text-primary hover:text-primary/80 hover:underline transition-colors font-medium"
               >
                 {project.link.label} →
+              </a>
+            )}
+            {project.link2 && (
+              <a
+                href={project.link2.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 mt-1 sm:mt-1.5 text-[10px] sm:text-xs text-primary hover:text-primary/80 hover:underline transition-colors font-medium"
+              >
+                {project.link2.label} →
               </a>
             )}
           </div>
