@@ -286,13 +286,32 @@ export default function AdminAnalytics() {
             </div>
             <div>
               <p className="text-muted-foreground mb-1">Pages Visited:</p>
-              <div className="flex flex-wrap items-center gap-1">
-                {(selectedSession.pages_visited || []).map((p: any, i: number) => (
-                  <span key={i} className="flex items-center gap-1">
-                    <Badge variant="outline">{p.page}</Badge>
-                    {i < (selectedSession.pages_visited || []).length - 1 && <ArrowRight size={12} className="text-muted-foreground" />}
-                  </span>
-                ))}
+              <div className="space-y-1">
+                {(selectedSession.pages_visited || []).map((p: any, i: number) => {
+                  const pages = selectedSession.pages_visited || [];
+                  let pageDuration = "";
+                  if (p.timestamp) {
+                    const start = new Date(p.timestamp).getTime();
+                    if (i < pages.length - 1 && pages[i + 1].timestamp) {
+                      const end = new Date(pages[i + 1].timestamp).getTime();
+                      pageDuration = formatDuration(Math.round((end - start) / 1000));
+                    } else if (selectedSession.last_active_at) {
+                      const end = new Date(selectedSession.last_active_at).getTime();
+                      pageDuration = formatDuration(Math.round((end - start) / 1000));
+                    }
+                  }
+                  return (
+                    <div key={i} className="flex items-center gap-2">
+                      <Badge variant="outline">{p.page}</Badge>
+                      {pageDuration && (
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Clock size={10} /> {pageDuration}
+                        </span>
+                      )}
+                      {i < (selectedSession.pages_visited || []).length - 1 && <ArrowRight size={12} className="text-muted-foreground" />}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </CardContent>
