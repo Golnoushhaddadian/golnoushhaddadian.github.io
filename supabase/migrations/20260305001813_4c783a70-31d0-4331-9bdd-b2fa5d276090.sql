@@ -1,0 +1,1 @@
+DELETE FROM public.visitor_sessions WHERE referrer ILIKE '%lovable%' OR user_agent ILIKE '%lovable%';
