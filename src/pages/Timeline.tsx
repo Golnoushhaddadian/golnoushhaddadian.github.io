@@ -169,6 +169,14 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
             {expanded ? 'Less' : 'More'}
           </button>
         )}
+
+        <Link
+          to={categoryPageMap[event.category].path}
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-1 text-[10px] text-primary/70 hover:text-primary mt-2 hover:underline transition-colors"
+        >
+          View in {categoryPageMap[event.category].label} <ArrowRight size={10} />
+        </Link>
       </motion.div>
     </motion.div>
   );
