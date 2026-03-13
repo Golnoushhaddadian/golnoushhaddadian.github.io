@@ -62,11 +62,6 @@ const categories: AwardCategory[] = [
         detail: 'Nominated for the 2025 International Education Award in International Initiatives.',
       },
       {
-        title: 'Honored Student — All Three Degrees',
-        org: 'B.A. (3.71/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
-        year: ['2012', '2014', '2025'],
-      },
-      {
         title: 'Top 1% Nationwide — M.A. Entrance Exam',
         org: 'Sharif University of Technology',
         year: '2012',
@@ -75,6 +70,11 @@ const categories: AwardCategory[] = [
         title: 'Admitted as Exceptionally Talented Student',
         org: 'Sharif University of Technology, supported by the National Organization for Development of Exceptional Talents',
         year: '2012',
+      },
+      {
+        title: 'Honored Student — All Three Degrees',
+        org: 'B.A. (3.71/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
+        year: ['2012', '2014', '2025'],
       },
     ],
   },
