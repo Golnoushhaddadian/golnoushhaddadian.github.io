@@ -81,9 +81,15 @@ const categories: AwardCategory[] = [
         year: ['2012', '2014', '2025'],
       },
       {
-        title: 'Nominated for International Education Award',
-        org: 'Georgia State University — International Initiatives',
-        year: '2024',
+        title: 'Outstanding Contributions to Global Engagement and Global Citizenship',
+        org: 'Georgia State University',
+        year: '2025',
+        detail: 'Nominated for the 2025 International Education Award in International Initiatives.',
+      },
+      {
+        title: 'Admitted as Exceptionally Talented Student',
+        org: 'Sharif University of Technology, supported by the National Organization for Development of Exceptional Talents',
+        year: '2012',
       },
     ],
   },
