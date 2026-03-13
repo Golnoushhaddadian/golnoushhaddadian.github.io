@@ -223,6 +223,17 @@ const AboutMe = () => {
           </p>
           <CoauthorshipNetwork />
         </section>
+
+        {/* Timeline CTA */}
+        <section className="text-center py-8">
+          <a
+            href="/timeline"
+            className="inline-flex items-center gap-2 text-sm sm:text-base font-medium text-primary hover:underline transition-colors group"
+          >
+            <span>✦ View a timeline of my journey here</span>
+            <ExternalLink size={14} className="opacity-60 group-hover:opacity-100 transition-opacity" />
+          </a>
+        </section>
       </div>
     </div>;
 };
