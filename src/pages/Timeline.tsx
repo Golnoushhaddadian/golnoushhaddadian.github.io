@@ -7,55 +7,6 @@ import { ChevronDown, ChevronUp, Filter, Sparkles, Flag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Slider } from '@/components/ui/slider';
 
-// ── Animated count-up hook ──
-const useCountUp = (end: number, duration = 1200) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !hasStarted) setHasStarted(true); },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [hasStarted]);
-
-  useEffect(() => {
-    if (!hasStarted) return;
-    let start = 0;
-    const increment = end / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) { setCount(end); clearInterval(timer); }
-      else setCount(Math.floor(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [hasStarted, end, duration]);
-
-  return { count, ref };
-};
-
-// ── Stat card with count-up ──
-const StatCard = ({ catKey, cfg }: { catKey: TimelineCategory; cfg: typeof categoryConfig[TimelineCategory] }) => {
-  const total = timelineEvents.filter((e) => e.category === catKey).length;
-  const { count, ref } = useCountUp(total);
-  return (
-    <motion.div
-      ref={ref}
-      whileHover={{ scale: 1.05 }}
-      className="text-center p-2 rounded-lg border cursor-default"
-      style={{ backgroundColor: cfg.bgColor }}
-    >
-      <span className="text-lg font-bold" style={{ color: cfg.color }}>{count}</span>
-      <p className="text-[10px] font-medium" style={{ color: cfg.color }}>
-        {cfg.icon} {cfg.label}
-      </p>
-    </motion.div>
-  );
-};
-
 // ── Category filter pills ──
 const CategoryFilter = ({ active, onToggle }: { active: Set<TimelineCategory>; onToggle: (cat: TimelineCategory) => void }) => (
   <div className="flex flex-wrap gap-2 justify-center">
@@ -80,26 +31,13 @@ const CategoryFilter = ({ active, onToggle }: { active: Set<TimelineCategory>; o
 
 // ── Year range slider ──
 const YearRangeSlider = ({
-  min,
-  max,
-  value,
-  onChange,
+  min, max, value, onChange,
 }: {
-  min: number;
-  max: number;
-  value: [number, number];
-  onChange: (val: [number, number]) => void;
+  min: number; max: number; value: [number, number]; onChange: (val: [number, number]) => void;
 }) => (
   <div className="flex items-center gap-3 w-full max-w-md mx-auto mt-4 px-2">
     <span className="text-xs font-semibold text-primary min-w-[2.5rem] text-right">{value[0]}</span>
-    <Slider
-      min={min}
-      max={max}
-      step={1}
-      value={value}
-      onValueChange={(v) => onChange(v as [number, number])}
-      className="flex-1"
-    />
+    <Slider min={min} max={max} step={1} value={value} onValueChange={(v) => onChange(v as [number, number])} className="flex-1" />
     <span className="text-xs font-semibold text-primary min-w-[2.5rem]">{value[1]}</span>
   </div>
 );
@@ -143,7 +81,6 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
         isLeft ? 'md:mr-auto md:pr-4' : 'md:ml-auto md:pl-4'
       )}
     >
-      {/* Connector dot */}
       <div
         className={cn(
           'hidden md:block absolute top-5 w-3 h-3 rounded-full border-2 z-10',
@@ -165,7 +102,6 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
         }}
         onClick={() => event.description && setExpanded(!expanded)}
       >
-        {/* Milestone banner */}
         {event.milestone && (
           <div
             className="flex items-center gap-1 text-[10px] font-semibold mb-2 px-2 py-0.5 rounded-full w-fit"
@@ -271,7 +207,6 @@ const Timeline = () => {
     return years.map((y) => ({ year: y, events: map.get(y)! }));
   }, [filtered, sortAsc]);
 
-  // Find the first milestone in each year group for the year marker
   const getMilestoneForYear = (events: TimelineEvent[]) => {
     const m = events.find((e) => e.milestone);
     return m?.milestone;
@@ -287,7 +222,6 @@ const Timeline = () => {
 
         <CategoryFilter active={activeCategories} onToggle={toggleCategory} />
 
-        {/* Year range slider */}
         <YearRangeSlider min={minYear} max={maxYear} value={yearRange} onChange={setYearRange} />
 
         <div className="flex justify-center mt-4 gap-2">
@@ -303,9 +237,6 @@ const Timeline = () => {
           </span>
         </div>
       </motion.div>
-
-
-
 
       {/* Timeline */}
       <div className="relative">
