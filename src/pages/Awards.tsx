@@ -61,6 +61,12 @@ const categories: AwardCategory[] = [
         year: '2012',
       },
       {
+        title: 'Honored Student — Highest GPA',
+        org: 'B.A. (4.00/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
+        year: '2012–2025',
+        detail: 'Achieved the highest GPA across all three degree programs.',
+      },
+      {
         title: 'Nominated for International Education Award',
         org: 'Georgia State University — International Initiatives',
         year: '2024',
