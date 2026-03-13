@@ -304,12 +304,8 @@ const Timeline = () => {
         </div>
       </motion.div>
 
-      {/* Animated stats bar */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2 mb-8">
-        {(Object.entries(categoryConfig) as [TimelineCategory, typeof categoryConfig[TimelineCategory]][]).map(
-          ([key, cfg]) => <StatCard key={key} catKey={key as TimelineCategory} cfg={cfg} />
-        )}
-      </div>
+
+
 
       {/* Timeline */}
       <div className="relative">
