@@ -19,6 +19,7 @@ import Awards from "@/pages/Awards";
 import Education from "@/pages/Education";
 import Research from "@/pages/Research";
 import Resources from "@/pages/Resources";
+import Timeline from "@/pages/Timeline";
 import AdminAnalytics from "@/pages/AdminAnalytics";
 const queryClient = new QueryClient();
 
