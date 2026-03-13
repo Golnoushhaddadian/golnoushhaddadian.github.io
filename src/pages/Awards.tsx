@@ -148,9 +148,13 @@ const Awards = () => {
                   className="group relative grid grid-cols-[auto_1fr] gap-x-4 py-3 sm:py-4 border-b border-border/20 last:border-b-0"
                 >
                   {/* Year */}
-                  <span className="text-xs sm:text-sm font-medium text-muted-foreground/60 pt-0.5 min-w-[4.5rem] text-right tabular-nums">
-                    {award.year}
-                  </span>
+                  <div className="text-xs sm:text-sm font-medium text-muted-foreground/60 pt-0.5 min-w-[4.5rem] text-right tabular-nums">
+                    {Array.isArray(award.year) ? (
+                      award.year.map((y, i) => <div key={i}>{y}</div>)
+                    ) : (
+                      <span>{award.year}</span>
+                    )}
+                  </div>
 
                   {/* Content */}
                   <div className="min-w-0">
