@@ -97,7 +97,7 @@ const AboutMe = () => {
             <p className="text-sm sm:text-lg md:text-xl text-muted-foreground mb-2 sm:mb-3 md:mb-4">Ph.D. in Learning Sciences</p>
             <p className="mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-base">
               Postdoctoral Associate | Georgia State University, University of Memphis, and Educational Testing
-              Services (ETS).
+              Services (ETS)
             </p>
           </div>
         </div>
