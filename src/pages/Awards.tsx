@@ -57,7 +57,7 @@ const categories: AwardCategory[] = [
       },
       {
         title: 'Ranked 1st in GPA',
-        org: 'Bachelor's (2012) and Master's (2014) degrees',
+        org: "Bachelor's (2012) and Master's (2014) degrees",
         year: '2012–2014',
       },
       {
