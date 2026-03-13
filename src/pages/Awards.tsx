@@ -56,9 +56,10 @@ const categories: AwardCategory[] = [
         detail: 'Awarded for demonstrated potential for excellence in research, teaching, and service.',
       },
       {
-        title: 'Top 1% Nationwide — M.A. Entrance Exam',
-        org: 'Sharif University of Technology',
-        year: '2012',
+        title: 'Outstanding Contributions to Global Engagement and Global Citizenship',
+        org: 'Georgia State University',
+        year: '2025',
+        detail: 'Nominated for the 2025 International Education Award in International Initiatives.',
       },
       {
         title: 'Honored Student — All Three Degrees',
@@ -66,10 +67,9 @@ const categories: AwardCategory[] = [
         year: ['2012', '2014', '2025'],
       },
       {
-        title: 'Outstanding Contributions to Global Engagement and Global Citizenship',
-        org: 'Georgia State University',
-        year: '2025',
-        detail: 'Nominated for the 2025 International Education Award in International Initiatives.',
+        title: 'Top 1% Nationwide — M.A. Entrance Exam',
+        org: 'Sharif University of Technology',
+        year: '2012',
       },
       {
         title: 'Admitted as Exceptionally Talented Student',
