@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 import { timelineEvents, categoryConfig, TimelineCategory, TimelineEvent } from '@/data/timelineData';
