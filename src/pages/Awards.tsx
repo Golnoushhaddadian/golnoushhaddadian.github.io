@@ -5,7 +5,7 @@ import { Award, GraduationCap, Trophy, Star } from 'lucide-react';
 type AwardItem = {
   title: string;
   org: string;
-  year: string;
+  year: string | string[];
   detail?: string;
 };
 
