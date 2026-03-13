@@ -19,6 +19,7 @@ import Awards from "@/pages/Awards";
 import Education from "@/pages/Education";
 import Research from "@/pages/Research";
 import Resources from "@/pages/Resources";
+import Timeline from "@/pages/Timeline";
 import AdminAnalytics from "@/pages/AdminAnalytics";
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="/projects" element={<Projects />} />
               <Route path="/teaching" element={<Teaching />} />
               <Route path="/resources" element={<Resources />} />
+              <Route path="/timeline" element={<Timeline />} />
               <Route path="/admin-analytics" element={<AdminAnalytics />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
