@@ -61,10 +61,9 @@ const categories: AwardCategory[] = [
         year: '2012',
       },
       {
-        title: 'Honored Student — Highest GPA',
-        org: 'B.A. (4.00/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
+        title: 'Honored Student — All Three Degrees',
+        org: 'B.A. (3.71/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
         year: '2012–2025',
-        detail: 'Achieved the highest GPA across all three degree programs.',
       },
       {
         title: 'Nominated for International Education Award',
