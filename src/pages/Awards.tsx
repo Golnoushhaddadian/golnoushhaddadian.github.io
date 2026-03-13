@@ -38,21 +38,6 @@ const categories: AwardCategory[] = [
         year: '2024',
         detail: 'Fully-funded program for advanced quantitative research methods.',
       },
-      {
-        title: 'Graduate Student Travel Award ($500)',
-        org: 'College of Education & Human Development, Georgia State University',
-        year: '2025',
-      },
-      {
-        title: 'Graduate Student Travel Award ($500)',
-        org: 'College of Education & Human Development, Georgia State University',
-        year: '2024',
-      },
-      {
-        title: 'Graduate Student Travel Award ($500)',
-        org: 'College of Education & Human Development, Georgia State University',
-        year: '2023',
-      },
     ],
   },
   {
