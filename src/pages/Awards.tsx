@@ -63,7 +63,7 @@ const categories: AwardCategory[] = [
       {
         title: 'Honored Student — All Three Degrees',
         org: 'B.A. (3.71/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
-        year: '2012–2025',
+        year: '2012, 2014, 2025',
       },
       {
         title: 'Nominated for International Education Award',
