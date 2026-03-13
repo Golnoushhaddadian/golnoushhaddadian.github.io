@@ -61,11 +61,6 @@ const categories: AwardCategory[] = [
         year: '2012',
       },
       {
-        title: 'Ranked 1st in GPA',
-        org: "Bachelor's (2012) and Master's (2014) degrees",
-        year: '2012–2014',
-      },
-      {
         title: 'Nominated for International Education Award',
         org: 'Georgia State University — International Initiatives',
         year: '2024',
