@@ -108,6 +108,11 @@ const categories: AwardCategory[] = [
         org: 'Young Researchers and Elite Club',
         year: '2006',
       },
+      {
+        title: 'Outstanding Student Researcher Award',
+        org: 'Shahid Shamloo High School',
+        year: '2005',
+      },
     ],
   },
   {
