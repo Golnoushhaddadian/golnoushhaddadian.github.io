@@ -1,55 +1,131 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 import { timelineEvents, categoryConfig, TimelineCategory, TimelineEvent } from '@/data/timelineData';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Filter, Sparkles } from 'lucide-react';
+import { ChevronDown, ChevronUp, Filter, Sparkles, Flag } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Slider } from '@/components/ui/slider';
 
-const CategoryFilter = ({
-  active,
-  onToggle,
-}: {
-  active: Set<TimelineCategory>;
-  onToggle: (cat: TimelineCategory) => void;
-}) => (
+// ── Animated count-up hook ──
+const useCountUp = (end: number, duration = 1200) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && !hasStarted) setHasStarted(true); },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    let start = 0;
+    const increment = end / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) { setCount(end); clearInterval(timer); }
+      else setCount(Math.floor(start));
+    }, 16);
+    return () => clearInterval(timer);
+  }, [hasStarted, end, duration]);
+
+  return { count, ref };
+};
+
+// ── Stat card with count-up ──
+const StatCard = ({ catKey, cfg }: { catKey: TimelineCategory; cfg: typeof categoryConfig[TimelineCategory] }) => {
+  const total = timelineEvents.filter((e) => e.category === catKey).length;
+  const { count, ref } = useCountUp(total);
+  return (
+    <motion.div
+      ref={ref}
+      whileHover={{ scale: 1.05 }}
+      className="text-center p-2 rounded-lg border cursor-default"
+      style={{ backgroundColor: cfg.bgColor }}
+    >
+      <span className="text-lg font-bold" style={{ color: cfg.color }}>{count}</span>
+      <p className="text-[10px] font-medium" style={{ color: cfg.color }}>
+        {cfg.icon} {cfg.label}
+      </p>
+    </motion.div>
+  );
+};
+
+// ── Category filter pills ──
+const CategoryFilter = ({ active, onToggle }: { active: Set<TimelineCategory>; onToggle: (cat: TimelineCategory) => void }) => (
   <div className="flex flex-wrap gap-2 justify-center">
-    {(Object.entries(categoryConfig) as [TimelineCategory, typeof categoryConfig[TimelineCategory]][]).map(
-      ([key, cfg]) => {
-        const isActive = active.has(key);
-        return (
-          <button
-            key={key}
-            onClick={() => onToggle(key)}
-            className={cn(
-              'px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border',
-              isActive
-                ? 'shadow-sm scale-105'
-                : 'opacity-40 hover:opacity-70 bg-muted border-transparent'
-            )}
-            style={
-              isActive
-                ? { backgroundColor: cfg.bgColor, borderColor: cfg.color, color: cfg.color }
-                : undefined
-            }
-          >
-            {cfg.label}
-          </button>
-        );
-      }
-    )}
+    {(Object.entries(categoryConfig) as [TimelineCategory, typeof categoryConfig[TimelineCategory]][]).map(([key, cfg]) => {
+      const isActive = active.has(key);
+      return (
+        <button
+          key={key}
+          onClick={() => onToggle(key)}
+          className={cn(
+            'px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border',
+            isActive ? 'shadow-sm scale-105' : 'opacity-40 hover:opacity-70 bg-muted border-transparent'
+          )}
+          style={isActive ? { backgroundColor: cfg.bgColor, borderColor: cfg.color, color: cfg.color } : undefined}
+        >
+          {cfg.icon} {cfg.label}
+        </button>
+      );
+    })}
   </div>
 );
 
-const YearMarker = ({ year }: { year: number }) => (
+// ── Year range slider ──
+const YearRangeSlider = ({
+  min,
+  max,
+  value,
+  onChange,
+}: {
+  min: number;
+  max: number;
+  value: [number, number];
+  onChange: (val: [number, number]) => void;
+}) => (
+  <div className="flex items-center gap-3 w-full max-w-md mx-auto mt-4 px-2">
+    <span className="text-xs font-semibold text-primary min-w-[2.5rem] text-right">{value[0]}</span>
+    <Slider
+      min={min}
+      max={max}
+      step={1}
+      value={value}
+      onValueChange={(v) => onChange(v as [number, number])}
+      className="flex-1"
+    />
+    <span className="text-xs font-semibold text-primary min-w-[2.5rem]">{value[1]}</span>
+  </div>
+);
+
+// ── Year marker with sticky badge ──
+const YearMarker = ({ year, milestoneLabel }: { year: number; milestoneLabel?: string }) => (
   <div className="sticky top-16 z-10 flex items-center gap-3 py-2">
     <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shadow-md">
       <span className="text-sm sm:text-base font-bold text-primary">{year}</span>
     </div>
-    <div className="flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent" />
+    <div className="flex-1 flex items-center gap-2">
+      <div className="flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent" />
+      {milestoneLabel && (
+        <motion.span
+          initial={{ opacity: 0, x: 10 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full whitespace-nowrap"
+        >
+          <Flag size={10} /> {milestoneLabel}
+        </motion.span>
+      )}
+    </div>
   </div>
 );
 
+// ── Timeline card ──
 const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number }) => {
   const [expanded, setExpanded] = useState(false);
   const cfg = categoryConfig[event.category];
@@ -67,7 +143,7 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
         isLeft ? 'md:mr-auto md:pr-4' : 'md:ml-auto md:pl-4'
       )}
     >
-      {/* Connector dot on the center line (md+) */}
+      {/* Connector dot */}
       <div
         className={cn(
           'hidden md:block absolute top-5 w-3 h-3 rounded-full border-2 z-10',
@@ -79,9 +155,8 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
       <motion.div
         whileHover={{ y: -2, boxShadow: '0 8px 25px -8px rgba(0,0,0,0.15)' }}
         className={cn(
-          'w-full rounded-lg border p-4 cursor-pointer transition-colors duration-200',
-          event.highlight && 'ring-1',
-          'bg-card'
+          'w-full rounded-lg border p-4 cursor-pointer transition-colors duration-200 bg-card',
+          event.highlight && 'ring-1'
         )}
         style={{
           borderLeftWidth: '4px',
@@ -90,20 +165,29 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
         }}
         onClick={() => event.description && setExpanded(!expanded)}
       >
+        {/* Milestone banner */}
+        {event.milestone && (
+          <div
+            className="flex items-center gap-1 text-[10px] font-semibold mb-2 px-2 py-0.5 rounded-full w-fit"
+            style={{ backgroundColor: cfg.bgColor, color: cfg.color }}
+          >
+            <Flag size={10} />
+            {event.milestone}
+          </div>
+        )}
+
         <div className="flex items-start justify-between gap-2 mb-1">
           <Badge
             variant="outline"
             className="text-[10px] shrink-0"
             style={{ backgroundColor: cfg.bgColor, color: cfg.color, borderColor: cfg.color }}
           >
-            {cfg.label}
+            {cfg.icon} {cfg.label}
           </Badge>
           <div className="flex items-center gap-1">
             {event.highlight && <Sparkles size={12} className="text-amber-500" />}
             {event.endYear && (
-              <span className="text-[10px] text-muted-foreground">
-                {event.year}–{event.endYear}
-              </span>
+              <span className="text-[10px] text-muted-foreground">{event.year}–{event.endYear}</span>
             )}
           </div>
         </div>
@@ -132,10 +216,7 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
         {event.description && (
           <button
             className="flex items-center gap-1 text-[10px] text-primary mt-2 hover:underline"
-            onClick={(e) => {
-              e.stopPropagation();
-              setExpanded(!expanded);
-            }}
+            onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
           >
             {expanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
             {expanded ? 'Less' : 'More'}
@@ -146,6 +227,7 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
   );
 };
 
+// ── Main page ──
 const Timeline = () => {
   useDocumentHead({
     title: 'Timeline — Golnoush Haddadian',
@@ -157,22 +239,26 @@ const Timeline = () => {
   const [activeCategories, setActiveCategories] = useState<Set<TimelineCategory>>(allCategories);
   const [sortAsc, setSortAsc] = useState(false);
 
+  const allYears = useMemo(() => timelineEvents.map((e) => e.year), []);
+  const minYear = Math.min(...allYears);
+  const maxYear = Math.max(...allYears);
+  const [yearRange, setYearRange] = useState<[number, number]>([minYear, maxYear]);
+
   const toggleCategory = (cat: TimelineCategory) => {
     setActiveCategories((prev) => {
       const next = new Set(prev);
-      if (next.has(cat)) {
-        if (next.size > 1) next.delete(cat);
-      } else {
-        next.add(cat);
-      }
+      if (next.has(cat)) { if (next.size > 1) next.delete(cat); }
+      else next.add(cat);
       return next;
     });
   };
 
   const filtered = useMemo(() => {
-    const items = timelineEvents.filter((e) => activeCategories.has(e.category));
+    const items = timelineEvents.filter(
+      (e) => activeCategories.has(e.category) && e.year >= yearRange[0] && e.year <= yearRange[1]
+    );
     return items.sort((a, b) => (sortAsc ? a.year - b.year : b.year - a.year));
-  }, [activeCategories, sortAsc]);
+  }, [activeCategories, sortAsc, yearRange]);
 
   const grouped = useMemo(() => {
     const map = new Map<number, TimelineEvent[]>();
@@ -185,13 +271,15 @@ const Timeline = () => {
     return years.map((y) => ({ year: y, events: map.get(y)! }));
   }, [filtered, sortAsc]);
 
+  // Find the first milestone in each year group for the year marker
+  const getMilestoneForYear = (events: TimelineEvent[]) => {
+    const m = events.find((e) => e.milestone);
+    return m?.milestone;
+  };
+
   return (
     <div className="max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
-      >
+      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">My Journey</h1>
         <p className="text-sm text-muted-foreground mb-6">
           An interactive timeline of my academic career, research, and achievements
@@ -199,7 +287,10 @@ const Timeline = () => {
 
         <CategoryFilter active={activeCategories} onToggle={toggleCategory} />
 
-        <div className="flex justify-center mt-4">
+        {/* Year range slider */}
+        <YearRangeSlider min={minYear} max={maxYear} value={yearRange} onChange={setYearRange} />
+
+        <div className="flex justify-center mt-4 gap-2">
           <button
             onClick={() => setSortAsc(!sortAsc)}
             className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5 rounded-md border bg-card"
@@ -207,41 +298,26 @@ const Timeline = () => {
             <Filter size={12} />
             {sortAsc ? 'Oldest first' : 'Newest first'}
           </button>
+          <span className="text-xs text-muted-foreground self-center">
+            Showing {filtered.length} of {timelineEvents.length} events
+          </span>
         </div>
       </motion.div>
 
-      {/* Stats bar */}
+      {/* Animated stats bar */}
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2 mb-8">
         {(Object.entries(categoryConfig) as [TimelineCategory, typeof categoryConfig[TimelineCategory]][]).map(
-          ([key, cfg]) => {
-            const count = timelineEvents.filter((e) => e.category === key).length;
-            return (
-              <motion.div
-                key={key}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-2 rounded-lg border"
-                style={{ backgroundColor: cfg.bgColor }}
-              >
-                <span className="text-lg font-bold" style={{ color: cfg.color }}>
-                  {count}
-                </span>
-                <p className="text-[10px] font-medium" style={{ color: cfg.color }}>
-                  {cfg.label}
-                </p>
-              </motion.div>
-            );
-          }
+          ([key, cfg]) => <StatCard key={key} catKey={key as TimelineCategory} cfg={cfg} />
         )}
       </div>
 
       {/* Timeline */}
       <div className="relative">
-        {/* Center line (md+) */}
         <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border -translate-x-px" />
 
         {grouped.map(({ year, events }, gi) => (
           <div key={year} className="mb-6">
-            <YearMarker year={year} />
+            <YearMarker year={year} milestoneLabel={getMilestoneForYear(events)} />
             <div className="md:flex md:flex-wrap md:gap-y-0 relative mt-2">
               {events.map((event, i) => (
                 <TimelineCard key={event.id} event={event} index={gi * 10 + i} />
@@ -249,6 +325,12 @@ const Timeline = () => {
             </div>
           </div>
         ))}
+
+        {filtered.length === 0 && (
+          <p className="text-center text-sm text-muted-foreground py-12">
+            No events match your filters. Try adjusting the year range or categories.
+          </p>
+        )}
       </div>
 
       <motion.p
