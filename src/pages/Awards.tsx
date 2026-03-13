@@ -5,7 +5,7 @@ import { Award, GraduationCap, Trophy, Star } from 'lucide-react';
 type AwardItem = {
   title: string;
   org: string;
-  year: string;
+  year: string | string[];
   detail?: string;
 };
 
@@ -63,7 +63,7 @@ const categories: AwardCategory[] = [
       {
         title: 'Honored Student — All Three Degrees',
         org: 'B.A. (3.71/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
-        year: '2012, 2014, 2025',
+        year: ['2012', '2014', '2025'],
       },
       {
         title: 'Nominated for International Education Award',
@@ -148,9 +148,13 @@ const Awards = () => {
                   className="group relative grid grid-cols-[auto_1fr] gap-x-4 py-3 sm:py-4 border-b border-border/20 last:border-b-0"
                 >
                   {/* Year */}
-                  <span className="text-xs sm:text-sm font-medium text-muted-foreground/60 pt-0.5 min-w-[4.5rem] text-right tabular-nums">
-                    {award.year}
-                  </span>
+                  <div className="text-xs sm:text-sm font-medium text-muted-foreground/60 pt-0.5 min-w-[4.5rem] text-right tabular-nums">
+                    {Array.isArray(award.year) ? (
+                      award.year.map((y, i) => <div key={i}>{y}</div>)
+                    ) : (
+                      <span>{award.year}</span>
+                    )}
+                  </div>
 
                   {/* Content */}
                   <div className="min-w-0">
