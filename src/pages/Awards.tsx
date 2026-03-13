@@ -45,6 +45,11 @@ const categories: AwardCategory[] = [
     icon: <GraduationCap className="w-4 h-4" />,
     items: [
       {
+        title: 'Outstanding Dissertation in Learning Technologies',
+        org: 'Department of Learning Sciences, College of Education & Human Development, Georgia State University',
+        year: '2026',
+      },
+      {
         title: 'Outstanding Ph.D. Student in Learning Technologies',
         org: 'College of Education & Human Development, Georgia State University',
         year: '2025',
