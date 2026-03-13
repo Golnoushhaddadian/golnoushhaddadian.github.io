@@ -1,11 +1,22 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 import { timelineEvents, categoryConfig, TimelineCategory, TimelineEvent } from '@/data/timelineData';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Filter, Sparkles, Flag } from 'lucide-react';
+import { ChevronDown, ChevronUp, Filter, Sparkles, Flag, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Slider } from '@/components/ui/slider';
+
+const categoryPageMap: Record<TimelineCategory, { path: string; label: string }> = {
+  education: { path: '/education', label: 'Education' },
+  research: { path: '/research', label: 'Research' },
+  publication: { path: '/research', label: 'Research' },
+  award: { path: '/awards', label: 'Awards' },
+  teaching: { path: '/teaching', label: 'Teaching' },
+  leadership: { path: '/cv', label: 'CV' },
+  service: { path: '/cv', label: 'CV' },
+};
 
 // ── Category filter pills ──
 const CategoryFilter = ({ active, onToggle }: { active: Set<TimelineCategory>; onToggle: (cat: TimelineCategory) => void }) => (
@@ -158,6 +169,14 @@ const TimelineCard = ({ event, index }: { event: TimelineEvent; index: number })
             {expanded ? 'Less' : 'More'}
           </button>
         )}
+
+        <Link
+          to={categoryPageMap[event.category].path}
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-1 text-[10px] text-primary/70 hover:text-primary mt-2 hover:underline transition-colors"
+        >
+          View in {categoryPageMap[event.category].label} <ArrowRight size={10} />
+        </Link>
       </motion.div>
     </motion.div>
   );
