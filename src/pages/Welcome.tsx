@@ -2,7 +2,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
 import CoauthorshipNetwork from "@/components/CoauthorshipNetwork";
-import Timeline from "@/pages/Timeline";
+import JourneyTimeline from "@/components/JourneyTimeline";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 import { useEffect, useRef, useState } from "react";
@@ -226,9 +226,7 @@ const AboutMe = () => {
         </section>
 
         {/* Journey Timeline */}
-        <section className="mt-12 sm:mt-16 md:mt-20">
-          <Timeline />
-        </section>
+        <JourneyTimeline />
 
 
       </div>
