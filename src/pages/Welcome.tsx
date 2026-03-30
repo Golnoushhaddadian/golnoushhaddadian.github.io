@@ -2,6 +2,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
 import CoauthorshipNetwork from "@/components/CoauthorshipNetwork";
+import ResearchStrands from "@/components/ResearchStrands";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 import { useEffect, useRef, useState } from "react";
@@ -213,6 +214,11 @@ const AboutMe = () => {
             </a>
             {" "}· Updated Mar 2026
           </p>
+        </section>
+
+        {/* Research Strands */}
+        <section className="mt-12 sm:mt-16 md:mt-20">
+          <ResearchStrands />
         </section>
 
         {/* Co-authorship Network */}
