@@ -2,7 +2,6 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
 import CoauthorshipNetwork from "@/components/CoauthorshipNetwork";
-import JourneyTimeline from "@/components/JourneyTimeline";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 import { useEffect, useRef, useState } from "react";
