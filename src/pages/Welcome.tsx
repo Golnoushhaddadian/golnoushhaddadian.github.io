@@ -224,8 +224,6 @@ const AboutMe = () => {
           <CoauthorshipNetwork />
         </section>
 
-        {/* Journey Timeline */}
-        <JourneyTimeline />
 
 
       </div>
