@@ -226,9 +226,7 @@ const AboutMe = () => {
         </section>
 
         {/* Journey Timeline */}
-        <section className="mt-12 sm:mt-16 md:mt-20">
-          <Timeline />
-        </section>
+        <JourneyTimeline />
 
 
       </div>
