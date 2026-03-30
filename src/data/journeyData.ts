@@ -1,4 +1,4 @@
-export type JourneyCategory = 'Education' | 'Research' | 'Publications' | 'Teaching' | 'Awards' | 'Leadership' | 'Service';
+export type JourneyCategory = 'Education' | 'Federal Projects' | 'Publications' | 'Teaching' | 'Awards' | 'Leadership' | 'Service';
 
 export type JourneyItem = {
   category: JourneyCategory;
