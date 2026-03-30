@@ -1,122 +1,165 @@
 
-import { useState } from "react";
+import { 
+  BookText, FileText, FileSearch, Layers, BookOpen, 
+  GraduationCap, Users, Search, FileCode
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
-import ResearchStrandsVenn, { type Strand, type PubType, type RadarDot, strandConfig, radarDots } from "@/components/research/ResearchStrandsVenn";
-import { cn } from "@/lib/utils";
 
 const ResearchInterests = () => {
   useDocumentHead({
-    title: "Research Strands — Golnoush Haddadian",
-    description:
-      "Research strands of Golnoush Haddadian spanning AI in education, assessment & feedback, language learning, and research methodology.",
-    canonical: "/research-interests",
+    title: 'Research Interests — Golnoush Haddadian',
+    description: 'Research interests of Golnoush Haddadian spanning educational technology, AI in education, assessment, and language learning.',
+    canonical: '/research-interests',
   });
-
-  const [activeStrand, setActiveStrand] = useState<Strand>("all");
-  const [activeType, setActiveType] = useState<PubType>("all");
-  const [selectedDot, setSelectedDot] = useState<RadarDot | null>(null);
-
-  const strandFilters: { key: PubType; label: string }[] = [
-    { key: "all", label: "All" },
-    { key: "journal", label: "Publications" },
-    { key: "conference", label: "Conferences" },
-    { key: "in-progress", label: "In Progress" },
+  const interestCategories = [
+    {
+      title: "Educational Technology",
+      interests: [
+        {
+          icon: <BookText className="h-8 w-8 text-primary" />,
+          title: "Instructional/Educational Technology",
+          description: "Exploring innovative approaches to enhance learning through technology."
+        },
+        {
+          icon: <GraduationCap className="h-8 w-8 text-primary" />,
+          title: "AI in Education",
+          description: "Investigating the role of AI in transforming educational practices."
+        },
+        {
+          icon: <FileCode className="h-8 w-8 text-primary" />,
+          title: "AI-Augmented Learning Environments",
+          description: "Creating intelligent learning systems that adapt to learners' needs."
+        },
+        {
+          icon: <Search className="h-8 w-8 text-primary" />,
+          title: "Personalized Learning Environments",
+          description: "Crafting tailored educational experiences for diverse learners."
+        }
+      ]
+    },
+    {
+      title: "Assessment & Collaboration",
+      interests: [
+        {
+          icon: <FileText className="h-8 w-8 text-primary" />,
+          title: "Formative Assessment and Feedback",
+          description: "Enhancing learning through strategic assessment and feedback processes."
+        },
+        {
+          icon: <Users className="h-8 w-8 text-primary" />,
+          title: "Peer Feedback",
+          description: "Fostering student growth through structured peer evaluation systems."
+        },
+        {
+          icon: <BookOpen className="h-8 w-8 text-primary" />,
+          title: "Collaborative Learning",
+          description: "Studying how learners co-construct knowledge and develop skills together."
+        }
+      ]
+    },
+    {
+      title: "Language Learning & CALL",
+      interests: [
+        {
+          icon: <Layers className="h-8 w-8 text-primary" />,
+          title: "Automated Writing Evaluation Systems",
+          description: "Developing tools to provide timely feedback on written assignments."
+        },
+        {
+          icon: <FileSearch className="h-8 w-8 text-primary" />,
+          title: "Essay Writing",
+          description: "Improving argumentative and academic writing skills through technology."
+        },
+        {
+          icon: <FileCode className="h-8 w-8 text-primary" />,
+          title: "Computer Assisted Language Learning",
+          description: "Using technology to enhance language acquisition and proficiency."
+        }
+      ]
+    },
+    {
+      title: "Research Methodology",
+      interests: [
+        {
+          icon: <BookText className="h-8 w-8 text-primary" />,
+          title: "Curriculum Design and Development",
+          description: "Creating innovative educational experiences that align with learning goals."
+        },
+        {
+          icon: <FileSearch className="h-8 w-8 text-primary" />,
+          title: "Design Based Research",
+          description: "Iteratively improving educational interventions through systematic study."
+        },
+        {
+          icon: <Layers className="h-8 w-8 text-primary" />,
+          title: "Mixed-Methods Research",
+          description: "Combining qualitative and quantitative approaches for comprehensive analysis."
+        }
+      ]
+    }
   ];
 
-  const typeLabels: Record<string, string> = {
-    journal: "Journal",
-    conference: "Conference",
-    "under-review": "Under Review",
-    "in-progress": "In Progress",
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
   };
 
   return (
-    <div className="container max-w-5xl mx-auto py-8 px-4">
-      <div className="text-center mb-8">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 tracking-tight">Research Strands</h1>
-        <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          My work moves across four interconnected strands. Hover over each area to see how they relate:
+    <div className="container max-w-6xl mx-auto py-8 px-4">
+      <div className="text-center mb-12">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">Research Interests</h1>
+        <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-5xl mx-auto leading-relaxed">
+          My research spans across educational technology, assessment methods, language learning, and innovative research methodologies, all aimed at creating more effective and equitable learning experiences.
         </p>
       </div>
 
-      {/* Type filter buttons */}
-      <div className="flex justify-center gap-2 mb-6 flex-wrap">
-        {strandFilters.map((f) => (
-          <button
-            key={f.key}
-            onClick={() => setActiveType(f.key)}
-            className={cn(
-              "px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all border",
-              activeType === f.key
-                ? "bg-foreground text-background border-foreground"
-                : "bg-transparent text-muted-foreground border-border hover:border-foreground/40"
-            )}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Venn Radar Diagram */}
-      <ResearchStrandsVenn
-        activeStrand={activeStrand}
-        activeType={activeType}
-        onStrandChange={setActiveStrand}
-        onDotClick={setSelectedDot}
-      />
-
-      {/* Modal for clicked dot */}
-      <AnimatePresence>
-        {selectedDot && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
-            onClick={() => setSelectedDot(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-card border rounded-xl shadow-xl max-w-lg w-full p-6"
-              onClick={(e) => e.stopPropagation()}
+      <Tabs defaultValue="Educational Technology" className="w-full">
+        <TabsList className="flex justify-center mb-8 overflow-x-auto max-w-3xl mx-auto">
+          {interestCategories.map((category) => (
+            <TabsTrigger 
+              key={category.title} 
+              value={category.title}
+              className="px-4 py-2 text-base"
             >
-              <button
-                onClick={() => setSelectedDot(null)}
-                className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
-              <div className="flex items-center gap-2 mb-3">
-                <Badge
-                  variant="secondary"
-                  className="text-[10px] uppercase tracking-wider"
-                  style={{ backgroundColor: strandConfig[selectedDot.strand].color + "20", color: strandConfig[selectedDot.strand].color }}
-                >
-                  {typeLabels[selectedDot.type]}
-                </Badge>
-                <span
-                  className="text-xs font-medium"
-                  style={{ color: strandConfig[selectedDot.strand].color }}
-                >
-                  {strandConfig[selectedDot.strand].label}
-                </span>
-                {selectedDot.year && (
-                  <span className="text-xs text-muted-foreground ml-auto">{selectedDot.year}</span>
-                )}
-              </div>
-              <h3 className="text-base sm:text-lg font-semibold mb-2 leading-snug">{selectedDot.title}</h3>
-              <p className="text-sm text-muted-foreground mb-1">{selectedDot.authors}</p>
-              <p className="text-xs text-muted-foreground italic">{selectedDot.venue}</p>
+              {category.title}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        
+        {interestCategories.map((category) => (
+          <TabsContent key={category.title} value={category.title} className="mt-0">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.1
+                  }
+                }
+              }}
+            >
+              {category.interests.map((interest, index) => (
+                <motion.div key={index} variants={item}>
+                  <Card className="h-full overflow-hidden border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                    <CardContent className="p-6 flex flex-col gap-3">
+                      <div className="bg-primary/5 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-2">
+                        {interest.icon}
+                      </div>
+                      <h3 className="text-lg font-semibold">{interest.title}</h3>
+                      <p className="text-muted-foreground">{interest.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   );
 };

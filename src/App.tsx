@@ -18,7 +18,6 @@ import Gallery from "@/pages/Gallery";
 import Awards from "@/pages/Awards";
 import Education from "@/pages/Education";
 import Research from "@/pages/Research";
-import ResearchInterests from "@/pages/ResearchInterests";
 import Resources from "@/pages/Resources";
 import Timeline from "@/pages/Timeline";
 import AdminAnalytics from "@/pages/AdminAnalytics";
@@ -37,7 +36,6 @@ const App = () => (
               <Route path="/awards" element={<Awards />} />
               <Route path="/education" element={<Education />} />
               <Route path="/research" element={<Research />} />
-              <Route path="/research-interests" element={<ResearchInterests />} />
               <Route path="/cv" element={<CurriculumVitae />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/teaching" element={<Teaching />} />
