@@ -15,9 +15,9 @@ export const journeyQuote =
 
 export const journeyPeriods = [
   '2008–2014',
-  '2015–2020',
-  '2021–2022',
-  '2023–2024',
+  '2015–2021',
+  '2022–2023',
+  '2024–2025',
   '2025–2026',
 ];
 
@@ -61,7 +61,7 @@ export const journeyItems: JourneyItem[] = [
   // ── Federal Projects ──
   {
     category: 'Federal Projects',
-    period: '2021–2022',
+    period: '2022–2023',
     label: 'Private AI (SaTC)',
     sublabel: 'NSF-Funded · Graduate Research Associate',
     detail:
@@ -69,7 +69,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Federal Projects',
-    period: '2021–2022',
+    period: '2022–2023',
     label: 'Adult Learning & Online Ed.',
     sublabel: 'NSF AI-ALOE · Graduate Research Associate',
     detail:
@@ -77,7 +77,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Federal Projects',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'AI for Undergraduate Physics',
     sublabel: 'NSF IUSE · Researcher',
     detail:
@@ -96,7 +96,7 @@ export const journeyItems: JourneyItem[] = [
   // ── Publications: Journals ──
   {
     category: 'Publications',
-    period: '2015–2020',
+    period: '2015–2021',
     label: 'Conversational Repairs in Persian Discourse',
     sublabel: 'Persian Literary Studies Journal · 2018',
     detail:
@@ -106,7 +106,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Formative Assessment Literacy Questionnaire',
     sublabel: 'Language Testing in Asia · 2024',
     detail:
@@ -116,7 +116,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Grammarly for EFL Speaking',
     sublabel: 'Journal of Applied Instructional Design · 2024',
     detail:
@@ -125,7 +125,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Feedback Effects on EFL Writing',
     sublabel: 'CALL Electronic Journal · 2024',
     detail:
@@ -165,7 +165,7 @@ export const journeyItems: JourneyItem[] = [
   // ── Publications: Conference Proceedings ──
   {
     category: 'Publications',
-    period: '2015–2020',
+    period: '2015–2021',
     label: 'Mind Mapping & EFL Vocabulary',
     sublabel: 'WEI Academic Conference · Barcelona · 2020',
     detail:
@@ -174,7 +174,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'AI vs. Human Evaluation',
     sublabel: 'ICLS 2023 · Montreal',
     detail:
@@ -183,7 +183,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Learning Progress with AI Systems',
     sublabel: 'ICLS 2023 · Montreal',
     detail:
@@ -192,7 +192,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Problem-Centered Private AI Instruction',
     sublabel: 'AECT 2023 · Orlando',
     detail:
@@ -201,7 +201,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'AI Literacy: Developmental Model',
     sublabel: 'AECT 2023 · Orlando',
     detail:
@@ -210,7 +210,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'AI Tool & Adult Learners',
     sublabel: 'AECT 2023 · Orlando',
     detail:
@@ -219,7 +219,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'ML for Cognitive Engagement',
     sublabel: 'AECT 2023 · Orlando',
     detail:
@@ -228,7 +228,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'AI-Augmented Summarization',
     sublabel: 'AECT 2023 · Orlando',
     detail:
@@ -237,7 +237,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Teachers\' Online Self-Efficacy',
     sublabel: 'SITE 2024 · Las Vegas',
     detail:
@@ -247,7 +247,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Private AI in CS Education',
     sublabel: 'ICLS 2024 · Buffalo',
     detail:
@@ -256,7 +256,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Publications',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'AI Personalized Recommendations for L2',
     sublabel: 'AIRiAL 2024 · Columbia University',
     detail:
@@ -303,7 +303,7 @@ export const journeyItems: JourneyItem[] = [
   // ── Publications: Non-Refereed ──
   {
     category: 'Publications',
-    period: '2015–2020',
+    period: '2015–2021',
     label: 'TeleCrowd: Text Corpora',
     sublabel: 'arXiv Preprint · 2020',
     detail:
@@ -415,7 +415,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Teaching',
-    period: '2015–2020',
+    period: '2015–2021',
     label: 'Senior Instructor & CEO',
     sublabel: 'Tehran Pouya · RadGuyesh Institute',
     detail:
@@ -424,7 +424,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Teaching',
-    period: '2015–2020',
+    period: '2015–2021',
     label: 'Adjunct Instructor',
     sublabel: 'Al-Zahra University · Andisheh Moein',
     detail:
@@ -432,7 +432,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Teaching',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Instructor of Record',
     sublabel: 'Georgia State University · Fall 2022–Present',
     detail:
@@ -440,7 +440,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Teaching',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'GenAI Curriculum Module',
     sublabel: 'Georgia State University · Summer 2024',
     detail:
@@ -491,7 +491,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Awards',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Doctoral Fellowship ($15,000)',
     sublabel: 'Georgia State University · 2023',
     detail:
@@ -500,7 +500,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Awards',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Outstanding Conference Paper',
     sublabel: 'SITE / AACE · Las Vegas · 2024',
     detail:
@@ -509,7 +509,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Awards',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Travel Awards ($1,000)',
     sublabel: 'Georgia State University · 2023 & 2024',
     detail:
@@ -556,7 +556,7 @@ export const journeyItems: JourneyItem[] = [
   // ── Leadership ──
   {
     category: 'Leadership',
-    period: '2015–2020',
+    period: '2015–2021',
     label: 'CEO & Founder',
     sublabel: 'RadGuyesh Haddadian Intl. Institute · 2019–2021',
     detail:
@@ -564,7 +564,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Leadership',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'ISLS Committee Representative',
     sublabel: 'Equity & Justice · Publications · Since 2024',
     detail:
@@ -572,7 +572,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Leadership',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Africa & Middle East Representative',
     sublabel: 'ILSSA at ISLS/ICLS · Since 2024',
     detail:
@@ -598,7 +598,7 @@ export const journeyItems: JourneyItem[] = [
   // ── Service ──
   {
     category: 'Service',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Journal Reviewer',
     sublabel: 'CALL · IETI · EIT · CALL-EJ · Since 2024',
     detail:
@@ -606,7 +606,7 @@ export const journeyItems: JourneyItem[] = [
   },
   {
     category: 'Service',
-    period: '2023–2024',
+    period: '2024–2025',
     label: 'Program Committee Member',
     sublabel: 'ISLS · SITE · AECT · ACM L@S · Since 2024',
     detail:
