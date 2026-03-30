@@ -9,42 +9,36 @@ import {
   type JourneyItem,
 } from '@/data/journeyData';
 
-const categoryStyles: Record<JourneyCategory, { bg: string; border: string; text: string; dot: string; filterActive: string }> = {
-  Education: {
-    bg: 'bg-blue-500/10',
-    border: 'border-blue-500/25',
-    text: 'text-blue-700 dark:text-blue-300',
-    dot: 'bg-blue-500',
-    filterActive: 'bg-blue-500 text-white border-blue-500 shadow-blue-500/25',
-  },
-  Research: {
-    bg: 'bg-emerald-500/10',
-    border: 'border-emerald-500/25',
-    text: 'text-emerald-700 dark:text-emerald-300',
-    dot: 'bg-emerald-500',
-    filterActive: 'bg-emerald-500 text-white border-emerald-500 shadow-emerald-500/25',
-  },
-  Publications: {
-    bg: 'bg-amber-500/10',
-    border: 'border-amber-500/25',
-    text: 'text-amber-700 dark:text-amber-300',
-    dot: 'bg-amber-500',
-    filterActive: 'bg-amber-500 text-white border-amber-500 shadow-amber-500/25',
-  },
-  Teaching: {
-    bg: 'bg-violet-500/10',
-    border: 'border-violet-500/25',
-    text: 'text-violet-700 dark:text-violet-300',
-    dot: 'bg-violet-500',
-    filterActive: 'bg-violet-500 text-white border-violet-500 shadow-violet-500/25',
-  },
-  Awards: {
-    bg: 'bg-rose-500/10',
-    border: 'border-rose-500/25',
-    text: 'text-rose-700 dark:text-rose-300',
-    dot: 'bg-rose-500',
-    filterActive: 'bg-rose-500 text-white border-rose-500 shadow-rose-500/25',
-  },
+const categoryAccent: Record<JourneyCategory, string> = {
+  Education: 'border-l-blue-500',
+  Research: 'border-l-emerald-500',
+  Publications: 'border-l-amber-500',
+  Teaching: 'border-l-violet-500',
+  Awards: 'border-l-rose-500',
+};
+
+const categoryDot: Record<JourneyCategory, string> = {
+  Education: 'bg-blue-500',
+  Research: 'bg-emerald-500',
+  Publications: 'bg-amber-500',
+  Teaching: 'bg-violet-500',
+  Awards: 'bg-rose-500',
+};
+
+const categoryTextAccent: Record<JourneyCategory, string> = {
+  Education: 'text-blue-600 dark:text-blue-400',
+  Research: 'text-emerald-600 dark:text-emerald-400',
+  Publications: 'text-amber-600 dark:text-amber-400',
+  Teaching: 'text-violet-600 dark:text-violet-400',
+  Awards: 'text-rose-600 dark:text-rose-400',
+};
+
+const filterColors: Record<JourneyCategory, string> = {
+  Education: 'bg-blue-500 text-white border-blue-500 shadow-blue-500/25',
+  Research: 'bg-emerald-500 text-white border-emerald-500 shadow-emerald-500/25',
+  Publications: 'bg-amber-500 text-white border-amber-500 shadow-amber-500/25',
+  Teaching: 'bg-violet-500 text-white border-violet-500 shadow-violet-500/25',
+  Awards: 'bg-rose-500 text-white border-rose-500 shadow-rose-500/25',
 };
 
 const filterOptions: (JourneyCategory | 'All')[] = ['All', ...journeyCategories];
@@ -57,14 +51,10 @@ const HoverTooltip = ({
   item: JourneyItem;
   anchorRect: DOMRect;
 }) => {
-  const s = categoryStyles[item.category];
-
-  // Position tooltip above the card, centered
   const tooltipWidth = 320;
   let left = anchorRect.left + anchorRect.width / 2 - tooltipWidth / 2;
-  // Keep tooltip within viewport
   left = Math.max(8, Math.min(left, window.innerWidth - tooltipWidth - 8));
-  let top = anchorRect.top - 8;
+  const top = anchorRect.top - 8;
 
   return (
     <motion.div
@@ -73,18 +63,12 @@ const HoverTooltip = ({
       exit={{ opacity: 0, y: 4 }}
       transition={{ duration: 0.15 }}
       className="fixed z-50 pointer-events-none"
-      style={{
-        left,
-        top,
-        width: tooltipWidth,
-        transform: 'translateY(-100%)',
-      }}
+      style={{ left, top, width: tooltipWidth, transform: 'translateY(-100%)' }}
     >
-      <div className="bg-popover border border-border rounded-xl shadow-2xl overflow-hidden">
-        <div className={`h-1 w-full ${s.dot}`} />
+      <div className={`bg-popover border border-border rounded-xl shadow-2xl overflow-hidden border-l-[3px] ${categoryAccent[item.category]}`}>
         <div className="p-3.5">
           <div className="flex items-center gap-1.5 mb-2">
-            <span className={`w-2 h-2 rounded-full ${s.dot}`} />
+            <span className={`w-2 h-2 rounded-full ${categoryDot[item.category]}`} />
             <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
               {item.category} · {item.period}
             </span>
@@ -94,79 +78,65 @@ const HoverTooltip = ({
             {item.detail}
           </p>
           {item.url && (
-            <span className={`inline-flex items-center gap-1 mt-2 text-[10px] font-medium ${s.text}`}>
+            <span className={`inline-flex items-center gap-1 mt-2 text-[10px] font-medium ${categoryTextAccent[item.category]}`}>
               View publication →
             </span>
           )}
         </div>
       </div>
-      {/* Arrow */}
       <div
         className="w-3 h-3 bg-popover border-b border-r border-border rotate-45 absolute -bottom-1.5"
-        style={{ left: anchorRect.left + anchorRect.width / 2 - left - 6 }}
+        style={{ left: Math.max(12, Math.min(anchorRect.left + anchorRect.width / 2 - left - 6, tooltipWidth - 20)) }}
       />
     </motion.div>
   );
 };
 
-/* ─── Journey Card ─── */
+/* ─── Journey Card — neutral bg + colored left line ─── */
 const JourneyCard = ({
   item,
-  index,
   onHover,
   onLeave,
 }: {
   item: JourneyItem;
-  index: number;
   onHover: (item: JourneyItem, rect: DOMRect) => void;
   onLeave: () => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const s = categoryStyles[item.category];
 
   return (
-    <motion.div
+    <div
       ref={ref}
       onMouseEnter={() => {
         if (ref.current) onHover(item, ref.current.getBoundingClientRect());
       }}
       onMouseLeave={onLeave}
       className={`
-        relative w-full text-left rounded-md border px-2 py-1.5 transition-all duration-200
-        cursor-default group backdrop-blur-sm
-        ${s.bg} ${s.border} ${s.text}
-        hover:shadow-md hover:scale-[1.03] hover:brightness-105
+        w-full text-left rounded-[4px] border border-border/40 border-l-[3px]
+        bg-card/80 hover:bg-card hover:shadow-sm
+        px-2 py-1.5 transition-all duration-150 cursor-default
+        ${categoryAccent[item.category]}
       `}
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ delay: index * 0.02, duration: 0.2 }}
-      layout
     >
-      <div className="flex items-start gap-1">
-        <span className={`w-1 h-1 rounded-full shrink-0 mt-[5px] ${s.dot}`} />
-        <div className="min-w-0 flex-1">
-          <p className="text-[9px] sm:text-[10px] font-semibold leading-tight truncate">
-            {item.label}
-          </p>
-          <p className="text-[7px] sm:text-[8px] opacity-55 leading-tight mt-0.5 truncate">
-            {item.sublabel}
-          </p>
-        </div>
-      </div>
+      <p className="text-[9px] sm:text-[10px] font-semibold leading-tight text-foreground/85 truncate">
+        {item.label}
+      </p>
+      <p className="text-[7px] sm:text-[8px] text-muted-foreground/60 leading-tight mt-0.5 truncate">
+        {item.sublabel}
+      </p>
       {item.badges && (
         <div className="flex gap-0.5 mt-1 flex-wrap">
           {item.badges.map((b) => (
             <span
               key={b}
-              className="text-[6px] sm:text-[7px] font-bold uppercase tracking-wider px-1 py-px rounded-full bg-foreground/5 border border-foreground/10 text-foreground/50"
+              className="text-[6px] sm:text-[7px] font-bold uppercase tracking-wider px-1 py-px rounded bg-muted text-muted-foreground/70"
             >
               {b}
             </span>
           ))}
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -191,8 +161,6 @@ const JourneyTimeline = () => {
   const getCategoryCount = (cat: JourneyCategory | 'All') =>
     cat === 'All' ? journeyItems.length : journeyItems.filter((i) => i.category === cat).length;
 
-  let cardIndex = 0;
-
   return (
     <section className="mt-12 sm:mt-16 md:mt-20">
       <div className="flex items-baseline gap-3 mb-2">
@@ -212,7 +180,7 @@ const JourneyTimeline = () => {
           const activeClass =
             opt === 'All'
               ? 'bg-foreground text-background border-foreground shadow-lg'
-              : categoryStyles[opt as JourneyCategory].filterActive + ' shadow-lg';
+              : filterColors[opt as JourneyCategory] + ' shadow-lg';
           return (
             <motion.button
               key={opt}
@@ -227,7 +195,7 @@ const JourneyTimeline = () => {
               {opt !== 'All' && (
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
-                    isActive ? 'bg-white/80' : categoryStyles[opt as JourneyCategory].dot
+                    isActive ? 'bg-white/80' : categoryDot[opt as JourneyCategory]
                   }`}
                 />
               )}
@@ -240,27 +208,31 @@ const JourneyTimeline = () => {
         })}
       </div>
 
-      {/* Timeline Grid — everything in one frame */}
+      {/* Timeline Grid — uniform cell sizes, no scroll */}
       <div
-        className="grid gap-px rounded-xl overflow-hidden border border-border/30 bg-border/20"
+        className="grid rounded-xl overflow-hidden border border-border/30"
         style={{
           gridTemplateColumns: `80px minmax(0, 1.8fr) repeat(${journeyPeriods.length - 1}, minmax(0, 1fr))`,
+          gridAutoRows: 'minmax(0, 1fr)',
         }}
       >
         {/* Header Row */}
-        <div className="bg-muted/40 p-1.5 flex items-center justify-center" />
-        {journeyPeriods.map((p) => (
-          <div key={p} className="bg-muted/40 p-1.5 text-center">
+        <div className="bg-muted/50 p-2 flex items-center justify-center border-b border-r border-border/20" />
+        {journeyPeriods.map((p, i) => (
+          <div
+            key={p}
+            className={`bg-muted/50 p-2 text-center border-b border-border/20 ${i < journeyPeriods.length - 1 ? 'border-r border-border/20' : ''}`}
+          >
             <span className="text-[9px] sm:text-[11px] font-bold text-foreground/55 tabular-nums">
               {p}
             </span>
           </div>
         ))}
 
-        {/* Data Rows */}
+        {/* Data Rows — equal height */}
         <AnimatePresence mode="popLayout">
-          {visibleCategories.map((cat) => {
-            const s = categoryStyles[cat];
+          {visibleCategories.map((cat, catIdx) => {
+            const isLast = catIdx === visibleCategories.length - 1;
             return (
               <motion.div
                 key={cat}
@@ -270,33 +242,32 @@ const JourneyTimeline = () => {
                 exit={{ opacity: 0 }}
                 layout
               >
-                <div className="bg-background/80 p-1.5 flex items-center border-r border-border/10">
-                  <div className="flex items-center gap-1">
-                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${s.dot}`} />
+                {/* Row label */}
+                <div className={`bg-background p-2 flex items-center border-r border-border/20 ${!isLast ? 'border-b border-border/20' : ''}`}>
+                  <div className="flex items-center gap-1.5">
+                    <span className={`w-2 h-2 rounded-full shrink-0 ${categoryDot[cat]}`} />
                     <span className="text-[8px] sm:text-[9px] font-semibold text-foreground/55 leading-tight">
                       {cat}
                     </span>
                   </div>
                 </div>
-                {journeyPeriods.map((period) => {
+                {/* Period cells */}
+                {journeyPeriods.map((period, pIdx) => {
                   const cellItems = getItemsForCell(cat, period);
+                  const isLastCol = pIdx === journeyPeriods.length - 1;
                   return (
                     <div
                       key={`${cat}-${period}`}
-                      className="bg-background/40 p-1 sm:p-1.5 min-h-[44px] flex flex-col gap-0.5 justify-center"
+                      className={`bg-background p-2 flex flex-col gap-1 justify-center ${!isLast ? 'border-b border-border/20' : ''} ${!isLastCol ? 'border-r border-border/20' : ''}`}
                     >
-                      {cellItems.map((item) => {
-                        const ci = cardIndex++;
-                        return (
-                          <JourneyCard
-                            key={`${item.label}-${ci}`}
-                            item={item}
-                            index={ci}
-                            onHover={(itm, rect) => setHoveredItem({ item: itm, rect })}
-                            onLeave={() => setHoveredItem(null)}
-                          />
-                        );
-                      })}
+                      {cellItems.map((item, idx) => (
+                        <JourneyCard
+                          key={`${item.label}-${idx}`}
+                          item={item}
+                          onHover={(itm, rect) => setHoveredItem({ item: itm, rect })}
+                          onLeave={() => setHoveredItem(null)}
+                        />
+                      ))}
                     </div>
                   );
                 })}
