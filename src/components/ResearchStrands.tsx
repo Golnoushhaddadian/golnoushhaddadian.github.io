@@ -161,19 +161,22 @@ const ResearchStrands = () => {
     return pos;
   }, []);
 
-  const connections: { x1: number; y1: number; x2: number; y2: number }[] = [];
-  for (let i = 0; i < filteredPubs.length; i++) {
-    for (let j = i + 1; j < filteredPubs.length; j++) {
-      const shared = filteredPubs[i].strands.filter((s) => filteredPubs[j].strands.includes(s));
-      if (shared.length > 0) {
-        const p1 = getPos(filteredPubs[i]);
-        const p2 = getPos(filteredPubs[j]);
-        if (Math.hypot(p2.x - p1.x, p2.y - p1.y) < 250) {
-          connections.push({ x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y });
-        }
-      }
+  // Build spoke connections: each dot connects to the axis endpoint of each strand it belongs to
+  const strandEndpoints: Record<StrandId, { x: number; y: number }> = {} as any;
+  (Object.keys(STRAND_POSITIONS) as StrandId[]).forEach((sid) => {
+    const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
+    strandEndpoints[sid] = { x: CX + RING_RADII[1] * Math.cos(angle), y: CY + RING_RADII[1] * Math.sin(angle) };
+  });
+
+  const spokeLines: { x1: number; y1: number; x2: number; y2: number; strand: StrandId }[] = [];
+  filteredPubs.forEach((pub) => {
+    if (pub.strands.length > 1) {
+      const pos = getPos(pub);
+      pub.strands.forEach((sid) => {
+        spokeLines.push({ x1: pos.x, y1: pos.y, x2: strandEndpoints[sid].x, y2: strandEndpoints[sid].y, strand: sid });
+      });
     }
-  }
+  });
 
   const isStrandHighlighted = (strandId: StrandId) => !hoveredStrand || hoveredStrand === strandId;
 
