@@ -33,12 +33,20 @@ const categoryTextAccent: Record<JourneyCategory, string> = {
   Awards: 'text-rose-600 dark:text-rose-400',
 };
 
-const filterColors: Record<JourneyCategory, string> = {
+const filterActive: Record<JourneyCategory, string> = {
   Education: 'bg-blue-500 text-white border-blue-500 shadow-blue-500/25',
   Research: 'bg-emerald-500 text-white border-emerald-500 shadow-emerald-500/25',
   Publications: 'bg-amber-500 text-white border-amber-500 shadow-amber-500/25',
   Teaching: 'bg-violet-500 text-white border-violet-500 shadow-violet-500/25',
   Awards: 'bg-rose-500 text-white border-rose-500 shadow-rose-500/25',
+};
+
+const filterInactive: Record<JourneyCategory, string> = {
+  Education: 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30 hover:bg-blue-500/25',
+  Research: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/25',
+  Publications: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/25',
+  Teaching: 'bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 hover:bg-violet-500/25',
+  Awards: 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/30 hover:bg-rose-500/25',
 };
 
 const filterOptions: (JourneyCategory | 'All')[] = ['All', ...journeyCategories];
@@ -180,7 +188,11 @@ const JourneyTimeline = () => {
           const activeClass =
             opt === 'All'
               ? 'bg-foreground text-background border-foreground shadow-lg'
-              : filterColors[opt as JourneyCategory] + ' shadow-lg';
+              : filterActive[opt as JourneyCategory] + ' shadow-lg';
+          const inactiveClass =
+            opt === 'All'
+              ? 'bg-muted/40 text-muted-foreground border-border/60 hover:bg-muted'
+              : filterInactive[opt as JourneyCategory];
           return (
             <motion.button
               key={opt}
@@ -189,18 +201,11 @@ const JourneyTimeline = () => {
               whileTap={{ scale: 0.97 }}
               className={`
                 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-medium transition-all duration-200 border flex items-center gap-1
-                ${isActive ? activeClass : 'bg-muted/40 text-muted-foreground border-border/60 hover:bg-muted hover:border-border'}
+                ${isActive ? activeClass : inactiveClass}
               `}
             >
-              {opt !== 'All' && (
-                <span
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    isActive ? 'bg-white/80' : categoryDot[opt as JourneyCategory]
-                  }`}
-                />
-              )}
               {opt}
-              <span className={`text-[8px] ml-0.5 ${isActive ? 'opacity-80' : 'opacity-40'}`}>
+              <span className={`text-[8px] ml-0.5 ${isActive ? 'opacity-80' : 'opacity-50'}`}>
                 {getCategoryCount(opt)}
               </span>
             </motion.button>
@@ -212,7 +217,7 @@ const JourneyTimeline = () => {
       <div
         className="grid rounded-xl overflow-hidden border border-border/30"
         style={{
-          gridTemplateColumns: `80px repeat(${journeyPeriods.length}, minmax(0, 1fr))`,
+          gridTemplateColumns: `64px repeat(${journeyPeriods.length}, minmax(0, 1fr))`,
           gridAutoRows: 'minmax(0, 1fr)',
         }}
       >
