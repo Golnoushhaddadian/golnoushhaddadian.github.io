@@ -305,15 +305,13 @@ const ResearchStrands = () => {
             );
           })}
 
-          {connections.map((c, i) => (
-            <line key={`conn-${i}`} x1={c.x1} y1={c.y1} x2={c.x2} y2={c.y2}
-              stroke="hsl(var(--muted-foreground))" strokeWidth="1" strokeDasharray="5 4" opacity={0.25}
-              style={{ pointerEvents: "none" }}
+          {spokeLines.map((c, i) => (
+            <line key={`spoke-${i}`} x1={c.x1} y1={c.y1} x2={c.x2} y2={c.y2}
+              stroke={STRANDS[c.strand].color} strokeWidth="1" strokeDasharray="4 3"
+              opacity={hoveredStrand ? (hoveredStrand === c.strand ? 0.4 : 0.05) : 0.2}
+              style={{ pointerEvents: "none", transition: "opacity 0.4s" }}
             />
           ))}
-
-          <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
-          <text x={CX} y={CY - 8} textAnchor="middle" fontSize="13" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI × Education</text>
           <text x={CX} y={CY + 8} textAnchor="middle" fontSize="9.5" fill="hsl(var(--muted-foreground))" opacity={0.6}>Shared foundation</text>
           <text x={CX} y={CY + 22} textAnchor="middle" fontSize="9" fontWeight="600" fill="hsl(var(--muted-foreground))" opacity={0.5}>{PUBLICATIONS.length} works</text>
 
