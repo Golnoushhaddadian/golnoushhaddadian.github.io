@@ -82,7 +82,7 @@ const HoverTooltip = ({
             </span>
           </div>
           <h4 className="text-sm font-bold text-foreground mb-1.5">{item.label}</h4>
-          <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line line-clamp-4">
+          <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
             {item.detail}
           </p>
           {item.url && (
