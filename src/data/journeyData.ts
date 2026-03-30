@@ -1,4 +1,4 @@
-export type JourneyCategory = 'Education' | 'Research' | 'Publications' | 'Teaching' | 'Awards';
+export type JourneyCategory = 'Education' | 'Research' | 'Publications' | 'Teaching' | 'Awards' | 'Leadership' | 'Service';
 
 export type JourneyItem = {
   category: JourneyCategory;
@@ -27,6 +27,8 @@ export const journeyCategories: JourneyCategory[] = [
   'Publications',
   'Teaching',
   'Awards',
+  'Leadership',
+  'Service',
 ];
 
 export const journeyItems: JourneyItem[] = [
@@ -549,5 +551,89 @@ export const journeyItems: JourneyItem[] = [
     detail:
       'Graduate Student Travel Award ($500) — 2025\nCollege of Education & Human Development, Learning Technology Department, Georgia State University.',
     badges: ['$500'],
+  },
+
+  // ── Leadership ──
+  {
+    category: 'Leadership',
+    period: '2015–2020',
+    label: 'CEO & Founder',
+    sublabel: 'RadGuyesh Haddadian Intl. Institute · 2019–2021',
+    detail:
+      'Founded a multidisciplinary educational center specializing in English language learning and computer science. Offered TOEFL, GRE, TESOL training, General English, and advanced computer science courses including Machine Learning and Deep Learning.',
+  },
+  {
+    category: 'Leadership',
+    period: '2023–2024',
+    label: 'ISLS Committee Representative',
+    sublabel: 'Equity & Justice · Publications · Since 2024',
+    detail:
+      'Student Representative on the Equity and Justice Committee and the Publication Committee at the International Society of the Learning Sciences (ISLS/ICLS). Since 2024.',
+  },
+  {
+    category: 'Leadership',
+    period: '2023–2024',
+    label: 'Africa & Middle East Representative',
+    sublabel: 'ILSSA at ISLS/ICLS · Since 2024',
+    detail:
+      'Africa and Middle East Regional Representative for the International Learning Sciences Student Association (ILSSA) at ISLS/ICLS. Since 2024.',
+  },
+  {
+    category: 'Leadership',
+    period: '2025–2026',
+    label: 'Mentorship Program Initiator',
+    sublabel: 'ILSSA Mentorship Program · 2025',
+    detail:
+      'Initiated and mentored the ILSSA Mentorship Program, creating an adaptive, inclusive, collaborative space for Learning Sciences students and researchers to connect, enhance expertise, and foster personal and professional development.',
+  },
+  {
+    category: 'Leadership',
+    period: '2025–2026',
+    label: 'Graduate Student Mentor',
+    sublabel: 'RITA Project · Robinson College · 2025',
+    detail:
+      'Mentoring a team of Master\'s students in Business Analytics and Computer Science at J. Mack Robinson College of Business for the RITA (Real-time Intelligent Technology for Argumentative Writing) Project.',
+  },
+
+  // ── Service ──
+  {
+    category: 'Service',
+    period: '2023–2024',
+    label: 'Journal Reviewer',
+    sublabel: 'CALL · IETI · EIT · CALL-EJ · Since 2024',
+    detail:
+      'Reviewer for: Innovations in Education and Teaching International, Education and Information Technologies, Computer Assisted Language Learning, and Computer-Assisted Language Learning Electronic Journal. Since 2024.',
+  },
+  {
+    category: 'Service',
+    period: '2023–2024',
+    label: 'Program Committee Member',
+    sublabel: 'ISLS · SITE · AECT · ACM L@S · Since 2024',
+    detail:
+      'Program Committee Member for: ISLS/ICLS (International Society of the Learning Sciences), SITE (Society for Information Technology and Teacher Education), AECT International Convention, and ACM Learning @ Scale at Georgia Institute of Technology. Since 2024.',
+  },
+  {
+    category: 'Service',
+    period: '2025–2026',
+    label: 'Scholarships Reviewer',
+    sublabel: 'ISLS/ICLS Travel Scholarships · 2025',
+    detail:
+      'Reviewer for the ISLS/ICLS Travel to Helsinki Scholarships (Equity Travel Support and ILSSA Annual Meeting Scholarship). 2025.',
+  },
+  {
+    category: 'Service',
+    period: '2025–2026',
+    label: 'Faculty Tech Proposal Evaluator',
+    sublabel: 'Georgia State University · 2025',
+    detail:
+      'Student Representative and Proposal Evaluator for Faculty Technology Initiatives, College of Education and Human Development, Georgia State University. 2025.',
+  },
+  {
+    category: 'Service',
+    period: '2025–2026',
+    label: 'Project FEED Volunteer',
+    sublabel: 'Food Equity · Atlanta · 2025',
+    detail:
+      'Volunteer for Project FEED (Food Equity and Efficient Delivery), fighting food insecurity in under-resourced areas of Atlanta. Backed by the 2025 Youth Stop Hunger Sodexo Grant, providing families in need with access to fresh, healthy food.',
   },
 ];
