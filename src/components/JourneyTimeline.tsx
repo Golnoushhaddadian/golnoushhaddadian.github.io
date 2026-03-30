@@ -15,6 +15,8 @@ const categoryAccent: Record<JourneyCategory, string> = {
   Publications: 'border-l-amber-500',
   Teaching: 'border-l-violet-500',
   Awards: 'border-l-rose-500',
+  Leadership: 'border-l-cyan-500',
+  Service: 'border-l-orange-500',
 };
 
 const categoryDot: Record<JourneyCategory, string> = {
@@ -23,6 +25,8 @@ const categoryDot: Record<JourneyCategory, string> = {
   Publications: 'bg-amber-500',
   Teaching: 'bg-violet-500',
   Awards: 'bg-rose-500',
+  Leadership: 'bg-cyan-500',
+  Service: 'bg-orange-500',
 };
 
 const categoryTextAccent: Record<JourneyCategory, string> = {
@@ -31,6 +35,8 @@ const categoryTextAccent: Record<JourneyCategory, string> = {
   Publications: 'text-amber-600 dark:text-amber-400',
   Teaching: 'text-violet-600 dark:text-violet-400',
   Awards: 'text-rose-600 dark:text-rose-400',
+  Leadership: 'text-cyan-600 dark:text-cyan-400',
+  Service: 'text-orange-600 dark:text-orange-400',
 };
 
 const filterActive: Record<JourneyCategory, string> = {
@@ -39,6 +45,8 @@ const filterActive: Record<JourneyCategory, string> = {
   Publications: 'bg-amber-500 text-white border-amber-500 shadow-amber-500/25',
   Teaching: 'bg-violet-500 text-white border-violet-500 shadow-violet-500/25',
   Awards: 'bg-rose-500 text-white border-rose-500 shadow-rose-500/25',
+  Leadership: 'bg-cyan-500 text-white border-cyan-500 shadow-cyan-500/25',
+  Service: 'bg-orange-500 text-white border-orange-500 shadow-orange-500/25',
 };
 
 const filterInactive: Record<JourneyCategory, string> = {
@@ -47,6 +55,8 @@ const filterInactive: Record<JourneyCategory, string> = {
   Publications: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/25',
   Teaching: 'bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 hover:bg-violet-500/25',
   Awards: 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/30 hover:bg-rose-500/25',
+  Leadership: 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/25',
+  Service: 'bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/30 hover:bg-orange-500/25',
 };
 
 const filterOptions: (JourneyCategory | 'All')[] = ['All', ...journeyCategories];

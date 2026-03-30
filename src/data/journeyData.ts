@@ -1,4 +1,4 @@
-export type JourneyCategory = 'Education' | 'Research' | 'Publications' | 'Teaching' | 'Awards';
+export type JourneyCategory = 'Education' | 'Research' | 'Publications' | 'Teaching' | 'Awards' | 'Leadership' | 'Service';
 
 export type JourneyItem = {
   category: JourneyCategory;
@@ -27,6 +27,8 @@ export const journeyCategories: JourneyCategory[] = [
   'Publications',
   'Teaching',
   'Awards',
+  'Leadership',
+  'Service',
 ];
 
 export const journeyItems: JourneyItem[] = [
