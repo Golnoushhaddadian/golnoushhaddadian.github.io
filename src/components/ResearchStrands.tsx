@@ -312,6 +312,9 @@ const ResearchStrands = () => {
               style={{ pointerEvents: "none", transition: "opacity 0.4s" }}
             />
           ))}
+
+          <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
+          <text x={CX} y={CY - 8} textAnchor="middle" fontSize="13" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI × Education</text>
           <text x={CX} y={CY + 8} textAnchor="middle" fontSize="9.5" fill="hsl(var(--muted-foreground))" opacity={0.6}>Shared foundation</text>
           <text x={CX} y={CY + 22} textAnchor="middle" fontSize="9" fontWeight="600" fill="hsl(var(--muted-foreground))" opacity={0.5}>{PUBLICATIONS.length} works</text>
 
