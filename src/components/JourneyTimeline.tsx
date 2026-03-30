@@ -212,7 +212,7 @@ const JourneyTimeline = () => {
       <div
         className="grid rounded-xl overflow-hidden border border-border/30"
         style={{
-          gridTemplateColumns: `80px minmax(0, 1.8fr) repeat(${journeyPeriods.length - 1}, minmax(0, 1fr))`,
+          gridTemplateColumns: `80px repeat(${journeyPeriods.length}, minmax(0, 1fr))`,
           gridAutoRows: 'minmax(0, 1fr)',
         }}
       >
