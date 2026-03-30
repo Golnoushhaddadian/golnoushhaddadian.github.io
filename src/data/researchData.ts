@@ -33,6 +33,25 @@ export const currentProjects: ResearchProject[] = [
 
 export const journalPublications: JournalPublication[] = [
   {
+    authors: ["Haddadian, G.", "Kim, M. K.", "Haddadian, N."],
+    year: "2025",
+    title: "A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education",
+    journal: "Research Synthesis in Applied Linguistics",
+    pages: "1-51",
+    url: "https://doi.org/10.1080/29984475.2025.2598266",
+    keywords: ["Systematic Review", "AWE", "Argumentative Writing", "EFL"]
+  },
+  {
+    authors: ["Noroozi, O.", "Haddadian, G.", "Gao, X.", "Schunn, C.", "Alqassab, M.", "Banihashem, S. K."],
+    year: "2025",
+    title: "The value of GenAI for peer feedback provision: student perceptions and impacts",
+    journal: "International Journal of Educational Technology in Higher Education",
+    volume: "22(1)",
+    pages: "61",
+    url: "https://doi.org/10.1186/s41239-025-00558-6",
+    keywords: ["GenAI", "Peer Feedback", "Higher Education"]
+  },
+  {
     authors: ["Haddadian, G.", "Panzade, P.", "Takabi, D.", "Kim, M. K."],
     year: "2025",
     title: "Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum",
@@ -79,15 +98,63 @@ export const journalPublications: JournalPublication[] = [
 
 export const conferenceProceedings: ConferenceProceeding[] = [
   {
+    authors: ["Noroozi, O.", "Haddadian, G.", "Banihashem, K.", "Schunn, C."],
+    year: "Accepted, 2026",
+    title: "How students perceive and respond to GenAI for peer feedback uptake",
+    conference: "American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA",
+    keywords: ["GenAI", "Peer Feedback", "AERA"]
+  },
+  {
+    authors: ["Haddadian, G.", "Kim, M. K.", "Haddadian, N."],
+    year: "Accepted, 2026",
+    title: "Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context",
+    conference: "American Association for Applied Linguistics (AAAL) 2026 Conference, Chicago, IL",
+    keywords: ["AWE", "EFL", "Argumentative Writing"]
+  },
+  {
+    authors: ["Motevali, S.", "Haddadian, G.", "Desai, P.", "Seelam, N.", "Kim, M. K."],
+    year: "Accepted, 2026",
+    title: "The potential of artificial intelligence for automated scoring of argumentative essays",
+    conference: "American Association for Applied Linguistics (AAAL) 2026 Conference, Chicago, IL",
+    keywords: ["AI", "Automated Scoring", "Argumentative Writing"]
+  },
+  {
+    authors: ["Haddadian, N.", "Haddadian, G.", "Haddadian, M."],
+    year: "Accepted, 2026",
+    title: "Collaborative use of AI-generated feedback in EFL argumentative writing: Impacts on writing quality and self-efficacy",
+    conference: "American Association for Applied Linguistics (AAAL) 2026 Conference, Chicago, IL",
+    keywords: ["AI Feedback", "EFL", "Writing", "Self-efficacy"]
+  },
+  {
+    authors: ["Greisel, M.", "Hornstein, J.", "Kollar, I.", "Noroozi, O.", "Haddadian, G.", "Gao, X.", "Alqassab, M.", "Banihashem, K.", "Khosravi, H.", "Pozdniakov, S.", "Schunn, C. D.", "Yu, Q.", "Rummel, N."],
+    year: "2025",
+    title: "Enhancing Peer Feedback Practices With Generative AI",
+    conference: "Proceedings of the 18th International Conference on Computer-Supported Collaborative Learning - CSCL 2025",
+    pages: "490-498",
+    publisher: "International Society of the Learning Sciences",
+    url: "https://doi.org/10.22318/cscl2025.921873",
+    keywords: ["Peer Feedback", "GenAI", "CSCL"]
+  },
+  {
+    authors: ["Haddadian, G.", "Han, H.", "Kim, J.", "Abdeen, M. S.", "Kim, M. K."],
+    year: "2025",
+    title: "Exploring AI-Generated Expert Models: Instructor Interaction and Learner Perceptions in a Physics Class",
+    conference: "Proceedings of the 19th International Conference of the Learning Sciences - ICLS 2025",
+    pages: "1684-1688",
+    publisher: "International Society of the Learning Sciences",
+    url: "https://doi.org/10.22318/icls2025.213524",
+    keywords: ["AI", "Expert Models", "Physics Education"]
+  },
+  {
     authors: ["Noroozi, O.", "Haddadian, G.", "Gao, X.", "Schunn, C. D.", "Alqassab, M.", "Banihashem, S. K."],
-    year: "Accepted",
+    year: "2025",
     title: "Supporting peer feedback provision and uptake with GenAI",
     conference: "International Conference of the Learning Sciences – ICLS/ISLS 2025",
     keywords: ["Peer Feedback", "GenAI", "Learning Sciences"]
   },
   {
-    authors: ["Haddadian, G.", "Han, H.", "Kim, M. Kim, J.", "Bae, Y."],
-    year: "Accepted",
+    authors: ["Haddadian, G.", "Han, H.", "Kim, M.", "Kim, J.", "Bae, Y."],
+    year: "2025",
     title: "Automated Generation of Expert Models with Generative AI",
     conference: "International Conference of the Learning Sciences – ICLS/ISLS 2025"
   },
