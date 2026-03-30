@@ -37,7 +37,7 @@ export const journeyItems: JourneyItem[] = [
     category: 'Education',
     period: '2008–2014',
     label: 'B.A. English Translation',
-    sublabel: 'Emam Khomeiny Intl. University · 2008–2012',
+    sublabel: 'Emam Khomeiny Intl. University · 2012',
     detail:
       'B.A. in English Language Translation\nKar Institute of Higher Education, Emam Khomeiny International University\nQazvin, Iran · 2008–2012\nGPA: 3.71/4.00 (Honored Student)',
   },
@@ -45,15 +45,15 @@ export const journeyItems: JourneyItem[] = [
     category: 'Education',
     period: '2008–2014',
     label: 'M.A. Applied Linguistics',
-    sublabel: 'Sharif University of Technology · 2012–2014',
+    sublabel: 'Sharif University of Technology · 2014',
     detail:
       'M.A. in Applied Linguistics\nSharif University of Technology, Tehran, Iran · 2012–2014\nGPA: 4.00/4.00 (Honored Student)\nThesis: "Design and Development of a Computerized Adaptive Software to Test Written Receptive Vocabulary Knowledge of Foreign Language Learners"\nAdvisor: Professor Salehi, M.',
   },
   {
     category: 'Education',
-    period: '2021–2022',
+    period: '2025–2026',
     label: 'Ph.D. Learning Sciences',
-    sublabel: 'Georgia State University · 2021–Present',
+    sublabel: 'Georgia State University · 2025',
     detail:
       'Ph.D. in Learning Sciences\nGeorgia State University, Atlanta, GA · 2021–2025\nGPA: 4.14/4.00 (Honored Student)\nDissertation: "Design and Development of an AI-Augmented Feedback System to Enhance Argumentative Writing Proficiency Among EFL Learners"\nLearning tool: RITA - Real-time Intelligent Technology for Argumentative Writing\nAdvisor: Professor Kim, M. K.\nCommittee: Darling-Aduana, J. & Shapiro, B. R.',
   },
