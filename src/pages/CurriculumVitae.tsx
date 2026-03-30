@@ -40,17 +40,7 @@ const CurriculumVitae = () => {
         </CardContent>
       </Card>
 
-      {/* Timeline CTA */}
-      <div className="text-center pt-10 pb-4">
-        <Link
-          to="/timeline"
-          className="inline-flex items-center gap-2 text-sm sm:text-base font-medium text-primary hover:underline transition-colors group tracking-wide uppercase"
-          style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif", letterSpacing: '0.08em', fontSize: '0.8rem' }}
-        >
-          <span>✦ Explore a Timeline of My Journey</span>
-          <span className="opacity-60 group-hover:opacity-100 transition-opacity">→</span>
-        </Link>
-      </div>
+
     </section>
   );
 };
