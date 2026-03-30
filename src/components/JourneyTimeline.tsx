@@ -188,7 +188,11 @@ const JourneyTimeline = () => {
           const activeClass =
             opt === 'All'
               ? 'bg-foreground text-background border-foreground shadow-lg'
-              : filterColors[opt as JourneyCategory] + ' shadow-lg';
+              : filterActive[opt as JourneyCategory] + ' shadow-lg';
+          const inactiveClass =
+            opt === 'All'
+              ? 'bg-muted/40 text-muted-foreground border-border/60 hover:bg-muted'
+              : filterInactive[opt as JourneyCategory];
           return (
             <motion.button
               key={opt}
@@ -197,18 +201,11 @@ const JourneyTimeline = () => {
               whileTap={{ scale: 0.97 }}
               className={`
                 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-medium transition-all duration-200 border flex items-center gap-1
-                ${isActive ? activeClass : 'bg-muted/40 text-muted-foreground border-border/60 hover:bg-muted hover:border-border'}
+                ${isActive ? activeClass : inactiveClass}
               `}
             >
-              {opt !== 'All' && (
-                <span
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    isActive ? 'bg-white/80' : categoryDot[opt as JourneyCategory]
-                  }`}
-                />
-              )}
               {opt}
-              <span className={`text-[8px] ml-0.5 ${isActive ? 'opacity-80' : 'opacity-40'}`}>
+              <span className={`text-[8px] ml-0.5 ${isActive ? 'opacity-80' : 'opacity-50'}`}>
                 {getCategoryCount(opt)}
               </span>
             </motion.button>
