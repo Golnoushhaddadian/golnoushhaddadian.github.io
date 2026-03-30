@@ -216,6 +216,11 @@ const AboutMe = () => {
           </p>
         </section>
 
+        {/* Research Strands */}
+        <section className="mt-12 sm:mt-16 md:mt-20">
+          <ResearchStrands />
+        </section>
+
         {/* Co-authorship Network */}
         <section className="mt-12 sm:mt-16 md:mt-20">
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Collaboration Network</h2>
