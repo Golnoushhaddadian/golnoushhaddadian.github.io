@@ -33,6 +33,25 @@ export const currentProjects: ResearchProject[] = [
 
 export const journalPublications: JournalPublication[] = [
   {
+    authors: ["Haddadian, G.", "Kim, M. K.", "Haddadian, N."],
+    year: "2025",
+    title: "A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education",
+    journal: "Research Synthesis in Applied Linguistics",
+    pages: "1-51",
+    url: "https://doi.org/10.1080/29984475.2025.2598266",
+    keywords: ["Systematic Review", "AWE", "Argumentative Writing", "EFL"]
+  },
+  {
+    authors: ["Noroozi, O.", "Haddadian, G.", "Gao, X.", "Schunn, C.", "Alqassab, M.", "Banihashem, S. K."],
+    year: "2025",
+    title: "The value of GenAI for peer feedback provision: student perceptions and impacts",
+    journal: "International Journal of Educational Technology in Higher Education",
+    volume: "22(1)",
+    pages: "61",
+    url: "https://doi.org/10.1186/s41239-025-00558-6",
+    keywords: ["GenAI", "Peer Feedback", "Higher Education"]
+  },
+  {
     authors: ["Haddadian, G.", "Panzade, P.", "Takabi, D.", "Kim, M. K."],
     year: "2025",
     title: "Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum",
