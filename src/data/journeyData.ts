@@ -23,7 +23,7 @@ export const journeyPeriods = [
 
 export const journeyCategories: JourneyCategory[] = [
   'Education',
-  'Research',
+  'Federal Projects',
   'Publications',
   'Teaching',
   'Awards',
@@ -60,7 +60,7 @@ export const journeyItems: JourneyItem[] = [
 
   // ── Research ──
   {
-    category: 'Research',
+    category: 'Federal Projects',
     period: '2021–2022',
     label: 'Private AI (SaTC)',
     sublabel: 'NSF-Funded · Graduate Research Associate',
@@ -68,7 +68,7 @@ export const journeyItems: JourneyItem[] = [
       'Secure and Trustworthy Cyberspace (SaTC): Private Artificial Intelligence\nFunded by NSF · Graduate Research Associate · Aug 2021–Present\nDeveloping instructional materials and hands-on labs to train students in trustworthy AI, addressing the demand for skilled researchers by integrating technical knowledge with ethical and privacy-focused practices.',
   },
   {
-    category: 'Research',
+    category: 'Federal Projects',
     period: '2021–2022',
     label: 'Adult Learning & Online Ed.',
     sublabel: 'NSF AI-ALOE · Graduate Research Associate',
@@ -76,7 +76,7 @@ export const journeyItems: JourneyItem[] = [
       'AI Institute for Adult Learning and Online Education (ALOE)\nFunded by NSF · Graduate Research Associate · Jan 2022–Aug 2022\nTransforming online adult learning through AI-driven models grounded in cognitive and social learning theories, developing intelligent virtual assistants and personalized learning systems.',
   },
   {
-    category: 'Research',
+    category: 'Federal Projects',
     period: '2023–2024',
     label: 'AI for Undergraduate Physics',
     sublabel: 'NSF IUSE · Researcher',
@@ -84,7 +84,7 @@ export const journeyItems: JourneyItem[] = [
       'IUSE-Engaged Student Learning: AI-Scaffolded Pre-Classroom Learning for Undergraduate Physics Courses\nFunded by NSF · Researcher · Aug 2024–Present\nDesigning AI-augmented formative assessment and feedback systems to help students build skills for interactive problem-solving, with a focus on underrepresented students in STEM.',
   },
   {
-    category: 'Research',
+    category: 'Federal Projects',
     period: '2025–2026',
     label: 'AI4Ed Summer Program',
     sublabel: 'Google.org · Graduate Fellow',
