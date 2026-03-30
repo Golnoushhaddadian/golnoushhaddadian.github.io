@@ -58,7 +58,7 @@ export const journeyItems: JourneyItem[] = [
       'Ph.D. in Learning Sciences\nGeorgia State University, Atlanta, GA · 2021–2025\nGPA: 4.14/4.00 (Honored Student)\nDissertation: "Design and Development of an AI-Augmented Feedback System to Enhance Argumentative Writing Proficiency Among EFL Learners"\nLearning tool: RITA - Real-time Intelligent Technology for Argumentative Writing\nAdvisor: Professor Kim, M. K.\nCommittee: Darling-Aduana, J. & Shapiro, B. R.',
   },
 
-  // ── Research ──
+  // ── Federal Projects ──
   {
     category: 'Federal Projects',
     period: '2021–2022',
