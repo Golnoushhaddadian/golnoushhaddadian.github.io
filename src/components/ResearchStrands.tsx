@@ -436,11 +436,7 @@ const ResearchStrands = () => {
           </text>
           <line x1={CX - 160} y1={34} x2={CX - 40} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
           <line x1={CX + 40} y1={34} x2={CX + 160} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
-          <text x={CX} y={H - 12} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
-            MIXED METHODS
-          </text>
-          <line x1={CX - 120} y1={H - 18} x2={CX - 30} y2={H - 18} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
-          <line x1={CX + 30} y1={H - 18} x2={CX + 120} y2={H - 18} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
+          {/* Mixed Methods label moved below SVG to avoid overlap */}
 
           <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" strokeDasharray="8 5" opacity={0.5} />
 
@@ -470,13 +466,7 @@ const ResearchStrands = () => {
             );
           })}
 
-          {spokeLines.map((c, i) => (
-            <line key={`spoke-${i}`} x1={c.x1} y1={c.y1} x2={c.x2} y2={c.y2}
-              stroke={STRANDS[c.strand].color} strokeWidth="1" strokeDasharray="4 3"
-              opacity={hoveredStrand ? (hoveredStrand === c.strand ? 0.4 : 0.05) : 0.2}
-              style={{ pointerEvents: "none", transition: "opacity 0.4s" }}
-            />
-          ))}
+          {/* Spoke lines removed for cleaner visualization */}
 
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
           <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
@@ -543,6 +533,13 @@ const ResearchStrands = () => {
             );
           })()}
         </AnimatePresence>
+      </div>
+
+      {/* Mixed Methods label below visualization */}
+      <div className="flex items-center justify-center gap-3 mt-2 mb-4">
+        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
+        <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
+        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
       </div>
 
       {/* Legend */}
