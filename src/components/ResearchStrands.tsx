@@ -430,21 +430,17 @@ const ResearchStrands = () => {
             </radialGradient>
           </defs>
 
-          {/* Methodological foundation ring */}
-          <circle cx={CX} cy={CY} r={330} fill="none" stroke="hsl(var(--foreground))" strokeWidth="1.2" strokeDasharray="10 6" opacity={0.2} />
-          <circle cx={CX} cy={CY} r={335} fill="none" stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="3 4" opacity={0.1} />
-          
-          {/* DBR label - top arc */}
-          <defs>
-            <path id="arc-top" d={`M ${CX - 280} ${CY - 180} A 335 335 0 0 1 ${CX + 280} ${CY - 180}`} fill="none" />
-            <path id="arc-bottom" d={`M ${CX + 280} ${CY + 200} A 335 335 0 0 1 ${CX - 280} ${CY + 200}`} fill="none" />
-          </defs>
-          <text fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.35} letterSpacing="3">
-            <textPath href="#arc-top" startOffset="50%" textAnchor="middle">DESIGN-BASED RESEARCH (DBR)</textPath>
+          {/* Methodological foundation - subtle text labels outside the visualization */}
+          <text x={CX} y={28} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
+            DESIGN-BASED RESEARCH (DBR)
           </text>
-          <text fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.35} letterSpacing="3">
-            <textPath href="#arc-bottom" startOffset="50%" textAnchor="middle">MIXED METHODS</textPath>
+          <line x1={CX - 160} y1={34} x2={CX - 40} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
+          <line x1={CX + 40} y1={34} x2={CX + 160} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
+          <text x={CX} y={H - 12} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
+            MIXED METHODS
           </text>
+          <line x1={CX - 120} y1={H - 18} x2={CX - 30} y2={H - 18} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
+          <line x1={CX + 30} y1={H - 18} x2={CX + 120} y2={H - 18} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
 
           <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" strokeDasharray="8 5" opacity={0.5} />
 
