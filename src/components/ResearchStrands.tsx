@@ -32,7 +32,7 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
     colorLight: "hsl(263, 70%, 65%)",
   },
   humanai: {
-    label: "Human-Centered\nAI in Education",
+    label: "Human-Centered\nAI",
     subtitle: "Ethics, literacy & curriculum design",
     color: "hsl(24, 85%, 48%)",
     colorLight: "hsl(24, 85%, 63%)",
