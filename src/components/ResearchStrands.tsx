@@ -124,7 +124,7 @@ function getDotPosition(pub: Publication): { x: number; y: number } {
 
 // Resolve overlapping dots by pushing them apart
 function resolveOverlaps(pubs: Publication[], posMap: Map<string, { x: number; y: number }>) {
-  const MIN_DIST = 24; // minimum distance between dot centers
+  const MIN_DIST = 30; // minimum distance between dot centers
   const iterations = 15;
   for (let iter = 0; iter < iterations; iter++) {
     let moved = false;
@@ -457,8 +457,6 @@ const ResearchStrands = () => {
 
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
           <text x={CX} y={CY - 8} textAnchor="middle" fontSize="13" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI × Education</text>
-          <text x={CX} y={CY + 8} textAnchor="middle" fontSize="9.5" fill="hsl(var(--muted-foreground))" opacity={0.6}>Shared foundation</text>
-          <text x={CX} y={CY + 22} textAnchor="middle" fontSize="9" fontWeight="600" fill="hsl(var(--muted-foreground))" opacity={0.5}>{PUBLICATIONS.length} works</text>
 
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const pos = STRAND_POSITIONS[sid];
