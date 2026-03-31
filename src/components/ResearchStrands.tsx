@@ -571,7 +571,7 @@ const ResearchStrands = () => {
                 <X className="h-5 w-5" />
               </button>
               <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: getStrandColor(selectedPub.strands) }}>
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
                   {TYPE_LABELS[selectedPub.type]}
                 </span>
                 {selectedPub.strands.map((s) => (
