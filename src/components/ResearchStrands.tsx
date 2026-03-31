@@ -1,5 +1,5 @@
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -142,23 +142,129 @@ const ResearchStrands = () => {
   const [selectedPub, setSelectedPub] = useState<Publication | null>(null);
   const [hoveredDot, setHoveredDot] = useState<{ pub: Publication; x: number; y: number } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [, forceRender] = useState(0);
 
-  const filteredPubs = PUBLICATIONS.filter((p) => filter === "all" || p.type === filter);
-  const dotPositions = useRef(new Map<string, { x: number; y: number }>());
+  // Mutable drag/position state stored in refs for performance
+  const positions = useRef<Map<string, { x: number; y: number }>>(new Map());
+  const velocities = useRef<Map<string, { vx: number; vy: number }>>(new Map());
+  const dragState = useRef<{
+    id: string | null;
+    startMouseSVG: { x: number; y: number };
+    startPos: { x: number; y: number };
+    lastMouse: { x: number; y: number };
+    lastTime: number;
+  }>({ id: null, startMouseSVG: { x: 0, y: 0 }, startPos: { x: 0, y: 0 }, lastMouse: { x: 0, y: 0 }, lastTime: 0 });
+  const animFrameRef = useRef<number>(0);
 
+  // Initialize positions
   useEffect(() => {
     PUBLICATIONS.forEach((pub) => {
-      if (!dotPositions.current.has(pub.id)) {
-        dotPositions.current.set(pub.id, getDotPosition(pub));
+      if (!positions.current.has(pub.id)) {
+        positions.current.set(pub.id, getDotPosition(pub));
+        velocities.current.set(pub.id, { vx: 0, vy: 0 });
       }
     });
+    forceRender((n) => n + 1);
   }, []);
 
+  // Inertia animation loop
+  useEffect(() => {
+    let running = true;
+    const decay = 0.94;
+    const minV = 0.08;
+    const tick = () => {
+      if (!running) return;
+      let anyMoving = false;
+      velocities.current.forEach((vel, id) => {
+        if (dragState.current.id === id) return; // skip actively dragged
+        if (Math.abs(vel.vx) > minV || Math.abs(vel.vy) > minV) {
+          anyMoving = true;
+          vel.vx *= decay;
+          vel.vy *= decay;
+          const pos = positions.current.get(id);
+          if (pos) {
+            pos.x += vel.vx;
+            pos.y += vel.vy;
+          }
+        } else {
+          vel.vx = 0;
+          vel.vy = 0;
+        }
+      });
+      if (anyMoving) forceRender((n) => n + 1);
+      animFrameRef.current = requestAnimationFrame(tick);
+    };
+    animFrameRef.current = requestAnimationFrame(tick);
+    return () => { running = false; cancelAnimationFrame(animFrameRef.current); };
+  }, []);
+
+  const screenToSVG = useCallback((clientX: number, clientY: number) => {
+    const svg = svgRef.current;
+    if (!svg) return { x: 0, y: 0 };
+    const pt = svg.createSVGPoint();
+    pt.x = clientX;
+    pt.y = clientY;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return { x: 0, y: 0 };
+    const svgPt = pt.matrixTransform(ctm.inverse());
+    return { x: svgPt.x, y: svgPt.y };
+  }, []);
+
+  const handlePointerDown = useCallback((pub: Publication, e: React.PointerEvent) => {
+    e.preventDefault();
+    (e.target as Element).setPointerCapture(e.pointerId);
+    const svgPt = screenToSVG(e.clientX, e.clientY);
+    const pos = positions.current.get(pub.id) || { x: 0, y: 0 };
+    dragState.current = {
+      id: pub.id,
+      startMouseSVG: svgPt,
+      startPos: { ...pos },
+      lastMouse: svgPt,
+      lastTime: performance.now(),
+    };
+    // Kill existing velocity
+    const vel = velocities.current.get(pub.id);
+    if (vel) { vel.vx = 0; vel.vy = 0; }
+  }, [screenToSVG]);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    const ds = dragState.current;
+    if (!ds.id) return;
+    const svgPt = screenToSVG(e.clientX, e.clientY);
+    const pos = positions.current.get(ds.id);
+    if (pos) {
+      pos.x = ds.startPos.x + (svgPt.x - ds.startMouseSVG.x);
+      pos.y = ds.startPos.y + (svgPt.y - ds.startMouseSVG.y);
+    }
+    const now = performance.now();
+    const dt = Math.max(now - ds.lastTime, 1);
+    const vel = velocities.current.get(ds.id);
+    if (vel) {
+      vel.vx = ((svgPt.x - ds.lastMouse.x) / dt) * 16; // scale to ~60fps
+      vel.vy = ((svgPt.y - ds.lastMouse.y) / dt) * 16;
+    }
+    ds.lastMouse = svgPt;
+    ds.lastTime = now;
+    forceRender((n) => n + 1);
+  }, [screenToSVG]);
+
+  const handlePointerUp = useCallback((pub: Publication) => {
+    if (dragState.current.id === pub.id) {
+      const ds = dragState.current;
+      const pos = positions.current.get(pub.id);
+      const startPos = ds.startPos;
+      // If barely moved, treat as click
+      if (pos && Math.abs(pos.x - startPos.x) < 3 && Math.abs(pos.y - startPos.y) < 3) {
+        setSelectedPub(pub);
+      }
+      dragState.current.id = null;
+    }
+  }, []);
+
+  const filteredPubs = PUBLICATIONS.filter((p) => filter === "all" || p.type === filter);
+
   const getPos = useCallback((pub: Publication) => {
-    if (dotPositions.current.has(pub.id)) return dotPositions.current.get(pub.id)!;
-    const pos = getDotPosition(pub);
-    dotPositions.current.set(pub.id, pos);
-    return pos;
+    return positions.current.get(pub.id) || getDotPosition(pub);
   }, []);
 
   // Build spoke connections: each dot connects to the axis endpoint of each strand it belongs to
@@ -336,54 +442,49 @@ const ResearchStrands = () => {
             );
           })}
 
-          {filteredPubs.map((pub, i) => {
+          {filteredPubs.map((pub) => {
             const pos = getPos(pub);
             const color = getStrandColor(pub.strands);
             const isHovered = hoveredDot?.pub.id === pub.id;
+            const isDragging = dragState.current.id === pub.id;
             const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
-            const seed = hashCode(pub.id);
-            const floatDur = 3 + (seed % 4);
-            const floatDur2 = 4 + ((seed >> 3) % 3);
-            const dx = 4 + (seed % 6);
-            const dy = 3 + ((seed >> 2) % 5);
-            const delay = -((seed % 100) / 100) * floatDur;
             return (
               <g key={pub.id}
-                style={{ opacity: strandMatch ? 1 : 0.15, transition: "opacity 0.35s", cursor: "pointer" }}
-                onClick={() => setSelectedPub(pub)}
+                style={{ opacity: strandMatch ? 1 : 0.15, transition: "opacity 0.35s", cursor: isDragging ? "grabbing" : "grab" }}
+                onPointerDown={(e) => handlePointerDown(pub, e)}
+                onPointerMove={handlePointerMove}
+                onPointerUp={() => handlePointerUp(pub)}
                 onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
                 onMouseLeave={() => setHoveredDot(null)}
               >
-                <g>
-                  <animateTransform attributeName="transform" type="translate"
-                    values={`0,0; ${dx},${-dy}; ${-dx * 0.5},${dy * 0.7}; ${dx * 0.3},${-dy * 0.4}; 0,0`}
-                    dur={`${floatDur}s`} repeatCount="indefinite" begin={`${delay}s`} />
-                  <circle cx={pos.x} cy={pos.y} r={isHovered ? 16 : 4} fill={color} opacity={isHovered ? 0.15 : 0.3}>
-                    <animate attributeName="r" values={isHovered ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur={`${floatDur2}s`} repeatCount="indefinite" />
-                  </circle>
-                  <circle cx={pos.x} cy={pos.y} r={isHovered ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered ? 3 : 2.5} filter="url(#dot-shadow)" />
-                  {pub.type === "journal" && <circle cx={pos.x} cy={pos.y} r={3.5} fill={color} opacity={0.6} />}
-                  {pub.type === "conference" && <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />}
-                  {pub.type === "underreview" && <rect x={pos.x - 2.5} y={pos.y - 2.5} width={5} height={5} fill={color} opacity={0.5} rx={1} />}
-                  {pub.type === "inprogress" && <circle cx={pos.x} cy={pos.y} r={3} fill={color} opacity={0.5} />}
-                </g>
+                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 16 : 4} fill={color} opacity={isHovered || isDragging ? 0.15 : 0.3}>
+                  <animate attributeName="r" values={isHovered || isDragging ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite" />
+                </circle>
+                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered || isDragging ? 3 : 2.5} filter="url(#dot-shadow)" />
+                {pub.type === "journal" && <circle cx={pos.x} cy={pos.y} r={3.5} fill={color} opacity={0.6} />}
+                {pub.type === "conference" && <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />}
+                {pub.type === "underreview" && <rect x={pos.x - 2.5} y={pos.y - 2.5} width={5} height={5} fill={color} opacity={0.5} rx={1} />}
+                {pub.type === "inprogress" && <circle cx={pos.x} cy={pos.y} r={3} fill={color} opacity={0.5} />}
               </g>
             );
           })}
         </svg>
 
         <AnimatePresence>
-          {hoveredDot && (
-            <motion.div
-              initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
-              style={{ left: `${(hoveredDot.x / W) * 100}%`, top: `${(hoveredDot.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
-            >
-              <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
-              <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
-            </motion.div>
-          )}
+          {hoveredDot && (() => {
+            const livePos = positions.current.get(hoveredDot.pub.id) || hoveredDot;
+            return (
+              <motion.div
+                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
+                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
+              >
+                <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
+                <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
+              </motion.div>
+            );
+          })()}
         </AnimatePresence>
       </div>
 
