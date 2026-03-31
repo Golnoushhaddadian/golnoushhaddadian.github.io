@@ -510,10 +510,7 @@ const ResearchStrands = () => {
                   <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite" />
                 </circle>
                 <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered || isDragging ? 3 : 2.5} filter="url(#dot-shadow)" />
-                {pub.type === "journal" && <circle cx={pos.x} cy={pos.y} r={3.5} fill={color} opacity={0.6} />}
-                {pub.type === "conference" && <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />}
-                {pub.type === "underreview" && <rect x={pos.x - 2.5} y={pos.y - 2.5} width={5} height={5} fill={color} opacity={0.5} rx={1} />}
-                {pub.type === "inprogress" && <circle cx={pos.x} cy={pos.y} r={3} fill={color} opacity={0.5} />}
+                <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />
               </g>
             );
           })}
@@ -539,7 +536,7 @@ const ResearchStrands = () => {
       {/* Legend */}
       <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity={0.6} /></svg>
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
           Journal
         </span>
         <span className="flex items-center gap-1.5">
@@ -547,11 +544,11 @@ const ResearchStrands = () => {
           Conference
         </span>
         <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><rect x="5" y="5" width="4" height="4" fill="currentColor" opacity={0.5} rx={1} /></svg>
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
           Under Review
         </span>
         <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><circle cx="7" cy="7" r="2" fill="currentColor" opacity={0.4} /></svg>
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
           In Progress
         </span>
       </div>
