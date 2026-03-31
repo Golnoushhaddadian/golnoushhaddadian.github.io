@@ -1,7 +1,7 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
-import CoauthorshipNetwork from "@/components/CoauthorshipNetwork";
+
 import ResearchStrands from "@/components/ResearchStrands";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
@@ -221,14 +221,6 @@ const AboutMe = () => {
           <ResearchStrands />
         </section>
 
-        {/* Co-authorship Network */}
-        <section className="mt-12 sm:mt-16 md:mt-20">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Collaboration Network</h2>
-          <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-            Each <strong>circle</strong> represents a co-author · <strong>Numbers</strong> inside show total shared publications · <strong>Line thickness</strong> reflects frequency of collaboration · <strong>Colors</strong> indicate research clusters identified by shared co-authorships
-          </p>
-          <CoauthorshipNetwork />
-        </section>
 
 
 
