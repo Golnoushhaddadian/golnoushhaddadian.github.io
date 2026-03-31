@@ -510,10 +510,7 @@ const ResearchStrands = () => {
                   <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite" />
                 </circle>
                 <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered || isDragging ? 3 : 2.5} filter="url(#dot-shadow)" />
-                {pub.type === "journal" && <circle cx={pos.x} cy={pos.y} r={3.5} fill={color} opacity={0.6} />}
-                {pub.type === "conference" && <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />}
-                {pub.type === "underreview" && <rect x={pos.x - 2.5} y={pos.y - 2.5} width={5} height={5} fill={color} opacity={0.5} rx={1} />}
-                {pub.type === "inprogress" && <circle cx={pos.x} cy={pos.y} r={3} fill={color} opacity={0.5} />}
+                <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />
               </g>
             );
           })}
