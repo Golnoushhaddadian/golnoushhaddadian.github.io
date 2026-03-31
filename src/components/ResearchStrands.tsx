@@ -456,7 +456,8 @@ const ResearchStrands = () => {
           ))}
 
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
-          <text x={CX} y={CY - 8} textAnchor="middle" fontSize="13" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI × Education</text>
+          <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI ×</text>
+          <text x={CX} y={CY + 10} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>Education</text>
 
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const pos = STRAND_POSITIONS[sid];
