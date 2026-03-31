@@ -535,6 +535,13 @@ const ResearchStrands = () => {
         </AnimatePresence>
       </div>
 
+      {/* Mixed Methods label below visualization */}
+      <div className="flex items-center justify-center gap-3 mt-2 mb-4">
+        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
+        <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
+        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
+      </div>
+
       {/* Legend */}
       <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
