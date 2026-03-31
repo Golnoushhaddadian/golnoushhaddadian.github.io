@@ -430,6 +430,22 @@ const ResearchStrands = () => {
             </radialGradient>
           </defs>
 
+          {/* Methodological foundation ring */}
+          <circle cx={CX} cy={CY} r={330} fill="none" stroke="hsl(var(--foreground))" strokeWidth="1.2" strokeDasharray="10 6" opacity={0.2} />
+          <circle cx={CX} cy={CY} r={335} fill="none" stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="3 4" opacity={0.1} />
+          
+          {/* DBR label - top arc */}
+          <defs>
+            <path id="arc-top" d={`M ${CX - 280} ${CY - 180} A 335 335 0 0 1 ${CX + 280} ${CY - 180}`} fill="none" />
+            <path id="arc-bottom" d={`M ${CX + 280} ${CY + 200} A 335 335 0 0 1 ${CX - 280} ${CY + 200}`} fill="none" />
+          </defs>
+          <text fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.35} letterSpacing="3">
+            <textPath href="#arc-top" startOffset="50%" textAnchor="middle">DESIGN-BASED RESEARCH (DBR)</textPath>
+          </text>
+          <text fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.35} letterSpacing="3">
+            <textPath href="#arc-bottom" startOffset="50%" textAnchor="middle">MIXED METHODS</textPath>
+          </text>
+
           <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" strokeDasharray="8 5" opacity={0.5} />
 
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
