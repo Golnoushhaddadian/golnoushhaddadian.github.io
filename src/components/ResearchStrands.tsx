@@ -142,23 +142,129 @@ const ResearchStrands = () => {
   const [selectedPub, setSelectedPub] = useState<Publication | null>(null);
   const [hoveredDot, setHoveredDot] = useState<{ pub: Publication; x: number; y: number } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [, forceRender] = useState(0);
 
-  const filteredPubs = PUBLICATIONS.filter((p) => filter === "all" || p.type === filter);
-  const dotPositions = useRef(new Map<string, { x: number; y: number }>());
+  // Mutable drag/position state stored in refs for performance
+  const positions = useRef<Map<string, { x: number; y: number }>>(new Map());
+  const velocities = useRef<Map<string, { vx: number; vy: number }>>(new Map());
+  const dragState = useRef<{
+    id: string | null;
+    startMouseSVG: { x: number; y: number };
+    startPos: { x: number; y: number };
+    lastMouse: { x: number; y: number };
+    lastTime: number;
+  }>({ id: null, startMouseSVG: { x: 0, y: 0 }, startPos: { x: 0, y: 0 }, lastMouse: { x: 0, y: 0 }, lastTime: 0 });
+  const animFrameRef = useRef<number>(0);
 
+  // Initialize positions
   useEffect(() => {
     PUBLICATIONS.forEach((pub) => {
-      if (!dotPositions.current.has(pub.id)) {
-        dotPositions.current.set(pub.id, getDotPosition(pub));
+      if (!positions.current.has(pub.id)) {
+        positions.current.set(pub.id, getDotPosition(pub));
+        velocities.current.set(pub.id, { vx: 0, vy: 0 });
       }
     });
+    forceRender((n) => n + 1);
   }, []);
 
+  // Inertia animation loop
+  useEffect(() => {
+    let running = true;
+    const decay = 0.94;
+    const minV = 0.08;
+    const tick = () => {
+      if (!running) return;
+      let anyMoving = false;
+      velocities.current.forEach((vel, id) => {
+        if (dragState.current.id === id) return; // skip actively dragged
+        if (Math.abs(vel.vx) > minV || Math.abs(vel.vy) > minV) {
+          anyMoving = true;
+          vel.vx *= decay;
+          vel.vy *= decay;
+          const pos = positions.current.get(id);
+          if (pos) {
+            pos.x += vel.vx;
+            pos.y += vel.vy;
+          }
+        } else {
+          vel.vx = 0;
+          vel.vy = 0;
+        }
+      });
+      if (anyMoving) forceRender((n) => n + 1);
+      animFrameRef.current = requestAnimationFrame(tick);
+    };
+    animFrameRef.current = requestAnimationFrame(tick);
+    return () => { running = false; cancelAnimationFrame(animFrameRef.current); };
+  }, []);
+
+  const screenToSVG = useCallback((clientX: number, clientY: number) => {
+    const svg = svgRef.current;
+    if (!svg) return { x: 0, y: 0 };
+    const pt = svg.createSVGPoint();
+    pt.x = clientX;
+    pt.y = clientY;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return { x: 0, y: 0 };
+    const svgPt = pt.matrixTransform(ctm.inverse());
+    return { x: svgPt.x, y: svgPt.y };
+  }, []);
+
+  const handlePointerDown = useCallback((pub: Publication, e: React.PointerEvent) => {
+    e.preventDefault();
+    (e.target as Element).setPointerCapture(e.pointerId);
+    const svgPt = screenToSVG(e.clientX, e.clientY);
+    const pos = positions.current.get(pub.id) || { x: 0, y: 0 };
+    dragState.current = {
+      id: pub.id,
+      startMouseSVG: svgPt,
+      startPos: { ...pos },
+      lastMouse: svgPt,
+      lastTime: performance.now(),
+    };
+    // Kill existing velocity
+    const vel = velocities.current.get(pub.id);
+    if (vel) { vel.vx = 0; vel.vy = 0; }
+  }, [screenToSVG]);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    const ds = dragState.current;
+    if (!ds.id) return;
+    const svgPt = screenToSVG(e.clientX, e.clientY);
+    const pos = positions.current.get(ds.id);
+    if (pos) {
+      pos.x = ds.startPos.x + (svgPt.x - ds.startMouseSVG.x);
+      pos.y = ds.startPos.y + (svgPt.y - ds.startMouseSVG.y);
+    }
+    const now = performance.now();
+    const dt = Math.max(now - ds.lastTime, 1);
+    const vel = velocities.current.get(ds.id);
+    if (vel) {
+      vel.vx = ((svgPt.x - ds.lastMouse.x) / dt) * 16; // scale to ~60fps
+      vel.vy = ((svgPt.y - ds.lastMouse.y) / dt) * 16;
+    }
+    ds.lastMouse = svgPt;
+    ds.lastTime = now;
+    forceRender((n) => n + 1);
+  }, [screenToSVG]);
+
+  const handlePointerUp = useCallback((pub: Publication) => {
+    if (dragState.current.id === pub.id) {
+      const ds = dragState.current;
+      const pos = positions.current.get(pub.id);
+      const startPos = ds.startPos;
+      // If barely moved, treat as click
+      if (pos && Math.abs(pos.x - startPos.x) < 3 && Math.abs(pos.y - startPos.y) < 3) {
+        setSelectedPub(pub);
+      }
+      dragState.current.id = null;
+    }
+  }, []);
+
+  const filteredPubs = PUBLICATIONS.filter((p) => filter === "all" || p.type === filter);
+
   const getPos = useCallback((pub: Publication) => {
-    if (dotPositions.current.has(pub.id)) return dotPositions.current.get(pub.id)!;
-    const pos = getDotPosition(pub);
-    dotPositions.current.set(pub.id, pos);
-    return pos;
+    return positions.current.get(pub.id) || getDotPosition(pub);
   }, []);
 
   // Build spoke connections: each dot connects to the axis endpoint of each strand it belongs to
