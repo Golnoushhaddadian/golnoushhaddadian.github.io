@@ -115,11 +115,46 @@ function getDotPosition(pub: Publication): { x: number; y: number } {
   avgY /= strands.length;
   const baseAngle = Math.atan2(avgY, avgX);
   const seed = hashCode(pub.id);
-  const radiusJitter = 0.6 + (((seed >> 4) & 0xff) / 255) * 0.35;
-  const angleJitter = ((((seed >> 12) & 0xff) / 255) - 0.5) * 0.6;
+  const radiusJitter = 0.35 + (((seed >> 4) & 0xff) / 255) * 0.6;
+  const angleJitter = ((((seed >> 12) & 0xff) / 255) - 0.5) * 0.9;
   const r = RING_RADII[2] * radiusJitter;
   const finalAngle = baseAngle + angleJitter;
   return { x: CX + r * Math.cos(finalAngle), y: CY + r * Math.sin(finalAngle) };
+}
+
+// Resolve overlapping dots by pushing them apart
+function resolveOverlaps(pubs: Publication[], posMap: Map<string, { x: number; y: number }>) {
+  const MIN_DIST = 24; // minimum distance between dot centers
+  const iterations = 15;
+  for (let iter = 0; iter < iterations; iter++) {
+    let moved = false;
+    for (let i = 0; i < pubs.length; i++) {
+      for (let j = i + 1; j < pubs.length; j++) {
+        const a = posMap.get(pubs[i].id);
+        const b = posMap.get(pubs[j].id);
+        if (!a || !b) continue;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MIN_DIST && dist > 0) {
+          const push = (MIN_DIST - dist) / 2;
+          const nx = dx / dist;
+          const ny = dy / dist;
+          a.x -= nx * push;
+          a.y -= ny * push;
+          b.x += nx * push;
+          b.y += ny * push;
+          moved = true;
+        } else if (dist === 0) {
+          // Identical positions — nudge randomly
+          a.x += (Math.random() - 0.5) * MIN_DIST;
+          a.y += (Math.random() - 0.5) * MIN_DIST;
+          moved = true;
+        }
+      }
+    }
+    if (!moved) break;
+  }
 }
 
 function hashCode(s: string): number {
@@ -156,7 +191,7 @@ const ResearchStrands = () => {
   }>({ id: null, startMouseSVG: { x: 0, y: 0 }, startPos: { x: 0, y: 0 }, lastMouse: { x: 0, y: 0 }, lastTime: 0 });
   const animFrameRef = useRef<number>(0);
 
-  // Initialize positions
+  // Initialize positions with overlap resolution
   useEffect(() => {
     PUBLICATIONS.forEach((pub) => {
       if (!positions.current.has(pub.id)) {
@@ -164,6 +199,7 @@ const ResearchStrands = () => {
         velocities.current.set(pub.id, { vx: 0, vy: 0 });
       }
     });
+    resolveOverlaps(PUBLICATIONS, positions.current);
     forceRender((n) => n + 1);
   }, []);
 
