@@ -472,16 +472,19 @@ const ResearchStrands = () => {
         </svg>
 
         <AnimatePresence>
-          {hoveredDot && (
-            <motion.div
-              initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
-              style={{ left: `${(hoveredDot.x / W) * 100}%`, top: `${(hoveredDot.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
-            >
-              <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
-              <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
-            </motion.div>
-          )}
+          {hoveredDot && (() => {
+            const livePos = positions.current.get(hoveredDot.pub.id) || hoveredDot;
+            return (
+              <motion.div
+                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
+                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
+              >
+                <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
+                <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
+              </motion.div>
+            );
+          })()}
         </AnimatePresence>
       </div>
 
