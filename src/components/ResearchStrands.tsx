@@ -191,7 +191,7 @@ const ResearchStrands = () => {
   }>({ id: null, startMouseSVG: { x: 0, y: 0 }, startPos: { x: 0, y: 0 }, lastMouse: { x: 0, y: 0 }, lastTime: 0 });
   const animFrameRef = useRef<number>(0);
 
-  // Initialize positions
+  // Initialize positions with overlap resolution
   useEffect(() => {
     PUBLICATIONS.forEach((pub) => {
       if (!positions.current.has(pub.id)) {
@@ -199,6 +199,7 @@ const ResearchStrands = () => {
         velocities.current.set(pub.id, { vx: 0, vy: 0 });
       }
     });
+    resolveOverlaps(PUBLICATIONS, positions.current);
     forceRender((n) => n + 1);
   }, []);
 
