@@ -124,7 +124,7 @@ function getDotPosition(pub: Publication): { x: number; y: number } {
 
 // Resolve overlapping dots by pushing them apart
 function resolveOverlaps(pubs: Publication[], posMap: Map<string, { x: number; y: number }>) {
-  const MIN_DIST = 24; // minimum distance between dot centers
+  const MIN_DIST = 30; // minimum distance between dot centers
   const iterations = 15;
   for (let iter = 0; iter < iterations; iter++) {
     let moved = false;
