@@ -341,6 +341,12 @@ const ResearchStrands = () => {
             const color = getStrandColor(pub.strands);
             const isHovered = hoveredDot?.pub.id === pub.id;
             const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
+            const seed = hashCode(pub.id);
+            const floatDur = 3 + (seed % 4);
+            const floatDur2 = 4 + ((seed >> 3) % 3);
+            const dx = 4 + (seed % 6);
+            const dy = 3 + ((seed >> 2) % 5);
+            const delay = -((seed % 100) / 100) * floatDur;
             return (
               <g key={pub.id}
                 style={{ opacity: strandMatch ? 1 : 0.15, transition: "opacity 0.35s", cursor: "pointer" }}
@@ -348,15 +354,20 @@ const ResearchStrands = () => {
                 onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
                 onMouseLeave={() => setHoveredDot(null)}
               >
-                <circle cx={pos.x} cy={pos.y} r={isHovered ? 16 : 4} fill={color} opacity={isHovered ? 0.15 : 0.3}>
-                  <animate attributeName="r" values={isHovered ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2.5s" repeatCount="indefinite" />
-                </circle>
-                <circle cx={pos.x} cy={pos.y} r={isHovered ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered ? 3 : 2.5} filter="url(#dot-shadow)" />
-                {pub.type === "journal" && <circle cx={pos.x} cy={pos.y} r={3.5} fill={color} opacity={0.6} />}
-                {pub.type === "conference" && <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />}
-                {pub.type === "underreview" && <rect x={pos.x - 2.5} y={pos.y - 2.5} width={5} height={5} fill={color} opacity={0.5} rx={1} />}
-                {pub.type === "inprogress" && <circle cx={pos.x} cy={pos.y} r={3} fill={color} opacity={0.5} />}
+                <g>
+                  <animateTransform attributeName="transform" type="translate"
+                    values={`0,0; ${dx},${-dy}; ${-dx * 0.5},${dy * 0.7}; ${dx * 0.3},${-dy * 0.4}; 0,0`}
+                    dur={`${floatDur}s`} repeatCount="indefinite" begin={`${delay}s`} />
+                  <circle cx={pos.x} cy={pos.y} r={isHovered ? 16 : 4} fill={color} opacity={isHovered ? 0.15 : 0.3}>
+                    <animate attributeName="r" values={isHovered ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur={`${floatDur2}s`} repeatCount="indefinite" />
+                  </circle>
+                  <circle cx={pos.x} cy={pos.y} r={isHovered ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered ? 3 : 2.5} filter="url(#dot-shadow)" />
+                  {pub.type === "journal" && <circle cx={pos.x} cy={pos.y} r={3.5} fill={color} opacity={0.6} />}
+                  {pub.type === "conference" && <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />}
+                  {pub.type === "underreview" && <rect x={pos.x - 2.5} y={pos.y - 2.5} width={5} height={5} fill={color} opacity={0.5} rx={1} />}
+                  {pub.type === "inprogress" && <circle cx={pos.x} cy={pos.y} r={3} fill={color} opacity={0.5} />}
+                </g>
               </g>
             );
           })}
