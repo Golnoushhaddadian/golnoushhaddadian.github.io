@@ -470,13 +470,7 @@ const ResearchStrands = () => {
             );
           })}
 
-          {spokeLines.map((c, i) => (
-            <line key={`spoke-${i}`} x1={c.x1} y1={c.y1} x2={c.x2} y2={c.y2}
-              stroke={STRANDS[c.strand].color} strokeWidth="1" strokeDasharray="4 3"
-              opacity={hoveredStrand ? (hoveredStrand === c.strand ? 0.4 : 0.05) : 0.2}
-              style={{ pointerEvents: "none", transition: "opacity 0.4s" }}
-            />
-          ))}
+          {/* Spoke lines removed for cleaner visualization */}
 
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
           <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
