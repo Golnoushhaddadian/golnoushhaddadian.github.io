@@ -344,7 +344,7 @@ const ResearchStrands = () => {
     <div>
       <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Research Strands</h2>
       <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-        My work moves across four interconnected strands with <strong>AI × Education</strong> as the shared foundation.
+        My work moves across four interconnected strands with <strong>AI in Education</strong> as the shared foundation.
         Hover over each area to highlight it. Click any dot to see the publication details.
       </p>
 
@@ -467,7 +467,7 @@ const ResearchStrands = () => {
           ))}
 
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
-          <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI ×</text>
+          <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
           <text x={CX} y={CY + 10} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>Education</text>
 
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
