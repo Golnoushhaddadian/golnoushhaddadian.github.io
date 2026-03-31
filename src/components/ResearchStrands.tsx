@@ -163,8 +163,19 @@ function hashCode(s: string): number {
   return Math.abs(hash);
 }
 
-function getStrandColor(strands: StrandId[]): string {
-  return STRANDS[strands[0]].color;
+function getStrandColor(pub: Publication, pos: { x: number; y: number }): string {
+  if (pub.strands.length === 1) return STRANDS[pub.strands[0]].color;
+  // Pick color of the closest strand axis
+  let closest: StrandId = pub.strands[0];
+  let minDist = Infinity;
+  pub.strands.forEach((sid) => {
+    const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
+    const ax = CX + RING_RADII[2] * Math.cos(angle);
+    const ay = CY + RING_RADII[2] * Math.sin(angle);
+    const d = (pos.x - ax) ** 2 + (pos.y - ay) ** 2;
+    if (d < minDist) { minDist = d; closest = sid; }
+  });
+  return STRANDS[closest].color;
 }
 
 function countByStrand(strandId: StrandId): number {
