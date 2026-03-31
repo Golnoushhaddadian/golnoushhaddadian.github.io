@@ -490,7 +490,7 @@ const ResearchStrands = () => {
 
           {filteredPubs.map((pub) => {
             const pos = getPos(pub);
-            const color = getStrandColor(pub.strands);
+            const color = getStrandColor(pub, pos);
             const isHovered = hoveredDot?.pub.id === pub.id;
             const isDragging = dragState.current.id === pub.id;
             const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
