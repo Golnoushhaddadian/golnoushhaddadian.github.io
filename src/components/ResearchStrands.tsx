@@ -483,7 +483,9 @@ const ResearchStrands = () => {
                 {lines.map((line, li) => (
                   <text key={li} x={pos.labelX} y={pos.labelY + li * 22} textAnchor={pos.anchor} fontSize="16" fontWeight="800" fill={strand.color}>{line}</text>
                 ))}
-                <text x={pos.labelX} y={pos.labelY + lines.length * 22 + 6} textAnchor={pos.anchor} fontSize="11" fill={strand.color} opacity={0.7} fontStyle="italic">{strand.subtitle}</text>
+                {strand.subtitle.split("\n").map((subLine, si) => (
+                  <text key={`sub-${si}`} x={pos.labelX} y={pos.labelY + lines.length * 22 + 6 + si * 14} textAnchor={pos.anchor} fontSize="11" fill={strand.color} opacity={0.7} fontStyle="italic">{subLine}</text>
+                ))}
               </g>
             );
           })}
