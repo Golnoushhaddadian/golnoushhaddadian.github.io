@@ -31,12 +31,6 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
     color: "hsl(263, 70%, 50%)",
     colorLight: "hsl(263, 70%, 65%)",
   },
-  humanai: {
-    label: "Human-Centered AI",
-    subtitle: "",
-    color: "hsl(24, 85%, 48%)",
-    colorLight: "hsl(24, 85%, 63%)",
-  },
   writing: {
     label: "Language Education",
     subtitle: "Writing, Argumentation, AWE\nCALL & Assessment",
