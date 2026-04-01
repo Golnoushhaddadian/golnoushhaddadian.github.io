@@ -476,6 +476,8 @@ const ResearchStrands = () => {
             const pos = STRAND_POSITIONS[sid];
             const strand = STRANDS[sid];
             const lines = strand.label.split("\n");
+            const isHovered = hoveredStrand === sid;
+            const subtitleLines = strand.subtitle ? strand.subtitle.split("\n") : [];
             return (
               <g key={`lbl-${sid}`}
                 style={{ opacity: isStrandHighlighted(sid) ? 1 : 0.25, transition: "opacity 0.5s", cursor: "pointer" }}
@@ -485,8 +487,20 @@ const ResearchStrands = () => {
                 {lines.map((line, li) => (
                   <text key={li} x={pos.labelX} y={pos.labelY + li * 22} textAnchor={pos.anchor} fontSize="16" fontWeight="800" fill={strand.color}>{line}</text>
                 ))}
-                {strand.subtitle.split("\n").map((subLine, si) => (
-                  <text key={`sub-${si}`} x={pos.labelX} y={pos.labelY + lines.length * 22 + 6 + si * 14} textAnchor={pos.anchor} fontSize="11" fill={strand.color} opacity={0.7} fontStyle="italic">{subLine}</text>
+                {subtitleLines.length > 0 && subtitleLines[0] !== "" && subtitleLines.map((subLine, si) => (
+                  <text
+                    key={`sub-${si}`}
+                    x={pos.labelX}
+                    y={pos.labelY + lines.length * 22 + 6 + si * 14}
+                    textAnchor={pos.anchor}
+                    fontSize="11"
+                    fill={strand.color}
+                    opacity={isHovered ? 0.7 : 0}
+                    fontStyle="italic"
+                    style={{ transition: "opacity 0.3s ease" }}
+                  >
+                    {subLine}
+                  </text>
                 ))}
               </g>
             );
