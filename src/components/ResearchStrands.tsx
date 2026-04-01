@@ -411,7 +411,7 @@ const ResearchStrands = () => {
               <stop offset="50%" stopColor="hsl(263,70%,55%)" stopOpacity="0.35" />
               <stop offset="100%" stopColor="hsl(263,70%,50%)" stopOpacity="0.08" />
             </radialGradient>
-            <radialGradient id="grad-feedback" cx="50%" cy="65%" r="70%">
+            <radialGradient id="grad-writing" cx="50%" cy="65%" r="70%">
               <stop offset="0%" stopColor="hsl(205,80%,53%)" stopOpacity="0.65" />
               <stop offset="50%" stopColor="hsl(205,80%,43%)" stopOpacity="0.35" />
               <stop offset="100%" stopColor="hsl(205,80%,33%)" stopOpacity="0.08" />
