@@ -38,8 +38,8 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
     colorLight: "hsl(24, 85%, 63%)",
   },
   writing: {
-    label: "Writing",
-    subtitle: "Automated Writing Evaluation (AWE)\nArgumentative Writing",
+    label: "Language Education\n& Writing",
+    subtitle: "AWE, Argumentative Writing\nCALL, EFL/ESL",
     color: "hsl(205, 80%, 33%)",
     colorLight: "hsl(205, 80%, 53%)",
   },
