@@ -337,7 +337,7 @@ const ResearchStrands = () => {
     <div>
       <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Research Strands</h2>
       <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-        My work moves across four interconnected strands with <strong>AI in Education</strong> as the shared foundation.
+        My work moves across three interconnected strands with <strong>AI in Education</strong> as the shared foundation.
         Hover over each area to highlight it. Click any dot to see the publication details.
       </p>
 
