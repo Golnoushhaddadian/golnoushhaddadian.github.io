@@ -92,9 +92,8 @@ const RING_RADII = [85, 170, 260];
 
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
   adaptive: { angle: -90, labelX: CX, labelY: 55, anchor: "middle" },
-  feedback: { angle: 0, labelX: 750, labelY: CY - 10, anchor: "start" },
-  humanai: { angle: 90, labelX: CX, labelY: H - 50, anchor: "middle" },
-  writing: { angle: 180, labelX: 150, labelY: CY - 10, anchor: "end" },
+  feedback: { angle: 30, labelX: 730, labelY: CY + 140, anchor: "start" },
+  writing: { angle: 150, labelX: 170, labelY: CY + 140, anchor: "end" },
 };
 
 function getDotPosition(pub: Publication): { x: number; y: number } {
