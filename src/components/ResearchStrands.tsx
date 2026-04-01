@@ -38,7 +38,7 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
     colorLight: "hsl(24, 85%, 63%)",
   },
   writing: {
-    label: "Language Education\n& Writing",
+    label: "Language Education & Writing",
     subtitle: "AWE, Argumentative Writing\nCALL, EFL/ESL",
     color: "hsl(205, 80%, 33%)",
     colorLight: "hsl(205, 80%, 53%)",
