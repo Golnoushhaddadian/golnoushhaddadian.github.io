@@ -116,7 +116,8 @@ function getDotPosition(pub: Publication): { x: number; y: number } {
   const baseAngle = Math.atan2(avgY, avgX);
   const seed = hashCode(pub.id);
   const radiusJitter = 0.35 + (((seed >> 4) & 0xff) / 255) * 0.6;
-  const angleJitter = ((((seed >> 12) & 0xff) / 255) - 0.5) * 0.9;
+  const maxJitter = strands.length === 1 ? 0.4 : 0.9;
+  const angleJitter = ((((seed >> 12) & 0xff) / 255) - 0.5) * maxJitter;
   const r = RING_RADII[2] * radiusJitter;
   const finalAngle = baseAngle + angleJitter;
   return { x: CX + r * Math.cos(finalAngle), y: CY + r * Math.sin(finalAngle) };
