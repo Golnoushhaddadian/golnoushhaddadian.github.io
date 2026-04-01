@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
 // ── Strand definitions ──
-type StrandId = "adaptive" | "feedback" | "humanai" | "writing";
+type StrandId = "adaptive" | "feedback" | "writing";
 type WorkType = "journal" | "conference" | "inprogress" | "underreview";
 
 interface Publication {
