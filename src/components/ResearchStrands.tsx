@@ -18,24 +18,27 @@ interface Publication {
   url?: string;
 }
 
-const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string; colorLight: string }> = {
+const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string; colorLight: string; glow: string }> = {
   adaptive: {
     label: "Personalized & Adaptive\nLearning Environments",
     subtitle: "Intelligent systems & learner-centered design",
-    color: "hsl(172, 66%, 30%)",
-    colorLight: "hsl(172, 66%, 50%)",
+    color: "hsl(165, 50%, 45%)",
+    colorLight: "hsl(165, 55%, 62%)",
+    glow: "hsl(165, 60%, 55%)",
   },
   feedback: {
     label: "Feedback",
     subtitle: "Formative assessment & peer evaluation",
-    color: "hsl(263, 70%, 50%)",
-    colorLight: "hsl(263, 70%, 65%)",
+    color: "hsl(270, 55%, 58%)",
+    colorLight: "hsl(270, 60%, 72%)",
+    glow: "hsl(270, 65%, 65%)",
   },
   writing: {
     label: "Language Education",
     subtitle: "Writing, Argumentation, AWE\nCALL & Assessment",
-    color: "hsl(205, 80%, 33%)",
-    colorLight: "hsl(205, 80%, 53%)",
+    color: "hsl(210, 65%, 48%)",
+    colorLight: "hsl(210, 70%, 62%)",
+    glow: "hsl(210, 70%, 55%)",
   },
 };
 
