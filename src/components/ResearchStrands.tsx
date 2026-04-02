@@ -315,22 +315,17 @@ const ResearchStrands = () => {
     return positions.current.get(pub.id) || getDotPosition(pub);
   }, []);
 
-  // Build spoke connections: each dot connects to the axis endpoint of each strand it belongs to
-  const strandEndpoints: Record<StrandId, { x: number; y: number }> = {} as any;
-  (Object.keys(STRAND_POSITIONS) as StrandId[]).forEach((sid) => {
-    const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
-    strandEndpoints[sid] = { x: CX + RING_RADII[1] * Math.cos(angle), y: CY + RING_RADII[1] * Math.sin(angle) };
-  });
-
-  const spokeLines: { x1: number; y1: number; x2: number; y2: number; strand: StrandId }[] = [];
-  filteredPubs.forEach((pub) => {
-    if (pub.strands.length > 1) {
-      const pos = getPos(pub);
-      pub.strands.forEach((sid) => {
-        spokeLines.push({ x1: pos.x, y1: pos.y, x2: strandEndpoints[sid].x, y2: strandEndpoints[sid].y, strand: sid });
-      });
+  // Build peer connections: connect publications that share at least one strand
+  const connectionLines = useMemo(() => {
+    const lines: { a: string; b: string }[] = [];
+    for (let i = 0; i < filteredPubs.length; i++) {
+      for (let j = i + 1; j < filteredPubs.length; j++) {
+        const shared = filteredPubs[i].strands.some(s => filteredPubs[j].strands.includes(s));
+        if (shared) lines.push({ a: filteredPubs[i].id, b: filteredPubs[j].id });
+      }
     }
-  });
+    return lines;
+  }, [filteredPubs]);
 
   const isStrandHighlighted = (strandId: StrandId) => !hoveredStrand || hoveredStrand === strandId;
 
