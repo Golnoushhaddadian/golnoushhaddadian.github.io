@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
 // ── Strand definitions ──
-type StrandId = "adaptive" | "feedback" | "writing";
+type StrandId = "adaptive" | "feedback" | "humanai" | "writing";
 type WorkType = "journal" | "conference" | "inprogress" | "underreview";
 
 interface Publication {
@@ -18,59 +18,62 @@ interface Publication {
   url?: string;
 }
 
-const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string; colorLight: string; fill: string }> = {
+const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string; colorLight: string }> = {
   adaptive: {
     label: "Personalized & Adaptive\nLearning Environments",
     subtitle: "Intelligent systems & learner-centered design",
-    color: "hsl(174, 55%, 42%)",
-    colorLight: "hsl(174, 60%, 52%)",
-    fill: "hsl(174, 50%, 72%)",
+    color: "hsl(172, 66%, 30%)",
+    colorLight: "hsl(172, 66%, 50%)",
   },
   feedback: {
     label: "Feedback",
     subtitle: "Formative assessment & peer evaluation",
-    color: "hsl(15, 70%, 55%)",
-    colorLight: "hsl(15, 75%, 62%)",
-    fill: "hsl(15, 65%, 78%)",
+    color: "hsl(263, 70%, 50%)",
+    colorLight: "hsl(263, 70%, 65%)",
+  },
+  humanai: {
+    label: "Human-Centered AI",
+    subtitle: "",
+    color: "hsl(24, 85%, 48%)",
+    colorLight: "hsl(24, 85%, 63%)",
   },
   writing: {
     label: "Language Education",
     subtitle: "Writing, Argumentation, AWE\nCALL & Assessment",
-    color: "hsl(210, 55%, 50%)",
-    colorLight: "hsl(210, 60%, 58%)",
-    fill: "hsl(210, 50%, 75%)",
+    color: "hsl(205, 80%, 33%)",
+    colorLight: "hsl(205, 80%, 53%)",
   },
 };
 
 const PUBLICATIONS: Publication[] = [
-  { id: "j1", title: "Problem-centered post-secondary CS education: Private AI curriculum", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "IJTE, 8(2)", year: "2025", type: "journal", strands: ["adaptive"] },
-  { id: "j2", title: "Construction and validation of a CFAL questionnaire for language teachers", authors: "Haddadian, G., Radmanesh, S., & Haddadian, N.", venue: "Language Testing in Asia, 14(33)", year: "2024", type: "journal", strands: ["feedback", "writing"] },
+  { id: "j1", title: "Problem-centered post-secondary CS education: Private AI curriculum", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "IJTE, 8(2)", year: "2025", type: "journal", strands: ["humanai"] },
+  { id: "j2", title: "Construction and validation of a CFAL questionnaire for language teachers", authors: "Haddadian, G., Radmanesh, S., & Haddadian, N.", venue: "Language Testing in Asia, 14(33)", year: "2024", type: "journal", strands: ["feedback", "writing", "humanai"] },
   { id: "j3", title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking", authors: "Haddadian, G., & Haddadian, N.", venue: "JAID, 13(2)", year: "2024", type: "journal", strands: ["feedback", "writing"] },
   { id: "j4", title: "Comparing Effects of Teacher, Automated, and Integrative Feedback on Writing", authors: "Haddadian, G.", venue: "CALL-EJ, 25(3)", year: "2024", type: "journal", strands: ["feedback", "writing"] },
   { id: "j5", title: "Conversational Repairs in Persian Dramatic Discourse", authors: "Haddadian, G., & Mahmoodi-Bakhtiari, B.", venue: "Persian Literary Studies, 7(11)", year: "2018", type: "journal", strands: ["writing"] },
-  { id: "c1", title: "Supporting peer feedback provision and uptake with GenAI", authors: "Noroozi, O., Haddadian, G., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["feedback"] },
-  { id: "c2", title: "Automated Generation of Expert Models with Generative AI", authors: "Haddadian, G., Han, H., Kim, M., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["adaptive"] },
-  { id: "c3", title: "Evaluating Private AI Curriculum in CS Education", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "ICLS 2024", year: "2024", type: "conference", strands: ["adaptive"] },
-  { id: "c4", title: "ELT Teachers' Online Self-efficacy: Does Agency Matter?", authors: "Haddadian, G., & Haddadian, N.", venue: "SITE 2024", year: "2024", type: "conference", strands: ["writing"] },
-  { id: "c5", title: "Impact of AI-Enabled Personalized Recommendations on L2 Learners", authors: "Daneshvar Ghorbani, B., & Haddadian, G.", venue: "AIRiAL 2024, Columbia University", year: "2024", type: "conference", strands: ["adaptive", "writing"] },
-  { id: "c6", title: "Knowledge-based AI vs. Human Evaluation in Academic Summary", authors: "Kim, J., Haddadian, G., & Kim, M.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["feedback"] },
-  { id: "c7", title: "Design Study of PCI for Private AI Curriculum Development", authors: "Haddadian, G., Takabi, D., Panzade, P., Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
-  { id: "c8", title: "A Comprehensive Model of AI Literacy from a Developmental Perspective", authors: "Haddadian, G., Bae, Y., Kim, J., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
-  { id: "c9", title: "Learning progress models using an AI-enabled knowledge representation", authors: "Kim, M., Kim, N., Haddadian, G., & Heidari, A.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["adaptive"] },
-  { id: "c10", title: "Impact of AI-based educational tool: Technology acceptance & metacognition", authors: "Bae, Y., Kim, J., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
-  { id: "c11", title: "Leveraging ML to evaluate cognitive engagement in online discussions", authors: "Kim, J., Bae, Y., Haddadian, G., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["feedback"] },
-  { id: "c12", title: "AI-augmented summarization: Impact on adult learners' concept learning", authors: "Kim, J., Bae, Y., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
+  { id: "c1", title: "Supporting peer feedback provision and uptake with GenAI", authors: "Noroozi, O., Haddadian, G., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["feedback", "humanai"] },
+  { id: "c2", title: "Automated Generation of Expert Models with Generative AI", authors: "Haddadian, G., Han, H., Kim, M., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["humanai", "adaptive"] },
+  { id: "c3", title: "Evaluating Private AI Curriculum in CS Education", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "ICLS 2024", year: "2024", type: "conference", strands: ["humanai"] },
+  { id: "c4", title: "ELT Teachers' Online Self-efficacy: Does Agency Matter?", authors: "Haddadian, G., & Haddadian, N.", venue: "SITE 2024", year: "2024", type: "conference", strands: ["writing", "humanai"] },
+  { id: "c5", title: "Impact of AI-Enabled Personalized Recommendations on L2 Learners", authors: "Daneshvar Ghorbani, B., & Haddadian, G.", venue: "AIRiAL 2024, Columbia University", year: "2024", type: "conference", strands: ["adaptive", "writing", "humanai"] },
+  { id: "c6", title: "Knowledge-based AI vs. Human Evaluation in Academic Summary", authors: "Kim, J., Haddadian, G., & Kim, M.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["feedback", "humanai"] },
+  { id: "c7", title: "Design Study of PCI for Private AI Curriculum Development", authors: "Haddadian, G., Takabi, D., Panzade, P., Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["humanai"] },
+  { id: "c8", title: "A Comprehensive Model of AI Literacy from a Developmental Perspective", authors: "Haddadian, G., Bae, Y., Kim, J., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["humanai", "adaptive"] },
+  { id: "c9", title: "Learning progress models using an AI-enabled knowledge representation", authors: "Kim, M., Kim, N., Haddadian, G., & Heidari, A.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["adaptive", "humanai"] },
+  { id: "c10", title: "Impact of AI-based educational tool: Technology acceptance & metacognition", authors: "Bae, Y., Kim, J., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive", "humanai"] },
+  { id: "c11", title: "Leveraging ML to evaluate cognitive engagement in online discussions", authors: "Kim, J., Bae, Y., Haddadian, G., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["humanai", "feedback"] },
+  { id: "c12", title: "AI-augmented summarization: Impact on adult learners' concept learning", authors: "Kim, J., Bae, Y., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive", "humanai"] },
   { id: "c13", title: "Effect of Mind Mapping on EFL Learners' Self-efficacy in Vocabulary", authors: "Radmanesh, S., Haddadian, G.", venue: "WEI-ETL Barcelona 2020", year: "2020", type: "conference", strands: ["adaptive", "writing"] },
   { id: "c14", title: "Computer-Adaptive Prototype to Measure Written Receptive Vocabulary", authors: "Haddadian, G., Salehi, M.", venue: "Sharif University of Technology", year: "2015", type: "conference", strands: ["adaptive", "writing"] },
   { id: "r1", title: "Learners' Collaboration in Using AI-generated Feedback & Argumentative Writing", authors: "Haddadian, G., Haddadian, M.", venue: "Computer Assisted Language Learning", year: "2025", type: "underreview", strands: ["feedback", "writing"] },
-  { id: "r2", title: "Scaffolding Value of GenAI during Peer Feedback Provision and Uptake", authors: "Noroozi, O., Haddadian, G., et al.", venue: "Int. J. Educational Technology in Higher Ed.", year: "2025", type: "underreview", strands: ["feedback"] },
-  { id: "r3", title: "Promoting EFL Teachers' Self-Directed Professional Development", authors: "Mashhadi, F., Haddadian, G., et al.", venue: "Journal of Language and Education", year: "2025", type: "underreview", strands: ["writing"] },
+  { id: "r2", title: "Scaffolding Value of GenAI during Peer Feedback Provision and Uptake", authors: "Noroozi, O., Haddadian, G., et al.", venue: "Int. J. Educational Technology in Higher Ed.", year: "2025", type: "underreview", strands: ["feedback", "humanai"] },
+  { id: "r3", title: "Promoting EFL Teachers' Self-Directed Professional Development", authors: "Mashhadi, F., Haddadian, G., et al.", venue: "Journal of Language and Education", year: "2025", type: "underreview", strands: ["humanai", "writing"] },
   { id: "r4", title: "Exploring Classroom Interactions in Iranian EFL Classrooms", authors: "Kavoshian, S., Mashhadi, F., Haddadian, G.", venue: "Int. J. Language Studies", year: "2025", type: "underreview", strands: ["feedback", "writing"] },
   { id: "p1", title: "Systematic Review of AWE in Argumentative Writing for EFL Education", authors: "Haddadian, G., Kim, M., Haddadian, N.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["writing", "feedback"] },
-  { id: "p2", title: "RITA: Real-time Intelligent Technology for Argumentative Writing (DBR)", authors: "Haddadian, G., Kim, M.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["writing", "adaptive", "feedback"] },
-  { id: "p3", title: "GenAI to Facilitate Peer Feedback: Opportunities and Challenges", authors: "Alqassab, M., Noroozi, O., Haddadian, G., et al.", venue: "Book Chapter", year: "2025", type: "inprogress", strands: ["feedback"] },
-  { id: "p4", title: "Students' Plagiarism Behaviors within AI-Enabled Introductory Physics", authors: "Han, H., Haddadian, G., et al.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["adaptive"] },
-  { id: "p5", title: "GenAI for Automated Construction and Evaluation of Expert Models", authors: "Han, H., Kim, M., Haddadian, G.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["adaptive"] },
+  { id: "p2", title: "RITA: Real-time Intelligent Technology for Argumentative Writing (DBR)", authors: "Haddadian, G., Kim, M.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["writing", "adaptive", "humanai", "feedback"] },
+  { id: "p3", title: "GenAI to Facilitate Peer Feedback: Opportunities and Challenges", authors: "Alqassab, M., Noroozi, O., Haddadian, G., et al.", venue: "Book Chapter", year: "2025", type: "inprogress", strands: ["feedback", "humanai"] },
+  { id: "p4", title: "Students' Plagiarism Behaviors within AI-Enabled Introductory Physics", authors: "Han, H., Haddadian, G., et al.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["humanai"] },
+  { id: "p5", title: "GenAI for Automated Construction and Evaluation of Expert Models", authors: "Han, H., Kim, M., Haddadian, G.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["humanai", "adaptive"] },
   { id: "p6", title: "Examining Learner's Evaluative Judgment Supported by Technology-Enabled Feedback", authors: "Heidari, A., Kim, M., et al., Haddadian, G.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["feedback", "adaptive"] },
 ];
 
@@ -89,14 +92,15 @@ const FILTER_OPTIONS: { label: string; value: WorkType | "all" }[] = [
   { label: "In Progress", value: "inprogress" },
 ];
 
-const W = 800, H = 750;
-const CX = 400, CY = 380;
-const RING_RADII = [85, 170, 240];
+const W = 900, H = 800;
+const CX = 450, CY = 400;
+const RING_RADII = [85, 170, 260];
 
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: 80, anchor: "middle" },
-  feedback: { angle: 30, labelX: CX + 230, labelY: CY + 145, anchor: "middle" },
-  writing: { angle: 150, labelX: CX - 230, labelY: CY + 145, anchor: "middle" },
+  adaptive: { angle: -90, labelX: CX, labelY: 55, anchor: "middle" },
+  feedback: { angle: 0, labelX: 750, labelY: CY - 10, anchor: "start" },
+  humanai: { angle: 90, labelX: CX, labelY: H - 50, anchor: "middle" },
+  writing: { angle: 180, labelX: 150, labelY: CY - 10, anchor: "end" },
 };
 
 function getDotPosition(pub: Publication): { x: number; y: number } {
@@ -331,36 +335,54 @@ const ResearchStrands = () => {
   const isStrandHighlighted = (strandId: StrandId) => !hoveredStrand || hoveredStrand === strandId;
 
   const ellipseParams: Record<StrandId, { cx: number; cy: number; rx: number; ry: number }> = {
-    adaptive: { cx: CX, cy: CY - 75, rx: 215, ry: 185 },
-    feedback: { cx: CX + 95, cy: CY + 50, rx: 200, ry: 185 },
-    writing: { cx: CX - 95, cy: CY + 50, rx: 200, ry: 185 },
+    adaptive: { cx: CX, cy: CY - 130, rx: 250, ry: 260 },
+    feedback: { cx: CX + 150, cy: CY, rx: 270, ry: 220 },
+    humanai: { cx: CX, cy: CY + 130, rx: 250, ry: 260 },
+    writing: { cx: CX - 150, cy: CY, rx: 270, ry: 220 },
   };
 
   return (
     <div>
-      {/* Section header */}
-      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 tracking-[0.15em] uppercase text-foreground/90">
-        Research Strands
-      </h2>
-      <p className="text-sm text-muted-foreground mb-6 max-w-2xl leading-relaxed">
-        My work moves across three interconnected strands. Hover over each area to see how they relate:
+      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Research Strands</h2>
+      <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
+        My work moves across four interconnected strands with <strong>AI in Education</strong> as the shared foundation.
+        Hover over each area to highlight it. Click any dot to see the publication details.
       </p>
 
-      {/* Filter pills */}
-      <div className="flex justify-center gap-2 mb-8 flex-wrap">
+      {/* Strand counts */}
+      <div className="flex flex-wrap justify-center gap-3 mb-5">
+        {(Object.keys(STRANDS) as StrandId[]).map((sid) => (
+          <button
+            key={sid}
+            onMouseEnter={() => setHoveredStrand(sid)}
+            onMouseLeave={() => setHoveredStrand(null)}
+            className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border"
+            style={{
+              borderColor: STRANDS[sid].color,
+              color: hoveredStrand === sid ? "white" : STRANDS[sid].color,
+              backgroundColor: hoveredStrand === sid ? STRANDS[sid].color : "transparent",
+            }}
+          >
+            {STRANDS[sid].label.replace("\n", " ")} ({countByStrand(sid)})
+          </button>
+        ))}
+      </div>
+
+      {/* Filters */}
+      <div className="flex justify-center gap-2 mb-6 flex-wrap">
         {FILTER_OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => setFilter(opt.value)}
-            className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border ${
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
               filter === opt.value
-                ? "bg-foreground text-background border-foreground"
-                : "bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground"
+                ? "bg-primary text-primary-foreground border-primary"
+                : "bg-background text-muted-foreground border-border hover:border-primary/50"
             }`}
           >
             {opt.label}
             {opt.value !== "all" && (
-              <span className="ml-1 opacity-60">
+              <span className="ml-1 opacity-70">
                 ({PUBLICATIONS.filter((p) => p.type === opt.value).length})
               </span>
             )}
@@ -369,7 +391,7 @@ const ResearchStrands = () => {
       </div>
 
       {/* SVG Visualization */}
-      <div className="relative max-w-[780px] mx-auto select-none">
+      <div className="relative max-w-[860px] mx-auto select-none">
         <svg
           ref={svgRef}
           viewBox={`0 0 ${W} ${H}`}
@@ -378,96 +400,105 @@ const ResearchStrands = () => {
         >
           <defs>
             <filter id="dot-shadow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="b" />
-              <feOffset dy="1" result="o" />
-              <feFlood floodOpacity="0.1" result="c" />
+              <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b" />
+              <feOffset dy="2" result="o" />
+              <feFlood floodOpacity="0.12" result="c" />
               <feComposite in="c" in2="o" operator="in" result="s" />
               <feMerge>
                 <feMergeNode in="s" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            {/* Soft radial gradients — pastel fills */}
-            <radialGradient id="grad-adaptive" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.7" />
-              <stop offset="60%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.45" />
-              <stop offset="100%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.12" />
+            <radialGradient id="grad-adaptive" cx="50%" cy="35%" r="70%">
+              <stop offset="0%" stopColor="hsl(172,66%,50%)" stopOpacity="0.65" />
+              <stop offset="50%" stopColor="hsl(172,66%,40%)" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="hsl(172,66%,30%)" stopOpacity="0.08" />
             </radialGradient>
-            <radialGradient id="grad-feedback" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor={STRANDS.feedback.fill} stopOpacity="0.7" />
-              <stop offset="60%" stopColor={STRANDS.feedback.fill} stopOpacity="0.45" />
-              <stop offset="100%" stopColor={STRANDS.feedback.fill} stopOpacity="0.12" />
+            <radialGradient id="grad-feedback" cx="35%" cy="50%" r="70%">
+              <stop offset="0%" stopColor="hsl(263,70%,65%)" stopOpacity="0.65" />
+              <stop offset="50%" stopColor="hsl(263,70%,55%)" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="hsl(263,70%,50%)" stopOpacity="0.08" />
             </radialGradient>
-            <radialGradient id="grad-writing" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor={STRANDS.writing.fill} stopOpacity="0.7" />
-              <stop offset="60%" stopColor={STRANDS.writing.fill} stopOpacity="0.45" />
-              <stop offset="100%" stopColor={STRANDS.writing.fill} stopOpacity="0.12" />
+            <radialGradient id="grad-humanai" cx="50%" cy="65%" r="70%">
+              <stop offset="0%" stopColor="hsl(24,85%,63%)" stopOpacity="0.65" />
+              <stop offset="50%" stopColor="hsl(24,85%,53%)" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="hsl(24,85%,48%)" stopOpacity="0.08" />
+            </radialGradient>
+            <radialGradient id="grad-writing" cx="65%" cy="50%" r="70%">
+              <stop offset="0%" stopColor="hsl(205,80%,53%)" stopOpacity="0.65" />
+              <stop offset="50%" stopColor="hsl(205,80%,43%)" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="hsl(205,80%,33%)" stopOpacity="0.08" />
             </radialGradient>
           </defs>
 
-          {/* Venn ellipses — soft pastel, layered */}
+          {/* Methodological foundation - subtle text labels outside the visualization */}
+          <text x={CX} y={28} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
+            DESIGN-BASED RESEARCH (DBR)
+          </text>
+          <line x1={CX - 160} y1={34} x2={CX - 40} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
+          <line x1={CX + 40} y1={34} x2={CX + 160} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
+          {/* Mixed Methods label moved below SVG to avoid overlap */}
+
+          <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" strokeDasharray="8 5" opacity={0.5} />
+
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const e = ellipseParams[sid];
-            const highlighted = isStrandHighlighted(sid);
             return (
-              <ellipse key={sid}
-                cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
+              <ellipse key={sid} cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
                 fill={`url(#grad-${sid})`}
-                opacity={highlighted ? 1 : 0.25}
-                style={{ transition: "opacity 0.5s ease" }}
+                opacity={isStrandHighlighted(sid) ? 0.75 : 0.15}
+                style={{ transition: "opacity 0.5s", pointerEvents: "none" }}
               />
             );
           })}
 
-          {/* Subtle dashed connection lines from center to strand direction */}
+          {RING_RADII.map((r, i) => (
+            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.4} />
+          ))}
+
           {(Object.keys(STRAND_POSITIONS) as StrandId[]).map((sid) => {
             const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
-            const endR = 130;
             return (
-              <line key={sid}
-                x1={CX} y1={CY}
-                x2={CX + endR * Math.cos(angle)} y2={CY + endR * Math.sin(angle)}
-                stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="4 6"
-                opacity={isStrandHighlighted(sid) ? 0.12 : 0.04}
-                style={{ transition: "opacity 0.5s ease" }}
+              <line key={sid} x1={CX} y1={CY} x2={CX + RING_RADII[2] * Math.cos(angle)} y2={CY + RING_RADII[2] * Math.sin(angle)}
+                stroke="hsl(var(--border))" strokeWidth="0.8"
+                opacity={isStrandHighlighted(sid) ? 0.6 : 0.15}
+                style={{ transition: "opacity 0.5s" }}
               />
             );
           })}
 
-          {/* Center label — clean, simple */}
-          <text x={CX} y={CY - 8} textAnchor="middle" fontSize="12" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.7}>
-            AI × Education
-          </text>
-          <text x={CX} y={CY + 8} textAnchor="middle" fontSize="9" fill="hsl(var(--muted-foreground))" opacity={0.5} fontStyle="italic">
-            Shared foundation
-          </text>
+          {/* Spoke lines removed for cleaner visualization */}
 
-          {/* Strand labels — inside the ellipses, colored */}
+          <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
+          <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
+          <text x={CX} y={CY + 10} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>Education</text>
+
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const pos = STRAND_POSITIONS[sid];
             const strand = STRANDS[sid];
             const lines = strand.label.split("\n");
+            const isHovered = hoveredStrand === sid;
             const subtitleLines = strand.subtitle ? strand.subtitle.split("\n") : [];
             return (
               <g key={`lbl-${sid}`}
-                style={{ opacity: isStrandHighlighted(sid) ? 1 : 0.2, transition: "opacity 0.5s ease", cursor: "pointer" }}
+                style={{ opacity: isStrandHighlighted(sid) ? 1 : 0.25, transition: "opacity 0.5s", cursor: "pointer" }}
                 onMouseEnter={() => setHoveredStrand(sid)}
                 onMouseLeave={() => setHoveredStrand(null)}
               >
                 {lines.map((line, li) => (
-                  <text key={li} x={pos.labelX} y={pos.labelY + li * 18} textAnchor={pos.anchor}
-                    fontSize="13" fontWeight="700" fill={strand.color}>{line}</text>
+                  <text key={li} x={pos.labelX} y={pos.labelY + li * 22} textAnchor={pos.anchor} fontSize="16" fontWeight="800" fill={strand.color}>{line}</text>
                 ))}
                 {subtitleLines.length > 0 && subtitleLines[0] !== "" && subtitleLines.map((subLine, si) => (
                   <text
                     key={`sub-${si}`}
                     x={pos.labelX}
-                    y={pos.labelY + lines.length * 18 + 4 + si * 12}
+                    y={pos.labelY + lines.length * 22 + 6 + si * 14}
                     textAnchor={pos.anchor}
-                    fontSize="9"
+                    fontSize="11"
                     fill={strand.color}
-                    opacity={0.6}
+                    opacity={isHovered ? 0.7 : 0}
                     fontStyle="italic"
+                    style={{ transition: "opacity 0.3s ease" }}
                   >
                     {subLine}
                   </text>
@@ -476,45 +507,40 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Publication dots — clean white with colored border */}
           {filteredPubs.map((pub) => {
             const pos = getPos(pub);
             const color = getStrandColor(pub, pos);
             const isHovered = hoveredDot?.pub.id === pub.id;
             const isDragging = dragState.current.id === pub.id;
             const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
-            const active = isHovered || isDragging;
             return (
               <g key={pub.id}
-                style={{ opacity: strandMatch ? 1 : 0.12, transition: "opacity 0.4s ease", cursor: isDragging ? "grabbing" : "grab" }}
+                style={{ opacity: strandMatch ? 1 : 0.15, transition: "opacity 0.35s", cursor: isDragging ? "grabbing" : "grab" }}
                 onPointerDown={(e) => handlePointerDown(pub, e)}
                 onPointerMove={handlePointerMove}
                 onPointerUp={() => handlePointerUp(pub)}
                 onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
                 onMouseLeave={() => setHoveredDot(null)}
               >
-                {/* Simple white dot with colored stroke */}
-                <circle cx={pos.x} cy={pos.y} r={active ? 10 : 7}
-                  fill="hsl(var(--background))"
-                  stroke={color} strokeWidth={active ? 2.5 : 2}
-                  filter="url(#dot-shadow)"
-                  style={{ transition: "r 0.2s ease" }}
-                />
+                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 16 : 4} fill={color} opacity={isHovered || isDragging ? 0.15 : 0.3}>
+                  <animate attributeName="r" values={isHovered || isDragging ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite" />
+                </circle>
+                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered || isDragging ? 3 : 2.5} filter="url(#dot-shadow)" />
+                <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />
               </g>
             );
           })}
         </svg>
 
-        {/* Hover tooltip */}
         <AnimatePresence>
           {hoveredDot && (() => {
             const livePos = positions.current.get(hoveredDot.pub.id) || hoveredDot;
             return (
               <motion.div
-                initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-                className="absolute pointer-events-none z-10 bg-popover/95 backdrop-blur-sm text-popover-foreground border border-border/40 rounded-lg shadow-xl px-3 py-2.5 max-w-[280px]"
-                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 4}%`, transform: "translate(-50%, -100%)" }}
+                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
+                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
               >
                 <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
                 <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
@@ -524,14 +550,31 @@ const ResearchStrands = () => {
         </AnimatePresence>
       </div>
 
+      {/* Mixed Methods label below visualization */}
+      <div className="flex items-center justify-center gap-3 mt-2 mb-4">
+        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
+        <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
+        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
+      </div>
+
       {/* Legend */}
-      <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground/70">
-        {(["journal", "conference", "underreview", "inprogress"] as WorkType[]).map((type) => (
-          <span key={type} className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full border-2 border-current" />
-            {TYPE_LABELS[type]}
-          </span>
-        ))}
+      <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground">
+        <span className="flex items-center gap-1.5">
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          Journal
+        </span>
+        <span className="flex items-center gap-1.5">
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          Conference
+        </span>
+        <span className="flex items-center gap-1.5">
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          Under Review
+        </span>
+        <span className="flex items-center gap-1.5">
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          In Progress
+        </span>
       </div>
 
       {/* Modal */}
@@ -543,28 +586,27 @@ const ResearchStrands = () => {
             onClick={() => setSelectedPub(null)}
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="bg-card text-card-foreground border border-border/50 rounded-xl shadow-2xl max-w-lg w-full p-6 relative"
+              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-card text-card-foreground border border-border rounded-xl shadow-2xl max-w-lg w-full p-6 relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={() => setSelectedPub(null)} className="absolute top-3 right-3 text-muted-foreground/40 hover:text-foreground transition-colors">
-                <X className="h-4 w-4" />
+              <button onClick={() => setSelectedPub(null)} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors">
+                <X className="h-5 w-5" />
               </button>
               <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
                   {TYPE_LABELS[selectedPub.type]}
                 </span>
                 {selectedPub.strands.map((s) => (
-                  <span key={s} className="px-2.5 py-0.5 rounded-full text-[10px] font-medium border" style={{ borderColor: STRANDS[s].color, color: STRANDS[s].color }}>
+                  <span key={s} className="px-2.5 py-0.5 rounded-full text-xs font-medium border" style={{ borderColor: STRANDS[s].color, color: STRANDS[s].color }}>
                     {STRANDS[s].label.replace("\n", " ")}
                   </span>
                 ))}
               </div>
-              <h3 className="text-base font-bold mb-2 leading-snug">{selectedPub.title}</h3>
+              <h3 className="text-lg font-bold mb-2 leading-tight">{selectedPub.title}</h3>
               <p className="text-sm text-muted-foreground mb-1">{selectedPub.authors}</p>
-              <p className="text-sm text-muted-foreground/70">
-                <span className="font-medium text-muted-foreground">{selectedPub.venue}</span> · {selectedPub.year}
+              <p className="text-sm text-muted-foreground">
+                <span className="font-medium">{selectedPub.venue}</span> · {selectedPub.year}
               </p>
             </motion.div>
           </motion.div>
