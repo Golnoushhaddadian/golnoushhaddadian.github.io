@@ -394,97 +394,132 @@ const ResearchStrands = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
+            {/* Refined shadow for dots */}
             <filter id="dot-shadow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b" />
-              <feOffset dy="2" result="o" />
-              <feFlood floodOpacity="0.12" result="c" />
+              <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="b" />
+              <feOffset dy="1.5" result="o" />
+              <feFlood floodOpacity="0.18" result="c" />
               <feComposite in="c" in2="o" operator="in" result="s" />
               <feMerge>
                 <feMergeNode in="s" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
+            {/* Glow filter for center hub */}
+            <filter id="hub-glow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="glow" />
+              <feFlood floodColor="hsl(220, 60%, 60%)" floodOpacity="0.15" />
+              <feComposite in2="glow" operator="in" result="glowColor" />
+              <feMerge>
+                <feMergeNode in="glowColor" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            {/* Radial gradients for each ellipse — inner glow fading to edge */}
+            <radialGradient id="grad-adaptive" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="hsl(165, 55%, 50%)" stopOpacity="0.28" />
+              <stop offset="55%" stopColor="hsl(165, 50%, 45%)" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="hsl(165, 45%, 40%)" stopOpacity="0.04" />
+            </radialGradient>
+            <radialGradient id="grad-feedback" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="hsl(270, 60%, 62%)" stopOpacity="0.28" />
+              <stop offset="55%" stopColor="hsl(270, 55%, 58%)" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="hsl(270, 50%, 50%)" stopOpacity="0.04" />
+            </radialGradient>
+            <radialGradient id="grad-writing" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="hsl(210, 70%, 52%)" stopOpacity="0.28" />
+              <stop offset="55%" stopColor="hsl(210, 65%, 48%)" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="hsl(210, 60%, 42%)" stopOpacity="0.04" />
+            </radialGradient>
           </defs>
 
-          {/* Methodological foundation - subtle text labels outside the visualization */}
-          <text x={CX} y={28} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
+          {/* Subtle methodological label */}
+          <text x={CX} y={28} textAnchor="middle" fontSize="9" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.25} letterSpacing="5" fontFamily="inherit">
             DESIGN-BASED RESEARCH (DBR)
           </text>
-          <line x1={CX - 160} y1={34} x2={CX - 40} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
-          <line x1={CX + 40} y1={34} x2={CX + 160} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
-          {/* Mixed Methods label moved below SVG to avoid overlap */}
+          <line x1={CX - 155} y1={34} x2={CX - 45} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="4 6" opacity={0.1} />
+          <line x1={CX + 45} y1={34} x2={CX + 155} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="4 6" opacity={0.1} />
 
-          <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" strokeDasharray="8 5" opacity={0.5} />
+          {/* Outer boundary — very subtle */}
+          <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.3" strokeDasharray="6 8" opacity={0.3} />
 
-          {/* Venn diagram ellipses with blend mode for real intersections */}
-          <g style={{ isolation: "isolate" }}>
-            {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
-              const e = ellipseParams[sid];
-              const colors: Record<StrandId, string> = {
-                adaptive: "hsl(172,66%,40%)",
-                feedback: "hsl(263,70%,55%)",
-                writing: "hsl(205,80%,45%)",
-              };
-              return (
-                <ellipse key={sid} cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
-                  fill={colors[sid]}
-                  fillOpacity={isStrandHighlighted(sid) ? 0.22 : 0.05}
-                  stroke={colors[sid]}
-                  strokeWidth="1.5"
-                  strokeOpacity={isStrandHighlighted(sid) ? 0.35 : 0.1}
-                  style={{ transition: "fill-opacity 0.5s, stroke-opacity 0.5s", mixBlendMode: "screen", pointerEvents: "none" }}
+          {/* Venn ellipses with radial gradients — NO blend mode, just layered opacity */}
+          {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
+            const e = ellipseParams[sid];
+            const highlighted = isStrandHighlighted(sid);
+            return (
+              <g key={sid}>
+                {/* Soft fill */}
+                <ellipse
+                  cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
+                  fill={`url(#grad-${sid})`}
+                  opacity={highlighted ? 1 : 0.2}
+                  style={{ transition: "opacity 0.6s ease" }}
                 />
-              );
-            })}
-          </g>
+                {/* Refined stroke */}
+                <ellipse
+                  cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
+                  fill="none"
+                  stroke={STRANDS[sid].color}
+                  strokeWidth={highlighted ? 1.2 : 0.6}
+                  strokeOpacity={highlighted ? 0.5 : 0.12}
+                  style={{ transition: "stroke-width 0.6s ease, stroke-opacity 0.6s ease" }}
+                />
+              </g>
+            );
+          })}
 
+          {/* Concentric reference rings — refined */}
           {RING_RADII.map((r, i) => (
-            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.4} />
+            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--foreground))" strokeWidth="0.4" strokeDasharray="3 8" opacity={0.08} />
           ))}
 
+          {/* Axis lines — very subtle */}
           {(Object.keys(STRAND_POSITIONS) as StrandId[]).map((sid) => {
             const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
             return (
               <line key={sid} x1={CX} y1={CY} x2={CX + RING_RADII[2] * Math.cos(angle)} y2={CY + RING_RADII[2] * Math.sin(angle)}
-                stroke="hsl(var(--border))" strokeWidth="0.8"
-                opacity={isStrandHighlighted(sid) ? 0.6 : 0.15}
-                style={{ transition: "opacity 0.5s" }}
+                stroke="hsl(var(--foreground))" strokeWidth="0.4"
+                opacity={isStrandHighlighted(sid) ? 0.12 : 0.04}
+                style={{ transition: "opacity 0.6s ease" }}
               />
             );
           })}
 
-          {/* Spoke lines removed for cleaner visualization */}
+          {/* Center hub — frosted glass effect */}
+          <circle cx={CX} cy={CY} r={44} fill="hsl(var(--background))" opacity={0.85} filter="url(#hub-glow)" />
+          <circle cx={CX} cy={CY} r={44} fill="none" stroke="hsl(var(--foreground))" strokeWidth="0.8" opacity={0.15} />
+          <text x={CX} y={CY - 5} textAnchor="middle" fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.8} letterSpacing="0.5">AI in</text>
+          <text x={CX} y={CY + 11} textAnchor="middle" fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.8} letterSpacing="0.5">Education</text>
 
-          <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
-          <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
-          <text x={CX} y={CY + 10} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>Education</text>
-
+          {/* Strand labels — refined typography */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const pos = STRAND_POSITIONS[sid];
             const strand = STRANDS[sid];
             const lines = strand.label.split("\n");
-            const isHovered = hoveredStrand === sid;
             const subtitleLines = strand.subtitle ? strand.subtitle.split("\n") : [];
             return (
               <g key={`lbl-${sid}`}
-                style={{ opacity: isStrandHighlighted(sid) ? 1 : 0.25, transition: "opacity 0.5s", cursor: "pointer" }}
+                style={{ opacity: isStrandHighlighted(sid) ? 1 : 0.2, transition: "opacity 0.6s ease", cursor: "pointer" }}
                 onMouseEnter={() => setHoveredStrand(sid)}
                 onMouseLeave={() => setHoveredStrand(null)}
               >
                 {lines.map((line, li) => (
-                  <text key={li} x={pos.labelX} y={pos.labelY + li * 22} textAnchor={pos.anchor} fontSize="16" fontWeight="800" fill={strand.color}>{line}</text>
+                  <text key={li} x={pos.labelX} y={pos.labelY + li * 20} textAnchor={pos.anchor}
+                    fontSize="14" fontWeight="700" fill={strand.colorLight} letterSpacing="0.3">{line}</text>
                 ))}
                 {subtitleLines.length > 0 && subtitleLines[0] !== "" && subtitleLines.map((subLine, si) => (
                   <text
                     key={`sub-${si}`}
                     x={pos.labelX}
-                    y={pos.labelY + lines.length * 22 + 6 + si * 14}
+                    y={pos.labelY + lines.length * 20 + 5 + si * 13}
                     textAnchor={pos.anchor}
-                    fontSize="11"
-                    fill={strand.color}
-                    opacity={0.7}
+                    fontSize="9.5"
+                    fill={strand.colorLight}
+                    opacity={0.55}
                     fontStyle="italic"
-                    style={{ transition: "opacity 0.3s ease" }}
+                    letterSpacing="0.2"
+                    style={{ transition: "opacity 0.4s ease" }}
                   >
                     {subLine}
                   </text>
@@ -493,27 +528,35 @@ const ResearchStrands = () => {
             );
           })}
 
+          {/* Publication dots — refined styling */}
           {filteredPubs.map((pub) => {
             const pos = getPos(pub);
             const color = getStrandColor(pub, pos);
             const isHovered = hoveredDot?.pub.id === pub.id;
             const isDragging = dragState.current.id === pub.id;
             const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
+            const active = isHovered || isDragging;
             return (
               <g key={pub.id}
-                style={{ opacity: strandMatch ? 1 : 0.15, transition: "opacity 0.35s", cursor: isDragging ? "grabbing" : "grab" }}
+                style={{ opacity: strandMatch ? 1 : 0.1, transition: "opacity 0.4s ease", cursor: isDragging ? "grabbing" : "grab" }}
                 onPointerDown={(e) => handlePointerDown(pub, e)}
                 onPointerMove={handlePointerMove}
                 onPointerUp={() => handlePointerUp(pub)}
                 onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
                 onMouseLeave={() => setHoveredDot(null)}
               >
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 16 : 4} fill={color} opacity={isHovered || isDragging ? 0.15 : 0.3}>
-                  <animate attributeName="r" values={isHovered || isDragging ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite" />
+                {/* Soft glow ring */}
+                <circle cx={pos.x} cy={pos.y} r={active ? 18 : 12} fill={color} opacity={active ? 0.12 : 0.06}>
+                  {!active && <animate attributeName="opacity" values="0.06;0.1;0.06" dur="4s" repeatCount="indefinite" />}
                 </circle>
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered || isDragging ? 3 : 2.5} filter="url(#dot-shadow)" />
-                <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />
+                {/* Main dot — glass-like */}
+                <circle cx={pos.x} cy={pos.y} r={active ? 10 : 7}
+                  fill="hsl(var(--background))" fillOpacity={0.7}
+                  stroke={color} strokeWidth={active ? 2.5 : 1.8}
+                  filter="url(#dot-shadow)"
+                />
+                {/* Inner marker */}
+                <circle cx={pos.x} cy={pos.y} r={active ? 3 : 2} fill={color} opacity={0.6} />
               </g>
             );
           })}
@@ -524,12 +567,13 @@ const ResearchStrands = () => {
             const livePos = positions.current.get(hoveredDot.pub.id) || hoveredDot;
             return (
               <motion.div
-                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
-                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
+                initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute pointer-events-none z-10 bg-popover/95 backdrop-blur-md text-popover-foreground border border-border/50 rounded-xl shadow-2xl px-4 py-3 max-w-[300px]"
+                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 5}%`, transform: "translate(-50%, -100%)" }}
               >
-                <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
-                <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
+                <p className="text-xs font-semibold leading-tight mb-1.5">{hoveredDot.pub.title}</p>
+                <p className="text-[10px] text-muted-foreground leading-snug">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
               </motion.div>
             );
           })()}
@@ -537,30 +581,20 @@ const ResearchStrands = () => {
       </div>
 
       {/* Mixed Methods label below visualization */}
-      <div className="flex items-center justify-center gap-3 mt-2 mb-4">
-        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
-        <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
-        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
+      <div className="flex items-center justify-center gap-3 mt-3 mb-4">
+        <div className="h-px w-20" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.1), transparent)" }} />
+        <span className="text-[9px] font-semibold tracking-[5px] text-foreground/20 uppercase">Mixed Methods</span>
+        <div className="h-px w-20" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.1), transparent)" }} />
       </div>
 
-      {/* Legend */}
-      <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground">
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
-          Journal
-        </span>
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
-          Conference
-        </span>
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
-          Under Review
-        </span>
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
-          In Progress
-        </span>
+      {/* Legend — minimal */}
+      <div className="flex justify-center gap-8 mt-4 flex-wrap text-[11px] text-muted-foreground/60">
+        {(["journal", "conference", "underreview", "inprogress"] as WorkType[]).map((type) => (
+          <span key={type} className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full border border-current opacity-60" />
+            {TYPE_LABELS[type]}
+          </span>
+        ))}
       </div>
 
       {/* Modal */}
