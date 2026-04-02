@@ -90,15 +90,16 @@ const FILTER_OPTIONS: { label: string; value: WorkType | "all" }[] = [
   { label: "In Progress", value: "inprogress" },
 ];
 
-const W = 900, H = 800;
+const W = 900, H = 820;
 const CX = 450, CY = 420;
 const RING_RADII = [85, 170, 260];
 
 // Triangular layout: adaptive top, writing bottom-left, feedback bottom-right
+// Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: 55, anchor: "middle" },
-  writing: { angle: 210, labelX: 130, labelY: H - 60, anchor: "start" },
-  feedback: { angle: 330, labelX: 770, labelY: H - 60, anchor: "end" },
+  adaptive: { angle: -90, labelX: CX, labelY: 120, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 180, labelY: 640, anchor: "middle" },
+  feedback: { angle: 330, labelX: CX + 180, labelY: 640, anchor: "middle" },
 };
 
 function getDotPosition(pub: Publication): { x: number; y: number } {
@@ -411,12 +412,6 @@ const ResearchStrands = () => {
             </radialGradient>
           </defs>
 
-          {/* Methodological label */}
-          <text x={CX} y={28} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
-            DESIGN-BASED RESEARCH (DBR)
-          </text>
-          <line x1={CX - 160} y1={34} x2={CX - 40} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
-          <line x1={CX + 40} y1={34} x2={CX + 160} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
 
           {/* Three circles */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
@@ -430,22 +425,8 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Concentric guide rings */}
-          {RING_RADII.map((r, i) => (
-            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.3} />
-          ))}
 
-          {/* Axis lines */}
-          {(Object.keys(STRAND_POSITIONS) as StrandId[]).map((sid) => {
-            const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
-            return (
-              <line key={sid} x1={CX} y1={CY} x2={CX + RING_RADII[2] * Math.cos(angle)} y2={CY + RING_RADII[2] * Math.sin(angle)}
-                stroke="hsl(var(--border))" strokeWidth="0.8"
-                opacity={isStrandHighlighted(sid) ? 0.5 : 0.1}
-                style={{ transition: "opacity 0.5s" }}
-              />
-            );
-          })}
+
 
           {/* Peer connection lines */}
           {connectionLines.map(({ a, b }, i) => {
@@ -494,9 +475,8 @@ const ResearchStrands = () => {
                     textAnchor={pos.anchor}
                     fontSize="11"
                     fill={strand.color}
-                    opacity={isHovered ? 0.7 : 0}
+                    opacity={0.7}
                     fontStyle="italic"
-                    style={{ transition: "opacity 0.3s ease" }}
                   >
                     {subLine}
                   </text>
