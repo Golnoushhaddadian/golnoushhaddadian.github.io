@@ -483,7 +483,7 @@ const ResearchStrands = () => {
                     textAnchor={pos.anchor}
                     fontSize="11"
                     fill={strand.color}
-                    opacity={isHovered ? 0.7 : 0}
+                    opacity={0.7}
                     fontStyle="italic"
                     style={{ transition: "opacity 0.3s ease" }}
                   >
