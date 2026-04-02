@@ -90,15 +90,16 @@ const FILTER_OPTIONS: { label: string; value: WorkType | "all" }[] = [
   { label: "In Progress", value: "inprogress" },
 ];
 
-const W = 900, H = 800;
+const W = 900, H = 820;
 const CX = 450, CY = 420;
 const RING_RADII = [85, 170, 260];
 
 // Triangular layout: adaptive top, writing bottom-left, feedback bottom-right
+// Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: 55, anchor: "middle" },
-  writing: { angle: 210, labelX: 130, labelY: H - 60, anchor: "start" },
-  feedback: { angle: 330, labelX: 770, labelY: H - 60, anchor: "end" },
+  adaptive: { angle: -90, labelX: CX, labelY: 120, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 180, labelY: 640, anchor: "middle" },
+  feedback: { angle: 330, labelX: CX + 180, labelY: 640, anchor: "middle" },
 };
 
 function getDotPosition(pub: Publication): { x: number; y: number } {
