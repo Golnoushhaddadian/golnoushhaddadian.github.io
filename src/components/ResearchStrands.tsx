@@ -338,47 +338,29 @@ const ResearchStrands = () => {
 
   return (
     <div>
-      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 tracking-tight">Research Strands</h2>
-      <p className="text-xs sm:text-sm text-muted-foreground/70 mb-5 sm:mb-7 max-w-xl leading-relaxed">
-        My work moves across three interconnected strands with <strong className="text-foreground/90">AI in Education</strong> as the shared foundation.
-        Hover over each area to highlight it. Click any dot to see details.
+      {/* Section header */}
+      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 tracking-[0.15em] uppercase text-foreground/90">
+        Research Strands
+      </h2>
+      <p className="text-sm text-muted-foreground mb-6 max-w-2xl leading-relaxed">
+        My work moves across three interconnected strands. Hover over each area to see how they relate:
       </p>
 
-      {/* Strand counts — refined pills */}
-      <div className="flex flex-wrap justify-center gap-2.5 mb-5">
-        {(Object.keys(STRANDS) as StrandId[]).map((sid) => (
-          <button
-            key={sid}
-            onMouseEnter={() => setHoveredStrand(sid)}
-            onMouseLeave={() => setHoveredStrand(null)}
-            className="px-3.5 py-1.5 rounded-full text-[11px] font-medium transition-all duration-400 border backdrop-blur-sm"
-            style={{
-              borderColor: hoveredStrand === sid ? STRANDS[sid].colorLight : `${STRANDS[sid].color}40`,
-              color: hoveredStrand === sid ? "white" : STRANDS[sid].colorLight,
-              backgroundColor: hoveredStrand === sid ? `${STRANDS[sid].color}` : "transparent",
-              boxShadow: hoveredStrand === sid ? `0 4px 20px -4px ${STRANDS[sid].color}60` : "none",
-            }}
-          >
-            {STRANDS[sid].label.replace("\n", " ")} <span className="opacity-60 ml-0.5">({countByStrand(sid)})</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Filters — sleeker */}
-      <div className="flex justify-center gap-1.5 mb-7 flex-wrap">
+      {/* Filter pills */}
+      <div className="flex justify-center gap-2 mb-8 flex-wrap">
         {FILTER_OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => setFilter(opt.value)}
-            className={`px-3.5 py-1.5 rounded-full text-[11px] font-medium transition-all duration-300 border ${
+            className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border ${
               filter === opt.value
-                ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                : "bg-transparent text-muted-foreground/60 border-border/40 hover:border-border hover:text-muted-foreground"
+                ? "bg-foreground text-background border-foreground"
+                : "bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground"
             }`}
           >
             {opt.label}
             {opt.value !== "all" && (
-              <span className="ml-1 opacity-50">
+              <span className="ml-1 opacity-60">
                 ({PUBLICATIONS.filter((p) => p.type === opt.value).length})
               </span>
             )}
@@ -387,7 +369,7 @@ const ResearchStrands = () => {
       </div>
 
       {/* SVG Visualization */}
-      <div className="relative max-w-[860px] mx-auto select-none">
+      <div className="relative max-w-[780px] mx-auto select-none">
         <svg
           ref={svgRef}
           viewBox={`0 0 ${W} ${H}`}
@@ -395,105 +377,72 @@ const ResearchStrands = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            {/* Refined shadow for dots */}
             <filter id="dot-shadow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="b" />
-              <feOffset dy="1.5" result="o" />
-              <feFlood floodOpacity="0.18" result="c" />
+              <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="b" />
+              <feOffset dy="1" result="o" />
+              <feFlood floodOpacity="0.1" result="c" />
               <feComposite in="c" in2="o" operator="in" result="s" />
               <feMerge>
                 <feMergeNode in="s" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            {/* Glow filter for center hub */}
-            <filter id="hub-glow" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="glow" />
-              <feFlood floodColor="hsl(220, 60%, 60%)" floodOpacity="0.15" />
-              <feComposite in2="glow" operator="in" result="glowColor" />
-              <feMerge>
-                <feMergeNode in="glowColor" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            {/* Radial gradients for each ellipse — inner glow fading to edge */}
-            <radialGradient id="grad-adaptive" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="hsl(165, 55%, 50%)" stopOpacity="0.28" />
-              <stop offset="55%" stopColor="hsl(165, 50%, 45%)" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="hsl(165, 45%, 40%)" stopOpacity="0.04" />
+            {/* Soft radial gradients — pastel fills */}
+            <radialGradient id="grad-adaptive" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.55" />
+              <stop offset="70%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.3" />
+              <stop offset="100%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.08" />
             </radialGradient>
-            <radialGradient id="grad-feedback" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="hsl(270, 60%, 62%)" stopOpacity="0.28" />
-              <stop offset="55%" stopColor="hsl(270, 55%, 58%)" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="hsl(270, 50%, 50%)" stopOpacity="0.04" />
+            <radialGradient id="grad-feedback" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stopColor={STRANDS.feedback.fill} stopOpacity="0.55" />
+              <stop offset="70%" stopColor={STRANDS.feedback.fill} stopOpacity="0.3" />
+              <stop offset="100%" stopColor={STRANDS.feedback.fill} stopOpacity="0.08" />
             </radialGradient>
-            <radialGradient id="grad-writing" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="hsl(210, 70%, 52%)" stopOpacity="0.28" />
-              <stop offset="55%" stopColor="hsl(210, 65%, 48%)" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="hsl(210, 60%, 42%)" stopOpacity="0.04" />
+            <radialGradient id="grad-writing" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stopColor={STRANDS.writing.fill} stopOpacity="0.55" />
+              <stop offset="70%" stopColor={STRANDS.writing.fill} stopOpacity="0.3" />
+              <stop offset="100%" stopColor={STRANDS.writing.fill} stopOpacity="0.08" />
             </radialGradient>
           </defs>
 
-          {/* Subtle methodological label */}
-          <text x={CX} y={28} textAnchor="middle" fontSize="9" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.25} letterSpacing="5" fontFamily="inherit">
-            DESIGN-BASED RESEARCH (DBR)
-          </text>
-          <line x1={CX - 155} y1={34} x2={CX - 45} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="4 6" opacity={0.1} />
-          <line x1={CX + 45} y1={34} x2={CX + 155} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="4 6" opacity={0.1} />
-
-          {/* Outer boundary — very subtle */}
-          <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.3" strokeDasharray="6 8" opacity={0.3} />
-
-          {/* Venn ellipses with radial gradients — NO blend mode, just layered opacity */}
+          {/* Venn ellipses — soft pastel, layered */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const e = ellipseParams[sid];
             const highlighted = isStrandHighlighted(sid);
             return (
-              <g key={sid}>
-                {/* Soft fill */}
-                <ellipse
-                  cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
-                  fill={`url(#grad-${sid})`}
-                  opacity={highlighted ? 1 : 0.2}
-                  style={{ transition: "opacity 0.6s ease" }}
-                />
-                {/* Refined stroke */}
-                <ellipse
-                  cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
-                  fill="none"
-                  stroke={STRANDS[sid].color}
-                  strokeWidth={highlighted ? 1.2 : 0.6}
-                  strokeOpacity={highlighted ? 0.5 : 0.12}
-                  style={{ transition: "stroke-width 0.6s ease, stroke-opacity 0.6s ease" }}
-                />
-              </g>
-            );
-          })}
-
-          {/* Concentric reference rings — refined */}
-          {RING_RADII.map((r, i) => (
-            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--foreground))" strokeWidth="0.4" strokeDasharray="3 8" opacity={0.08} />
-          ))}
-
-          {/* Axis lines — very subtle */}
-          {(Object.keys(STRAND_POSITIONS) as StrandId[]).map((sid) => {
-            const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
-            return (
-              <line key={sid} x1={CX} y1={CY} x2={CX + RING_RADII[2] * Math.cos(angle)} y2={CY + RING_RADII[2] * Math.sin(angle)}
-                stroke="hsl(var(--foreground))" strokeWidth="0.4"
-                opacity={isStrandHighlighted(sid) ? 0.12 : 0.04}
-                style={{ transition: "opacity 0.6s ease" }}
+              <ellipse key={sid}
+                cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
+                fill={`url(#grad-${sid})`}
+                opacity={highlighted ? 1 : 0.25}
+                style={{ transition: "opacity 0.5s ease" }}
               />
             );
           })}
 
-          {/* Center hub — frosted glass effect */}
-          <circle cx={CX} cy={CY} r={44} fill="hsl(var(--background))" opacity={0.85} filter="url(#hub-glow)" />
-          <circle cx={CX} cy={CY} r={44} fill="none" stroke="hsl(var(--foreground))" strokeWidth="0.8" opacity={0.15} />
-          <text x={CX} y={CY - 5} textAnchor="middle" fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.8} letterSpacing="0.5">AI in</text>
-          <text x={CX} y={CY + 11} textAnchor="middle" fontSize="11" fontWeight="700" fill="hsl(var(--foreground))" opacity={0.8} letterSpacing="0.5">Education</text>
+          {/* Subtle dashed connection lines from center to strand direction */}
+          {(Object.keys(STRAND_POSITIONS) as StrandId[]).map((sid) => {
+            const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
+            const endR = 130;
+            return (
+              <line key={sid}
+                x1={CX} y1={CY}
+                x2={CX + endR * Math.cos(angle)} y2={CY + endR * Math.sin(angle)}
+                stroke="hsl(var(--foreground))" strokeWidth="0.5" strokeDasharray="4 6"
+                opacity={isStrandHighlighted(sid) ? 0.12 : 0.04}
+                style={{ transition: "opacity 0.5s ease" }}
+              />
+            );
+          })}
 
-          {/* Strand labels — refined typography */}
+          {/* Center label — clean, simple */}
+          <text x={CX} y={CY - 8} textAnchor="middle" fontSize="12" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.7}>
+            AI × Education
+          </text>
+          <text x={CX} y={CY + 8} textAnchor="middle" fontSize="9" fill="hsl(var(--muted-foreground))" opacity={0.5} fontStyle="italic">
+            Shared foundation
+          </text>
+
+          {/* Strand labels — inside the ellipses, colored */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const pos = STRAND_POSITIONS[sid];
             const strand = STRANDS[sid];
@@ -501,26 +450,24 @@ const ResearchStrands = () => {
             const subtitleLines = strand.subtitle ? strand.subtitle.split("\n") : [];
             return (
               <g key={`lbl-${sid}`}
-                style={{ opacity: isStrandHighlighted(sid) ? 1 : 0.2, transition: "opacity 0.6s ease", cursor: "pointer" }}
+                style={{ opacity: isStrandHighlighted(sid) ? 1 : 0.2, transition: "opacity 0.5s ease", cursor: "pointer" }}
                 onMouseEnter={() => setHoveredStrand(sid)}
                 onMouseLeave={() => setHoveredStrand(null)}
               >
                 {lines.map((line, li) => (
-                  <text key={li} x={pos.labelX} y={pos.labelY + li * 20} textAnchor={pos.anchor}
-                    fontSize="14" fontWeight="700" fill={strand.colorLight} letterSpacing="0.3">{line}</text>
+                  <text key={li} x={pos.labelX} y={pos.labelY + li * 18} textAnchor={pos.anchor}
+                    fontSize="13" fontWeight="700" fill={strand.color}>{line}</text>
                 ))}
                 {subtitleLines.length > 0 && subtitleLines[0] !== "" && subtitleLines.map((subLine, si) => (
                   <text
                     key={`sub-${si}`}
                     x={pos.labelX}
-                    y={pos.labelY + lines.length * 20 + 5 + si * 13}
+                    y={pos.labelY + lines.length * 18 + 4 + si * 12}
                     textAnchor={pos.anchor}
-                    fontSize="9.5"
-                    fill={strand.colorLight}
-                    opacity={0.55}
+                    fontSize="9"
+                    fill={strand.color}
+                    opacity={0.6}
                     fontStyle="italic"
-                    letterSpacing="0.2"
-                    style={{ transition: "opacity 0.4s ease" }}
                   >
                     {subLine}
                   </text>
@@ -529,7 +476,7 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Publication dots — refined styling */}
+          {/* Publication dots — clean white with colored border */}
           {filteredPubs.map((pub) => {
             const pos = getPos(pub);
             const color = getStrandColor(pub, pos);
@@ -539,60 +486,49 @@ const ResearchStrands = () => {
             const active = isHovered || isDragging;
             return (
               <g key={pub.id}
-                style={{ opacity: strandMatch ? 1 : 0.1, transition: "opacity 0.4s ease", cursor: isDragging ? "grabbing" : "grab" }}
+                style={{ opacity: strandMatch ? 1 : 0.12, transition: "opacity 0.4s ease", cursor: isDragging ? "grabbing" : "grab" }}
                 onPointerDown={(e) => handlePointerDown(pub, e)}
                 onPointerMove={handlePointerMove}
                 onPointerUp={() => handlePointerUp(pub)}
                 onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
                 onMouseLeave={() => setHoveredDot(null)}
               >
-                {/* Soft glow ring */}
-                <circle cx={pos.x} cy={pos.y} r={active ? 18 : 12} fill={color} opacity={active ? 0.12 : 0.06}>
-                  {!active && <animate attributeName="opacity" values="0.06;0.1;0.06" dur="4s" repeatCount="indefinite" />}
-                </circle>
-                {/* Main dot — glass-like */}
+                {/* Simple white dot with colored stroke */}
                 <circle cx={pos.x} cy={pos.y} r={active ? 10 : 7}
-                  fill="hsl(var(--background))" fillOpacity={0.7}
-                  stroke={color} strokeWidth={active ? 2.5 : 1.8}
+                  fill="hsl(var(--background))"
+                  stroke={color} strokeWidth={active ? 2.5 : 2}
                   filter="url(#dot-shadow)"
+                  style={{ transition: "r 0.2s ease" }}
                 />
-                {/* Inner marker */}
-                <circle cx={pos.x} cy={pos.y} r={active ? 3 : 2} fill={color} opacity={0.6} />
               </g>
             );
           })}
         </svg>
 
+        {/* Hover tooltip */}
         <AnimatePresence>
           {hoveredDot && (() => {
             const livePos = positions.current.get(hoveredDot.pub.id) || hoveredDot;
             return (
               <motion.div
                 initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="absolute pointer-events-none z-10 bg-popover/95 backdrop-blur-md text-popover-foreground border border-border/50 rounded-xl shadow-2xl px-4 py-3 max-w-[300px]"
-                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 5}%`, transform: "translate(-50%, -100%)" }}
+                transition={{ duration: 0.15 }}
+                className="absolute pointer-events-none z-10 bg-popover/95 backdrop-blur-sm text-popover-foreground border border-border/40 rounded-lg shadow-xl px-3 py-2.5 max-w-[280px]"
+                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 4}%`, transform: "translate(-50%, -100%)" }}
               >
-                <p className="text-xs font-semibold leading-tight mb-1.5">{hoveredDot.pub.title}</p>
-                <p className="text-[10px] text-muted-foreground leading-snug">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
+                <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
+                <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
               </motion.div>
             );
           })()}
         </AnimatePresence>
       </div>
 
-      {/* Mixed Methods label below visualization */}
-      <div className="flex items-center justify-center gap-3 mt-3 mb-4">
-        <div className="h-px w-20" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.1), transparent)" }} />
-        <span className="text-[9px] font-semibold tracking-[5px] text-foreground/20 uppercase">Mixed Methods</span>
-        <div className="h-px w-20" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.1), transparent)" }} />
-      </div>
-
-      {/* Legend — minimal */}
-      <div className="flex justify-center gap-8 mt-4 flex-wrap text-[11px] text-muted-foreground/60">
+      {/* Legend */}
+      <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground/70">
         {(["journal", "conference", "underreview", "inprogress"] as WorkType[]).map((type) => (
-          <span key={type} className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full border border-current opacity-60" />
+          <span key={type} className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full border-2 border-current" />
             {TYPE_LABELS[type]}
           </span>
         ))}
@@ -603,32 +539,32 @@ const ResearchStrands = () => {
         {selectedPub && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
             onClick={() => setSelectedPub(null)}
           >
             <motion.div
-              initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.92, opacity: 0 }}
-              transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
-              className="bg-card text-card-foreground border border-border/50 rounded-2xl shadow-2xl max-w-lg w-full p-7 relative"
+              initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="bg-card text-card-foreground border border-border/50 rounded-xl shadow-2xl max-w-lg w-full p-6 relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={() => setSelectedPub(null)} className="absolute top-4 right-4 text-muted-foreground/50 hover:text-foreground transition-colors">
+              <button onClick={() => setSelectedPub(null)} className="absolute top-3 right-3 text-muted-foreground/40 hover:text-foreground transition-colors">
                 <X className="h-4 w-4" />
               </button>
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-3">
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
                   {TYPE_LABELS[selectedPub.type]}
                 </span>
                 {selectedPub.strands.map((s) => (
-                  <span key={s} className="px-2.5 py-0.5 rounded-full text-[10px] font-medium border" style={{ borderColor: `${STRANDS[s].color}60`, color: STRANDS[s].colorLight }}>
+                  <span key={s} className="px-2.5 py-0.5 rounded-full text-[10px] font-medium border" style={{ borderColor: STRANDS[s].color, color: STRANDS[s].color }}>
                     {STRANDS[s].label.replace("\n", " ")}
                   </span>
                 ))}
               </div>
-              <h3 className="text-base font-bold mb-2 leading-snug tracking-tight">{selectedPub.title}</h3>
-              <p className="text-sm text-muted-foreground/80 mb-1">{selectedPub.authors}</p>
-              <p className="text-sm text-muted-foreground/60">
-                <span className="font-medium text-muted-foreground/80">{selectedPub.venue}</span> · {selectedPub.year}
+              <h3 className="text-base font-bold mb-2 leading-snug">{selectedPub.title}</h3>
+              <p className="text-sm text-muted-foreground mb-1">{selectedPub.authors}</p>
+              <p className="text-sm text-muted-foreground/70">
+                <span className="font-medium text-muted-foreground">{selectedPub.venue}</span> · {selectedPub.year}
               </p>
             </motion.div>
           </motion.div>
