@@ -412,12 +412,6 @@ const ResearchStrands = () => {
             </radialGradient>
           </defs>
 
-          {/* Methodological label */}
-          <text x={CX} y={28} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
-            DESIGN-BASED RESEARCH (DBR)
-          </text>
-          <line x1={CX - 160} y1={34} x2={CX - 40} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
-          <line x1={CX + 40} y1={34} x2={CX + 160} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
 
           {/* Three circles */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
