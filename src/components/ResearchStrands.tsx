@@ -401,24 +401,6 @@ const ResearchStrands = () => {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <radialGradient id="grad-adaptive" cx="50%" cy="60%" r="65%">
-              <stop offset="0%" stopColor="hsl(172,66%,50%)" stopOpacity="0.55" />
-              <stop offset="40%" stopColor="hsl(172,66%,40%)" stopOpacity="0.35" />
-              <stop offset="80%" stopColor="hsl(172,66%,35%)" stopOpacity="0.18" />
-              <stop offset="100%" stopColor="hsl(172,66%,30%)" stopOpacity="0.05" />
-            </radialGradient>
-            <radialGradient id="grad-feedback" cx="40%" cy="45%" r="65%">
-              <stop offset="0%" stopColor="hsl(263,70%,65%)" stopOpacity="0.55" />
-              <stop offset="40%" stopColor="hsl(263,70%,55%)" stopOpacity="0.35" />
-              <stop offset="80%" stopColor="hsl(263,70%,50%)" stopOpacity="0.18" />
-              <stop offset="100%" stopColor="hsl(263,70%,45%)" stopOpacity="0.05" />
-            </radialGradient>
-            <radialGradient id="grad-writing" cx="60%" cy="45%" r="65%">
-              <stop offset="0%" stopColor="hsl(205,80%,53%)" stopOpacity="0.55" />
-              <stop offset="40%" stopColor="hsl(205,80%,43%)" stopOpacity="0.35" />
-              <stop offset="80%" stopColor="hsl(205,80%,38%)" stopOpacity="0.18" />
-              <stop offset="100%" stopColor="hsl(205,80%,33%)" stopOpacity="0.05" />
-            </radialGradient>
           </defs>
 
           {/* Methodological foundation - subtle text labels outside the visualization */}
@@ -431,16 +413,27 @@ const ResearchStrands = () => {
 
           <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" strokeDasharray="8 5" opacity={0.5} />
 
-          {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
-            const e = ellipseParams[sid];
-            return (
-              <ellipse key={sid} cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
-                fill={`url(#grad-${sid})`}
-                opacity={isStrandHighlighted(sid) ? 0.75 : 0.15}
-                style={{ transition: "opacity 0.5s", pointerEvents: "none" }}
-              />
-            );
-          })}
+          {/* Venn diagram ellipses with blend mode for real intersections */}
+          <g style={{ isolation: "isolate" }}>
+            {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
+              const e = ellipseParams[sid];
+              const colors: Record<StrandId, string> = {
+                adaptive: "hsl(172,66%,40%)",
+                feedback: "hsl(263,70%,55%)",
+                writing: "hsl(205,80%,45%)",
+              };
+              return (
+                <ellipse key={sid} cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
+                  fill={colors[sid]}
+                  fillOpacity={isStrandHighlighted(sid) ? 0.22 : 0.05}
+                  stroke={colors[sid]}
+                  strokeWidth="1.5"
+                  strokeOpacity={isStrandHighlighted(sid) ? 0.35 : 0.1}
+                  style={{ transition: "fill-opacity 0.5s, stroke-opacity 0.5s", mixBlendMode: "screen", pointerEvents: "none" }}
+                />
+              );
+            })}
+          </g>
 
           {RING_RADII.map((r, i) => (
             <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.4} />
