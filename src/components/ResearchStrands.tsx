@@ -328,9 +328,9 @@ const ResearchStrands = () => {
   const isStrandHighlighted = (strandId: StrandId) => !hoveredStrand || hoveredStrand === strandId;
 
   const ellipseParams: Record<StrandId, { cx: number; cy: number; rx: number; ry: number }> = {
-    adaptive: { cx: CX, cy: CY - 100, rx: 280, ry: 240 },
-    feedback: { cx: CX + 130, cy: CY + 80, rx: 260, ry: 240 },
-    writing: { cx: CX - 130, cy: CY + 80, rx: 260, ry: 240 },
+    adaptive: { cx: CX, cy: CY - 80, rx: 240, ry: 200 },
+    feedback: { cx: CX + 110, cy: CY + 60, rx: 220, ry: 200 },
+    writing: { cx: CX - 110, cy: CY + 60, rx: 220, ry: 200 },
   };
 
   return (
@@ -401,20 +401,23 @@ const ResearchStrands = () => {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <radialGradient id="grad-adaptive" cx="50%" cy="35%" r="70%">
-              <stop offset="0%" stopColor="hsl(172,66%,50%)" stopOpacity="0.65" />
-              <stop offset="50%" stopColor="hsl(172,66%,40%)" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="hsl(172,66%,30%)" stopOpacity="0.08" />
+            <radialGradient id="grad-adaptive" cx="50%" cy="60%" r="65%">
+              <stop offset="0%" stopColor="hsl(172,66%,50%)" stopOpacity="0.55" />
+              <stop offset="40%" stopColor="hsl(172,66%,40%)" stopOpacity="0.35" />
+              <stop offset="80%" stopColor="hsl(172,66%,35%)" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="hsl(172,66%,30%)" stopOpacity="0.05" />
             </radialGradient>
-            <radialGradient id="grad-feedback" cx="35%" cy="50%" r="70%">
-              <stop offset="0%" stopColor="hsl(263,70%,65%)" stopOpacity="0.65" />
-              <stop offset="50%" stopColor="hsl(263,70%,55%)" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="hsl(263,70%,50%)" stopOpacity="0.08" />
+            <radialGradient id="grad-feedback" cx="40%" cy="45%" r="65%">
+              <stop offset="0%" stopColor="hsl(263,70%,65%)" stopOpacity="0.55" />
+              <stop offset="40%" stopColor="hsl(263,70%,55%)" stopOpacity="0.35" />
+              <stop offset="80%" stopColor="hsl(263,70%,50%)" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="hsl(263,70%,45%)" stopOpacity="0.05" />
             </radialGradient>
-            <radialGradient id="grad-writing" cx="50%" cy="65%" r="70%">
-              <stop offset="0%" stopColor="hsl(205,80%,53%)" stopOpacity="0.65" />
-              <stop offset="50%" stopColor="hsl(205,80%,43%)" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="hsl(205,80%,33%)" stopOpacity="0.08" />
+            <radialGradient id="grad-writing" cx="60%" cy="45%" r="65%">
+              <stop offset="0%" stopColor="hsl(205,80%,53%)" stopOpacity="0.55" />
+              <stop offset="40%" stopColor="hsl(205,80%,43%)" stopOpacity="0.35" />
+              <stop offset="80%" stopColor="hsl(205,80%,38%)" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="hsl(205,80%,33%)" stopOpacity="0.05" />
             </radialGradient>
           </defs>
 
