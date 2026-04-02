@@ -433,6 +433,7 @@ const ResearchStrands = () => {
                 />
               );
             })}
+          </g>
 
           {RING_RADII.map((r, i) => (
             <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.4} />
