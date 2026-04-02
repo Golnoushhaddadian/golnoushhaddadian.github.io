@@ -559,19 +559,19 @@ const ResearchStrands = () => {
       {/* Legend */}
       <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
           Journal
         </span>
         <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
           Conference
         </span>
         <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
           Under Review
         </span>
         <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="2" /><polygon points="7,4 9.6,8.5 4.4,8.5" fill="currentColor" opacity={0.5} /></svg>
+          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
           In Progress
         </span>
       </div>
