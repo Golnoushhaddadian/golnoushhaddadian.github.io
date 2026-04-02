@@ -462,7 +462,23 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Spoke lines removed for cleaner visualization */}
+          {/* Peer connection lines */}
+          {connectionLines.map(({ a, b }, i) => {
+            const posA = positions.current.get(a);
+            const posB = positions.current.get(b);
+            if (!posA || !posB) return null;
+            const pubA = PUBLICATIONS.find(p => p.id === a);
+            const pubB = PUBLICATIONS.find(p => p.id === b);
+            const strandMatchA = hoveredStrand && pubA ? pubA.strands.includes(hoveredStrand) : true;
+            const strandMatchB = hoveredStrand && pubB ? pubB.strands.includes(hoveredStrand) : true;
+            return (
+              <line key={`conn-${i}`} x1={posA.x} y1={posA.y} x2={posB.x} y2={posB.y}
+                stroke="hsl(var(--foreground))" strokeWidth="0.6" strokeDasharray="4 4"
+                opacity={strandMatchA && strandMatchB ? 0.12 : 0.02}
+                style={{ transition: "opacity 0.4s" }}
+              />
+            );
+          })}
 
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
           <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
