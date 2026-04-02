@@ -315,13 +315,28 @@ const ResearchStrands = () => {
     return positions.current.get(pub.id) || getDotPosition(pub);
   }, []);
 
-  // Build peer connections: connect publications that share at least one strand
+  // Build peer connections: connect each publication to its nearest neighbors sharing a strand
   const connectionLines = useMemo(() => {
     const lines: { a: string; b: string }[] = [];
-    for (let i = 0; i < filteredPubs.length; i++) {
-      for (let j = i + 1; j < filteredPubs.length; j++) {
-        const shared = filteredPubs[i].strands.some(s => filteredPubs[j].strands.includes(s));
-        if (shared) lines.push({ a: filteredPubs[i].id, b: filteredPubs[j].id });
+    const MAX_NEIGHBORS = 2;
+    for (const pub of filteredPubs) {
+      const pos = positions.current.get(pub.id);
+      if (!pos) continue;
+      // Find neighbors sharing at least one strand, sorted by distance
+      const neighbors = filteredPubs
+        .filter(other => other.id !== pub.id && other.strands.some(s => pub.strands.includes(s)))
+        .map(other => {
+          const oPos = positions.current.get(other.id);
+          if (!oPos) return { id: other.id, dist: Infinity };
+          return { id: other.id, dist: Math.hypot(pos.x - oPos.x, pos.y - oPos.y) };
+        })
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, MAX_NEIGHBORS);
+      for (const n of neighbors) {
+        const key = [pub.id, n.id].sort().join("-");
+        if (!lines.some(l => [l.a, l.b].sort().join("-") === key)) {
+          lines.push({ a: pub.id, b: n.id });
+        }
       }
     }
     return lines;
