@@ -315,22 +315,32 @@ const ResearchStrands = () => {
     return positions.current.get(pub.id) || getDotPosition(pub);
   }, []);
 
-  // Build spoke connections: each dot connects to the axis endpoint of each strand it belongs to
-  const strandEndpoints: Record<StrandId, { x: number; y: number }> = {} as any;
-  (Object.keys(STRAND_POSITIONS) as StrandId[]).forEach((sid) => {
-    const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
-    strandEndpoints[sid] = { x: CX + RING_RADII[1] * Math.cos(angle), y: CY + RING_RADII[1] * Math.sin(angle) };
-  });
-
-  const spokeLines: { x1: number; y1: number; x2: number; y2: number; strand: StrandId }[] = [];
-  filteredPubs.forEach((pub) => {
-    if (pub.strands.length > 1) {
-      const pos = getPos(pub);
-      pub.strands.forEach((sid) => {
-        spokeLines.push({ x1: pos.x, y1: pos.y, x2: strandEndpoints[sid].x, y2: strandEndpoints[sid].y, strand: sid });
-      });
+  // Build peer connections: connect each publication to its nearest neighbors sharing a strand
+  const connectionLines = useMemo(() => {
+    const lines: { a: string; b: string }[] = [];
+    const MAX_NEIGHBORS = 2;
+    for (const pub of filteredPubs) {
+      const pos = positions.current.get(pub.id);
+      if (!pos) continue;
+      // Find neighbors sharing at least one strand, sorted by distance
+      const neighbors = filteredPubs
+        .filter(other => other.id !== pub.id && other.strands.some(s => pub.strands.includes(s)))
+        .map(other => {
+          const oPos = positions.current.get(other.id);
+          if (!oPos) return { id: other.id, dist: Infinity };
+          return { id: other.id, dist: Math.hypot(pos.x - oPos.x, pos.y - oPos.y) };
+        })
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, MAX_NEIGHBORS);
+      for (const n of neighbors) {
+        const key = [pub.id, n.id].sort().join("-");
+        if (!lines.some(l => [l.a, l.b].sort().join("-") === key)) {
+          lines.push({ a: pub.id, b: n.id });
+        }
+      }
     }
-  });
+    return lines;
+  }, [filteredPubs]);
 
   const isStrandHighlighted = (strandId: StrandId) => !hoveredStrand || hoveredStrand === strandId;
 
@@ -467,7 +477,23 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Spoke lines removed for cleaner visualization */}
+          {/* Peer connection lines */}
+          {connectionLines.map(({ a, b }, i) => {
+            const posA = positions.current.get(a);
+            const posB = positions.current.get(b);
+            if (!posA || !posB) return null;
+            const pubA = PUBLICATIONS.find(p => p.id === a);
+            const pubB = PUBLICATIONS.find(p => p.id === b);
+            const strandMatchA = hoveredStrand && pubA ? pubA.strands.includes(hoveredStrand) : true;
+            const strandMatchB = hoveredStrand && pubB ? pubB.strands.includes(hoveredStrand) : true;
+            return (
+              <line key={`conn-${i}`} x1={posA.x} y1={posA.y} x2={posB.x} y2={posB.y}
+                stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5"
+                opacity={strandMatchA && strandMatchB ? 0.2 : 0.03}
+                style={{ transition: "opacity 0.4s" }}
+              />
+            );
+          })}
 
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
           <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
