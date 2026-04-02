@@ -89,14 +89,14 @@ const FILTER_OPTIONS: { label: string; value: WorkType | "all" }[] = [
   { label: "In Progress", value: "inprogress" },
 ];
 
-const W = 900, H = 800;
-const CX = 450, CY = 400;
-const RING_RADII = [85, 170, 260];
+const W = 800, H = 700;
+const CX = 400, CY = 360;
+const RING_RADII = [85, 170, 240];
 
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: 55, anchor: "middle" },
-  feedback: { angle: 30, labelX: 730, labelY: CY + 140, anchor: "start" },
-  writing: { angle: 150, labelX: 170, labelY: CY + 140, anchor: "end" },
+  adaptive: { angle: -90, labelX: CX, labelY: 95, anchor: "middle" },
+  feedback: { angle: 30, labelX: CX + 230, labelY: CY + 135, anchor: "middle" },
+  writing: { angle: 150, labelX: CX - 230, labelY: CY + 135, anchor: "middle" },
 };
 
 function getDotPosition(pub: Publication): { x: number; y: number } {
