@@ -431,22 +431,8 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Concentric guide rings */}
-          {RING_RADII.map((r, i) => (
-            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.3} />
-          ))}
 
-          {/* Axis lines */}
-          {(Object.keys(STRAND_POSITIONS) as StrandId[]).map((sid) => {
-            const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
-            return (
-              <line key={sid} x1={CX} y1={CY} x2={CX + RING_RADII[2] * Math.cos(angle)} y2={CY + RING_RADII[2] * Math.sin(angle)}
-                stroke="hsl(var(--border))" strokeWidth="0.8"
-                opacity={isStrandHighlighted(sid) ? 0.5 : 0.1}
-                style={{ transition: "opacity 0.5s" }}
-              />
-            );
-          })}
+
 
           {/* Peer connection lines */}
           {connectionLines.map(({ a, b }, i) => {
