@@ -328,9 +328,9 @@ const ResearchStrands = () => {
   const isStrandHighlighted = (strandId: StrandId) => !hoveredStrand || hoveredStrand === strandId;
 
   const ellipseParams: Record<StrandId, { cx: number; cy: number; rx: number; ry: number }> = {
-    adaptive: { cx: CX, cy: CY - 100, rx: 280, ry: 240 },
-    feedback: { cx: CX + 130, cy: CY + 80, rx: 260, ry: 240 },
-    writing: { cx: CX - 130, cy: CY + 80, rx: 260, ry: 240 },
+    adaptive: { cx: CX, cy: CY - 80, rx: 240, ry: 200 },
+    feedback: { cx: CX + 110, cy: CY + 60, rx: 220, ry: 200 },
+    writing: { cx: CX - 110, cy: CY + 60, rx: 220, ry: 200 },
   };
 
   return (
