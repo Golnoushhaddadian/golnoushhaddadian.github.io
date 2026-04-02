@@ -388,20 +388,20 @@ const ResearchStrands = () => {
               </feMerge>
             </filter>
             {/* Soft radial gradients — pastel fills */}
-            <radialGradient id="grad-adaptive" cx="50%" cy="40%" r="60%">
-              <stop offset="0%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.55" />
-              <stop offset="70%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.3" />
-              <stop offset="100%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.08" />
+            <radialGradient id="grad-adaptive" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.7" />
+              <stop offset="60%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.45" />
+              <stop offset="100%" stopColor={STRANDS.adaptive.fill} stopOpacity="0.12" />
             </radialGradient>
-            <radialGradient id="grad-feedback" cx="50%" cy="40%" r="60%">
-              <stop offset="0%" stopColor={STRANDS.feedback.fill} stopOpacity="0.55" />
-              <stop offset="70%" stopColor={STRANDS.feedback.fill} stopOpacity="0.3" />
-              <stop offset="100%" stopColor={STRANDS.feedback.fill} stopOpacity="0.08" />
+            <radialGradient id="grad-feedback" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stopColor={STRANDS.feedback.fill} stopOpacity="0.7" />
+              <stop offset="60%" stopColor={STRANDS.feedback.fill} stopOpacity="0.45" />
+              <stop offset="100%" stopColor={STRANDS.feedback.fill} stopOpacity="0.12" />
             </radialGradient>
-            <radialGradient id="grad-writing" cx="50%" cy="40%" r="60%">
-              <stop offset="0%" stopColor={STRANDS.writing.fill} stopOpacity="0.55" />
-              <stop offset="70%" stopColor={STRANDS.writing.fill} stopOpacity="0.3" />
-              <stop offset="100%" stopColor={STRANDS.writing.fill} stopOpacity="0.08" />
+            <radialGradient id="grad-writing" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stopColor={STRANDS.writing.fill} stopOpacity="0.7" />
+              <stop offset="60%" stopColor={STRANDS.writing.fill} stopOpacity="0.45" />
+              <stop offset="100%" stopColor={STRANDS.writing.fill} stopOpacity="0.12" />
             </radialGradient>
           </defs>
 
