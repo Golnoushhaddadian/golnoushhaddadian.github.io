@@ -603,31 +603,32 @@ const ResearchStrands = () => {
         {selectedPub && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4"
             onClick={() => setSelectedPub(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-card text-card-foreground border border-border rounded-xl shadow-2xl max-w-lg w-full p-6 relative"
+              initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
+              className="bg-card text-card-foreground border border-border/50 rounded-2xl shadow-2xl max-w-lg w-full p-7 relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={() => setSelectedPub(null)} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors">
-                <X className="h-5 w-5" />
+              <button onClick={() => setSelectedPub(null)} className="absolute top-4 right-4 text-muted-foreground/50 hover:text-foreground transition-colors">
+                <X className="h-4 w-4" />
               </button>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
                   {TYPE_LABELS[selectedPub.type]}
                 </span>
                 {selectedPub.strands.map((s) => (
-                  <span key={s} className="px-2.5 py-0.5 rounded-full text-xs font-medium border" style={{ borderColor: STRANDS[s].color, color: STRANDS[s].color }}>
+                  <span key={s} className="px-2.5 py-0.5 rounded-full text-[10px] font-medium border" style={{ borderColor: `${STRANDS[s].color}60`, color: STRANDS[s].colorLight }}>
                     {STRANDS[s].label.replace("\n", " ")}
                   </span>
                 ))}
               </div>
-              <h3 className="text-lg font-bold mb-2 leading-tight">{selectedPub.title}</h3>
-              <p className="text-sm text-muted-foreground mb-1">{selectedPub.authors}</p>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-medium">{selectedPub.venue}</span> · {selectedPub.year}
+              <h3 className="text-base font-bold mb-2 leading-snug tracking-tight">{selectedPub.title}</h3>
+              <p className="text-sm text-muted-foreground/80 mb-1">{selectedPub.authors}</p>
+              <p className="text-sm text-muted-foreground/60">
+                <span className="font-medium text-muted-foreground/80">{selectedPub.venue}</span> · {selectedPub.year}
               </p>
             </motion.div>
           </motion.div>
