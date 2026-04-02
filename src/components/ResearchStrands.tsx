@@ -488,8 +488,8 @@ const ResearchStrands = () => {
             const strandMatchB = hoveredStrand && pubB ? pubB.strands.includes(hoveredStrand) : true;
             return (
               <line key={`conn-${i}`} x1={posA.x} y1={posA.y} x2={posB.x} y2={posB.y}
-                stroke="hsl(var(--foreground))" strokeWidth="0.6" strokeDasharray="4 4"
-                opacity={strandMatchA && strandMatchB ? 0.12 : 0.02}
+                stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5"
+                opacity={strandMatchA && strandMatchB ? 0.2 : 0.03}
                 style={{ transition: "opacity 0.4s" }}
               />
             );
