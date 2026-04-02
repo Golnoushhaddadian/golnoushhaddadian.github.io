@@ -3,8 +3,8 @@ import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
-// ── Strand definitions ──
-type StrandId = "adaptive" | "feedback" | "humanai" | "writing";
+// ── Strand definitions (3 strands: triangular Venn) ──
+type StrandId = "adaptive" | "feedback" | "writing";
 type WorkType = "journal" | "conference" | "inprogress" | "underreview";
 
 interface Publication {
@@ -31,12 +31,6 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
     color: "hsl(263, 70%, 50%)",
     colorLight: "hsl(263, 70%, 65%)",
   },
-  humanai: {
-    label: "Human-Centered AI",
-    subtitle: "",
-    color: "hsl(24, 85%, 48%)",
-    colorLight: "hsl(24, 85%, 63%)",
-  },
   writing: {
     label: "Language Education",
     subtitle: "Writing, Argumentation, AWE\nCALL & Assessment",
@@ -46,34 +40,38 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
 };
 
 const PUBLICATIONS: Publication[] = [
-  { id: "j1", title: "Problem-centered post-secondary CS education: Private AI curriculum", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "IJTE, 8(2)", year: "2025", type: "journal", strands: ["humanai"] },
-  { id: "j2", title: "Construction and validation of a CFAL questionnaire for language teachers", authors: "Haddadian, G., Radmanesh, S., & Haddadian, N.", venue: "Language Testing in Asia, 14(33)", year: "2024", type: "journal", strands: ["writing", "humanai"] },
+  // Journals
+  { id: "j1", title: "Problem-centered post-secondary CS education: Private AI curriculum", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "IJTE, 8(2)", year: "2025", type: "journal", strands: ["adaptive"] },
+  { id: "j2", title: "Construction and validation of a CFAL questionnaire for language teachers", authors: "Haddadian, G., Radmanesh, S., & Haddadian, N.", venue: "Language Testing in Asia, 14(33)", year: "2024", type: "journal", strands: ["feedback", "writing"] },
   { id: "j3", title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking", authors: "Haddadian, G., & Haddadian, N.", venue: "JAID, 13(2)", year: "2024", type: "journal", strands: ["feedback", "writing"] },
   { id: "j4", title: "Comparing Effects of Teacher, Automated, and Integrative Feedback on Writing", authors: "Haddadian, G.", venue: "CALL-EJ, 25(3)", year: "2024", type: "journal", strands: ["feedback", "writing"] },
   { id: "j5", title: "Conversational Repairs in Persian Dramatic Discourse", authors: "Haddadian, G., & Mahmoodi-Bakhtiari, B.", venue: "Persian Literary Studies, 7(11)", year: "2018", type: "journal", strands: ["writing"] },
-  { id: "c1", title: "Supporting peer feedback provision and uptake with GenAI", authors: "Noroozi, O., Haddadian, G., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["feedback", "humanai"] },
-  { id: "c2", title: "Automated Generation of Expert Models with Generative AI", authors: "Haddadian, G., Han, H., Kim, M., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["humanai", "adaptive"] },
-  { id: "c3", title: "Evaluating Private AI Curriculum in CS Education", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "ICLS 2024", year: "2024", type: "conference", strands: ["humanai"] },
-  { id: "c4", title: "ELT Teachers' Online Self-efficacy: Does Agency Matter?", authors: "Haddadian, G., & Haddadian, N.", venue: "SITE 2024", year: "2024", type: "conference", strands: ["writing", "humanai"] },
-  { id: "c5", title: "Impact of AI-Enabled Personalized Recommendations on L2 Learners", authors: "Daneshvar Ghorbani, B., & Haddadian, G.", venue: "AIRiAL 2024, Columbia University", year: "2024", type: "conference", strands: ["adaptive", "writing", "humanai"] },
-  { id: "c6", title: "Knowledge-based AI vs. Human Evaluation in Academic Summary", authors: "Kim, J., Haddadian, G., & Kim, M.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["feedback", "humanai"] },
-  { id: "c7", title: "Design Study of PCI for Private AI Curriculum Development", authors: "Haddadian, G., Takabi, D., Panzade, P., Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["humanai"] },
-  { id: "c8", title: "A Comprehensive Model of AI Literacy from a Developmental Perspective", authors: "Haddadian, G., Bae, Y., Kim, J., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["humanai", "adaptive"] },
-  { id: "c9", title: "Learning progress models using an AI-enabled knowledge representation", authors: "Kim, M., Kim, N., Haddadian, G., & Heidari, A.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["adaptive", "humanai"] },
-  { id: "c10", title: "Impact of AI-based educational tool: Technology acceptance & metacognition", authors: "Bae, Y., Kim, J., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive", "humanai"] },
-  { id: "c11", title: "Leveraging ML to evaluate cognitive engagement in online discussions", authors: "Kim, J., Bae, Y., Haddadian, G., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["humanai", "feedback"] },
-  { id: "c12", title: "AI-augmented summarization: Impact on adult learners' concept learning", authors: "Kim, J., Bae, Y., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive", "humanai"] },
+  // Conferences
+  { id: "c1", title: "Supporting peer feedback provision and uptake with GenAI", authors: "Noroozi, O., Haddadian, G., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["feedback"] },
+  { id: "c2", title: "Automated Generation of Expert Models with Generative AI", authors: "Haddadian, G., Han, H., Kim, M., et al.", venue: "ICLS/ISLS 2025", year: "2025", type: "conference", strands: ["adaptive"] },
+  { id: "c3", title: "Evaluating Private AI Curriculum in CS Education", authors: "Haddadian, G., Panzade, P., Takabi, D., & Kim, M. K.", venue: "ICLS 2024", year: "2024", type: "conference", strands: ["adaptive"] },
+  { id: "c4", title: "ELT Teachers' Online Self-efficacy: Does Agency Matter?", authors: "Haddadian, G., & Haddadian, N.", venue: "SITE 2024", year: "2024", type: "conference", strands: ["writing"] },
+  { id: "c5", title: "Impact of AI-Enabled Personalized Recommendations on L2 Learners", authors: "Daneshvar Ghorbani, B., & Haddadian, G.", venue: "AIRiAL 2024, Columbia University", year: "2024", type: "conference", strands: ["adaptive", "writing"] },
+  { id: "c6", title: "Knowledge-based AI vs. Human Evaluation in Academic Summary", authors: "Kim, J., Haddadian, G., & Kim, M.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["feedback"] },
+  { id: "c7", title: "Design Study of PCI for Private AI Curriculum Development", authors: "Haddadian, G., Takabi, D., Panzade, P., Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
+  { id: "c8", title: "A Comprehensive Model of AI Literacy from a Developmental Perspective", authors: "Haddadian, G., Bae, Y., Kim, J., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
+  { id: "c9", title: "Learning progress models using an AI-enabled knowledge representation", authors: "Kim, M., Kim, N., Haddadian, G., & Heidari, A.", venue: "ICLS 2023", year: "2023", type: "conference", strands: ["adaptive"] },
+  { id: "c10", title: "Impact of AI-based educational tool: Technology acceptance & metacognition", authors: "Bae, Y., Kim, J., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
+  { id: "c11", title: "Leveraging ML to evaluate cognitive engagement in online discussions", authors: "Kim, J., Bae, Y., Haddadian, G., & Kim, M.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["feedback"] },
+  { id: "c12", title: "AI-augmented summarization: Impact on adult learners' concept learning", authors: "Kim, J., Bae, Y., Haddadian, G., et al.", venue: "AECT 2023", year: "2023", type: "conference", strands: ["adaptive"] },
   { id: "c13", title: "Effect of Mind Mapping on EFL Learners' Self-efficacy in Vocabulary", authors: "Radmanesh, S., Haddadian, G.", venue: "WEI-ETL Barcelona 2020", year: "2020", type: "conference", strands: ["writing"] },
   { id: "c14", title: "Computer-Adaptive Prototype to Measure Written Receptive Vocabulary", authors: "Haddadian, G., Salehi, M.", venue: "Sharif University of Technology", year: "2015", type: "conference", strands: ["adaptive", "writing"] },
+  // Under Review
   { id: "r1", title: "Learners' Collaboration in Using AI-generated Feedback & Argumentative Writing", authors: "Haddadian, G., Haddadian, M.", venue: "Computer Assisted Language Learning", year: "2025", type: "underreview", strands: ["feedback", "writing"] },
-  { id: "r2", title: "Scaffolding Value of GenAI during Peer Feedback Provision and Uptake", authors: "Noroozi, O., Haddadian, G., et al.", venue: "Int. J. Educational Technology in Higher Ed.", year: "2025", type: "underreview", strands: ["feedback", "humanai"] },
+  { id: "r2", title: "Scaffolding Value of GenAI during Peer Feedback Provision and Uptake", authors: "Noroozi, O., Haddadian, G., et al.", venue: "Int. J. Educational Technology in Higher Ed.", year: "2025", type: "underreview", strands: ["feedback"] },
   { id: "r3", title: "Promoting EFL Teachers' Self-Directed Professional Development", authors: "Mashhadi, F., Haddadian, G., et al.", venue: "Journal of Language and Education", year: "2025", type: "underreview", strands: ["writing"] },
   { id: "r4", title: "Exploring Classroom Interactions in Iranian EFL Classrooms", authors: "Kavoshian, S., Mashhadi, F., Haddadian, G.", venue: "Int. J. Language Studies", year: "2025", type: "underreview", strands: ["feedback", "writing"] },
+  // In Progress
   { id: "p1", title: "Systematic Review of AWE in Argumentative Writing for EFL Education", authors: "Haddadian, G., Kim, M., Haddadian, N.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["writing", "feedback"] },
-  { id: "p2", title: "RITA: Real-time Intelligent Technology for Argumentative Writing (DBR)", authors: "Haddadian, G., Kim, M.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["writing", "adaptive", "humanai", "feedback"] },
-  { id: "p3", title: "GenAI to Facilitate Peer Feedback: Opportunities and Challenges", authors: "Alqassab, M., Noroozi, O., Haddadian, G., et al.", venue: "Book Chapter", year: "2025", type: "inprogress", strands: ["feedback", "humanai"] },
-  { id: "p4", title: "Students' Plagiarism Behaviors within AI-Enabled Introductory Physics", authors: "Han, H., Haddadian, G., et al.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["humanai"] },
-  { id: "p5", title: "GenAI for Automated Construction and Evaluation of Expert Models", authors: "Han, H., Kim, M., Haddadian, G.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["humanai", "adaptive"] },
+  { id: "p2", title: "RITA: Real-time Intelligent Technology for Argumentative Writing (DBR)", authors: "Haddadian, G., Kim, M.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["writing", "adaptive", "feedback"] },
+  { id: "p3", title: "GenAI to Facilitate Peer Feedback: Opportunities and Challenges", authors: "Alqassab, M., Noroozi, O., Haddadian, G., et al.", venue: "Book Chapter", year: "2025", type: "inprogress", strands: ["feedback"] },
+  { id: "p4", title: "Students' Plagiarism Behaviors within AI-Enabled Introductory Physics", authors: "Han, H., Haddadian, G., et al.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["adaptive"] },
+  { id: "p5", title: "GenAI for Automated Construction and Evaluation of Expert Models", authors: "Han, H., Kim, M., Haddadian, G.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["adaptive"] },
   { id: "p6", title: "Examining Learner's Evaluative Judgment Supported by Technology-Enabled Feedback", authors: "Heidari, A., Kim, M., et al., Haddadian, G.", venue: "Journal Article", year: "2025", type: "inprogress", strands: ["feedback", "adaptive"] },
 ];
 
@@ -93,14 +91,14 @@ const FILTER_OPTIONS: { label: string; value: WorkType | "all" }[] = [
 ];
 
 const W = 900, H = 800;
-const CX = 450, CY = 400;
+const CX = 450, CY = 420;
 const RING_RADII = [85, 170, 260];
 
+// Triangular layout: adaptive top, writing bottom-left, feedback bottom-right
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
   adaptive: { angle: -90, labelX: CX, labelY: 55, anchor: "middle" },
-  feedback: { angle: 0, labelX: 750, labelY: CY - 10, anchor: "start" },
-  humanai: { angle: 90, labelX: CX, labelY: H - 50, anchor: "middle" },
-  writing: { angle: 180, labelX: 150, labelY: CY - 10, anchor: "end" },
+  writing: { angle: 210, labelX: 130, labelY: H - 60, anchor: "start" },
+  feedback: { angle: 330, labelX: 770, labelY: H - 60, anchor: "end" },
 };
 
 function getDotPosition(pub: Publication): { x: number; y: number } {
@@ -123,9 +121,8 @@ function getDotPosition(pub: Publication): { x: number; y: number } {
   return { x: CX + r * Math.cos(finalAngle), y: CY + r * Math.sin(finalAngle) };
 }
 
-// Resolve overlapping dots by pushing them apart
 function resolveOverlaps(pubs: Publication[], posMap: Map<string, { x: number; y: number }>) {
-  const MIN_DIST = 30; // minimum distance between dot centers
+  const MIN_DIST = 30;
   const iterations = 15;
   for (let iter = 0; iter < iterations; iter++) {
     let moved = false;
@@ -147,7 +144,6 @@ function resolveOverlaps(pubs: Publication[], posMap: Map<string, { x: number; y
           b.y += ny * push;
           moved = true;
         } else if (dist === 0) {
-          // Identical positions — nudge randomly
           a.x += (Math.random() - 0.5) * MIN_DIST;
           a.y += (Math.random() - 0.5) * MIN_DIST;
           moved = true;
@@ -164,21 +160,6 @@ function hashCode(s: string): number {
   return Math.abs(hash);
 }
 
-function getStrandColor(pub: Publication, pos: { x: number; y: number }): string {
-  if (pub.strands.length === 1) return STRANDS[pub.strands[0]].color;
-  // Pick color of the closest strand axis
-  let closest: StrandId = pub.strands[0];
-  let minDist = Infinity;
-  pub.strands.forEach((sid) => {
-    const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
-    const ax = CX + RING_RADII[2] * Math.cos(angle);
-    const ay = CY + RING_RADII[2] * Math.sin(angle);
-    const d = (pos.x - ax) ** 2 + (pos.y - ay) ** 2;
-    if (d < minDist) { minDist = d; closest = sid; }
-  });
-  return STRANDS[closest].color;
-}
-
 function countByStrand(strandId: StrandId): number {
   return PUBLICATIONS.filter((p) => p.strands.includes(strandId)).length;
 }
@@ -191,7 +172,6 @@ const ResearchStrands = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [, forceRender] = useState(0);
 
-  // Mutable drag/position state stored in refs for performance
   const positions = useRef<Map<string, { x: number; y: number }>>(new Map());
   const velocities = useRef<Map<string, { vx: number; vy: number }>>(new Map());
   const dragState = useRef<{
@@ -203,7 +183,6 @@ const ResearchStrands = () => {
   }>({ id: null, startMouseSVG: { x: 0, y: 0 }, startPos: { x: 0, y: 0 }, lastMouse: { x: 0, y: 0 }, lastTime: 0 });
   const animFrameRef = useRef<number>(0);
 
-  // Initialize positions with overlap resolution
   useEffect(() => {
     PUBLICATIONS.forEach((pub) => {
       if (!positions.current.has(pub.id)) {
@@ -215,7 +194,6 @@ const ResearchStrands = () => {
     forceRender((n) => n + 1);
   }, []);
 
-  // Inertia animation loop
   useEffect(() => {
     let running = true;
     const decay = 0.94;
@@ -224,7 +202,7 @@ const ResearchStrands = () => {
       if (!running) return;
       let anyMoving = false;
       velocities.current.forEach((vel, id) => {
-        if (dragState.current.id === id) return; // skip actively dragged
+        if (dragState.current.id === id) return;
         if (Math.abs(vel.vx) > minV || Math.abs(vel.vy) > minV) {
           anyMoving = true;
           vel.vx *= decay;
@@ -270,7 +248,6 @@ const ResearchStrands = () => {
       lastMouse: svgPt,
       lastTime: performance.now(),
     };
-    // Kill existing velocity
     const vel = velocities.current.get(pub.id);
     if (vel) { vel.vx = 0; vel.vy = 0; }
   }, [screenToSVG]);
@@ -288,7 +265,7 @@ const ResearchStrands = () => {
     const dt = Math.max(now - ds.lastTime, 1);
     const vel = velocities.current.get(ds.id);
     if (vel) {
-      vel.vx = ((svgPt.x - ds.lastMouse.x) / dt) * 16; // scale to ~60fps
+      vel.vx = ((svgPt.x - ds.lastMouse.x) / dt) * 16;
       vel.vy = ((svgPt.y - ds.lastMouse.y) / dt) * 16;
     }
     ds.lastMouse = svgPt;
@@ -301,7 +278,6 @@ const ResearchStrands = () => {
       const ds = dragState.current;
       const pos = positions.current.get(pub.id);
       const startPos = ds.startPos;
-      // If barely moved, treat as click
       if (pos && Math.abs(pos.x - startPos.x) < 3 && Math.abs(pos.y - startPos.y) < 3) {
         setSelectedPub(pub);
       }
@@ -322,7 +298,6 @@ const ResearchStrands = () => {
     for (const pub of filteredPubs) {
       const pos = positions.current.get(pub.id);
       if (!pos) continue;
-      // Find neighbors sharing at least one strand, sorted by distance
       const neighbors = filteredPubs
         .filter(other => other.id !== pub.id && other.strands.some(s => pub.strands.includes(s)))
         .map(other => {
@@ -344,18 +319,18 @@ const ResearchStrands = () => {
 
   const isStrandHighlighted = (strandId: StrandId) => !hoveredStrand || hoveredStrand === strandId;
 
-  const ellipseParams: Record<StrandId, { cx: number; cy: number; rx: number; ry: number }> = {
-    adaptive: { cx: CX, cy: CY - 130, rx: 250, ry: 260 },
-    feedback: { cx: CX + 150, cy: CY, rx: 270, ry: 220 },
-    humanai: { cx: CX, cy: CY + 130, rx: 250, ry: 260 },
-    writing: { cx: CX - 150, cy: CY, rx: 270, ry: 220 },
+  // Triangular layout: 3 circles
+  const circleParams: Record<StrandId, { cx: number; cy: number; r: number }> = {
+    adaptive: { cx: CX, cy: CY - 160, r: 240 },
+    writing: { cx: CX - 180, cy: CY + 110, r: 240 },
+    feedback: { cx: CX + 180, cy: CY + 110, r: 240 },
   };
 
   return (
     <div>
       <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Research Strands</h2>
       <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-        My work moves across four interconnected strands with <strong>AI in Education</strong> as the shared foundation.
+        My work moves across three interconnected strands with <strong>AI in Education</strong> as the shared foundation.
         Hover over each area to highlight it. Click any dot to see the publication details.
       </p>
 
@@ -424,37 +399,30 @@ const ResearchStrands = () => {
               <stop offset="50%" stopColor="hsl(172,66%,40%)" stopOpacity="0.35" />
               <stop offset="100%" stopColor="hsl(172,66%,30%)" stopOpacity="0.08" />
             </radialGradient>
-            <radialGradient id="grad-feedback" cx="35%" cy="50%" r="70%">
+            <radialGradient id="grad-feedback" cx="35%" cy="60%" r="70%">
               <stop offset="0%" stopColor="hsl(263,70%,65%)" stopOpacity="0.65" />
               <stop offset="50%" stopColor="hsl(263,70%,55%)" stopOpacity="0.35" />
               <stop offset="100%" stopColor="hsl(263,70%,50%)" stopOpacity="0.08" />
             </radialGradient>
-            <radialGradient id="grad-humanai" cx="50%" cy="65%" r="70%">
-              <stop offset="0%" stopColor="hsl(24,85%,63%)" stopOpacity="0.65" />
-              <stop offset="50%" stopColor="hsl(24,85%,53%)" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="hsl(24,85%,48%)" stopOpacity="0.08" />
-            </radialGradient>
-            <radialGradient id="grad-writing" cx="65%" cy="50%" r="70%">
+            <radialGradient id="grad-writing" cx="65%" cy="60%" r="70%">
               <stop offset="0%" stopColor="hsl(205,80%,53%)" stopOpacity="0.65" />
               <stop offset="50%" stopColor="hsl(205,80%,43%)" stopOpacity="0.35" />
               <stop offset="100%" stopColor="hsl(205,80%,33%)" stopOpacity="0.08" />
             </radialGradient>
           </defs>
 
-          {/* Methodological foundation - subtle text labels outside the visualization */}
+          {/* Methodological label */}
           <text x={CX} y={28} textAnchor="middle" fontSize="10" fontWeight="600" fill="hsl(var(--foreground))" opacity={0.3} letterSpacing="4" fontFamily="inherit">
             DESIGN-BASED RESEARCH (DBR)
           </text>
           <line x1={CX - 160} y1={34} x2={CX - 40} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
           <line x1={CX + 40} y1={34} x2={CX + 160} y2={34} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="6 4" opacity={0.15} />
-          {/* Mixed Methods label moved below SVG to avoid overlap */}
 
-          <circle cx={CX} cy={CY} r={290} fill="none" stroke="hsl(var(--border))" strokeWidth="0.5" strokeDasharray="8 5" opacity={0.5} />
-
+          {/* Three circles */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
-            const e = ellipseParams[sid];
+            const c = circleParams[sid];
             return (
-              <ellipse key={sid} cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry}
+              <circle key={sid} cx={c.cx} cy={c.cy} r={c.r}
                 fill={`url(#grad-${sid})`}
                 opacity={isStrandHighlighted(sid) ? 0.75 : 0.15}
                 style={{ transition: "opacity 0.5s", pointerEvents: "none" }}
@@ -462,16 +430,18 @@ const ResearchStrands = () => {
             );
           })}
 
+          {/* Concentric guide rings */}
           {RING_RADII.map((r, i) => (
-            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.4} />
+            <circle key={i} cx={CX} cy={CY} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="1" strokeDasharray="6 4" opacity={0.3} />
           ))}
 
+          {/* Axis lines */}
           {(Object.keys(STRAND_POSITIONS) as StrandId[]).map((sid) => {
             const angle = (STRAND_POSITIONS[sid].angle * Math.PI) / 180;
             return (
               <line key={sid} x1={CX} y1={CY} x2={CX + RING_RADII[2] * Math.cos(angle)} y2={CY + RING_RADII[2] * Math.sin(angle)}
                 stroke="hsl(var(--border))" strokeWidth="0.8"
-                opacity={isStrandHighlighted(sid) ? 0.6 : 0.15}
+                opacity={isStrandHighlighted(sid) ? 0.5 : 0.1}
                 style={{ transition: "opacity 0.5s" }}
               />
             );
@@ -495,10 +465,12 @@ const ResearchStrands = () => {
             );
           })}
 
+          {/* Center hub */}
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
           <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
           <text x={CX} y={CY + 10} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>Education</text>
 
+          {/* Strand labels */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
             const pos = STRAND_POSITIONS[sid];
             const strand = STRANDS[sid];
@@ -533,6 +505,7 @@ const ResearchStrands = () => {
             );
           })}
 
+          {/* Publication dots */}
           {filteredPubs.map((pub) => {
             const pos = getPos(pub);
             const isHovered = hoveredDot?.pub.id === pub.id;
@@ -575,7 +548,7 @@ const ResearchStrands = () => {
         </AnimatePresence>
       </div>
 
-      {/* Mixed Methods label below visualization */}
+      {/* Mixed Methods label */}
       <div className="flex items-center justify-center gap-3 mt-2 mb-4">
         <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
         <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
