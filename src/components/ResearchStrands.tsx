@@ -338,46 +338,47 @@ const ResearchStrands = () => {
 
   return (
     <div>
-      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Research Strands</h2>
-      <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-        My work moves across three interconnected strands with <strong>AI in Education</strong> as the shared foundation.
-        Hover over each area to highlight it. Click any dot to see the publication details.
+      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 tracking-tight">Research Strands</h2>
+      <p className="text-xs sm:text-sm text-muted-foreground/70 mb-5 sm:mb-7 max-w-xl leading-relaxed">
+        My work moves across three interconnected strands with <strong className="text-foreground/90">AI in Education</strong> as the shared foundation.
+        Hover over each area to highlight it. Click any dot to see details.
       </p>
 
-      {/* Strand counts */}
-      <div className="flex flex-wrap justify-center gap-3 mb-5">
+      {/* Strand counts — refined pills */}
+      <div className="flex flex-wrap justify-center gap-2.5 mb-5">
         {(Object.keys(STRANDS) as StrandId[]).map((sid) => (
           <button
             key={sid}
             onMouseEnter={() => setHoveredStrand(sid)}
             onMouseLeave={() => setHoveredStrand(null)}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border"
+            className="px-3.5 py-1.5 rounded-full text-[11px] font-medium transition-all duration-400 border backdrop-blur-sm"
             style={{
-              borderColor: STRANDS[sid].color,
-              color: hoveredStrand === sid ? "white" : STRANDS[sid].color,
-              backgroundColor: hoveredStrand === sid ? STRANDS[sid].color : "transparent",
+              borderColor: hoveredStrand === sid ? STRANDS[sid].colorLight : `${STRANDS[sid].color}40`,
+              color: hoveredStrand === sid ? "white" : STRANDS[sid].colorLight,
+              backgroundColor: hoveredStrand === sid ? `${STRANDS[sid].color}` : "transparent",
+              boxShadow: hoveredStrand === sid ? `0 4px 20px -4px ${STRANDS[sid].color}60` : "none",
             }}
           >
-            {STRANDS[sid].label.replace("\n", " ")} ({countByStrand(sid)})
+            {STRANDS[sid].label.replace("\n", " ")} <span className="opacity-60 ml-0.5">({countByStrand(sid)})</span>
           </button>
         ))}
       </div>
 
-      {/* Filters */}
-      <div className="flex justify-center gap-2 mb-6 flex-wrap">
+      {/* Filters — sleeker */}
+      <div className="flex justify-center gap-1.5 mb-7 flex-wrap">
         {FILTER_OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => setFilter(opt.value)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
+            className={`px-3.5 py-1.5 rounded-full text-[11px] font-medium transition-all duration-300 border ${
               filter === opt.value
-                ? "bg-primary text-primary-foreground border-primary"
-                : "bg-background text-muted-foreground border-border hover:border-primary/50"
+                ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                : "bg-transparent text-muted-foreground/60 border-border/40 hover:border-border hover:text-muted-foreground"
             }`}
           >
             {opt.label}
             {opt.value !== "all" && (
-              <span className="ml-1 opacity-70">
+              <span className="ml-1 opacity-50">
                 ({PUBLICATIONS.filter((p) => p.type === opt.value).length})
               </span>
             )}
