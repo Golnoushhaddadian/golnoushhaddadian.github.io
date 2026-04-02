@@ -544,25 +544,6 @@ const ResearchStrands = () => {
         <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
       </div>
 
-      {/* Legend */}
-      <div className="flex justify-center gap-6 mt-6 flex-wrap text-xs text-muted-foreground">
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
-          Journal
-        </span>
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
-          Conference
-        </span>
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
-          Under Review
-        </span>
-        <span className="flex items-center gap-1.5">
-          <svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5" /><circle cx="7" cy="7" r="2.5" fill="currentColor" opacity="0.35" /></svg>
-          In Progress
-        </span>
-      </div>
 
       {/* Modal */}
       <AnimatePresence>
