@@ -102,24 +102,33 @@ const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY
   feedback: { angle: 330, labelX: CX + 180, labelY: 640, anchor: "middle" },
 };
 
+// Circle centers for positioning (must match circleParams below)
+const CIRCLE_CENTERS: Record<StrandId, { cx: number; cy: number }> = {
+  adaptive: { cx: CX, cy: CY - 160 },
+  writing: { cx: CX - 180, cy: CY + 110 },
+  feedback: { cx: CX + 180, cy: CY + 110 },
+};
+
 function getDotPosition(pub: Publication): { x: number; y: number } {
   const strands = pub.strands;
-  let avgX = 0, avgY = 0;
-  strands.forEach((s) => {
-    const angle = (STRAND_POSITIONS[s].angle * Math.PI) / 180;
-    avgX += Math.cos(angle);
-    avgY += Math.sin(angle);
-  });
-  avgX /= strands.length;
-  avgY /= strands.length;
-  const baseAngle = Math.atan2(avgY, avgX);
   const seed = hashCode(pub.id);
-  const radiusJitter = 0.35 + (((seed >> 4) & 0xff) / 255) * 0.6;
-  const maxJitter = strands.length === 1 ? 0.4 : 0.9;
-  const angleJitter = ((((seed >> 12) & 0xff) / 255) - 0.5) * maxJitter;
-  const r = RING_RADII[2] * radiusJitter;
-  const finalAngle = baseAngle + angleJitter;
-  return { x: CX + r * Math.cos(finalAngle), y: CY + r * Math.sin(finalAngle) };
+
+  // Compute target center: average of all strand circle centers
+  let targetX = 0, targetY = 0;
+  strands.forEach((s) => {
+    targetX += CIRCLE_CENTERS[s].cx;
+    targetY += CIRCLE_CENTERS[s].cy;
+  });
+  targetX /= strands.length;
+  targetY /= strands.length;
+
+  // For multi-strand pubs, place closer to the overlap center
+  // For single-strand pubs, spread within the circle
+  const spreadRadius = strands.length === 1 ? 140 : 80;
+  const angle = ((seed >> 4) & 0xff) / 255 * Math.PI * 2;
+  const r = spreadRadius * (0.2 + (((seed >> 12) & 0xff) / 255) * 0.7);
+  
+  return { x: targetX + r * Math.cos(angle), y: targetY + r * Math.sin(angle) };
 }
 
 function resolveOverlaps(pubs: Publication[], posMap: Map<string, { x: number; y: number }>) {
