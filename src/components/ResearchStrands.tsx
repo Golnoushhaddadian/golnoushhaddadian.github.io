@@ -509,7 +509,6 @@ const ResearchStrands = () => {
 
           {filteredPubs.map((pub) => {
             const pos = getPos(pub);
-            const color = getStrandColor(pub, pos);
             const isHovered = hoveredDot?.pub.id === pub.id;
             const isDragging = dragState.current.id === pub.id;
             const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
@@ -522,12 +521,12 @@ const ResearchStrands = () => {
                 onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
                 onMouseLeave={() => setHoveredDot(null)}
               >
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 16 : 4} fill={color} opacity={isHovered || isDragging ? 0.15 : 0.3}>
+                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 16 : 4} fill="hsl(var(--foreground))" opacity={isHovered || isDragging ? 0.08 : 0.15}>
                   <animate attributeName="r" values={isHovered || isDragging ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.15;0.05;0.15" dur="3s" repeatCount="indefinite" />
                 </circle>
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke={color} strokeWidth={isHovered || isDragging ? 3 : 2.5} filter="url(#dot-shadow)" />
-                <polygon points={`${pos.x},${pos.y - 3} ${pos.x + 2.6},${pos.y + 1.5} ${pos.x - 2.6},${pos.y + 1.5}`} fill={color} opacity={0.5} />
+                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke="hsl(var(--foreground))" strokeWidth={isHovered || isDragging ? 2.5 : 1.5} strokeOpacity={0.5} filter="url(#dot-shadow)" />
+                <circle cx={pos.x} cy={pos.y} r={3} fill="hsl(var(--foreground))" opacity={0.35} />
               </g>
             );
           })}
