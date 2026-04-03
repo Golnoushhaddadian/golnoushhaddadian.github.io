@@ -90,7 +90,7 @@ const FILTER_OPTIONS: { label: string; value: WorkType | "all" }[] = [
   { label: "In Progress", value: "inprogress" },
 ];
 
-const W = 900, H = 820;
+const W = 900, H = 880;
 const CX = 450, CY = 420;
 const RING_RADII = [85, 170, 260];
 
