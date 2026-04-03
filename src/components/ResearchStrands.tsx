@@ -20,7 +20,7 @@ interface Publication {
 
 const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string; colorLight: string }> = {
   adaptive: {
-    label: "Personalized & Adaptive\nLearning Environments",
+    label: "Personalized &\nAdaptive Learning\nEnvironments",
     subtitle: "Intelligent systems & learner-centered design",
     color: "hsl(172, 66%, 30%)",
     colorLight: "hsl(172, 66%, 50%)",
@@ -97,9 +97,9 @@ const RING_RADII = [85, 170, 260];
 // Triangular layout: adaptive top, writing bottom-left, feedback bottom-right
 // Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: 160, anchor: "middle" },
-  writing: { angle: 210, labelX: CX - 140, labelY: 580, anchor: "middle" },
-  feedback: { angle: 330, labelX: CX + 140, labelY: 580, anchor: "middle" },
+  adaptive: { angle: -90, labelX: CX, labelY: CY - 170, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 140, labelY: CY + 40, anchor: "middle" },
+  feedback: { angle: 330, labelX: CX + 140, labelY: CY + 50, anchor: "middle" },
 };
 
 // Circle centers for positioning (must match circleParams below)
@@ -424,15 +424,15 @@ const ResearchStrands = () => {
                 onMouseLeave={() => setHoveredStrand(null)}
               >
                 {lines.map((line, li) => (
-                  <text key={li} x={pos.labelX} y={pos.labelY + li * 22} textAnchor={pos.anchor} fontSize="16" fontWeight="800" fill={strand.color}>{line}</text>
+                  <text key={li} x={pos.labelX} y={pos.labelY + li * 18} textAnchor={pos.anchor} fontSize="13" fontWeight="800" fill={strand.color}>{line}</text>
                 ))}
                 {subtitleLines.length > 0 && subtitleLines[0] !== "" && subtitleLines.map((subLine, si) => (
                   <text
                     key={`sub-${si}`}
                     x={pos.labelX}
-                    y={pos.labelY + lines.length * 22 + 6 + si * 14}
+                    y={pos.labelY + lines.length * 18 + 4 + si * 12}
                     textAnchor={pos.anchor}
-                    fontSize="11"
+                    fontSize="9"
                     fill={strand.color}
                     opacity={0.7}
                     fontStyle="italic"
