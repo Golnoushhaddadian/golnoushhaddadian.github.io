@@ -90,7 +90,7 @@ const FILTER_OPTIONS: { label: string; value: WorkType | "all" }[] = [
   { label: "In Progress", value: "inprogress" },
 ];
 
-const W = 900, H = 880;
+const W = 900, H = 820;
 const CX = 450, CY = 420;
 const RING_RADII = [85, 170, 260];
 
@@ -98,8 +98,8 @@ const RING_RADII = [85, 170, 260];
 // Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
   adaptive: { angle: -90, labelX: CX, labelY: CY - 190, anchor: "middle" },
-  writing: { angle: 210, labelX: CX - 140, labelY: CY + 55, anchor: "middle" },
-  feedback: { angle: 330, labelX: CX + 140, labelY: CY + 72, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 140, labelY: CY + 62, anchor: "middle" },
+  feedback: { angle: 330, labelX: CX + 140, labelY: CY + 62, anchor: "middle" },
 };
 
 // Circle centers for positioning (must match circleParams below)
@@ -418,9 +418,12 @@ const ResearchStrands = () => {
           <line x1={CX - 140} y1={CY + 260} x2={CX - 30} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
           <line x1={CX + 30} y1={CY + 260} x2={CX + 140} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
 
-          {/* Higher Education ring */}
-          <circle cx={CX} cy={CY + 10} r={310} fill="none" stroke="hsl(var(--foreground))" strokeWidth="1.2" strokeDasharray="6 4" opacity={0.15} />
-          <text x={CX} y={CY - 308} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
+          {/* Higher Education arc */}
+          <path
+            d={`M ${CX - 320} ${CY + 30} A 320 320 0 0 1 ${CX + 320} ${CY + 30}`}
+            fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.15}
+          />
+          <text x={CX} y={CY + 340} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
             HIGHER EDUCATION
           </text>
 
