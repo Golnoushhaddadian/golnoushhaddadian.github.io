@@ -98,8 +98,8 @@ const RING_RADII = [85, 170, 260];
 // Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
   adaptive: { angle: -90, labelX: CX, labelY: CY - 190, anchor: "middle" },
-  writing: { angle: 210, labelX: CX - 140, labelY: CY + 55, anchor: "middle" },
-  feedback: { angle: 330, labelX: CX + 140, labelY: CY + 72, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 140, labelY: CY + 62, anchor: "middle" },
+  feedback: { angle: 330, labelX: CX + 140, labelY: CY + 62, anchor: "middle" },
 };
 
 // Circle centers for positioning (must match circleParams below)
