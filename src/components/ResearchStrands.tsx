@@ -443,9 +443,9 @@ const ResearchStrands = () => {
                   <text
                     key={`sub-${si}`}
                     x={pos.labelX}
-                    y={pos.labelY + lines.length * 26 + 8 + si * 16}
+                    y={pos.labelY + lines.length * 24 + 7 + si * 15}
                     textAnchor={pos.anchor}
-                    fontSize="13"
+                    fontSize="12"
                     fill={strand.color}
                     opacity={0.7}
                     fontStyle="italic"
