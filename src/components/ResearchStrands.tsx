@@ -432,7 +432,7 @@ const ResearchStrands = () => {
                     x={pos.labelX}
                     y={pos.labelY + lines.length * 18 + 4 + si * 12}
                     textAnchor={pos.anchor}
-                    fontSize="11"
+                    fontSize="9"
                     fill={strand.color}
                     opacity={0.7}
                     fontStyle="italic"
