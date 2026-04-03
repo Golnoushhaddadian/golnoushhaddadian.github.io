@@ -20,7 +20,7 @@ interface Publication {
 
 const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string; colorLight: string }> = {
   adaptive: {
-    label: "Personalized & Adaptive\nLearning Environments",
+    label: "Personalized &\nAdaptive Learning\nEnvironments",
     subtitle: "Intelligent systems & learner-centered design",
     color: "hsl(172, 66%, 30%)",
     colorLight: "hsl(172, 66%, 50%)",
