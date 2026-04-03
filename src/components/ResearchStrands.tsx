@@ -418,10 +418,17 @@ const ResearchStrands = () => {
           <line x1={CX - 140} y1={CY + 260} x2={CX - 30} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
           <line x1={CX + 30} y1={CY + 260} x2={CX + 140} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
 
-          {/* Higher Education arc - gap at top to avoid DBR label */}
+          {/* Higher Education arc - small gap at top for DBR label */}
+          {/* Left arc segment */}
           <path
-            d={`M ${CX + 160} ${CY - 290} A 330 330 0 1 1 ${CX - 160} ${CY - 290}`}
+            d={`M ${CX - 80} ${CY - 325} A 330 330 0 1 0 ${CX + 80} ${CY - 325}`}
             fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.15}
+          />
+          {/* Right arc segment */}
+          <path
+            d={`M ${CX + 80} ${CY - 325} A 330 330 0 0 0 ${CX - 80} ${CY - 325}`}
+            fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.15}
+            strokeOpacity="0"
           />
           <text x={CX} y={CY + 350} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
             HIGHER EDUCATION
