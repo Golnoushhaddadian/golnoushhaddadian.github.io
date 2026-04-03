@@ -33,7 +33,7 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
   },
   writing: {
     label: "Language Education",
-    subtitle: "Writing, Argumentation, AWE\nCALL & Assessment",
+    subtitle: "Writing, Argumentation, AWE, CALL & Assessment",
     color: "hsl(205, 80%, 33%)",
     colorLight: "hsl(205, 80%, 53%)",
   },
@@ -417,6 +417,12 @@ const ResearchStrands = () => {
           </text>
           <line x1={CX - 140} y1={CY + 260} x2={CX - 30} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
           <line x1={CX + 30} y1={CY + 260} x2={CX + 140} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+
+          {/* Higher Education ring */}
+          <circle cx={CX} cy={CY} r={120} fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.18} />
+          <text x={CX} y={CY - 126} textAnchor="middle" fontSize="10" fontWeight="700" letterSpacing="2.5" fill="hsl(var(--foreground))" opacity={0.35}>
+            HIGHER EDUCATION
+          </text>
 
           {/* Center hub */}
           <circle cx={CX} cy={CY} r={65} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
