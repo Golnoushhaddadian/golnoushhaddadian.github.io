@@ -97,9 +97,9 @@ const RING_RADII = [85, 170, 260];
 // Triangular layout: adaptive top, writing bottom-left, feedback bottom-right
 // Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: 160, anchor: "middle" },
-  writing: { angle: 210, labelX: CX - 140, labelY: 580, anchor: "middle" },
-  feedback: { angle: 330, labelX: CX + 140, labelY: 580, anchor: "middle" },
+  adaptive: { angle: -90, labelX: CX, labelY: CY - 170, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 140, labelY: CY + 40, anchor: "middle" },
+  feedback: { angle: 330, labelX: CX + 140, labelY: CY + 50, anchor: "middle" },
 };
 
 // Circle centers for positioning (must match circleParams below)
