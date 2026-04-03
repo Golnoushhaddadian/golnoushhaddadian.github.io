@@ -424,7 +424,7 @@ const ResearchStrands = () => {
                 onMouseLeave={() => setHoveredStrand(null)}
               >
                 {lines.map((line, li) => (
-                  <text key={li} x={pos.labelX} y={pos.labelY + li * 18} textAnchor={pos.anchor} fontSize="13" fontWeight="800" fill={strand.color}>{line}</text>
+                  <text key={li} x={pos.labelX} y={pos.labelY + li * 22} textAnchor={pos.anchor} fontSize="16" fontWeight="800" fill={strand.color}>{line}</text>
                 ))}
                 {subtitleLines.length > 0 && subtitleLines[0] !== "" && subtitleLines.map((subLine, si) => (
                   <text
