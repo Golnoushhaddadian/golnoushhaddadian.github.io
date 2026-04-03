@@ -444,47 +444,7 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Publication dots */}
-          {filteredPubs.map((pub) => {
-            const pos = getPos(pub);
-            const isHovered = hoveredDot?.pub.id === pub.id;
-            const isDragging = dragState.current.id === pub.id;
-            const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
-            return (
-              <g key={pub.id}
-                style={{ opacity: strandMatch ? 1 : 0.15, transition: "opacity 0.35s", cursor: isDragging ? "grabbing" : "grab" }}
-                onPointerDown={(e) => handlePointerDown(pub, e)}
-                onPointerMove={handlePointerMove}
-                onPointerUp={() => handlePointerUp(pub)}
-                onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
-                onMouseLeave={() => setHoveredDot(null)}
-              >
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 16 : 4} fill="hsl(var(--foreground))" opacity={isHovered || isDragging ? 0.08 : 0.15}>
-                  <animate attributeName="r" values={isHovered || isDragging ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.15;0.05;0.15" dur="3s" repeatCount="indefinite" />
-                </circle>
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke="hsl(var(--foreground))" strokeWidth={isHovered || isDragging ? 2.5 : 1.5} strokeOpacity={0.5} filter="url(#dot-shadow)" />
-                <circle cx={pos.x} cy={pos.y} r={3} fill="hsl(var(--foreground))" opacity={0.35} />
-              </g>
-            );
-          })}
         </svg>
-
-        <AnimatePresence>
-          {hoveredDot && (() => {
-            const livePos = positions.current.get(hoveredDot.pub.id) || hoveredDot;
-            return (
-              <motion.div
-                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
-                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
-              >
-                <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
-                <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
-              </motion.div>
-            );
-          })()}
-        </AnimatePresence>
       </div>
 
       {/* Mixed Methods label */}
@@ -493,43 +453,6 @@ const ResearchStrands = () => {
         <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
         <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
       </div>
-
-
-      {/* Modal */}
-      <AnimatePresence>
-        {selectedPub && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-            onClick={() => setSelectedPub(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-card text-card-foreground border border-border rounded-xl shadow-2xl max-w-lg w-full p-6 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button onClick={() => setSelectedPub(null)} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors">
-                <X className="h-5 w-5" />
-              </button>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
-                  {TYPE_LABELS[selectedPub.type]}
-                </span>
-                {selectedPub.strands.map((s) => (
-                  <span key={s} className="px-2.5 py-0.5 rounded-full text-xs font-medium border" style={{ borderColor: STRANDS[s].color, color: STRANDS[s].color }}>
-                    {STRANDS[s].label.replace("\n", " ")}
-                  </span>
-                ))}
-              </div>
-              <h3 className="text-lg font-bold mb-2 leading-tight">{selectedPub.title}</h3>
-              <p className="text-sm text-muted-foreground mb-1">{selectedPub.authors}</p>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-medium">{selectedPub.venue}</span> · {selectedPub.year}
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
