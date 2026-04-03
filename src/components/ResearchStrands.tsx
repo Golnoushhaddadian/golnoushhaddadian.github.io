@@ -97,9 +97,9 @@ const RING_RADII = [85, 170, 260];
 // Triangular layout: adaptive top, writing bottom-left, feedback bottom-right
 // Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: 120, anchor: "middle" },
-  writing: { angle: 210, labelX: CX - 180, labelY: 640, anchor: "middle" },
-  feedback: { angle: 330, labelX: CX + 180, labelY: 640, anchor: "middle" },
+  adaptive: { angle: -90, labelX: CX, labelY: 160, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 140, labelY: 580, anchor: "middle" },
+  feedback: { angle: 330, labelX: CX + 140, labelY: 580, anchor: "middle" },
 };
 
 // Circle centers for positioning (must match circleParams below)
@@ -331,9 +331,9 @@ const ResearchStrands = () => {
 
   // Triangular layout: 3 circles
   const circleParams: Record<StrandId, { cx: number; cy: number; r: number }> = {
-    adaptive: { cx: CX, cy: CY - 160, r: 240 },
-    writing: { cx: CX - 180, cy: CY + 110, r: 240 },
-    feedback: { cx: CX + 180, cy: CY + 110, r: 240 },
+    adaptive: { cx: CX, cy: CY - 120, r: 170 },
+    writing: { cx: CX - 140, cy: CY + 80, r: 170 },
+    feedback: { cx: CX + 140, cy: CY + 80, r: 170 },
   };
 
   return (
@@ -344,46 +344,11 @@ const ResearchStrands = () => {
         Hover over each area to highlight it. Click any dot to see the publication details.
       </p>
 
-      {/* Strand counts */}
-      <div className="flex flex-wrap justify-center gap-3 mb-5">
-        {(Object.keys(STRANDS) as StrandId[]).map((sid) => (
-          <button
-            key={sid}
-            onMouseEnter={() => setHoveredStrand(sid)}
-            onMouseLeave={() => setHoveredStrand(null)}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border"
-            style={{
-              borderColor: STRANDS[sid].color,
-              color: hoveredStrand === sid ? "white" : STRANDS[sid].color,
-              backgroundColor: hoveredStrand === sid ? STRANDS[sid].color : "transparent",
-            }}
-          >
-            {STRANDS[sid].label.replace("\n", " ")} ({countByStrand(sid)})
-          </button>
-        ))}
-      </div>
 
-      {/* Filters */}
-      <div className="flex justify-center gap-2 mb-6 flex-wrap">
-        {FILTER_OPTIONS.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => setFilter(opt.value)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
-              filter === opt.value
-                ? "bg-primary text-primary-foreground border-primary"
-                : "bg-background text-muted-foreground border-border hover:border-primary/50"
-            }`}
-          >
-            {opt.label}
-            {opt.value !== "all" && (
-              <span className="ml-1 opacity-70">
-                ({PUBLICATIONS.filter((p) => p.type === opt.value).length})
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
+
+
+
+
 
       {/* SVG Visualization */}
       <div className="relative max-w-[860px] mx-auto select-none">
@@ -437,28 +402,13 @@ const ResearchStrands = () => {
 
 
 
-          {/* Peer connection lines */}
-          {connectionLines.map(({ a, b }, i) => {
-            const posA = positions.current.get(a);
-            const posB = positions.current.get(b);
-            if (!posA || !posB) return null;
-            const pubA = PUBLICATIONS.find(p => p.id === a);
-            const pubB = PUBLICATIONS.find(p => p.id === b);
-            const strandMatchA = hoveredStrand && pubA ? pubA.strands.includes(hoveredStrand) : true;
-            const strandMatchB = hoveredStrand && pubB ? pubB.strands.includes(hoveredStrand) : true;
-            return (
-              <line key={`conn-${i}`} x1={posA.x} y1={posA.y} x2={posB.x} y2={posB.y}
-                stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5"
-                opacity={strandMatchA && strandMatchB ? 0.2 : 0.03}
-                style={{ transition: "opacity 0.4s" }}
-              />
-            );
-          })}
+
+
 
           {/* Center hub */}
-          <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
-          <text x={CX} y={CY - 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
-          <text x={CX} y={CY + 10} textAnchor="middle" fontSize="10" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>Education</text>
+          <circle cx={CX} cy={CY} r={65} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
+          <text x={CX} y={CY - 6} textAnchor="middle" fontSize="14" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>AI in</text>
+          <text x={CX} y={CY + 12} textAnchor="middle" fontSize="14" fontWeight="800" fill="hsl(var(--foreground))" opacity={0.85}>Education</text>
 
           {/* Strand labels */}
           {(Object.keys(STRANDS) as StrandId[]).map((sid) => {
@@ -494,47 +444,7 @@ const ResearchStrands = () => {
             );
           })}
 
-          {/* Publication dots */}
-          {filteredPubs.map((pub) => {
-            const pos = getPos(pub);
-            const isHovered = hoveredDot?.pub.id === pub.id;
-            const isDragging = dragState.current.id === pub.id;
-            const strandMatch = hoveredStrand ? pub.strands.includes(hoveredStrand) : true;
-            return (
-              <g key={pub.id}
-                style={{ opacity: strandMatch ? 1 : 0.15, transition: "opacity 0.35s", cursor: isDragging ? "grabbing" : "grab" }}
-                onPointerDown={(e) => handlePointerDown(pub, e)}
-                onPointerMove={handlePointerMove}
-                onPointerUp={() => handlePointerUp(pub)}
-                onMouseEnter={() => setHoveredDot({ pub, x: pos.x, y: pos.y })}
-                onMouseLeave={() => setHoveredDot(null)}
-              >
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 16 : 4} fill="hsl(var(--foreground))" opacity={isHovered || isDragging ? 0.08 : 0.15}>
-                  <animate attributeName="r" values={isHovered || isDragging ? "12;18;12" : "3;5;3"} dur="2.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.15;0.05;0.15" dur="3s" repeatCount="indefinite" />
-                </circle>
-                <circle cx={pos.x} cy={pos.y} r={isHovered || isDragging ? 11 : 8} fill="hsl(var(--background))" stroke="hsl(var(--foreground))" strokeWidth={isHovered || isDragging ? 2.5 : 1.5} strokeOpacity={0.5} filter="url(#dot-shadow)" />
-                <circle cx={pos.x} cy={pos.y} r={3} fill="hsl(var(--foreground))" opacity={0.35} />
-              </g>
-            );
-          })}
         </svg>
-
-        <AnimatePresence>
-          {hoveredDot && (() => {
-            const livePos = positions.current.get(hoveredDot.pub.id) || hoveredDot;
-            return (
-              <motion.div
-                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                className="absolute pointer-events-none z-10 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg px-3 py-2 max-w-[280px]"
-                style={{ left: `${(livePos.x / W) * 100}%`, top: `${(livePos.y / H) * 100 - 6}%`, transform: "translate(-50%, -100%)" }}
-              >
-                <p className="text-xs font-semibold leading-tight mb-1">{hoveredDot.pub.title}</p>
-                <p className="text-[10px] text-muted-foreground">{hoveredDot.pub.venue} · {hoveredDot.pub.year} · {TYPE_LABELS[hoveredDot.pub.type]}</p>
-              </motion.div>
-            );
-          })()}
-        </AnimatePresence>
       </div>
 
       {/* Mixed Methods label */}
@@ -543,43 +453,6 @@ const ResearchStrands = () => {
         <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
         <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
       </div>
-
-
-      {/* Modal */}
-      <AnimatePresence>
-        {selectedPub && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-            onClick={() => setSelectedPub(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-card text-card-foreground border border-border rounded-xl shadow-2xl max-w-lg w-full p-6 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button onClick={() => setSelectedPub(null)} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors">
-                <X className="h-5 w-5" />
-              </button>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: STRANDS[selectedPub.strands[0]].color }}>
-                  {TYPE_LABELS[selectedPub.type]}
-                </span>
-                {selectedPub.strands.map((s) => (
-                  <span key={s} className="px-2.5 py-0.5 rounded-full text-xs font-medium border" style={{ borderColor: STRANDS[s].color, color: STRANDS[s].color }}>
-                    {STRANDS[s].label.replace("\n", " ")}
-                  </span>
-                ))}
-              </div>
-              <h3 className="text-lg font-bold mb-2 leading-tight">{selectedPub.title}</h3>
-              <p className="text-sm text-muted-foreground mb-1">{selectedPub.authors}</p>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-medium">{selectedPub.venue}</span> · {selectedPub.year}
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
