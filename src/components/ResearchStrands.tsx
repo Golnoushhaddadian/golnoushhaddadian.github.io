@@ -331,9 +331,9 @@ const ResearchStrands = () => {
 
   // Triangular layout: 3 circles
   const circleParams: Record<StrandId, { cx: number; cy: number; r: number }> = {
-    adaptive: { cx: CX, cy: CY - 160, r: 240 },
-    writing: { cx: CX - 180, cy: CY + 110, r: 240 },
-    feedback: { cx: CX + 180, cy: CY + 110, r: 240 },
+    adaptive: { cx: CX, cy: CY - 120, r: 170 },
+    writing: { cx: CX - 140, cy: CY + 80, r: 170 },
+    feedback: { cx: CX + 140, cy: CY + 80, r: 170 },
   };
 
   return (
