@@ -405,11 +405,11 @@ const ResearchStrands = () => {
 
 
           {/* Design-Based Research label above the green (adaptive) circle */}
-          <text x={CX} y={CY - 300} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3} textDecoration="none">
+          <text x={CX} y={CY - 350} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3} textDecoration="none">
             DESIGN-BASED RESEARCH (DBR)
           </text>
-          <line x1={CX - 140} y1={CY - 290} x2={CX - 30} y2={CY - 290} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
-          <line x1={CX + 30} y1={CY - 290} x2={CX + 140} y2={CY - 290} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+          <line x1={CX - 140} y1={CY - 340} x2={CX - 30} y2={CY - 340} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+          <line x1={CX + 30} y1={CY - 340} x2={CX + 140} y2={CY - 340} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
 
           {/* Mixed Methods label below the two bottom circles */}
           <text x={CX} y={CY + 270} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
@@ -418,18 +418,8 @@ const ResearchStrands = () => {
           <line x1={CX - 140} y1={CY + 260} x2={CX - 30} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
           <line x1={CX + 30} y1={CY + 260} x2={CX + 140} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
 
-          {/* Higher Education arc - small gap at top for DBR label */}
-          {/* Left arc segment */}
-          <path
-            d={`M ${CX - 80} ${CY - 325} A 330 330 0 1 0 ${CX + 80} ${CY - 325}`}
-            fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.15}
-          />
-          {/* Right arc segment */}
-          <path
-            d={`M ${CX + 80} ${CY - 325} A 330 330 0 0 0 ${CX - 80} ${CY - 325}`}
-            fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.15}
-            strokeOpacity="0"
-          />
+          {/* Higher Education - full circle */}
+          <circle cx={CX} cy={CY} r={330} fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.15} />
           <text x={CX} y={CY + 350} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
             HIGHER EDUCATION
           </text>
