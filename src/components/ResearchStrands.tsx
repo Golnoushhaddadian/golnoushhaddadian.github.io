@@ -404,6 +404,19 @@ const ResearchStrands = () => {
 
 
 
+          {/* Design-Based Research label above the green (adaptive) circle */}
+          <text x={CX} y={CY - 300} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3} textDecoration="none">
+            DESIGN-BASED RESEARCH (DBR)
+          </text>
+          <line x1={CX - 140} y1={CY - 290} x2={CX - 30} y2={CY - 290} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+          <line x1={CX + 30} y1={CY - 290} x2={CX + 140} y2={CY - 290} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+
+          {/* Mixed Methods label below the two bottom circles */}
+          <text x={CX} y={CY + 270} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
+            MIXED METHODS
+          </text>
+          <line x1={CX - 140} y1={CY + 260} x2={CX - 30} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+          <line x1={CX + 30} y1={CY + 260} x2={CX + 140} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
 
           {/* Center hub */}
           <circle cx={CX} cy={CY} r={65} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
