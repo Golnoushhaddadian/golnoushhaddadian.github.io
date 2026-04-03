@@ -344,24 +344,8 @@ const ResearchStrands = () => {
         Hover over each area to highlight it. Click any dot to see the publication details.
       </p>
 
-      {/* Strand counts */}
-      <div className="flex flex-wrap justify-center gap-3 mb-5">
-        {(Object.keys(STRANDS) as StrandId[]).map((sid) => (
-          <button
-            key={sid}
-            onMouseEnter={() => setHoveredStrand(sid)}
-            onMouseLeave={() => setHoveredStrand(null)}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border"
-            style={{
-              borderColor: STRANDS[sid].color,
-              color: hoveredStrand === sid ? "white" : STRANDS[sid].color,
-              backgroundColor: hoveredStrand === sid ? STRANDS[sid].color : "transparent",
-            }}
-          >
-            {STRANDS[sid].label.replace("\n", " ")} ({countByStrand(sid)})
-          </button>
-        ))}
-      </div>
+
+
 
       {/* Filters */}
       <div className="flex justify-center gap-2 mb-6 flex-wrap">
