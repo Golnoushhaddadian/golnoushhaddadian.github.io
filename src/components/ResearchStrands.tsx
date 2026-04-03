@@ -418,9 +418,12 @@ const ResearchStrands = () => {
           <line x1={CX - 140} y1={CY + 260} x2={CX - 30} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
           <line x1={CX + 30} y1={CY + 260} x2={CX + 140} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
 
-          {/* Higher Education ring */}
-          <circle cx={CX} cy={CY + 10} r={310} fill="none" stroke="hsl(var(--foreground))" strokeWidth="1.2" strokeDasharray="6 4" opacity={0.15} />
-          <text x={CX} y={CY - 308} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
+          {/* Higher Education arc */}
+          <path
+            d={`M ${CX - 320} ${CY + 30} A 320 320 0 0 1 ${CX + 320} ${CY + 30}`}
+            fill="none" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="6 4" opacity={0.15}
+          />
+          <text x={CX} y={CY + 340} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
             HIGHER EDUCATION
           </text>
 
