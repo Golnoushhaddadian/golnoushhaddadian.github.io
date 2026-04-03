@@ -402,23 +402,8 @@ const ResearchStrands = () => {
 
 
 
-          {/* Peer connection lines */}
-          {connectionLines.map(({ a, b }, i) => {
-            const posA = positions.current.get(a);
-            const posB = positions.current.get(b);
-            if (!posA || !posB) return null;
-            const pubA = PUBLICATIONS.find(p => p.id === a);
-            const pubB = PUBLICATIONS.find(p => p.id === b);
-            const strandMatchA = hoveredStrand && pubA ? pubA.strands.includes(hoveredStrand) : true;
-            const strandMatchB = hoveredStrand && pubB ? pubB.strands.includes(hoveredStrand) : true;
-            return (
-              <line key={`conn-${i}`} x1={posA.x} y1={posA.y} x2={posB.x} y2={posB.y}
-                stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5"
-                opacity={strandMatchA && strandMatchB ? 0.2 : 0.03}
-                style={{ transition: "opacity 0.4s" }}
-              />
-            );
-          })}
+
+
 
           {/* Center hub */}
           <circle cx={CX} cy={CY} r={42} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
