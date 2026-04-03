@@ -97,8 +97,8 @@ const RING_RADII = [85, 170, 260];
 // Triangular layout: adaptive top, writing bottom-left, feedback bottom-right
 // Labels positioned INSIDE the circles near the outer edges
 const STRAND_POSITIONS: Record<StrandId, { angle: number; labelX: number; labelY: number; anchor: string }> = {
-  adaptive: { angle: -90, labelX: CX, labelY: CY - 170, anchor: "middle" },
-  writing: { angle: 210, labelX: CX - 140, labelY: CY + 40, anchor: "middle" },
+  adaptive: { angle: -90, labelX: CX, labelY: CY - 190, anchor: "middle" },
+  writing: { angle: 210, labelX: CX - 140, labelY: CY + 30, anchor: "middle" },
   feedback: { angle: 330, labelX: CX + 140, labelY: CY + 50, anchor: "middle" },
 };
 
@@ -404,6 +404,19 @@ const ResearchStrands = () => {
 
 
 
+          {/* Design-Based Research label above the green (adaptive) circle */}
+          <text x={CX} y={CY - 300} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3} textDecoration="none">
+            DESIGN-BASED RESEARCH (DBR)
+          </text>
+          <line x1={CX - 140} y1={CY - 290} x2={CX - 30} y2={CY - 290} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+          <line x1={CX + 30} y1={CY - 290} x2={CX + 140} y2={CY - 290} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+
+          {/* Mixed Methods label below the two bottom circles */}
+          <text x={CX} y={CY + 270} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="3" fill="hsl(var(--foreground))" opacity={0.3}>
+            MIXED METHODS
+          </text>
+          <line x1={CX - 140} y1={CY + 260} x2={CX - 30} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
+          <line x1={CX + 30} y1={CY + 260} x2={CX + 140} y2={CY + 260} stroke="hsl(var(--foreground))" strokeWidth="0.8" strokeDasharray="5 5" opacity={0.15} />
 
           {/* Center hub */}
           <circle cx={CX} cy={CY} r={65} fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" filter="url(#dot-shadow)" />
@@ -424,15 +437,15 @@ const ResearchStrands = () => {
                 onMouseLeave={() => setHoveredStrand(null)}
               >
                 {lines.map((line, li) => (
-                  <text key={li} x={pos.labelX} y={pos.labelY + li * 18} textAnchor={pos.anchor} fontSize="13" fontWeight="800" fill={strand.color}>{line}</text>
+                  <text key={li} x={pos.labelX} y={pos.labelY + li * 22} textAnchor={pos.anchor} fontSize="16" fontWeight="800" fill={strand.color}>{line}</text>
                 ))}
                 {subtitleLines.length > 0 && subtitleLines[0] !== "" && subtitleLines.map((subLine, si) => (
                   <text
                     key={`sub-${si}`}
                     x={pos.labelX}
-                    y={pos.labelY + lines.length * 18 + 4 + si * 12}
+                    y={pos.labelY + lines.length * 22 + 6 + si * 14}
                     textAnchor={pos.anchor}
-                    fontSize="9"
+                    fontSize="11"
                     fill={strand.color}
                     opacity={0.7}
                     fontStyle="italic"
@@ -447,12 +460,8 @@ const ResearchStrands = () => {
         </svg>
       </div>
 
-      {/* Mixed Methods label */}
-      <div className="flex items-center justify-center gap-3 mt-2 mb-4">
-        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
-        <span className="text-[10px] font-semibold tracking-[4px] text-foreground/30 uppercase">Mixed Methods</span>
-        <div className="h-px w-16 bg-foreground/15" style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 4px, hsl(var(--foreground) / 0.15) 4px, hsl(var(--foreground) / 0.15) 10px)" }} />
-      </div>
+
+
     </div>
   );
 };
