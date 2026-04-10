@@ -27,13 +27,13 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
   },
   feedback: {
     label: "Feedback and\nAssessment",
-    subtitle: "Formative Assessment and Feedback; AI-Supported Assessment;\nComputer-Adaptive Testing (CAT); Peer Evaluation",
+    subtitle: "Formative Assessment and Feedback;\nAI-Supported Assessment;\nComputer-Adaptive Testing (CAT); Peer Evaluation",
     color: "hsl(263, 70%, 50%)",
     colorLight: "hsl(263, 70%, 65%)",
   },
   writing: {
     label: "Language Education",
-    subtitle: "Writing, Argumentation, AWE, CALL & Assessment",
+    subtitle: "Writing, Argumentation, AWE & CALL",
     color: "hsl(205, 80%, 33%)",
     colorLight: "hsl(205, 80%, 53%)",
   },
