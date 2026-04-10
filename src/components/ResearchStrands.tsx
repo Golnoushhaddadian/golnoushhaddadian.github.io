@@ -26,8 +26,8 @@ const STRANDS: Record<StrandId, { label: string; subtitle: string; color: string
     colorLight: "hsl(172, 66%, 50%)",
   },
   feedback: {
-    label: "Feedback",
-    subtitle: "Formative assessment & peer evaluation",
+    label: "Feedback and\nAssessment",
+    subtitle: "Formative Assessment and Feedback; AI-Supported Assessment;\nComputer-Adaptive Testing (CAT); Peer Evaluation",
     color: "hsl(263, 70%, 50%)",
     colorLight: "hsl(263, 70%, 65%)",
   },
