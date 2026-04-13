@@ -47,7 +47,7 @@ const useCountUp = (end: number, duration = 1800, startOnView = true) => {
 
 const AboutMe = () => {
   useDocumentHead({
-    title: 'Golnoush (Lia) Haddadian — AI in Education & Argumentative Writing Researcher',
+    title: 'Golnoush (Lia) Haddadian — AI in Education, Personalized Learning',
     description: 'Academic portfolio of Dr. Golnoush (Lia) Haddadian. Postdoctoral Associate researching AI in Education, argumentative writing, automated writing evaluation, personalized learning, and formative assessment.',
     canonical: '/',
   });
