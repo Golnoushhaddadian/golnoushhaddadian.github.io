@@ -123,18 +123,18 @@ const AboutMe = () => {
             <p>My core research areas include:</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-1">
               {[
-                { label: 'AI in Education', color: 'border-[hsl(210,55%,55%)] text-[hsl(210,55%,40%)] hover:bg-[hsl(210,55%,55%)]/10' },
-                { label: 'Personalized Learning', color: 'border-[hsl(280,40%,55%)] text-[hsl(280,40%,45%)] hover:bg-[hsl(280,40%,55%)]/10' },
-                { label: 'Feedback', color: 'border-[hsl(160,45%,45%)] text-[hsl(160,45%,35%)] hover:bg-[hsl(160,45%,45%)]/10' },
-                { label: 'Assessment & Evaluation', color: 'border-[hsl(25,70%,55%)] text-[hsl(25,70%,45%)] hover:bg-[hsl(25,70%,55%)]/10' },
-                { label: 'Higher Education', color: 'border-[hsl(345,55%,55%)] text-[hsl(345,55%,45%)] hover:bg-[hsl(345,55%,55%)]/10' },
-                { label: 'Design & Development', color: 'border-[hsl(195,55%,45%)] text-[hsl(195,55%,35%)] hover:bg-[hsl(195,55%,45%)]/10' },
-                { label: 'Mixed-Methods', color: 'border-[hsl(45,70%,50%)] text-[hsl(40,70%,40%)] hover:bg-[hsl(45,70%,50%)]/10' },
-                { label: 'Design-Based Research', color: 'border-[hsl(140,40%,45%)] text-[hsl(140,40%,35%)] hover:bg-[hsl(140,40%,45%)]/10' },
-              ].map(({ label, color }) => (
+                { label: 'AI in Education', bg: 'bg-[hsl(210,55%,92%)] border-[hsl(210,55%,75%)]' },
+                { label: 'Personalized Learning', bg: 'bg-[hsl(280,40%,92%)] border-[hsl(280,40%,78%)]' },
+                { label: 'Feedback', bg: 'bg-[hsl(160,45%,90%)] border-[hsl(160,45%,72%)]' },
+                { label: 'Assessment & Evaluation', bg: 'bg-[hsl(25,70%,90%)] border-[hsl(25,70%,75%)]' },
+                { label: 'Higher Education', bg: 'bg-[hsl(345,55%,92%)] border-[hsl(345,55%,80%)]' },
+                { label: 'Design & Development', bg: 'bg-[hsl(195,55%,90%)] border-[hsl(195,55%,72%)]' },
+                { label: 'Mixed-Methods', bg: 'bg-[hsl(45,75%,88%)] border-[hsl(45,70%,70%)]' },
+                { label: 'Design-Based Research', bg: 'bg-[hsl(140,40%,88%)] border-[hsl(140,40%,72%)]' },
+              ].map(({ label, bg }) => (
                 <span
                   key={label}
-                  className={`inline-block border ${color} text-[10px] sm:text-xs md:text-sm font-medium px-2.5 py-1 rounded-md transition-colors duration-200`}
+                  className={`inline-block border ${bg} text-foreground text-[10px] sm:text-xs md:text-sm font-medium px-2.5 py-1 rounded-md transition-colors duration-200`}
                 >
                   {label}
                 </span>
