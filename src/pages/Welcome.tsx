@@ -3,6 +3,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from "lucide-react";
 
 import ResearchStrands from "@/components/ResearchStrands";
+import CoauthorshipNetwork from "@/components/CoauthorshipNetwork";
 import { Button } from "@/components/ui/button";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 import { useEffect, useRef, useState } from "react";
@@ -217,7 +218,10 @@ const AboutMe = () => {
           </p>
         </section>
 
-
+        <section className="mt-12 sm:mt-16 md:mt-20">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Collaboration Network</h2>
+          <CoauthorshipNetwork />
+        </section>
 
 
 
