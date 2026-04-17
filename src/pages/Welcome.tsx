@@ -123,20 +123,20 @@ const AboutMe = () => {
             <p>My core research areas include:</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-1">
               {[
-                'AI in Education',
-                'Personalized Learning',
-                'Feedback',
-                'Assessment & Evaluation',
-                'Higher Education',
-                'Design & Development',
-                'Mixed-Methods',
-                'Design-Based Research',
-              ].map((keyword) => (
+                { label: 'AI in Education', color: 'border-[hsl(210,55%,55%)] text-[hsl(210,55%,40%)] hover:bg-[hsl(210,55%,55%)]/10' },
+                { label: 'Personalized Learning', color: 'border-[hsl(280,40%,55%)] text-[hsl(280,40%,45%)] hover:bg-[hsl(280,40%,55%)]/10' },
+                { label: 'Feedback', color: 'border-[hsl(160,45%,45%)] text-[hsl(160,45%,35%)] hover:bg-[hsl(160,45%,45%)]/10' },
+                { label: 'Assessment & Evaluation', color: 'border-[hsl(25,70%,55%)] text-[hsl(25,70%,45%)] hover:bg-[hsl(25,70%,55%)]/10' },
+                { label: 'Higher Education', color: 'border-[hsl(345,55%,55%)] text-[hsl(345,55%,45%)] hover:bg-[hsl(345,55%,55%)]/10' },
+                { label: 'Design & Development', color: 'border-[hsl(195,55%,45%)] text-[hsl(195,55%,35%)] hover:bg-[hsl(195,55%,45%)]/10' },
+                { label: 'Mixed-Methods', color: 'border-[hsl(45,70%,50%)] text-[hsl(40,70%,40%)] hover:bg-[hsl(45,70%,50%)]/10' },
+                { label: 'Design-Based Research', color: 'border-[hsl(140,40%,45%)] text-[hsl(140,40%,35%)] hover:bg-[hsl(140,40%,45%)]/10' },
+              ].map(({ label, color }) => (
                 <span
-                  key={keyword}
-                  className="inline-block border border-primary/60 text-primary text-[10px] sm:text-xs md:text-sm font-medium px-2.5 py-1 rounded-md hover:bg-primary/10 transition-colors duration-200"
+                  key={label}
+                  className={`inline-block border ${color} text-[10px] sm:text-xs md:text-sm font-medium px-2.5 py-1 rounded-md transition-colors duration-200`}
                 >
-                  {keyword}
+                  {label}
                 </span>
               ))}
             </div>
