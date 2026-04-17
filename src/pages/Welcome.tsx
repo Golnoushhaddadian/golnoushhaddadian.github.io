@@ -219,7 +219,10 @@ const AboutMe = () => {
         </section>
 
         <section className="mt-12 sm:mt-16 md:mt-20">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Collaboration Network</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Collaboration Network</h2>
+          <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
+            Each <strong>circle</strong> represents a co-author · <strong>Numbers</strong> inside show total shared publications · <strong>Line thickness</strong> reflects frequency of collaboration · <strong>Colors</strong> indicate research clusters identified by shared co-authorships
+          </p>
           <CoauthorshipNetwork />
         </section>
 
