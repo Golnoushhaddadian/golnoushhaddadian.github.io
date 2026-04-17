@@ -127,3 +127,21 @@ a:focus-visible,
 button:focus-visible {
   @apply outline-2 outline-offset-2 outline-primary rounded-sm;
 }
+
+/* Floating badge animation for core research areas */
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.badge-float {
+  animation: badge-float 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.badge-float:hover {
+  animation-play-state: paused;
+  transform: translateY(-6px) scale(1.05);
+  transition: transform 0.25s ease-out;
+}
+
