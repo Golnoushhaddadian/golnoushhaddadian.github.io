@@ -122,20 +122,20 @@ const AboutMe = () => {
               As a researcher, teacher, designer, and innovator, my work sits at the intersection of AI and learning, focusing on the design of human-centered AI systems that enhance student learning, strengthen teaching practices, and support personalized learning and teaching experiences. Grounded in theories of learning and guided by design-based research and mixed-methods approaches, my work aims to develop responsible AI innovations that address real-world challenges in education and create meaningful societal impact.
             </p>
             <p>My core research areas include:</p>
-            <div className="flex flex-wrap justify-center md:justify-start gap-2.5 mt-2">
+            <div className="flex flex-wrap justify-center gap-2.5 mt-2">
               {[
-                { label: 'AI in Education', bg: 'bg-[hsl(210,55%,92%)] border-[hsl(210,55%,75%)] shadow-[0_4px_12px_-2px_hsl(210,55%,55%/0.25)]' },
-                { label: 'Personalized Learning', bg: 'bg-[hsl(280,40%,92%)] border-[hsl(280,40%,78%)] shadow-[0_4px_12px_-2px_hsl(280,40%,55%/0.25)]' },
-                { label: 'Feedback', bg: 'bg-[hsl(160,45%,90%)] border-[hsl(160,45%,72%)] shadow-[0_4px_12px_-2px_hsl(160,45%,45%/0.25)]' },
-                { label: 'Assessment & Evaluation', bg: 'bg-[hsl(25,70%,90%)] border-[hsl(25,70%,75%)] shadow-[0_4px_12px_-2px_hsl(25,70%,55%/0.25)]' },
-                { label: 'Higher Education', bg: 'bg-[hsl(345,55%,92%)] border-[hsl(345,55%,80%)] shadow-[0_4px_12px_-2px_hsl(345,55%,55%/0.25)]' },
-                { label: 'Design & Development', bg: 'bg-[hsl(195,55%,90%)] border-[hsl(195,55%,72%)] shadow-[0_4px_12px_-2px_hsl(195,55%,45%/0.25)]' },
-                { label: 'Mixed-Methods', bg: 'bg-[hsl(45,75%,88%)] border-[hsl(45,70%,70%)] shadow-[0_4px_12px_-2px_hsl(45,70%,50%/0.25)]' },
-                { label: 'Design-Based Research', bg: 'bg-[hsl(140,40%,88%)] border-[hsl(140,40%,72%)] shadow-[0_4px_12px_-2px_hsl(140,40%,45%/0.25)]' },
+                { label: 'AI in Education', bg: 'bg-[hsl(217,91%,60%)] border-[hsl(217,91%,50%)] shadow-[0_6px_16px_-3px_hsl(217,91%,60%/0.45)]' },
+                { label: 'Personalized Learning', bg: 'bg-[hsl(271,76%,53%)] border-[hsl(271,76%,45%)] shadow-[0_6px_16px_-3px_hsl(271,76%,53%/0.45)]' },
+                { label: 'Feedback', bg: 'bg-[hsl(160,84%,39%)] border-[hsl(160,84%,32%)] shadow-[0_6px_16px_-3px_hsl(160,84%,39%/0.45)]' },
+                { label: 'Assessment & Evaluation', bg: 'bg-[hsl(20,90%,55%)] border-[hsl(20,90%,47%)] shadow-[0_6px_16px_-3px_hsl(20,90%,55%/0.45)]' },
+                { label: 'Higher Education', bg: 'bg-[hsl(340,82%,55%)] border-[hsl(340,82%,47%)] shadow-[0_6px_16px_-3px_hsl(340,82%,55%/0.45)]' },
+                { label: 'Design & Development', bg: 'bg-[hsl(190,90%,42%)] border-[hsl(190,90%,35%)] shadow-[0_6px_16px_-3px_hsl(190,90%,42%/0.45)]' },
+                { label: 'Mixed-Methods', bg: 'bg-[hsl(38,92%,50%)] border-[hsl(38,92%,42%)] shadow-[0_6px_16px_-3px_hsl(38,92%,50%/0.45)]' },
+                { label: 'Design-Based Research', bg: 'bg-[hsl(142,71%,40%)] border-[hsl(142,71%,33%)] shadow-[0_6px_16px_-3px_hsl(142,71%,40%/0.45)]' },
               ].map(({ label, bg }, i) => (
                 <span
                   key={label}
-                  className={`badge-float inline-block border ${bg} text-foreground text-[10px] sm:text-xs md:text-sm font-medium px-3 py-1.5 rounded-full backdrop-blur-sm`}
+                  className={`badge-float inline-block border ${bg} text-white text-[10px] sm:text-xs md:text-sm font-medium px-3 py-1.5 rounded-full`}
                   style={{ animationDelay: `${i * 0.35}s` }}
                 >
                   {label}
