@@ -325,14 +325,7 @@ const Research = () => {
     <div className="max-w-5xl mx-auto">
       <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-center">Research</h1>
 
-      {/* Collaboration Network */}
-      <section className="mb-12 sm:mb-16">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Collaboration Network</h2>
-        <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-          Each <strong>circle</strong> represents a co-author · <strong>Numbers</strong> inside show total shared publications · <strong>Line thickness</strong> reflects frequency of collaboration · <strong>Colors</strong> indicate research clusters identified by shared co-authorships
-        </p>
-        <CoauthorshipNetwork />
-      </section>
+
 
       <section className="mb-12">
         {grouped.map(({ year, items }, groupIdx) => {
