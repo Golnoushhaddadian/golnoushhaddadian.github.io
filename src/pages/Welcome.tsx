@@ -111,12 +111,10 @@ const AboutMe = () => {
             <p>
               My name is <em>Golnoush</em>, a{" "}
               <a href="https://en.wikipedia.org/wiki/Persians" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Persian</a>
-              {" "}name that metaphorically means <em>enduring beauty</em>. Since its pronunciation can be challenging for non-Persian speakers, people often call me <em>Lia</em>, a name with Greek origins meaning <em>one who brings good news</em>.
+              {" "}name that metaphorically means <em>enduring beauty</em>. Since its pronunciation can be challenging for non-Persian speakers, people often call me <em>Lia</em>, a name with Greek origins meaning <em>one who brings good news</em>. So, somewhere between complexity and simplicity lies a belief that consistently guides my work:
             </p>
-            <p
-              className="cursor-default text-muted-foreground transition-all duration-700 hover:text-primary hover:[text-shadow:0_0_8px_hsl(var(--primary)/0.4),0_0_20px_hsl(var(--primary)/0.2)]"
-            >
-              So, somewhere between complexity and simplicity lies a belief that consistently guides my work: technology exists to expand human potential, to amplify abilities, deepen critical thinking, and empower what people can become, never to replace them.
+            <p>
+              Technology exists to expand human potential, to amplify abilities, deepen critical thinking, and empower what people can become, never to replace them.
             </p>
             <p>
               As a researcher, teacher, designer, and innovator, my work sits at the intersection of AI and learning, focusing on the design, deployment, and study of human-centered AI-augmented systems that enhance student learning, strengthen teaching practices, and support personalized learning and teaching experiences. Grounded in theories of learning and guided by design-based research and mixed-methods approaches, my work aims to develop responsible AI innovations that address real-world challenges in education and create meaningful societal impact.
