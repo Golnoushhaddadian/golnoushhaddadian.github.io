@@ -119,7 +119,7 @@ const AboutMe = () => {
               I believe technology exists to expand human potential, to amplify abilities, deepen thinking, and empower what humans can become, never to replace them.
             </p>
             <p>
-              As a researcher, teacher, designer, and innovator, my work sits at the intersection of AI and learning, focusing on the design of human-centered AI systems that enhance student learning, strengthen teaching practices, and support personalized learning and teaching experiences. Grounded in theories of learning and guided by design-based research and mixed-methods approaches, my work aims to develop responsible AI innovations that address real-world challenges in education and create meaningful societal impact.
+              As a researcher, teacher, designer, and innovator, my work sits at the intersection of AI and learning, focusing on the design, deployment, and study of human-centered AI-augmented systems that enhance student learning, strengthen teaching practices, and support personalized learning and teaching experiences. Grounded in theories of learning and guided by design-based research and mixed-methods approaches, my work aims to develop responsible AI innovations that address real-world challenges in education and create meaningful societal impact.
             </p>
             <p>My core research areas include:</p>
             <div className="flex flex-wrap justify-center gap-2.5 mt-2">
