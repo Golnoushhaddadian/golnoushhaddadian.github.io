@@ -27,10 +27,7 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
         <GalleryGrid images={images.filter(image => image.category === "teaching")} />
       </TabsContent>
       
-      <TabsContent value="awards" className="mt-0 space-y-4">
-        <p className="text-sm text-muted-foreground">
-          Outstanding Ph.D. Student in Learning Technologies (LT) Award (2025), College of Education & Human Development (CEHD), Georgia State University (GSU).
-        </p>
+      <TabsContent value="awards" className="mt-0">
         <GalleryGrid images={images.filter(image => image.category === "awards")} />
       </TabsContent>
       
