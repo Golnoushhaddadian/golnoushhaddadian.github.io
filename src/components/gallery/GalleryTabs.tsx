@@ -38,7 +38,7 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
               {dissertation2026.length > 0 && (
                 <section>
                   <h2 className="text-xs sm:text-sm uppercase tracking-widest text-muted-foreground mb-4 sm:mb-5 pb-2 border-b border-border">
-                    Outstanding Dissertation in Learning Technologies (2026)
+                    <span className="text-foreground font-semibold">Outstanding Dissertation</span> in Learning Technologies (2026)
                   </h2>
                   <GalleryGrid images={dissertation2026} />
                 </section>
@@ -46,7 +46,7 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
               {phdStudent2025.length > 0 && (
                 <section>
                   <h2 className="text-xs sm:text-sm uppercase tracking-widest text-muted-foreground mb-4 sm:mb-5 pb-2 border-b border-border">
-                    Outstanding Ph.D. Student in Learning Technologies (2025)
+                    Outstanding <span className="text-foreground font-semibold">Ph.D. Student</span> in Learning Technologies (2025)
                   </h2>
                   <GalleryGrid images={phdStudent2025} />
                 </section>
