@@ -38,7 +38,7 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
               {dissertation2026.length > 0 && (
                 <section>
                   <h2 className="text-xs sm:text-sm uppercase tracking-widest text-muted-foreground mb-4 sm:mb-5 pb-2 border-b border-border">
-                    <span className="text-foreground font-semibold">Outstanding Dissertation</span> in Learning Technologies (2026)
+                    Outstanding <span className="text-foreground font-semibold">Dissertation</span> in Learning Technologies (2026)
                   </h2>
                   <GalleryGrid images={dissertation2026} />
                 </section>
