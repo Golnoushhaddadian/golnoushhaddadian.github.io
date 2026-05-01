@@ -30,9 +30,11 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
       <TabsContent value="awards" className="mt-0">
         {(() => {
           const awardImages = images.filter(image => image.category === "awards");
-          const dissertation2026 = awardImages.filter(img => img.description.includes("2026"));
-          const phdStudent2025 = awardImages.filter(img => img.description.includes("2025"));
-          const others = awardImages.filter(img => !img.description.includes("2026") && !img.description.includes("2025"));
+          const isDissertation2026 = (img: GalleryImage) => img.src.includes("dissertation-award-2026") || img.description.includes("2026");
+          const isPhdStudent2025 = (img: GalleryImage) => img.description.includes("2025");
+          const dissertation2026 = awardImages.filter(isDissertation2026);
+          const phdStudent2025 = awardImages.filter(img => !isDissertation2026(img) && isPhdStudent2025(img));
+          const others = awardImages.filter(img => !isDissertation2026(img) && !isPhdStudent2025(img));
           return (
             <div className="space-y-10 sm:space-y-12">
               {dissertation2026.length > 0 && (
