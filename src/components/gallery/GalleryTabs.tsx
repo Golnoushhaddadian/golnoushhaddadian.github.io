@@ -13,10 +13,10 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
   return (
     <Tabs defaultValue="research" value={activeTab} onValueChange={setActiveTab} className="w-full">
       <TabsList className="mb-4 sm:mb-5 md:mb-6 w-full sm:w-auto h-auto p-1.5 gap-1 bg-muted/70">
-        <TabsTrigger value="research" className="text-sm sm:text-base font-bold uppercase tracking-wider px-4 sm:px-6 py-2 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Research</TabsTrigger>
-        <TabsTrigger value="teaching" className="text-sm sm:text-base font-bold uppercase tracking-wider px-4 sm:px-6 py-2 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Teaching</TabsTrigger>
-        <TabsTrigger value="awards" className="text-sm sm:text-base font-bold uppercase tracking-wider px-4 sm:px-6 py-2 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Awards</TabsTrigger>
-        <TabsTrigger value="community" className="text-sm sm:text-base font-bold uppercase tracking-wider px-4 sm:px-6 py-2 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Community</TabsTrigger>
+        <TabsTrigger value="research" className="text-xs sm:text-sm font-bold uppercase tracking-wider px-3 sm:px-4 py-1.5 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Research</TabsTrigger>
+        <TabsTrigger value="teaching" className="text-xs sm:text-sm font-bold uppercase tracking-wider px-3 sm:px-4 py-1.5 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Teaching</TabsTrigger>
+        <TabsTrigger value="awards" className="text-xs sm:text-sm font-bold uppercase tracking-wider px-3 sm:px-4 py-1.5 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Awards</TabsTrigger>
+        <TabsTrigger value="community" className="text-xs sm:text-sm font-bold uppercase tracking-wider px-3 sm:px-4 py-1.5 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-md transition-all">Community</TabsTrigger>
       </TabsList>
       
       <TabsContent value="research" className="mt-0">
