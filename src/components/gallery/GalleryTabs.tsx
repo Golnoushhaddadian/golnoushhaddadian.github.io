@@ -31,7 +31,8 @@ export const GalleryTabs = ({ images, activeTab, setActiveTab }: GalleryTabsProp
         {(() => {
           const awardImages = images.filter(image => image.category === "awards");
           const isDissertation2026 = (img: GalleryImage) => img.src.includes("dissertation-award-2026") || img.description.includes("2026");
-          const isPhdStudent2025 = (img: GalleryImage) => img.description.includes("2025");
+          const phd2025Sources = ["456f670a-3858-4253-a9f9-4acc80d81cc6", "6828e63c-0d05-4394-9936-01c4542b4a79", "b3903a2b-7911-42f7-a228-32eeefa770ec"];
+          const isPhdStudent2025 = (img: GalleryImage) => phd2025Sources.some(s => img.src.includes(s)) || img.description.includes("2025");
           const dissertation2026 = awardImages.filter(isDissertation2026);
           const phdStudent2025 = awardImages.filter(img => !isDissertation2026(img) && isPhdStudent2025(img));
           const others = awardImages.filter(img => !isDissertation2026(img) && !isPhdStudent2025(img));
