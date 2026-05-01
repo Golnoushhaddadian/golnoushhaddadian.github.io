@@ -220,7 +220,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/dissertation-award-2026.png",
     alt: "Holding the Outstanding Dissertation in Learning Technologies Award at Georgia State University",
-    description: "Outstanding Dissertation in Learning Technologies (LT) Award (2026), College of Education & Human Development (CEHD), Georgia State University (GSU)",
+    description: "College of Education & Human Development (CEHD), Georgia State University (GSU)",
     category: "awards"
   },
   {
