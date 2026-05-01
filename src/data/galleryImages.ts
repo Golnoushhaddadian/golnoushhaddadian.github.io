@@ -238,19 +238,19 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/lovable-uploads/456f670a-3858-4253-a9f9-4acc80d81cc6.png",
     alt: "Woman in black dress holding award with Georgia State University backdrop",
-    description: "Outstanding Ph.D. Student in Learning Technologies (LT) Award (2025), College of Education & Human Development (CEHD), Georgia State University (GSU)",
+    description: "College of Education & Human Development (CEHD), Georgia State University (GSU)",
     category: "awards"
   },
   {
     src: "/lovable-uploads/6828e63c-0d05-4394-9936-01c4542b4a79.png",
     alt: "Two women at Honors Day ceremony, one holding award and certificate",
-    description: "Outstanding Ph.D. Student in Learning Technologies (LT) Award (2025), College of Education & Human Development (CEHD), Georgia State University (GSU)",
+    description: "College of Education & Human Development (CEHD), Georgia State University (GSU)",
     category: "awards"
   },
   {
     src: "/lovable-uploads/b3903a2b-7911-42f7-a228-32eeefa770ec.png",
     alt: "Award ceremony with two men presenting award to woman on stage",
-    description: "Outstanding Ph.D. Student in Learning Technologies (LT) Award (2025), College of Education & Human Development (CEHD), Georgia State University (GSU)",
+    description: "College of Education & Human Development (CEHD), Georgia State University (GSU)",
     category: "awards"
   },
   
