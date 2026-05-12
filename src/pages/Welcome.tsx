@@ -130,6 +130,8 @@ const AboutMe = () => {
                 { label: 'Design & Development', bg: 'bg-[hsl(190,90%,42%)] border-[hsl(190,90%,35%)] shadow-[0_6px_16px_-3px_hsl(190,90%,42%/0.45)]' },
                 { label: 'Mixed-Methods', bg: 'bg-[hsl(38,92%,50%)] border-[hsl(38,92%,42%)] shadow-[0_6px_16px_-3px_hsl(38,92%,50%/0.45)]' },
                 { label: 'Design-Based Research', bg: 'bg-[hsl(142,71%,40%)] border-[hsl(142,71%,33%)] shadow-[0_6px_16px_-3px_hsl(142,71%,40%/0.45)]' },
+                { label: 'Responsible AI', bg: 'bg-[hsl(0,72%,51%)] border-[hsl(0,72%,43%)] shadow-[0_6px_16px_-3px_hsl(0,72%,51%/0.45)]' },
+                { label: 'Human-centered Design', bg: 'bg-[hsl(250,70%,55%)] border-[hsl(250,70%,47%)] shadow-[0_6px_16px_-3px_hsl(250,70%,55%/0.45)]' },
               ].map(({ label, bg }, i) => (
                 <span
                   key={label}
