@@ -150,37 +150,31 @@ const AboutMe = () => {
         </section>
 
         <section className="mt-6 sm:mt-8 md:mt-12">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Publications</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-[10px] sm:text-xs md:text-sm">
             <p>
-              <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (2025). A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education. <em>Research Synthesis in Applied Linguistics</em>, 1-51.{" "}
-              <a href="https://doi.org/10.1080/29984475.2025.2598266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                https://doi.org/10.1080/29984475.2025.2598266
-              </a>
+              Cohen, J. D., O'Reilly, T., Magliano, J., <strong>Haddadian, G.</strong>, Dobar, E. B., Ari, O., Tinker Sachs, G., & Sabatini, J. (Accepted, 2026). Scenario-based learning and assessment design principles for the AI age. International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain.
             </p>
             <p>
-              Noroozi, O., <strong>Haddadian, G.</strong>, Gao, X., Schunn, C., Alqassab, M., & Banihashem, S. K. (2025). The value of GenAI for peer feedback provision: student perceptions and impacts. <em>International Journal of Educational Technology in Higher Education</em>, 22(1), 61.{" "}
-              <a href="https://doi.org/10.1186/s41239-025-00558-6" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                https://doi.org/10.1186/s41239-025-00558-6
-              </a>
+              Dobar, E. B., <strong>Haddadian, G.</strong>, Ari, O., Cohen, J. D., Tinker Sachs, G., & Magliano, J. (Accepted, 2026). Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment. International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain.
             </p>
             <p>
-              <strong>Haddadian, G.</strong>, Panzade, P., Takabi, D., & Kim, M. K. (2025). Problem-centered post-secondary computer science education: A study of the private artificial intelligence curriculum. <em>International Journal of Technology in Education</em>, 8(2), 220-245.{" "}
-              <a href="https://doi.org/10.46328/ijte.1071" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                https://doi.org/10.46328/ijte.1071
-              </a>
+              Cohen, J. D., Sabatini, J., <strong>Haddadian, G.</strong>, O'Reilly, T., & Magliano, J. (Accepted, 2026). Developing authentic learning and assessment through scenarios. EdMedia 2026, Edinburgh, Scotland.
             </p>
             <p>
-              <strong>Haddadian, G.</strong>, Han, H., Kim, J., Abdeen, M. S., & Kim, M. K. (2025). Exploring AI-Generated Expert Models: Instructor Interaction and Learner Perceptions in a Physics Class. In <em>Proceedings of the 19th International Conference of the Learning Sciences-ICLS 2025</em>, pp. 1684-1688. International Society of the Learning Sciences.{" "}
-              <a href="https://doi.org/10.22318/icls2025.213524" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                https://doi.org/10.22318/icls2025.213524
-              </a>
+              Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (Accepted, 2026). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
             </p>
             <p>
-              Greisel, M., Hornstein, J., Kollar, I., Noroozi, O., <strong>Haddadian, G.</strong>, Gao, X., ... & Rummel, N. (2025). Enhancing Peer Feedback Practices with Generative AI. In <em>Proceedings of the 18th International Conference on Computer-Supported Collaborative Learning-CSCL 2025</em>, pp. 490-498. International Society of the Learning Sciences.{" "}
-              <a href="https://doi.org/10.22318/cscl2025.921873" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                https://doi.org/10.22318/cscl2025.921873
-              </a>
+              Noroozi, O., <strong>Haddadian, G.</strong>, Banihashem, K., & Schunn, C. (2026). How students perceive and respond to GenAI for peer feedback uptake. In <em>Understanding and supporting feedback uptake: Bridging research and practice in educational contexts</em>. American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA, United States.
+            </p>
+            <p>
+              <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (2026). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+            </p>
+            <p>
+              Motevali, S., <strong>Haddadian, G.</strong>, Desai, P., Seelam, N., & Kim, M. K. (2026). The potential of artificial intelligence for automated scoring of argumentative essays. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+            </p>
+            <p>
+              Haddadian, N., <strong>Haddadian, G.</strong>, & Haddadian, M. (2026). Collaborative use of AI-generated feedback in EFL argumentative writing: Impacts on writing quality and self-efficacy. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
             </p>
           </div>
         </section>
