@@ -102,19 +102,21 @@ export default function AdminAnalytics() {
   useEffect(() => {
     if (!authenticated) return;
     setLoading(true);
-    supabase
-      .from("visitor_sessions")
-      .select("*")
-      .order("started_at", { ascending: false })
+    supabase.functions
+      .invoke("admin-visitor-sessions", {
+        body: { password: ADMIN_PASSWORD, action: "list" },
+      })
       .then(({ data, error }) => {
         if (error) console.error(error);
-        setSessions((data as Session[]) || []);
+        setSessions(((data as any)?.sessions as Session[]) || []);
         setLoading(false);
       });
   }, [authenticated]);
 
   const handleDelete = async (id: string) => {
-    const { error } = await supabase.from("visitor_sessions").delete().eq("id", id);
+    const { error } = await supabase.functions.invoke("admin-visitor-sessions", {
+      body: { password: ADMIN_PASSWORD, action: "delete", id },
+    });
     if (error) {
       console.error("Delete failed:", error);
       return;
