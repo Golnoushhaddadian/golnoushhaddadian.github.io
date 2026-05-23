@@ -153,28 +153,28 @@ const AboutMe = () => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-[10px] sm:text-xs md:text-sm">
             <p>
-              Cohen, J. D., O'Reilly, T., Magliano, J., <strong>Haddadian, G.</strong>, Dobar, E. B., Ari, O., Tinker Sachs, G., & Sabatini, J. (Accepted, 2026). Scenario-based learning and assessment design principles for the AI age. International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain.
+              Cohen, J. D., O'Reilly, T., Magliano, J., <strong>Haddadian, G.</strong>, Dobar, E. B., Ari, O., Tinker Sachs, G., & Sabatini, J. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Scenario-based learning and assessment design principles for the AI age. International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain.
             </p>
             <p>
-              Dobar, E. B., <strong>Haddadian, G.</strong>, Ari, O., Cohen, J. D., Tinker Sachs, G., & Magliano, J. (Accepted, 2026). Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment. International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain.
+              Dobar, E. B., <strong>Haddadian, G.</strong>, Ari, O., Cohen, J. D., Tinker Sachs, G., & Magliano, J. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment. International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain.
             </p>
             <p>
-              Cohen, J. D., Sabatini, J., <strong>Haddadian, G.</strong>, O'Reilly, T., & Magliano, J. (Accepted, 2026). Developing authentic learning and assessment through scenarios. EdMedia 2026, Edinburgh, Scotland.
+              Cohen, J. D., Sabatini, J., <strong>Haddadian, G.</strong>, O'Reilly, T., & Magliano, J. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Developing authentic learning and assessment through scenarios. EdMedia <span className="text-blue-600 font-medium">2026</span>, Edinburgh, Scotland.
             </p>
             <p>
-              Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (Accepted, 2026). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
+              Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
             </p>
             <p>
-              Noroozi, O., <strong>Haddadian, G.</strong>, Banihashem, K., & Schunn, C. (2026). How students perceive and respond to GenAI for peer feedback uptake. In <em>Understanding and supporting feedback uptake: Bridging research and practice in educational contexts</em>. American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA, United States.
+              Noroozi, O., <strong>Haddadian, G.</strong>, Banihashem, K., & Schunn, C. (<span className="text-blue-600 font-medium">2026</span>). How students perceive and respond to GenAI for peer feedback uptake. In <em>Understanding and supporting feedback uptake: Bridging research and practice in educational contexts</em>. American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA, United States.
             </p>
             <p>
-              <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (2026). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+              <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (<span className="text-blue-600 font-medium">2026</span>). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
             </p>
             <p>
-              Motevali, S., <strong>Haddadian, G.</strong>, Desai, P., Seelam, N., & Kim, M. K. (2026). The potential of artificial intelligence for automated scoring of argumentative essays. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+              Motevali, S., <strong>Haddadian, G.</strong>, Desai, P., Seelam, N., & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>). The potential of artificial intelligence for automated scoring of argumentative essays. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
             </p>
             <p>
-              Haddadian, N., <strong>Haddadian, G.</strong>, & Haddadian, M. (2026). Collaborative use of AI-generated feedback in EFL argumentative writing: Impacts on writing quality and self-efficacy. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+              Haddadian, N., <strong>Haddadian, G.</strong>, & Haddadian, M. (<span className="text-blue-600 font-medium">2026</span>). Collaborative use of AI-generated feedback in EFL argumentative writing: Impacts on writing quality and self-efficacy. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
             </p>
           </div>
         </section>
