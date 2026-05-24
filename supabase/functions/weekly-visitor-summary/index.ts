@@ -137,6 +137,15 @@ Deno.serve(async (req) => {
       return m > 0 ? `${m}m ${s}s` : `${s}s`;
     };
 
+    // HTML-escape to prevent injection from attacker-controlled visitor data
+    const esc = (v: unknown) =>
+      String(v ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
     const sortedCountries = Object.entries(countries).sort((a, b) => b[1] - a[1]);
     const sortedDevices = Object.entries(devices).sort((a, b) => b[1] - a[1]);
     const sortedBrowsers = Object.entries(browsers).sort((a, b) => b[1] - a[1]);
@@ -147,23 +156,23 @@ Deno.serve(async (req) => {
     const visitorRows = recentSessions.map((s: any) => {
       const location = [s.city, s.region, s.country].filter(Boolean).join(', ');
       const dur = fmtDur(s.duration_seconds || 0);
-      const pages = (s.pages_visited || []).map((p: any) => p.page).join(' → ');
+      const pages = (s.pages_visited || []).map((p: any) => esc(p.page)).join(' → ');
       const time = new Date(s.started_at).toLocaleString('en-US', { timeZone: 'America/New_York' });
       return `
         <tr style="border-bottom: 1px solid #eee;">
-          <td style="padding: 6px 8px; font-size: 12px;">${time}</td>
-          <td style="padding: 6px 8px; font-size: 12px;">${location}</td>
-          <td style="padding: 6px 8px; font-size: 12px;">${s.device} · ${s.browser}</td>
-          <td style="padding: 6px 8px; font-size: 12px;">${dur}</td>
+          <td style="padding: 6px 8px; font-size: 12px;">${esc(time)}</td>
+          <td style="padding: 6px 8px; font-size: 12px;">${esc(location)}</td>
+          <td style="padding: 6px 8px; font-size: 12px;">${esc(s.device)} · ${esc(s.browser)}</td>
+          <td style="padding: 6px 8px; font-size: 12px;">${esc(dur)}</td>
           <td style="padding: 6px 8px; font-size: 12px; max-width: 200px; overflow: hidden; text-overflow: ellipsis;">${pages}</td>
         </tr>`;
     }).join('');
 
     const tableRow = (label: string, value: string) =>
-      `<tr><td style="padding:4px 8px;color:#666;font-size:13px;">${label}</td><td style="padding:4px 8px;font-size:13px;"><strong>${value}</strong></td></tr>`;
+      `<tr><td style="padding:4px 8px;color:#666;font-size:13px;">${esc(label)}</td><td style="padding:4px 8px;font-size:13px;"><strong>${esc(value)}</strong></td></tr>`;
 
     const listItems = (entries: [string, number][]) =>
-      entries.map(([k, v]) => `<li style="font-size:13px;">${k}: <strong>${v}</strong></li>`).join('');
+      entries.map(([k, v]) => `<li style="font-size:13px;">${esc(k)}: <strong>${v}</strong></li>`).join('');
 
     const weekStart = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric' });
     const weekEnd = new Date().toLocaleDateString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric' });
@@ -230,8 +239,8 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Weekly summary error:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    console.error('[weekly-visitor-summary] error:', error);
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
