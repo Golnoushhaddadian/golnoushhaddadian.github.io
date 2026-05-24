@@ -9,6 +9,32 @@ Deno.serve(async (req) => {
   }
 
   try {
+    const ADMIN_PASSWORD = Deno.env.get('ADMIN_PASSWORD');
+    if (!ADMIN_PASSWORD) {
+      return new Response(JSON.stringify({ error: 'Server not configured' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    // Accept secret via Authorization: Bearer <pw> header or { password } body
+    const authHeader = req.headers.get('authorization') || '';
+    const bearer = authHeader.toLowerCase().startsWith('bearer ')
+      ? authHeader.slice(7).trim()
+      : '';
+    let provided = bearer;
+    if (!provided) {
+      try {
+        const body = await req.clone().json();
+        if (typeof body?.password === 'string') provided = body.password;
+      } catch { /* ignore */ }
+    }
+    if (provided !== ADMIN_PASSWORD) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
