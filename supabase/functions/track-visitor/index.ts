@@ -11,6 +11,15 @@ Deno.serve(async (req) => {
   try {
     const { session_id, action, page, duration_seconds } = await req.json();
 
+    // Validate session_id format: alphanumeric + hyphen, max 64 chars
+    if (typeof session_id !== 'string' || !/^[A-Za-z0-9-]{1,64}$/.test(session_id)) {
+      return new Response(JSON.stringify({ error: 'Invalid session_id' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    const sid = encodeURIComponent(session_id);
+
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const OWNER_IP = Deno.env.get('OWNER_IP_ADDRESS') || '';
@@ -87,7 +96,7 @@ Deno.serve(async (req) => {
       if (duration_seconds) patchBody.duration_seconds = duration_seconds;
 
       const getRes = await fetch(
-        `${SUPABASE_URL}/rest/v1/visitor_sessions?session_id=eq.${session_id}&select=pages_visited&limit=1`,
+        `${SUPABASE_URL}/rest/v1/visitor_sessions?session_id=eq.${sid}&select=pages_visited&limit=1`,
         {
           headers: {
             'apikey': SUPABASE_SERVICE_ROLE_KEY,
@@ -107,7 +116,7 @@ Deno.serve(async (req) => {
       }
 
       await fetch(
-        `${SUPABASE_URL}/rest/v1/visitor_sessions?session_id=eq.${session_id}`,
+        `${SUPABASE_URL}/rest/v1/visitor_sessions?session_id=eq.${sid}`,
         {
           method: 'PATCH',
           headers: {
@@ -126,7 +135,7 @@ Deno.serve(async (req) => {
 
     if (action === 'end') {
       await fetch(
-        `${SUPABASE_URL}/rest/v1/visitor_sessions?session_id=eq.${session_id}`,
+        `${SUPABASE_URL}/rest/v1/visitor_sessions?session_id=eq.${sid}`,
         {
           method: 'PATCH',
           headers: {
