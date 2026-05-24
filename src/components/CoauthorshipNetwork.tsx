@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import {
   journalPublications,
   conferenceProceedings,
+  otherPresentations,
   nonRefereedPublications,
   workUnderReview,
   workInProgress,
