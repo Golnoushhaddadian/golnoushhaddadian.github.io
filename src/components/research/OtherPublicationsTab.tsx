@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter } from "@/components/ui/
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { nonRefereedPublications, workUnderReview } from "@/data/researchData";
+import { nonRefereedPublications, workUnderReview, otherPresentations } from "@/data/researchData";
 import { NonRefereedPublication, WorkUnderReview } from '@/types/research';
 
 export const OtherPublicationsTab = () => {

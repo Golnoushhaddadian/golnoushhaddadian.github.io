@@ -25,7 +25,7 @@ export const currentProjects: ResearchProject[] = [
   {
     title: "IUSE-Engaged Student Learning (Level 1): AI-Scaffolded Pre-Classroom Learning for Large/Introductory Undergraduate Physics Courses",
     position: "Researcher",
-    period: "August 2024 - present",
+    period: "Aug 2024 – Aug 2025",
     funding: "Funded by the National Science Foundation (NSF)",
     description: "This project designs and implements AI-augmented formative assessment and feedback systems to help students build skills for in-classroom interactive problem-solving activities. The aim is to determine whether AI in education improves students' well-being inside and outside the classroom, with a focus on those traditionally underrepresented in STEM education. Extensive data collected in the final phase will examine the relationships among pre-classroom activities, in-classroom performance, self-efficacy, interest in physics, and student backgrounds, including gender, race, ethnicity, first-generation status, and English language learning."
   },
@@ -58,6 +58,7 @@ export const journalPublications: JournalPublication[] = [
     journal: "International Journal of Technology in Education (IJTE)",
     volume: "8(2)",
     pages: "1-26",
+    url: "https://doi.org/10.46328/ijte.1071",
     keywords: ["CS Education", "AI Curriculum", "Problem-Centered Instruction"]
   },
   {
@@ -66,6 +67,7 @@ export const journalPublications: JournalPublication[] = [
     title: "Construction and validation of a Computerized Formative Assessment Literacy (CFAL) questionnaire for language teachers: An exploratory sequential mixed-methods investigation",
     journal: "Language Testing in Asia",
     volume: "14(33)",
+    url: "https://doi.org/10.1186/s40468-024-00303-2",
     keywords: ["Assessment", "Language Teaching", "Mixed Methods"]
   },
   {
@@ -74,6 +76,7 @@ export const journalPublications: JournalPublication[] = [
     title: "Innovative Use of Grammarly Feedback for Improving EFL Learners' Speaking: Learners' Perceptions and Transformative Engagement Experiences in Focus",
     journal: "The Journal of Applied Instructional Design",
     volume: "13(2)",
+    url: "https://doi.org/10.59668/1269.15640",
     keywords: ["EFL", "Feedback", "Grammarly", "Speaking"]
   },
   {
@@ -83,6 +86,7 @@ export const journalPublications: JournalPublication[] = [
     journal: "Computer-Assisted Language Learning Electronic Journal",
     volume: "25(3)",
     pages: "124-147",
+    url: "https://callej.org/index.php/journal/article/view/436",
     keywords: ["Feedback", "EFL", "Writing", "Automated Assessment"]
   },
   {
@@ -92,37 +96,66 @@ export const journalPublications: JournalPublication[] = [
     journal: "Persian Literary Studies Journal",
     volume: "7(11)",
     pages: "65-82",
+    url: "http://doi.org/10.22099/jps.2019.31124.1088",
     keywords: ["Conversation Analysis", "Persian Literature", "Discourse"]
   },
 ];
 
 export const conferenceProceedings: ConferenceProceeding[] = [
   {
-    authors: ["Noroozi, O.", "Haddadian, G.", "Banihashem, K.", "Schunn, C."],
+    authors: ["Cohen, J. D.", "O'Reilly, T.", "Magliano, J.", "Haddadian, G.", "Dobar, E. B.", "Ari, O.", "Tinker Sachs, G.", "Sabatini, J."],
     year: "Accepted, 2026",
+    title: "Scenario-based learning and assessment design principles for the AI age",
+    conference: "International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain",
+    keywords: ["Scenario-Based Learning", "Assessment", "AI"]
+  },
+  {
+    authors: ["Dobar, E. B.", "Haddadian, G.", "Ari, O.", "Cohen, J. D.", "Tinker Sachs, G.", "Magliano, J."],
+    year: "Accepted, 2026",
+    title: "Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment",
+    conference: "International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain",
+    keywords: ["Interdisciplinary", "Problem Solving", "Assessment"]
+  },
+  {
+    authors: ["Cohen, J. D.", "Sabatini, J.", "Haddadian, G.", "O'Reilly, T.", "Magliano, J."],
+    year: "Accepted, 2026",
+    title: "Developing authentic learning and assessment through scenarios",
+    conference: "EdMedia 2026, Edinburgh, Scotland",
+    keywords: ["Authentic Learning", "Assessment", "Scenarios"]
+  },
+  {
+    authors: ["Malcolm, B.", "Vickery, M.", "Louis-Strakes Lopez, J.", "Siciliano, L. M.", "Simon, S.", "Xing, G. (Y.)", "Kim, J.", "Kim, C.", "Zhao, Y.", "Desai, A.", "Gadong, E. S.", "Mabadeje, Y.", "Mhungu, B.", "Haddadian, G.", "Eloy, A.", "Soodhani, N.", "Prasad, R.", "Bae, Y."],
+    year: "Accepted, 2026",
+    title: "Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building",
+    conference: "International Society of the Learning Sciences (ISLS)",
+    keywords: ["ILSSA", "Community", "Learning Sciences"]
+  },
+  {
+    authors: ["Noroozi, O.", "Haddadian, G.", "Banihashem, K.", "Schunn, C."],
+    year: "2026",
     title: "How students perceive and respond to GenAI for peer feedback uptake",
     conference: "American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA",
     keywords: ["GenAI", "Peer Feedback", "AERA"]
   },
   {
     authors: ["Haddadian, G.", "Kim, M. K.", "Haddadian, N."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context",
-    conference: "American Association for Applied Linguistics (AAAL) 2026 Conference, Chicago, IL",
+    conference: "American Association for Applied Linguistics (AAAL), Chicago, IL",
     keywords: ["AWE", "EFL", "Argumentative Writing"]
   },
   {
     authors: ["Motevali, S.", "Haddadian, G.", "Desai, P.", "Seelam, N.", "Kim, M. K."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "The potential of artificial intelligence for automated scoring of argumentative essays",
-    conference: "American Association for Applied Linguistics (AAAL) 2026 Conference, Chicago, IL",
+    conference: "American Association for Applied Linguistics (AAAL), Chicago, IL",
     keywords: ["AI", "Automated Scoring", "Argumentative Writing"]
   },
   {
     authors: ["Haddadian, N.", "Haddadian, G.", "Haddadian, M."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Collaborative use of AI-generated feedback in EFL argumentative writing: Impacts on writing quality and self-efficacy",
-    conference: "American Association for Applied Linguistics (AAAL) 2026 Conference, Chicago, IL",
+    conference: "American Association for Applied Linguistics (AAAL), Chicago, IL",
     keywords: ["AI Feedback", "EFL", "Writing", "Self-efficacy"]
   },
   {
@@ -146,33 +179,22 @@ export const conferenceProceedings: ConferenceProceeding[] = [
     keywords: ["AI", "Expert Models", "Physics Education"]
   },
   {
-    authors: ["Noroozi, O.", "Haddadian, G.", "Gao, X.", "Schunn, C. D.", "Alqassab, M.", "Banihashem, S. K."],
-    year: "2025",
-    title: "Supporting peer feedback provision and uptake with GenAI",
-    conference: "International Conference of the Learning Sciences – ICLS/ISLS 2025",
-    keywords: ["Peer Feedback", "GenAI", "Learning Sciences"]
-  },
-  {
-    authors: ["Haddadian, G.", "Han, H.", "Kim, M.", "Kim, J.", "Bae, Y."],
-    year: "2025",
-    title: "Automated Generation of Expert Models with Generative AI",
-    conference: "International Conference of the Learning Sciences – ICLS/ISLS 2025"
-  },
-  {
     authors: ["Haddadian, G.", "Panzade, P.", "Takabi, D.", "Kim, M. K."],
     year: "2024",
     title: "Evaluating Private Artificial Intelligence (AI) Curriculum in Computer Science (CS) Education: Insights for Advancing Student-Centered CS Learning",
-    conference: "In Proceedings of the 18th International Conference of the Learning Sciences-ICLS 2024",
+    conference: "Proceedings of the 18th International Conference of the Learning Sciences - ICLS 2024",
     pages: "2271-2272",
-    publisher: "International Society of the Learning Sciences"
+    publisher: "International Society of the Learning Sciences",
+    url: "https://doi.org/10.22318/icls2024.141269"
   },
   {
     authors: ["Haddadian, G.", "Haddadian, N."],
     year: "2024",
     title: "An Investigation of ELT Teachers' Online Self-efficacy: Does Teachers' Level of Agency Matter?",
-    conference: "In J. Cohen & G. Solano (Eds.), Proceedings of Society for Information Technology & Teacher Education International Conference",
+    conference: "Proceedings of Society for Information Technology & Teacher Education International Conference",
     pages: "1607-1615",
-    publisher: "Las Vegas, Nevada, United States: Association for the Advancement of Computing in Education (AACE)"
+    publisher: "Las Vegas, Nevada, United States: Association for the Advancement of Computing in Education (AACE)",
+    url: "https://www.learntechlib.org/primary/p/224179/"
   },
   {
     authors: ["Daneshvar Ghorbani, B.", "Haddadian, G."],
@@ -181,32 +203,35 @@ export const conferenceProceedings: ConferenceProceeding[] = [
     conference: "AIRiAL 2024 Conference, Teachers College, Columbia University"
   },
   {
-    authors: ["Kim, J.", "Haddadian, G.", "Kim, M."],
+    authors: ["Kim, J.", "Haddadian, G.", "Kim, M. K."],
     year: "2023",
-    title: "An investigation of knowledge-based AI vs. human evaluation in academic summary evaluation: Similarities, dissimilarities, and being toward mutual understandings",
-    conference: "In Blikstein, P., Van Aalst, J., Kizito, R., & Brennan, K. (Eds.). Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023",
+    title: "An investigation of knowledge-based AI vs. human evaluation in the context of academic summary evaluation: Similarities, dissimilarities, and being toward mutual understandings",
+    conference: "Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023",
     pages: "994-997",
-    publisher: "Montreal, Canada: International Society of the Learning Sciences"
+    publisher: "International Society of the Learning Sciences",
+    url: "https://doi.org/10.22318/icls2023.633243"
   },
   {
     authors: ["Haddadian, G.", "Takabi, D.", "Panzade, P.", "Kim, M."],
     year: "2023",
     title: "A Design Study of Problem-Centered Instruction (PCI) for Private Artificial Intelligence (AI) Curriculum Development",
-    conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
+    conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL",
+    url: "https://par.nsf.gov/servlets/purl/10582484"
+  },
+  {
+    authors: ["Kim, M. K.", "Kim, N. J.", "Haddadian, G.", "Heidari, A."],
+    year: "2023",
+    title: "A test of learning progress models using an AI-enabled knowledge representation system",
+    conference: "Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023",
+    pages: "986-989",
+    publisher: "International Society of the Learning Sciences",
+    url: "https://doi.org/10.22318/icls2023.200138"
   },
   {
     authors: ["Haddadian, G.", "Bae, Y.", "Kim, J.", "Kim, M."],
     year: "2023",
     title: "A Comprehensive Model of AI Literacy from a Developmental Perspective",
     conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
-  },
-  {
-    authors: ["Kim, M.", "Kim, N.", "Haddadian, G.", "Heidari, A."],
-    year: "2023",
-    title: "A test of learning progress models using an AI-enabled knowledge representation system",
-    conference: "In Blikstein, P., Van Aalst, J., Kizito, R., & Brennan, K. (Eds.). Proceedings of the 17th International Conference of the Learning Sciences - ICLS 2023",
-    pages: "986-989",
-    publisher: "Montreal, Canada: International Society of the Learning Sciences"
   },
   {
     authors: ["Bae, Y.", "Kim, J.", "Haddadian, G.", "Davis, A.", "Kim, M."],
@@ -226,17 +251,41 @@ export const conferenceProceedings: ConferenceProceeding[] = [
     title: "AI-augmented summarization: Impact on online adult learners' concept learning, discussion quality, and achievement",
     conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
   },
+];
+
+export const otherPresentations: NonRefereedPublication[] = [
+  {
+    authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
+    year: "2026",
+    title: "The Moving Target Problem in AI Text Detection: Evidence From Chatbot and Detector Version Changes",
+    journal: "External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), May 15, Atlanta, Georgia [Format: Poster]",
+    keywords: ["AI Detection", "Chatbots"]
+  },
+  {
+    authors: ["Haddadian, G.", "Kim, M. K.", "Haddadian, N."],
+    year: "2025",
+    title: "Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context",
+    journal: "External Advisory Board meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), May 16, Atlanta, Georgia [Format: Poster]",
+    keywords: ["AWE", "EFL"]
+  },
+  {
+    authors: ["Haddadian, G.", "Kim, M. K.", "Haddadian, N."],
+    year: "2025",
+    title: "Automated Writing Evaluation in Foreign Language Education: A Systematic Review in Argumentative Writing",
+    journal: "American Association for Applied Linguistics (AAAL): The Multilingual Matters Graduate Research Roundtable, March 21, Denver, Colorado [Format: Article in progress]",
+    keywords: ["AWE", "AAAL"]
+  },
   {
     authors: ["Radmanesh, S.", "Haddadian, G."],
     year: "2020",
     title: "The Effect of Using Mind Mapping on Iranian EFL Learners' Self-efficacy in Vocabulary Learning",
-    conference: "WEI International Academic Conference on Education, Teaching, and Learning (WEI-ETL-Barcelona), Barcelona, Spain, February 2020"
+    journal: "WEI International Academic Conference on Education, Teaching, and Learning (WEI-ETL-Barcelona), Barcelona, Spain, February 2020 [Format: Full paper]"
   },
   {
     authors: ["Haddadian, G.", "Salehi, Mohammad"],
     year: "2015",
     title: "Design and Development of a Computer-Adaptive Prototype to Measure Written Receptive Vocabulary Knowledge of English Language Learners",
-    conference: "Thesis. Sharif University of Technology, Tehran, Iran, 2014"
+    journal: "English Language Teaching (ELT) Conference at Sharif University of Technology, Tehran, Iran, 2014 [Format: short paper]"
   },
 ];
 
@@ -253,29 +302,11 @@ export const nonRefereedPublications: NonRefereedPublication[] = [
 export const workUnderReview: WorkUnderReview[] = [
   {
     authors: ["Haddadian, G.", "Haddadian, M."],
-    year: "In revision",
+    year: "Under Review",
     title: "Learners' Collaboration in Using AI-generated Feedback, Argumentative Writing, and Writing Self-efficacy: Effects and Precepts",
     journal: "Computer Assisted Language Learning",
     keywords: ["AI Feedback", "Writing", "Collaboration"]
   },
-  {
-    authors: ["Noroozi, O.", "Haddadian, G.", "Banihashem, K.", "Schunn, C, Alqassab, M."],
-    year: "In revision",
-    title: "The Scaffolding Value of GenAI during Peer Feedback Provision and Uptake: Student Perceptions and Actual Impacts",
-    journal: "International Journal of Educational Technology in Higher Education"
-  },
-  {
-    authors: ["Mashhadi, F.", "Haddadian, G.", "Kavoshian, S.", "Heidari, F."],
-    year: "Under Review",
-    title: "Promoting EFL Teachers' Self-Directed Professional Development through Collaborative Action Research in a Networked Community of Shared Knowledge",
-    journal: "Journal of Language and Education"
-  },
-  {
-    authors: ["Kavoshian, S.", "Mashhadi, F.", "Haddadian, G."],
-    year: "Under Review",
-    title: "Exploring Classroom Interactions in Iranian EFL Classrooms",
-    journal: "International Journal of Language Studies"
-  }
 ];
 
 export const workInProgress: WorkInProgress[] = [
@@ -296,12 +327,12 @@ export const workInProgress: WorkInProgress[] = [
     title: "Text-based Generative AI to Facilitate Peer Feedback: Pedagogical Opportunities and Challenges"
   },
   {
-    authors: ["Han, H.", "Haddadian, G.", "Kim, M. Kim, J.", "Bae, Y."],
+    authors: ["Han, H.", "Haddadian, G.", "Kim, M.", "Kim, J.", "Bae, Y."],
     type: "Journal Article",
     title: "Students' Plagiarism Behaviors within AI-Enabled Introductory Physics Courses"
   },
   {
-    authors: ["Han, H.", "Kim, M. Haddadian, G."],
+    authors: ["Han, H.", "Kim, M.", "Haddadian, G."],
     type: "Journal Article",
     title: "Generative AI for the Automated Construction and Evaluation of Expert Models in Physics Course"
   },
