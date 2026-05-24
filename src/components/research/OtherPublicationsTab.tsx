@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter } from "@/components/ui/
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { nonRefereedPublications, workUnderReview } from "@/data/researchData";
+import { nonRefereedPublications, workUnderReview, otherPresentations } from "@/data/researchData";
 import { NonRefereedPublication, WorkUnderReview } from '@/types/research';
 
 export const OtherPublicationsTab = () => {
@@ -28,6 +28,32 @@ export const OtherPublicationsTab = () => {
                   <p className="text-muted-foreground mb-3">{work.authors.join(', ')}</p>
                   <CardDescription className="text-sm text-muted-foreground">
                     {work.journal || work.conference || ''}, {work.year}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {otherPresentations.length > 0 && (
+        <div>
+          <h3 className="text-xl font-semibold mb-4">Other Presentations</h3>
+          <div className="space-y-6">
+            {otherPresentations.map((pres: NonRefereedPublication, index: number) => (
+              <Card key={index} className="overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="mb-3 flex gap-2">
+                    {pres.keywords?.map((keyword, i) => (
+                      <Badge key={i} variant="outline" className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/20">
+                        {keyword}
+                      </Badge>
+                    ))}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{pres.title}</h3>
+                  <p className="text-muted-foreground mb-3">{pres.authors.join(', ')}</p>
+                  <CardDescription className="text-sm text-muted-foreground">
+                    {pres.journal}, {pres.year}
                   </CardDescription>
                 </CardContent>
               </Card>
