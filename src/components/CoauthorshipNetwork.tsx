@@ -89,6 +89,7 @@ function build() {
   for (const a of [
     ...journalPublications.map(p => p.authors),
     ...conferenceProceedings.map(p => p.authors),
+    ...otherPresentations.map(p => p.authors),
     ...nonRefereedPublications.map(p => p.authors),
     ...workUnderReview.map(p => p.authors),
     ...workInProgress.map(p => p.authors),
