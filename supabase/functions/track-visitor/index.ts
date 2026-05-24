@@ -20,6 +20,16 @@ Deno.serve(async (req) => {
     }
     const sid = encodeURIComponent(session_id);
 
+    // Validate page param when provided: must look like a URL path
+    if (page !== undefined && page !== null) {
+      if (typeof page !== 'string' || page.length > 256 || !/^\/[A-Za-z0-9/_\-]*$/.test(page)) {
+        return new Response(JSON.stringify({ error: 'Invalid page' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+    }
+
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const OWNER_IP = Deno.env.get('OWNER_IP_ADDRESS') || '';
@@ -160,8 +170,8 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Track visitor error:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    console.error('[track-visitor] error:', error);
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
