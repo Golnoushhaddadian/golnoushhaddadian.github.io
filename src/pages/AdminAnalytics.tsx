@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Lock, Users, Clock, Globe, Monitor, ArrowRight, Link2, Search, Trash2 } from "lucide-react";
 import { useDocumentHead } from "@/hooks/useDocumentHead";
 
-const ADMIN_PASSWORD = "LiaAdmin2026!";
+const PW_KEY = "admin_pw";
 
 type Session = {
   id: string;
@@ -83,39 +83,45 @@ function formatDate(d: string | null) {
 export default function AdminAnalytics() {
   useDocumentHead({ title: "Admin Analytics", description: "Private visitor analytics dashboard" });
   const [password, setPassword] = useState("");
+  const [adminPw, setAdminPw] = useState<string>(() => sessionStorage.getItem(PW_KEY) || "");
   const [authenticated, setAuthenticated] = useState(false);
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setAuthenticated(true);
-      setError("");
-    } else {
+    const { data, error: invokeError } = await supabase.functions.invoke("admin-visitor-sessions", {
+      body: { password, action: "verify" },
+    });
+    if (invokeError || !(data as any)?.ok) {
       setError("Incorrect password");
+      return;
     }
+    sessionStorage.setItem(PW_KEY, password);
+    setAdminPw(password);
+    setAuthenticated(true);
+    setError("");
   };
 
   useEffect(() => {
-    if (!authenticated) return;
+    if (!authenticated || !adminPw) return;
     setLoading(true);
     supabase.functions
       .invoke("admin-visitor-sessions", {
-        body: { password: ADMIN_PASSWORD, action: "list" },
+        body: { password: adminPw, action: "list" },
       })
       .then(({ data, error }) => {
         if (error) console.error(error);
         setSessions(((data as any)?.sessions as Session[]) || []);
         setLoading(false);
       });
-  }, [authenticated]);
+  }, [authenticated, adminPw]);
 
   const handleDelete = async (id: string) => {
     const { error } = await supabase.functions.invoke("admin-visitor-sessions", {
-      body: { password: ADMIN_PASSWORD, action: "delete", id },
+      body: { password: adminPw, action: "delete", id },
     });
     if (error) {
       console.error("Delete failed:", error);
