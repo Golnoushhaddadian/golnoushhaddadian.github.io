@@ -78,6 +78,7 @@ const resources: Resource[] = [
     citation:
       "Research Statement Evaluation Rubric [Interactive tool]. Generated with Claude (Anthropic). https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21",
     embedUrl: "https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21/embed",
+    image: "/lovable-uploads/rubric-preview.png",
     disclaimer: "Made with Claude — not verified data.",
   },
 ];
@@ -142,23 +143,23 @@ const Resources = () => {
                   </span>
                 )}
               </div>
-              {resource.embedUrl && (
+              {resource.image && (
+                <div className="mb-3 rounded-lg overflow-hidden border border-border/50 aspect-video">
+                  <img
+                    src={resource.image}
+                    alt={resource.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              {!resource.image && resource.embedUrl && (
                 <div className="mb-3 rounded-lg overflow-hidden border border-border/50 aspect-video">
                   <iframe
                     src={resource.embedUrl}
                     title={resource.title}
                     className="w-full h-full"
                     allowFullScreen
-                    loading="lazy"
-                  />
-                </div>
-              )}
-              {resource.image && !resource.embedUrl && (
-                <div className="mb-3 rounded-lg overflow-hidden border border-border/50 aspect-video">
-                  <img
-                    src={resource.image}
-                    alt={resource.title}
-                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
