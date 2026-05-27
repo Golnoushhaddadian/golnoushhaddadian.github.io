@@ -14,6 +14,7 @@ type Resource = {
   embedUrl?: string;
   image?: string;
   imageAttribution?: { text: string; url: string };
+  disclaimer?: string;
 };
 
 const resources: Resource[] = [
@@ -67,6 +68,17 @@ const resources: Resource[] = [
       "Vickery, M. (n.d.). Academic website template [GitHub Pages template]. GitHub. https://github.com/morganavickery/academic-website-template",
     image: "/lovable-uploads/academic-website-template.jpg",
     imageAttribution: { text: "Image Attribution", url: "https://www.freepik.com/free-photo/3d-rendering-website-hosting-concept_28645200.htm" },
+  },
+  {
+    title: "Research Statement Evaluation Rubric",
+    subtitle: "Interactive Rubric",
+    description:
+      "A self-scoring rubric for evaluating research statements across dimensions such as research identity, narrative architecture, and scholarly contribution. Useful for doctoral candidates and early-career researchers preparing application materials.",
+    link: "https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21",
+    citation:
+      "Research Statement Evaluation Rubric [Interactive tool]. Generated with Claude (Anthropic). https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21",
+    embedUrl: "https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21/embed",
+    disclaimer: "Made with Claude — not verified data.",
   },
 ];
 
@@ -145,6 +157,11 @@ const Resources = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {resource.description}
               </p>
+              {resource.disclaimer && (
+                <p className="mt-2 text-[11px] italic text-muted-foreground/70">
+                  {resource.disclaimer}
+                </p>
+              )}
             </div>
 
             <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50 flex-wrap gap-2">
