@@ -14,6 +14,7 @@ type Resource = {
   embedUrl?: string;
   image?: string;
   imageAttribution?: { text: string; url: string };
+  disclaimer?: string;
 };
 
 const resources: Resource[] = [
