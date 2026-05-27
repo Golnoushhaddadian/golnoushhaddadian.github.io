@@ -129,10 +129,19 @@ const Resources = () => {
             className="group relative flex flex-col justify-between rounded-xl border bg-card p-5 sm:p-6 hover:shadow-md hover:border-primary/30 transition-all duration-300"
           >
             <div>
-              <h2 className="text-base sm:text-lg font-semibold text-primary mb-1 group-hover:underline underline-offset-2">
-                {resource.title}
-              </h2>
-              <p className="text-xs text-muted-foreground mb-3">{resource.subtitle}</p>
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <h2 className="text-base sm:text-lg font-semibold text-primary group-hover:underline underline-offset-2">
+                  {resource.title}
+                </h2>
+              </div>
+              <div className="flex items-center gap-2 mb-3 flex-wrap">
+                <p className="text-xs text-muted-foreground">{resource.subtitle}</p>
+                {resource.disclaimer && (
+                  <span className="text-[11px] italic text-muted-foreground/70">
+                    — {resource.disclaimer}
+                  </span>
+                )}
+              </div>
               {resource.embedUrl && (
                 <div className="mb-3 rounded-lg overflow-hidden border border-border/50 aspect-video">
                   <iframe
@@ -157,11 +166,6 @@ const Resources = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {resource.description}
               </p>
-              {resource.disclaimer && (
-                <p className="mt-2 text-[11px] italic text-muted-foreground/70">
-                  {resource.disclaimer}
-                </p>
-              )}
             </div>
 
             <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50 flex-wrap gap-2">
