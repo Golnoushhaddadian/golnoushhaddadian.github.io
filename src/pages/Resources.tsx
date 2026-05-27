@@ -69,6 +69,17 @@ const resources: Resource[] = [
     image: "/lovable-uploads/academic-website-template.jpg",
     imageAttribution: { text: "Image Attribution", url: "https://www.freepik.com/free-photo/3d-rendering-website-hosting-concept_28645200.htm" },
   },
+  {
+    title: "Research Statement Evaluation Rubric",
+    subtitle: "Interactive Rubric",
+    description:
+      "A self-scoring rubric for evaluating research statements across dimensions such as research identity, narrative architecture, and scholarly contribution. Useful for doctoral candidates and early-career researchers preparing application materials.",
+    link: "https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21",
+    citation:
+      "Research Statement Evaluation Rubric [Interactive tool]. Generated with Claude (Anthropic). https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21",
+    embedUrl: "https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21/embed",
+    disclaimer: "Made with Claude — not verified data.",
+  },
 ];
 
 const CopyButton = ({ text }: { text: string }) => {
