@@ -157,6 +157,11 @@ const Resources = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {resource.description}
               </p>
+              {resource.disclaimer && (
+                <p className="mt-2 text-[11px] italic text-muted-foreground/70">
+                  {resource.disclaimer}
+                </p>
+              )}
             </div>
 
             <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50 flex-wrap gap-2">
