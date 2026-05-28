@@ -78,7 +78,7 @@ const resources: Resource[] = [
     citation:
       "Research Statement Evaluation Rubric [Interactive tool]. Generated with Claude (Anthropic). https://lime-benny-27-5769c8.tiiny.site",
     image: "/lovable-uploads/rubric-preview.png",
-    disclaimer: "Made with Claude — not verified data.",
+    disclaimer: "This tool is only a general guide and should not be treated as a definitive evaluation. Please use it alongside expert feedback and independent judgment.",
   },
 ];
 
