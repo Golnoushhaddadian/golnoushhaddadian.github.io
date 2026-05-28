@@ -79,18 +79,7 @@ const resources: Resource[] = [
       "Vickery, M. (n.d.). Academic website template [GitHub Pages template]. GitHub. https://github.com/morganavickery/academic-website-template",
     image: "/lovable-uploads/academic-website-template.jpg",
     imageAttribution: { text: "Image Attribution", url: "https://www.freepik.com/free-photo/3d-rendering-website-hosting-concept_28645200.htm" },
-  },
-  {
-    title: "Research Statement Evaluation Rubric",
-    subtitle: "Interactive Rubric",
-    description:
-      "A self-scoring rubric for evaluating research statements across dimensions such as research identity, narrative architecture, and scholarly contribution. Useful for doctoral candidates and early-career researchers preparing application materials.",
-    link: "https://lime-benny-27-5769c8.tiiny.site",
-    citation:
-      "Research Statement Evaluation Rubric [Interactive tool]. Generated with Claude (Anthropic). https://lime-benny-27-5769c8.tiiny.site",
-    image: "/lovable-uploads/rubric-preview.png",
-    disclaimer: "This tool is only a general guide and should not be treated as a definitive evaluation. Please use it alongside expert feedback and independent judgment.",
-  },
+  }
 ];
 
 const CopyButton = ({ text }: { text: string }) => {
