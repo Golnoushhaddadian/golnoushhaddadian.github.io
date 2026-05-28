@@ -74,10 +74,9 @@ const resources: Resource[] = [
     subtitle: "Interactive Rubric",
     description:
       "A self-scoring rubric for evaluating research statements across dimensions such as research identity, narrative architecture, and scholarly contribution. Useful for doctoral candidates and early-career researchers preparing application materials.",
-    link: "https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21",
+    link: "https://lime-benny-27-5769c8.tiiny.site",
     citation:
-      "Research Statement Evaluation Rubric [Interactive tool]. Generated with Claude (Anthropic). https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21",
-    embedUrl: "https://claude.site/public/artifacts/1b2ad7cb-6230-40c1-b798-2a56c3e67a21/embed",
+      "Research Statement Evaluation Rubric [Interactive tool]. Generated with Claude (Anthropic). https://lime-benny-27-5769c8.tiiny.site",
     image: "/lovable-uploads/rubric-preview.png",
     disclaimer: "Made with Claude — not verified data.",
   },
