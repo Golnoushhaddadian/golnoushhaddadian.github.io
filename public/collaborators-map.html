@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Research Collaborators — World Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root {
+    --paper: #f4ede1;
+    --paper-2: #ece2d0;
+    --ink: #1f1a14;
+    --ink-soft: #4a3f31;
+    --accent: #7a1f1f;
+    --rule: #c9bda6;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 24px 40px;
+  }
+  .eyebrow {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    font-size: 14px;
+    text-transform: lowercase;
+  }
+  h1 {
+    font-family: 'Fraunces', 'Times New Roman', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 6px 0 10px;
+  }
+  .lede {
+    color: var(--ink-soft);
+    max-width: 70ch;
+    margin: 0 0 18px;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    padding: 14px 0 18px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 18px;
+  }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat .lbl {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+  #map {
+    height: 560px;
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--paper-2);
+    box-shadow: 0 1px 0 #fff inset, 0 10px 30px -20px rgba(31,26,20,0.3);
+  }
+  .fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--ink-soft);
+    font-style: italic;
+    padding: 20px;
+    text-align: center;
+  }
+  .legend {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--accent);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .leaflet-popup-content-wrapper {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 8px 30px -10px rgba(31,26,20,0.35);
+  }
+  .leaflet-popup-tip { background: var(--paper); }
+  .popup-city {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 0 2px;
+    color: var(--accent);
+  }
+  .popup-meta {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .popup-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  .popup-list li {
+    padding: 8px 0;
+    border-top: 1px dotted var(--rule);
+    font-size: 14px;
+  }
+  .popup-list li:first-child { border-top: 0; }
+  .p-name { font-weight: 600; }
+  .p-role {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 12.5px;
+  }
+  .p-aff {
+    color: var(--ink-soft);
+    font-size: 12.5px;
+  }
+  .marker-pin {
+    background: var(--accent);
+    color: #fff;
+    border: 2px solid var(--paper);
+    border-radius: 999px;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 13px;
+    box-shadow: 0 2px 8px rgba(31,26,20,0.35);
+  }
+  footer.note {
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">a cartography of collaboration</div>
+  <h1>Research Collaborators Around the World</h1>
+  <p class="lede">Advisors, mentors, dissertation committee members, and co-authors who shape my scholarship across the learning sciences, AI in education, and applied linguistics. Click a marker to see who works where.</p>
+
+  <div class="stats" id="stats">
+    <div class="stat"><div class="num" id="stat-people">—</div><div class="lbl">collaborators</div></div>
+    <div class="stat"><div class="num" id="stat-cities">—</div><div class="lbl">cities</div></div>
+    <div class="stat"><div class="num" id="stat-countries">—</div><div class="lbl">countries</div></div>
+  </div>
+
+  <div id="map"><div class="fallback">Loading map…</div></div>
+
+  <div class="legend"><span><span class="dot"></span>Each marker shows the number of collaborators based in that city.</span></div>
+
+  <footer class="note">Map tiles by CARTO, data © OpenStreetMap contributors. Built with Leaflet.</footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Edit this single array to add, move, or update collaborators.
+  const COLLABORATORS = [
+    { city: "Atlanta", region: "Georgia", country: "USA", lat: 33.7490, lng: -84.3880, people: [
+      { name: "Min Kyu Kim", role: "Ph.D. advisor", affiliation: "Associate Professor, Learning Sciences, Georgia State University" },
+      { name: "Joseph P. Magliano", role: "Postdoc mentor", affiliation: "Professor, Learning Sciences, Georgia State University" },
+      { name: "Jonathan D. Cohen", role: "Postdoc mentor", affiliation: "Professor, Learning Sciences, Georgia State University" },
+      { name: "Jennifer Darling-Aduana", role: "Dissertation committee", affiliation: "Assistant Professor, Learning Technologies, Georgia State University" },
+      { name: "Gertrude Tinker Sachs", role: "Co-author / IES project", affiliation: "Professor, Georgia State University" },
+      { name: "Omer Ari", role: "Co-author / IES project", affiliation: "Clinical Associate Professor, Georgia State University" },
+      { name: "Yoojin Bae", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" },
+      { name: "Jinho Kim", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" },
+      { name: "Hyunkyu Han", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" },
+      { name: "Ali Heidari", role: "Co-author", affiliation: "Doctoral researcher, Learning Sciences, Georgia State University" },
+      { name: "Nooshin Haddadian", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" }
+    ]},
+    { city: "Heerlen", region: "", country: "Netherlands", lat: 50.8882, lng: 5.9795, people: [
+      { name: "Seyyed Kazem Banihashem", role: "Co-author", affiliation: "Assistant Professor, Open University of the Netherlands (also Wageningen University & Research)" },
+      { name: "Maryam Alqassab", role: "Co-author", affiliation: "Open University of the Netherlands" }
+    ]},
+    { city: "Wageningen", region: "", country: "Netherlands", lat: 51.9692, lng: 5.6654, people: [
+      { name: "Omid Noroozi", role: "Co-author", affiliation: "Associate Professor, Wageningen University & Research" },
+      { name: "Xingshi (Xin) Gao", role: "Co-author", affiliation: "PhD candidate, Wageningen University & Research" }
+    ]},
+    { city: "Norfolk", region: "Virginia", country: "USA", lat: 36.8508, lng: -76.2859, people: [
+      { name: "Daniel (Dan) Takabi", role: "Co-author", affiliation: "Professor and Director, School of Cybersecurity, Old Dominion University" },
+      { name: "Prajwal Panzade", role: "Co-author", affiliation: "Old Dominion University / Georgia State University" }
+    ]},
+    { city: "Nashville", region: "Tennessee", country: "USA", lat: 36.1627, lng: -86.7816, people: [
+      { name: "Scott A. Crossley", role: "Co-author", affiliation: "Professor, Vanderbilt University" }
+    ]},
+    { city: "Memphis", region: "Tennessee", country: "USA", lat: 35.1495, lng: -90.0490, people: [
+      { name: "John Sabatini", role: "Co-author / IES project", affiliation: "Distinguished Research Professor, University of Memphis" }
+    ]},
+    { city: "Pittsburgh", region: "Pennsylvania", country: "USA", lat: 40.4406, lng: -79.9959, people: [
+      { name: "Christian D. Schunn", role: "Co-author", affiliation: "Professor, University of Pittsburgh" }
+    ]},
+    { city: "Princeton", region: "New Jersey", country: "USA", lat: 40.3573, lng: -74.6672, people: [
+      { name: "Tenaha O'Reilly", role: "Co-author / IES project", affiliation: "Educational Testing Service (ETS)" }
+    ]},
+    { city: "Coral Gables", region: "Florida", country: "USA", lat: 25.7215, lng: -80.2684, people: [
+      { name: "Nam Ju Kim", role: "Co-author", affiliation: "Associate Professor, University of Miami" }
+    ]},
+    { city: "Augsburg", region: "", country: "Germany", lat: 48.3705, lng: 10.8978, people: [
+      { name: "Martin Greisel", role: "Co-author", affiliation: "Assistant Professor, Educational Psychology, University of Augsburg" }
+    ]},
+    { city: "Brisbane", region: "", country: "Australia", lat: -27.4698, lng: 153.0251, people: [
+      { name: "Hassan Khosravi", role: "Co-author", affiliation: "Associate Professor, University of Queensland" }
+    ]},
+    { city: "Tehran", region: "", country: "Iran", lat: 35.6892, lng: 51.3890, people: [
+      { name: "Behrooz Mahmoodi-Bakhtiari", role: "Co-author", affiliation: "Associate Professor, College of Fine Arts, University of Tehran" }
+    ]}
+  ];
+
+  // Stats
+  const totalPeople = COLLABORATORS.reduce((s, c) => s + c.people.length, 0);
+  const totalCities = COLLABORATORS.length;
+  const totalCountries = new Set(COLLABORATORS.map(c => c.country)).size;
+  document.getElementById('stat-people').textContent = totalPeople;
+  document.getElementById('stat-cities').textContent = totalCities;
+  document.getElementById('stat-countries').textContent = totalCountries;
+
+  const mapEl = document.getElementById('map');
+
+  if (typeof L === 'undefined') {
+    mapEl.innerHTML = '<div class="fallback">Map library could not load. Please check your internet connection and refresh.</div>';
+  } else {
+    mapEl.innerHTML = '';
+    const map = L.map('map', { scrollWheelZoom: false, worldCopyJump: true }).setView([20, 0], 2);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
+
+    const bounds = [];
+
+    COLLABORATORS.forEach(loc => {
+      const icon = L.divIcon({
+        className: 'collab-marker',
+        html: `<div class="marker-pin">${loc.people.length}</div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+        popupAnchor: [0, -14]
+      });
+
+      const cityLabel = [loc.city, loc.region, loc.country].filter(Boolean).join(', ');
+      const list = loc.people.map(p => `
+        <li>
+          <div class="p-name">${p.name}</div>
+          <div class="p-role">${p.role}</div>
+          <div class="p-aff">${p.affiliation}</div>
+        </li>`).join('');
+
+      const popupHtml = `
+        <div>
+          <p class="popup-city">${cityLabel}</p>
+          <div class="popup-meta">${loc.people.length} collaborator${loc.people.length === 1 ? '' : 's'}</div>
+          <ul class="popup-list">${list}</ul>
+        </div>`;
+
+      L.marker([loc.lat, loc.lng], { icon })
+        .addTo(map)
+        .bindPopup(popupHtml, { maxWidth: 320, minWidth: 240 });
+
+      bounds.push([loc.lat, loc.lng]);
+    });
+
+    if (bounds.length) {
+      map.fitBounds(bounds, { padding: [40, 40] });
+    }
+
+    setTimeout(() => map.invalidateSize(), 250);
+    window.addEventListener('resize', () => map.invalidateSize());
+  }
+</script>
+</body>
+</html>

@@ -21,6 +21,7 @@ import Research from "@/pages/Research";
 import Resources from "@/pages/Resources";
 import Timeline from "@/pages/Timeline";
 import AdminAnalytics from "@/pages/AdminAnalytics";
+import Collaborators from "@/pages/Collaborators";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -42,6 +43,7 @@ const App = () => (
               <Route path="/resources" element={<Resources />} />
               <Route path="/timeline" element={<Timeline />} />
               <Route path="/admin-analytics" element={<AdminAnalytics />} />
+              <Route path="/collaborators" element={<Collaborators />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
