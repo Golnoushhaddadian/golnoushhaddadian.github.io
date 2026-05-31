@@ -174,6 +174,28 @@
     color: var(--ink-soft);
     font-style: italic;
   }
+  .add-btn {
+    display: inline-block;
+    margin: 0 0 16px;
+    padding: 10px 22px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    background: var(--accent);
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(31,26,20,0.25);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .add-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(31,26,20,0.3); }
+  .add-btn:active { transform: translateY(0); }
+  .add-btn.added {
+    background: #4a6741;
+    cursor: default;
+  }
+  .add-btn:disabled { opacity: .9; }
 </style>
 </head>
 <body>
@@ -188,6 +210,8 @@
     <div class="stat"><div class="num" id="stat-countries">—</div><div class="lbl">countries</div></div>
   </div>
 
+  <button id="add-self-btn" class="add-btn">Add My Name to the Map</button>
+
   <div id="map"><div class="fallback">Loading map…</div></div>
 
   <div class="legend"><span><span class="dot"></span>Each marker shows the number of collaborators based in that city.</span></div>
@@ -198,7 +222,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   // Edit this single array to add, move, or update collaborators.
-  const COLLABORATORS = [
+  let COLLABORATORS = [
     { city: "Atlanta", region: "Georgia", country: "USA", lat: 33.7490, lng: -84.3880, people: [
       { name: "Min Kyu Kim", role: "Ph.D. advisor", affiliation: "Associate Professor, Learning Sciences, Georgia State University" },
       { name: "Joseph P. Magliano", role: "Postdoc mentor", affiliation: "Professor, Learning Sciences, Georgia State University" },
@@ -250,27 +274,40 @@
     ]}
   ];
 
-  // Stats
-  const totalPeople = COLLABORATORS.reduce((s, c) => s + c.people.length, 0);
-  const totalCities = COLLABORATORS.length;
-  const totalCountries = new Set(COLLABORATORS.map(c => c.country)).size;
-  document.getElementById('stat-people').textContent = totalPeople;
-  document.getElementById('stat-cities').textContent = totalCities;
-  document.getElementById('stat-countries').textContent = totalCountries;
+  let map = null;
+  let markers = [];
 
-  const mapEl = document.getElementById('map');
+  function updateStats() {
+    const totalPeople = COLLABORATORS.reduce((s, c) => s + c.people.length, 0);
+    const totalCities = COLLABORATORS.length;
+    const totalCountries = new Set(COLLABORATORS.map(c => c.country)).size;
+    document.getElementById('stat-people').textContent = totalPeople;
+    document.getElementById('stat-cities').textContent = totalCities;
+    document.getElementById('stat-countries').textContent = totalCountries;
+  }
 
-  if (typeof L === 'undefined') {
-    mapEl.innerHTML = '<div class="fallback">Map library could not load. Please check your internet connection and refresh.</div>';
-  } else {
-    mapEl.innerHTML = '';
-    const map = L.map('map', { scrollWheelZoom: false, worldCopyJump: true }).setView([20, 0], 2);
+  function renderMap() {
+    const mapEl = document.getElementById('map');
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 19
-    }).addTo(map);
+    if (typeof L === 'undefined') {
+      mapEl.innerHTML = '<div class="fallback">Map library could not load. Please check your internet connection and refresh.</div>';
+      return;
+    }
+
+    // Clear existing markers
+    if (map) {
+      markers.forEach(m => map.removeLayer(m));
+      markers = [];
+    } else {
+      mapEl.innerHTML = '';
+      map = L.map('map', { scrollWheelZoom: false, worldCopyJump: true }).setView([20, 0], 2);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+    }
 
     const bounds = [];
 
@@ -298,10 +335,11 @@
           <ul class="popup-list">${list}</ul>
         </div>`;
 
-      L.marker([loc.lat, loc.lng], { icon })
+      const marker = L.marker([loc.lat, loc.lng], { icon })
         .addTo(map)
         .bindPopup(popupHtml, { maxWidth: 320, minWidth: 240 });
 
+      markers.push(marker);
       bounds.push([loc.lat, loc.lng]);
     });
 
@@ -310,8 +348,36 @@
     }
 
     setTimeout(() => map.invalidateSize(), 250);
-    window.addEventListener('resize', () => map.invalidateSize());
   }
+
+  function addSelf() {
+    const atlanta = COLLABORATORS.find(c => c.city === "Atlanta");
+    if (atlanta) {
+      const alreadyAdded = atlanta.people.some(p => p.name === "Golnoush Haddadian");
+      if (!alreadyAdded) {
+        atlanta.people.unshift({
+          name: "Golnoush Haddadian",
+          role: "Researcher",
+          affiliation: "Ph.D. Candidate, Learning Sciences, Georgia State University"
+        });
+        updateStats();
+        renderMap();
+        const btn = document.getElementById('add-self-btn');
+        btn.textContent = "Golnoush Haddadian added ✓";
+        btn.disabled = true;
+        btn.classList.add('added');
+      }
+    }
+  }
+
+  updateStats();
+  renderMap();
+
+  window.addEventListener('resize', () => {
+    if (map) map.invalidateSize();
+  });
+
+  document.getElementById('add-self-btn').addEventListener('click', addSelf);
 </script>
 </body>
 </html>
