@@ -3,381 +3,327 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Research Collaborators — World Map</title>
+<title>My Collaborators Around the World — Golnoush Haddadian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
-    --paper: #f4ede1;
-    --paper-2: #ece2d0;
-    --ink: #1f1a14;
-    --ink-soft: #4a3f31;
-    --accent: #7a1f1f;
-    --rule: #c9bda6;
+    --bg: #f1f8fb;
+    --card: #ffffff;
+    --primary: #118ab2;
+    --primary-deep: #0b6e8f;
+    --advisor: #ef476f;
+    --committee: #ffb703;
+    --coauthor: #2a9d8f;
+    --text: #1f2d3d;
+    --muted: #6b7a8d;
+    --line: #e4eef3;
   }
   * { box-sizing: border-box; }
   html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: 17px;
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-size: 16px;
     line-height: 1.55;
   }
-  .wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 28px 24px 40px;
-  }
-  .eyebrow {
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    letter-spacing: 0.02em;
-    color: var(--accent);
-    font-size: 14px;
-    text-transform: lowercase;
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 40px; }
+  .header { text-align: center; margin-bottom: 22px; }
+  .kicker {
+    display: inline-block;
+    background: #fff;
+    color: var(--primary-deep);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 2px 10px rgba(17, 138, 178, 0.12);
+    border: 1px solid var(--line);
   }
   h1 {
-    font-family: 'Fraunces', 'Times New Roman', serif;
-    font-weight: 600;
-    font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    margin: 6px 0 10px;
-  }
-  .lede {
-    color: var(--ink-soft);
-    max-width: 70ch;
-    margin: 0 0 18px;
-  }
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    padding: 14px 0 18px;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 18px;
-  }
-  .stat .num {
-    font-family: 'Fraunces', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 32px;
-    color: var(--accent);
-    line-height: 1;
+    font-size: clamp(28px, 4.2vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 14px 0 10px;
+    color: var(--text);
   }
-  .stat .lbl {
-    font-style: italic;
-    color: var(--ink-soft);
-    font-size: 14px;
-    letter-spacing: 0.02em;
+  h1 .accent { color: var(--primary); }
+  .lede { color: var(--muted); max-width: 60ch; margin: 0 auto 20px; }
+  .stats {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 12px; margin-bottom: 22px;
+  }
+  .chip {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 18px;
+    display: inline-flex; align-items: baseline; gap: 8px;
+    box-shadow: 0 2px 8px rgba(17, 138, 178, 0.06);
+  }
+  .chip .num {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; font-size: 20px; color: var(--primary);
+  }
+  .chip .lbl { color: var(--muted); font-size: 14px; font-weight: 600; }
+  .map-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: 0 10px 30px -12px rgba(17, 138, 178, 0.25);
+    border: 1px solid var(--line);
   }
   #map {
-    height: 560px;
-    width: 100%;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    background: var(--paper-2);
-    box-shadow: 0 1px 0 #fff inset, 0 10px 30px -20px rgba(31,26,20,0.3);
+    height: 580px; width: 100%;
+    border-radius: 12px;
+    background: #e9f3f8;
+    overflow: hidden;
   }
   .fallback {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--ink-soft);
-    font-style: italic;
-    padding: 20px;
-    text-align: center;
-  }
-  .legend {
-    margin-top: 14px;
-    font-size: 14px;
-    color: var(--ink-soft);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    align-items: center;
-  }
-  .dot {
-    display: inline-block;
-    width: 10px; height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    border: 2px solid var(--paper);
-    box-shadow: 0 0 0 1px var(--accent);
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-  .leaflet-popup-content-wrapper {
-    background: var(--paper);
-    color: var(--ink);
-    border-radius: 4px;
-    border: 1px solid var(--rule);
-    box-shadow: 0 8px 30px -10px rgba(31,26,20,0.35);
-  }
-  .leaflet-popup-tip { background: var(--paper); }
-  .popup-city {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 16px;
-    margin: 0 0 2px;
-    color: var(--accent);
-  }
-  .popup-meta {
-    font-style: italic;
-    color: var(--ink-soft);
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  .popup-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    max-height: 240px;
-    overflow-y: auto;
-  }
-  .popup-list li {
-    padding: 8px 0;
-    border-top: 1px dotted var(--rule);
-    font-size: 14px;
-  }
-  .popup-list li:first-child { border-top: 0; }
-  .p-name { font-weight: 600; }
-  .p-role {
-    font-style: italic;
-    color: var(--accent);
-    font-size: 12.5px;
-  }
-  .p-aff {
-    color: var(--ink-soft);
-    font-size: 12.5px;
+    display: flex; align-items: center; justify-content: center;
+    height: 100%; color: var(--muted); padding: 20px; text-align: center;
+    font-weight: 600;
   }
   .marker-pin {
-    background: var(--accent);
-    color: #fff;
-    border: 2px solid var(--paper);
+    border: 3px solid #fff;
     border-radius: 999px;
-    width: 30px; height: 30px;
+    width: 36px; height: 36px;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 13px;
-    box-shadow: 0 2px 8px rgba(31,26,20,0.35);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; font-size: 14px; color: #fff;
+    box-shadow: 0 3px 10px rgba(31, 45, 61, 0.35);
   }
+  .leaflet-popup-content-wrapper {
+    background: #fff; color: var(--text);
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 30px -10px rgba(17, 138, 178, 0.3);
+  }
+  .leaflet-popup-content { margin: 14px 16px; }
+  .leaflet-popup-tip { background: #fff; }
+  .popup-city {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; font-size: 17px; margin: 0;
+    color: var(--text);
+  }
+  .popup-region {
+    color: var(--primary); font-weight: 700; font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .popup-list { margin: 0; padding: 0; list-style: none; max-height: 260px; overflow-y: auto; }
+  .popup-list li {
+    padding: 8px 0; border-top: 1px solid var(--line);
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .popup-list li:first-child { border-top: 0; }
+  .role-dot {
+    flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%;
+    margin-top: 6px;
+  }
+  .p-name { font-weight: 700; font-size: 14px; color: var(--text); }
+  .p-meta { color: var(--muted); font-size: 12.5px; line-height: 1.4; }
+  .legend {
+    background: #fff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(17, 138, 178, 0.18);
+    border: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .legend .title {
+    font-family: 'Poppins', sans-serif; font-weight: 700;
+    font-size: 12px; color: var(--text); margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .legend-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; color: var(--text); }
+  .legend-row .dot { width: 10px; height: 10px; border-radius: 50%; }
   footer.note {
-    margin-top: 22px;
-    font-size: 13px;
-    color: var(--ink-soft);
-    font-style: italic;
+    margin-top: 18px; text-align: center;
+    font-size: 12.5px; color: var(--muted);
   }
-  .add-btn {
-    display: inline-block;
-    margin: 0 0 16px;
-    padding: 10px 22px;
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: #fff;
-    background: var(--accent);
-    border: 0;
-    border-radius: 3px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(31,26,20,0.25);
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .add-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(31,26,20,0.3); }
-  .add-btn:active { transform: translateY(0); }
-  .add-btn.added {
-    background: #4a6741;
-    cursor: default;
-  }
-  .add-btn:disabled { opacity: .9; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="eyebrow">a cartography of collaboration</div>
-  <h1>Research Collaborators Around the World</h1>
-  <p class="lede">Advisors, mentors, dissertation committee members, and co-authors who shape my scholarship across the learning sciences, AI in education, and applied linguistics. Click a marker to see who works where.</p>
-
-  <div class="stats" id="stats">
-    <div class="stat"><div class="num" id="stat-people">—</div><div class="lbl">collaborators</div></div>
-    <div class="stat"><div class="num" id="stat-cities">—</div><div class="lbl">cities</div></div>
-    <div class="stat"><div class="num" id="stat-countries">—</div><div class="lbl">countries</div></div>
+  <div class="header">
+    <span class="kicker">Golnoush Haddadian · Research Network</span>
+    <h1>My Collaborators <span class="accent">Around the World</span></h1>
+    <p class="lede">A friendly map of the wonderful people I work with. Click any pin to meet the collaborators based there.</p>
+    <div class="stats">
+      <div class="chip"><span class="num" id="stat-people">—</span><span class="lbl">People</span></div>
+      <div class="chip"><span class="num" id="stat-cities">—</span><span class="lbl">Cities</span></div>
+      <div class="chip"><span class="num" id="stat-countries">—</span><span class="lbl">Countries</span></div>
+    </div>
   </div>
 
-  <button id="add-self-btn" class="add-btn">Add My Name to the Map</button>
+  <div class="map-card">
+    <div id="map"><div class="fallback">Loading map…</div></div>
+  </div>
 
-  <div id="map"><div class="fallback">Loading map…</div></div>
-
-  <div class="legend"><span><span class="dot"></span>Each marker shows the number of collaborators based in that city.</span></div>
-
-  <footer class="note">Map tiles by CARTO, data © OpenStreetMap contributors. Built with Leaflet.</footer>
+  <footer class="note">Map tiles © CARTO · Data © OpenStreetMap contributors · Built with Leaflet</footer>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   // Edit this single array to add, move, or update collaborators.
-  let COLLABORATORS = [
-    { city: "Atlanta", region: "Georgia", country: "USA", lat: 33.7490, lng: -84.3880, people: [
-      { name: "Min Kyu Kim", role: "Ph.D. advisor", affiliation: "Associate Professor, Learning Sciences, Georgia State University" },
-      { name: "Joseph P. Magliano", role: "Postdoc mentor", affiliation: "Professor, Learning Sciences, Georgia State University" },
-      { name: "Jonathan D. Cohen", role: "Postdoc mentor", affiliation: "Professor, Learning Sciences, Georgia State University" },
-      { name: "Jennifer Darling-Aduana", role: "Dissertation committee", affiliation: "Assistant Professor, Learning Technologies, Georgia State University" },
-      { name: "Gertrude Tinker Sachs", role: "Co-author / IES project", affiliation: "Professor, Georgia State University" },
-      { name: "Omer Ari", role: "Co-author / IES project", affiliation: "Clinical Associate Professor, Georgia State University" },
-      { name: "Yoojin Bae", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" },
-      { name: "Jinho Kim", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" },
-      { name: "Hyunkyu Han", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" },
-      { name: "Ali Heidari", role: "Co-author", affiliation: "Doctoral researcher, Learning Sciences, Georgia State University" },
-      { name: "Nooshin Haddadian", role: "Co-author", affiliation: "Doctoral student, Learning Sciences, Georgia State University" }
+  const COLLABORATORS = [
+    { city: "Atlanta", region: "Georgia, USA", lat: 33.7490, lng: -84.3880, country: "USA", people: [
+      { name: "Min Kyu Kim", role: "Ph.D. advisor", meta: "Associate Professor, Learning Sciences, Georgia State University" },
+      { name: "Joseph P. Magliano", role: "Postdoc mentor", meta: "Professor, Learning Sciences, Georgia State University" },
+      { name: "Jonathan D. Cohen", role: "Postdoc mentor", meta: "Professor, Learning Sciences, Georgia State University" },
+      { name: "Jennifer Darling-Aduana", role: "Dissertation committee", meta: "Assistant Professor, Learning Technologies, Georgia State University" },
+      { name: "Gertrude Tinker Sachs", role: "Co-author / IES project", meta: "Professor, Georgia State University" },
+      { name: "Omer Ari", role: "Co-author / IES project", meta: "Clinical Associate Professor, Georgia State University" },
+      { name: "Yoojin Bae", role: "Co-author", meta: "Doctoral student, Learning Sciences, Georgia State University" },
+      { name: "Jinho Kim", role: "Co-author", meta: "Doctoral student, Learning Sciences, Georgia State University" },
+      { name: "Hyunkyu Han", role: "Co-author", meta: "Doctoral student, Learning Sciences, Georgia State University" },
+      { name: "Ali Heidari", role: "Co-author", meta: "Doctoral researcher, Learning Sciences, Georgia State University" },
+      { name: "Nooshin Haddadian", role: "Co-author", meta: "Doctoral student, Learning Sciences, Georgia State University" }
     ]},
-    { city: "Heerlen", region: "", country: "Netherlands", lat: 50.8882, lng: 5.9795, people: [
-      { name: "Seyyed Kazem Banihashem", role: "Co-author", affiliation: "Assistant Professor, Open University of the Netherlands (also Wageningen University & Research)" },
-      { name: "Maryam Alqassab", role: "Co-author", affiliation: "Open University of the Netherlands" }
+    { city: "Heerlen", region: "Netherlands", lat: 50.8882, lng: 5.9795, country: "Netherlands", people: [
+      { name: "Seyyed Kazem Banihashem", role: "Co-author", meta: "Assistant Professor, Open University of the Netherlands (also Wageningen University & Research)" },
+      { name: "Maryam Alqassab", role: "Co-author", meta: "Open University of the Netherlands" }
     ]},
-    { city: "Wageningen", region: "", country: "Netherlands", lat: 51.9692, lng: 5.6654, people: [
-      { name: "Omid Noroozi", role: "Co-author", affiliation: "Associate Professor, Wageningen University & Research" },
-      { name: "Xingshi (Xin) Gao", role: "Co-author", affiliation: "PhD candidate, Wageningen University & Research" }
+    { city: "Wageningen", region: "Netherlands", lat: 51.9692, lng: 5.6654, country: "Netherlands", people: [
+      { name: "Omid Noroozi", role: "Co-author", meta: "Associate Professor, Wageningen University & Research" },
+      { name: "Xingshi (Xin) Gao", role: "Co-author", meta: "PhD candidate, Wageningen University & Research" }
     ]},
-    { city: "Norfolk", region: "Virginia", country: "USA", lat: 36.8508, lng: -76.2859, people: [
-      { name: "Daniel (Dan) Takabi", role: "Co-author", affiliation: "Professor and Director, School of Cybersecurity, Old Dominion University" },
-      { name: "Prajwal Panzade", role: "Co-author", affiliation: "Old Dominion University / Georgia State University" }
+    { city: "Norfolk", region: "Virginia, USA", lat: 36.8508, lng: -76.2859, country: "USA", people: [
+      { name: "Daniel (Dan) Takabi", role: "Co-author", meta: "Professor and Director, School of Cybersecurity, Old Dominion University" },
+      { name: "Prajwal Panzade", role: "Co-author", meta: "Old Dominion University / Georgia State University" }
     ]},
-    { city: "Nashville", region: "Tennessee", country: "USA", lat: 36.1627, lng: -86.7816, people: [
-      { name: "Scott A. Crossley", role: "Co-author", affiliation: "Professor, Vanderbilt University" }
+    { city: "Nashville", region: "Tennessee, USA", lat: 36.1627, lng: -86.7816, country: "USA", people: [
+      { name: "Scott A. Crossley", role: "Co-author", meta: "Professor, Vanderbilt University" }
     ]},
-    { city: "Memphis", region: "Tennessee", country: "USA", lat: 35.1495, lng: -90.0490, people: [
-      { name: "John Sabatini", role: "Co-author / IES project", affiliation: "Distinguished Research Professor, University of Memphis" }
+    { city: "Memphis", region: "Tennessee, USA", lat: 35.1495, lng: -90.0490, country: "USA", people: [
+      { name: "John Sabatini", role: "Co-author / IES project", meta: "Distinguished Research Professor, University of Memphis" }
     ]},
-    { city: "Pittsburgh", region: "Pennsylvania", country: "USA", lat: 40.4406, lng: -79.9959, people: [
-      { name: "Christian D. Schunn", role: "Co-author", affiliation: "Professor, University of Pittsburgh" }
+    { city: "Pittsburgh", region: "Pennsylvania, USA", lat: 40.4406, lng: -79.9959, country: "USA", people: [
+      { name: "Christian D. Schunn", role: "Co-author", meta: "Professor, University of Pittsburgh" }
     ]},
-    { city: "Princeton", region: "New Jersey", country: "USA", lat: 40.3573, lng: -74.6672, people: [
-      { name: "Tenaha O'Reilly", role: "Co-author / IES project", affiliation: "Educational Testing Service (ETS)" }
+    { city: "Princeton", region: "New Jersey, USA", lat: 40.3573, lng: -74.6672, country: "USA", people: [
+      { name: "Tenaha O'Reilly", role: "Co-author / IES project", meta: "Educational Testing Service (ETS)" }
     ]},
-    { city: "Coral Gables", region: "Florida", country: "USA", lat: 25.7215, lng: -80.2684, people: [
-      { name: "Nam Ju Kim", role: "Co-author", affiliation: "Associate Professor, University of Miami" }
+    { city: "Coral Gables", region: "Florida, USA", lat: 25.7215, lng: -80.2684, country: "USA", people: [
+      { name: "Nam Ju Kim", role: "Co-author", meta: "Associate Professor, University of Miami" }
     ]},
-    { city: "Augsburg", region: "", country: "Germany", lat: 48.3705, lng: 10.8978, people: [
-      { name: "Martin Greisel", role: "Co-author", affiliation: "Assistant Professor, Educational Psychology, University of Augsburg" }
+    { city: "Augsburg", region: "Germany", lat: 48.3705, lng: 10.8978, country: "Germany", people: [
+      { name: "Martin Greisel", role: "Co-author", meta: "Assistant Professor, Educational Psychology, University of Augsburg" }
     ]},
-    { city: "Brisbane", region: "", country: "Australia", lat: -27.4698, lng: 153.0251, people: [
-      { name: "Hassan Khosravi", role: "Co-author", affiliation: "Associate Professor, University of Queensland" }
+    { city: "Brisbane", region: "Australia", lat: -27.4698, lng: 153.0251, country: "Australia", people: [
+      { name: "Hassan Khosravi", role: "Co-author", meta: "Associate Professor, University of Queensland" }
     ]},
-    { city: "Tehran", region: "", country: "Iran", lat: 35.6892, lng: 51.3890, people: [
-      { name: "Behrooz Mahmoodi-Bakhtiari", role: "Co-author", affiliation: "Associate Professor, College of Fine Arts, University of Tehran" }
+    { city: "Tehran", region: "Iran", lat: 35.6892, lng: 51.3890, country: "Iran", people: [
+      { name: "Behrooz Mahmoodi-Bakhtiari", role: "Co-author", meta: "Associate Professor, College of Fine Arts, University of Tehran" }
     ]}
   ];
 
-  let map = null;
-  let markers = [];
+  const ROLE_COLORS = {
+    advisor: "#ef476f",
+    committee: "#ffb703",
+    coauthor: "#2a9d8f"
+  };
+  const ROLE_RANK = { advisor: 3, committee: 2, coauthor: 1 };
 
-  function updateStats() {
-    const totalPeople = COLLABORATORS.reduce((s, c) => s + c.people.length, 0);
-    const totalCities = COLLABORATORS.length;
-    const totalCountries = new Set(COLLABORATORS.map(c => c.country)).size;
-    document.getElementById('stat-people').textContent = totalPeople;
-    document.getElementById('stat-cities').textContent = totalCities;
-    document.getElementById('stat-countries').textContent = totalCountries;
+  function categorize(role) {
+    const r = role.toLowerCase();
+    if (r.includes("advisor") || r.includes("mentor")) return "advisor";
+    if (r.includes("committee")) return "committee";
+    return "coauthor";
   }
 
-  function renderMap() {
-    const mapEl = document.getElementById('map');
+  function topCategory(people) {
+    return people.reduce((top, p) => {
+      const c = categorize(p.role);
+      return ROLE_RANK[c] > ROLE_RANK[top] ? c : top;
+    }, "coauthor");
+  }
 
-    if (typeof L === 'undefined') {
-      mapEl.innerHTML = '<div class="fallback">Map library could not load. Please check your internet connection and refresh.</div>';
-      return;
-    }
+  // Stats
+  const totalPeople = COLLABORATORS.reduce((s, c) => s + c.people.length, 0);
+  document.getElementById('stat-people').textContent = totalPeople;
+  document.getElementById('stat-cities').textContent = COLLABORATORS.length;
+  document.getElementById('stat-countries').textContent = new Set(COLLABORATORS.map(c => c.country)).size;
 
-    // Clear existing markers
-    if (map) {
-      markers.forEach(m => map.removeLayer(m));
-      markers = [];
-    } else {
-      mapEl.innerHTML = '';
-      map = L.map('map', { scrollWheelZoom: false, worldCopyJump: true }).setView([20, 0], 2);
+  const mapEl = document.getElementById('map');
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19
-      }).addTo(map);
-    }
+  if (typeof L === 'undefined') {
+    mapEl.innerHTML = '<div class="fallback">We couldn\'t load the map right now. Please check your connection and refresh.</div>';
+  } else {
+    mapEl.innerHTML = '';
+    const map = L.map('map', { scrollWheelZoom: false, worldCopyJump: true }).setView([20, 0], 2);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
 
     const bounds = [];
 
     COLLABORATORS.forEach(loc => {
+      const cat = topCategory(loc.people);
+      const color = ROLE_COLORS[cat];
+
       const icon = L.divIcon({
         className: 'collab-marker',
-        html: `<div class="marker-pin">${loc.people.length}</div>`,
-        iconSize: [30, 30],
-        iconAnchor: [15, 15],
-        popupAnchor: [0, -14]
+        html: `<div class="marker-pin" style="background:${color}">${loc.people.length}</div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+        popupAnchor: [0, -16]
       });
 
-      const cityLabel = [loc.city, loc.region, loc.country].filter(Boolean).join(', ');
-      const list = loc.people.map(p => `
-        <li>
-          <div class="p-name">${p.name}</div>
-          <div class="p-role">${p.role}</div>
-          <div class="p-aff">${p.affiliation}</div>
-        </li>`).join('');
+      const list = loc.people.map(p => {
+        const c = categorize(p.role);
+        return `
+          <li>
+            <span class="role-dot" style="background:${ROLE_COLORS[c]}"></span>
+            <div>
+              <div class="p-name">${p.name}</div>
+              <div class="p-meta">${p.role} · ${p.meta}</div>
+            </div>
+          </li>`;
+      }).join('');
 
       const popupHtml = `
         <div>
-          <p class="popup-city">${cityLabel}</p>
-          <div class="popup-meta">${loc.people.length} collaborator${loc.people.length === 1 ? '' : 's'}</div>
+          <p class="popup-city">${loc.city}</p>
+          <div class="popup-region">${loc.region}</div>
           <ul class="popup-list">${list}</ul>
         </div>`;
 
-      const marker = L.marker([loc.lat, loc.lng], { icon })
+      L.marker([loc.lat, loc.lng], { icon })
         .addTo(map)
-        .bindPopup(popupHtml, { maxWidth: 320, minWidth: 240 });
+        .bindPopup(popupHtml, { maxWidth: 340, minWidth: 260 });
 
-      markers.push(marker);
       bounds.push([loc.lat, loc.lng]);
     });
 
-    if (bounds.length) {
-      map.fitBounds(bounds, { padding: [40, 40] });
-    }
+    if (bounds.length) map.fitBounds(bounds, { padding: [50, 50] });
 
-    setTimeout(() => map.invalidateSize(), 250);
+    // Legend
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'legend');
+      div.innerHTML = `
+        <div class="title">Role</div>
+        <div class="legend-row"><span class="dot" style="background:${ROLE_COLORS.advisor}"></span>Advisor / mentor</div>
+        <div class="legend-row"><span class="dot" style="background:${ROLE_COLORS.committee}"></span>Dissertation committee</div>
+        <div class="legend-row"><span class="dot" style="background:${ROLE_COLORS.coauthor}"></span>Co-author</div>`;
+      return div;
+    };
+    legend.addTo(map);
+
+    setTimeout(() => map.invalidateSize(), 300);
+    window.addEventListener('resize', () => map.invalidateSize());
   }
-
-  function addSelf() {
-    const atlanta = COLLABORATORS.find(c => c.city === "Atlanta");
-    if (atlanta) {
-      const alreadyAdded = atlanta.people.some(p => p.name === "Golnoush Haddadian");
-      if (!alreadyAdded) {
-        atlanta.people.unshift({
-          name: "Golnoush Haddadian",
-          role: "Researcher",
-          affiliation: "Ph.D. Candidate, Learning Sciences, Georgia State University"
-        });
-        updateStats();
-        renderMap();
-        const btn = document.getElementById('add-self-btn');
-        btn.textContent = "Golnoush Haddadian added ✓";
-        btn.disabled = true;
-        btn.classList.add('added');
-      }
-    }
-  }
-
-  updateStats();
-  renderMap();
-
-  window.addEventListener('resize', () => {
-    if (map) map.invalidateSize();
-  });
-
-  document.getElementById('add-self-btn').addEventListener('click', addSelf);
 </script>
 </body>
 </html>
