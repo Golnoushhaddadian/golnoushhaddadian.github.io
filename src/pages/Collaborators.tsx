@@ -2,7 +2,7 @@ import { useDocumentHead } from '@/hooks/useDocumentHead';
 
 const Collaborators = () => {
   useDocumentHead({
-    title: 'Research Collaborators Map — Golnoush Haddadian',
+    title: 'Research Collaborators — Golnoush Haddadian',
     description: 'An interactive world map of advisors, mentors, dissertation committee members, and co-authors collaborating with Golnoush Haddadian.',
     canonical: '/collaborators',
   });
