@@ -153,6 +153,9 @@ const AboutMe = () => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-[10px] sm:text-xs md:text-sm">
             <p>
+              <strong>Haddadian, G.</strong>, Haddadian, N., & Soleimani, S. (Accepted). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. Paper presented at AIRiAL <span className="text-blue-600 font-medium">2026</span> Conference, Teachers College, Columbia University, New York, NY, United States.
+            </p>
+            <p>
               Cohen, J. D., O'Reilly, T., Magliano, J., <strong>Haddadian, G.</strong>, Dobar, E. B., Ari, O., Tinker Sachs, G., & Sabatini, J. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Scenario-based learning and assessment design principles for the AI age. International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain.
             </p>
             <p>
