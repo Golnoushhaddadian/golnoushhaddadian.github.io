@@ -424,6 +424,26 @@ const Research = () => {
                 return <PublicationEntry key={idx} pub={pub} index={idx} />;
               })}
             </div>
+
+            {year === 2018 && (
+              <div className="mt-10 pt-8 border-t border-border/30">
+                <div className="flex items-baseline gap-3 mb-3">
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold">Collaborators</h2>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground/50 font-medium uppercase tracking-wider">
+                    World Map
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground/70 mb-4 max-w-2xl">
+                  Advisors, mentors, dissertation committee members, and co-authors collaborating across institutions worldwide.
+                </p>
+                <iframe
+                  src="/collaborators-map.html"
+                  title="Research Collaborators World Map"
+                  className="w-full rounded-md border border-border"
+                  style={{ height: '720px' }}
+                />
+              </div>
+            )}
           </div>
           );
         })}
