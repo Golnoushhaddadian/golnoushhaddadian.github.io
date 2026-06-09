@@ -20,8 +20,8 @@ type Resource = {
 
 const resources: Resource[] = [
   {
-    title: "Argumentative Writing & Feedback",
-    subtitle: "Interactive Concept Map",
+    title: "Argumentative Writing & Feedback Interactive Concept Map",
+    subtitle: "",
     note: "This concept map was developed with AI assistance, a useful starting point for exploration, though primary sources should be consulted for scholarly conclusions.",
     description:
       "A layered interactive map connecting argumentative writing, feedback research, learning theories, and AI in education.",
