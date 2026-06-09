@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argumentative Writing & Feedback — Interactive Concept Map</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap');
+
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--arg);
+  color: #fff;
+  padding: 10px 18px;
+  font-size: .8rem;
+  font-weight: 600;
+  border-radius: 0 0 8px 0;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top .2s;
+}
+.skip-link:focus { top: 0; }
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:root {
+  --bg:      #0e0f1a;
+  --surf:    #13141f;
+  --surf2:   #1a1b2a;
+  --surf3:   #1f2035;
+  --border:  #23253a;
+  --border2: #2c2f4a;
+  --text:    #dddaf0;
+  --sub:     #8585a8;
+  --dim:     #4a4a68;
+  --arg: #9b7fe8; --arg-bg: #16102a;
+  --fb:  #5aaee8; --fb-bg:  #0c1a2a;
+  --th:  #4ecf8a; --th-bg:  #0a1e14;
+  --ph:  #e8a84a; --ph-bg:  #1e1408;
+  --ai:  #e8588a; --ai-bg:  #1e0c14;
+  --br:  #96d44a; --br-bg:  #121e06;
+  --you: #f0c060;
+  --radius: 10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surf);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.topbar-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.topbar-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #fff;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+.topbar-title h1 em {
+  color: var(--arg);
+  font-style: normal;
+}
+.topbar-title .sub {
+  font-size: .72rem;
+  color: var(--dim);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.topbar-author {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.topbar-author .name { font-size: .82rem; font-weight: 600; color: var(--you); }
+.topbar-author .role { font-size: .7rem; color: var(--dim); }
+
+/* ── CONTROL BAR ── */
+.ctrlbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surf);
+  flex-wrap: wrap;
+}
+
+/* view toggle */
+.vtog {
+  display: flex;
+  background: var(--surf2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.vbtn {
+  padding: 6px 14px;
+  font-size: .75rem;
+  cursor: pointer;
+  color: var(--sub);
+  transition: all .18s;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  background: transparent;
+  letter-spacing: .02em;
+}
+.vbtn.active { background: var(--arg); color: #fff; }
+
+/* search */
+.srch { position: relative; }
+.srch input {
+  background: var(--surf2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 11px 6px 30px;
+  font-size: .75rem;
+  color: var(--text);
+  width: 190px;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  transition: border-color .15s;
+}
+.srch input:focus { border-color: var(--arg); }
+.srch input::placeholder { color: var(--dim); }
+.srch-ic { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); font-size: .65rem; color: var(--dim); pointer-events: none; }
+
+/* cluster filter pills */
+.clpills { display: flex; gap: 5px; flex-wrap: wrap; }
+.clpill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 11px 4px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  font-size: .7rem;
+  color: var(--sub);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.clpill:hover { color: var(--text); border-color: var(--sub); }
+.clpill.active { color: #fff; }
+.clpill .cpd { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.clpill-clear { font-size: .7rem; color: var(--dim); cursor: pointer; padding: 3px 6px; }
+.clpill-clear:hover { color: var(--sub); }
+
+/* layer toggles */
+.lyrs { display: flex; gap: 4px; margin-left: auto; flex-shrink: 0; }
+.lbtn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: .7rem;
+  color: var(--dim);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.lbtn .lic { font-size: .75rem; line-height: 1; }
+.lbtn:hover { color: var(--sub); border-color: var(--sub); }
+.lbtn.on { background: var(--surf2); color: var(--text); border-color: var(--border2); }
+.lbtn[data-l="refs"].on  { border-color: #3535a0; color: #9090d8; }
+.lbtn[data-l="you"].on   { border-color: #604010; color: var(--you); }
+.lbtn[data-l="debate"].on{ border-color: #501030; color: #d878b8; }
+
+
+
+
+/* ── LAYOUT ── */
+.layout {
+  display: flex;
+  height: calc(100vh - 90px);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 176px;
+  min-width: 176px;
+  border-right: 1px solid var(--border);
+  padding: 12px 0;
+  overflow-y: auto;
+  background: var(--surf);
+  height: calc(100vh - 90px);
+}
+.sn-section {
+  padding: 5px 14px 3px;
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--dim);
+}
+.sn-item {
+  padding: 7px 14px;
+  font-size: .76rem;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: all .13s;
+  color: var(--sub);
+  line-height: 1.3;
+}
+.sn-item:hover { color: var(--text); background: var(--surf2); }
+.sn-item.active { color: var(--text); border-left-color: var(--arg); background: var(--surf2); }
+.sn-div-unused { height: 1px; background: var(--border); margin: 8px 14px; }
+
+/* ── MAIN AREA ── */
+.card-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 32px;
+  scroll-behavior: smooth;
+  height: calc(100vh - 90px);
+}
+
+/* ── CLUSTER ── */
+.cluster { margin-bottom: 44px; }
+
+.cl-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.cl-header::before {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 48px; height: 2px;
+  background: var(--cl-color, var(--arg));
+  border-radius: 2px;
+}
+.cl-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.cl-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.08rem;
+  color: var(--text);
+  letter-spacing: -.005em;
+}
+.cl-sub {
+  font-size: .67rem;
+  color: var(--dim);
+  margin-left: auto;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.cl-count {
+  font-size: .58rem;
+  color: var(--dim);
+  background: var(--surf2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+}
+
+/* ── CARDS GRID ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color .18s, box-shadow .18s, transform .18s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--ac, var(--arg));
+  opacity: 0;
+  transition: opacity .18s;
+  border-radius: 0;
+}
+.card:hover { border-color: var(--ac); box-shadow: 0 4px 20px rgba(0,0,0,.35); }
+.card:hover::before { opacity: 1; }
+.card.open { border-color: var(--ac); }
+.card.open::before { opacity: 1; }
+.card.dim { opacity: .15; pointer-events: none; }
+
+.card-head { padding: 13px 14px 11px 16px; }
+.card-tag {
+  font-size: .64rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ac);
+  margin-bottom: 4px;
+  opacity: .85;
+}
+.card-title {
+  font-size: .92rem;
+  font-weight: 600;
+  color: #e0ddf5;
+  margin-bottom: 3px;
+  line-height: 1.35;
+}
+.card-short {
+  font-size: .78rem;
+  color: var(--sub);
+  line-height: 1.45;
+}
+.card-cue {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.card-chips-preview { display: flex; gap: 3px; flex-wrap: wrap; }
+.chip-mini {
+  font-size: .63rem;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: var(--surf2);
+  border: 1px solid var(--border2);
+  color: var(--dim);
+}
+.card-arrow {
+  font-size: .65rem;
+  color: var(--ac);
+  opacity: 0;
+  transition: opacity .15s, transform .18s;
+  flex-shrink: 0;
+}
+.card:hover .card-arrow { opacity: 1; }
+.card.open .card-arrow { opacity: 1; transform: rotate(180deg); }
+
+/* ── EXPANDED DETAIL ── */
+.card-detail {
+  display: none;
+  padding: 0 14px 13px 16px;
+  border-top: 1px solid var(--border);
+}
+.card.open .card-detail { display: block; }
+
+.card-body {
+  font-size: .79rem;
+  color: #9898b8;
+  line-height: 1.65;
+  padding: 10px 0 8px;
+}
+.card-body p { margin-bottom: 6px; }
+.card-body p:last-child { margin-bottom: 0; }
+.card-body strong { color: #b4aed4; }
+
+/* ── LAYER ACCORDIONS ── */
+.lyr {
+  margin-top: 6px;
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: border-color .15s;
+}
+.lyr.lyr-refs   { border-color: #24244a; }
+.lyr.lyr-you    { border-color: #3a3010; }
+.lyr.lyr-debate { border-color: #3a1028; }
+
+
+.lyr-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background .13s;
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .03em;
+}
+.lyr-refs   .lyr-head { background: #111130; color: #7878b8; }
+.lyr-you    .lyr-head { background: #181208; color: #b89040; }
+.lyr-debate .lyr-head { background: #180810; color: #c060a0; }
+
+.lyr-head:hover { filter: brightness(1.15); }
+.lyr-icon { font-size: .8rem; line-height: 1; flex-shrink: 0; }
+.lyr-label { flex: 1; }
+.lyr-chev { font-size: .6rem; transition: transform .2s; color: inherit; opacity: .6; }
+.lyr.open .lyr-chev { transform: rotate(180deg); }
+
+.lyr-body { display: none; padding: 8px 10px 9px; }
+.lyr.open .lyr-body { display: block; }
+.lyr-refs .lyr-body   { background: #0e0e28; }
+.lyr-you .lyr-body    { background: #120e04; }
+.lyr-debate .lyr-body { background: #120608; }
+
+
+/* refs */
+.ref { font-size: .75rem; color: #8888b4; line-height: 1.55; margin-bottom: 4px; }
+.ref:last-child { margin-bottom: 0; }
+.ref em { color: #a0a0cc; font-style: italic; }
+
+/* you */
+.you-text { font-size: .76rem; color: #c09840; line-height: 1.6; }
+
+/* debate */
+.deb-text { font-size: .76rem; color: #c060a0; line-height: 1.6; }
+
+
+
+/* bottom chips */
+.card-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+.chip { font-size: .66rem; padding: 2px 7px; border-radius: 10px; background: var(--surf2); border: 1px solid var(--border2); color: var(--dim); }
+
+/* ── GRAPH VIEW ── */
+#graphView { display: none; position: relative; width: 100%; height: calc(100vh - 90px); background: var(--bg); }
+#graphView svg { width: 100%; height: 100%; }
+.g-tt {
+  position: absolute;
+  background: var(--surf2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 10px 13px;
+  max-width: 260px;
+  font-size: .68rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .18s;
+  z-index: 100;
+  line-height: 1.55;
+}
+.g-tt .g-tt-title { font-weight: 600; font-size: .76rem; color: var(--text); margin-bottom: 3px; }
+.g-tt .g-tt-body  { color: var(--sub); }
+.g-legend {
+  position: absolute;
+  bottom: 20px; left: 20px;
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 14px;
+}
+.g-legend-title { font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin-bottom: 7px; }
+.g-legend-item { display: flex; align-items: center; gap: 7px; font-size: .72rem; color: var(--sub); margin-bottom: 4px; }
+.g-legend-item:last-child { margin-bottom: 0; }
+.g-dot { width: 7px; height: 7px; border-radius: 50%; }
+.g-hint { position: absolute; top: 14px; right: 18px; font-size: .7rem; color: var(--dim); }
+
+/* ── GRAPH PANEL ── */
+.g-panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: 360px;
+  height: 100%;
+  background: var(--surf);
+  border-left: 1px solid var(--border2);
+  overflow-y: auto;
+  padding: 20px 18px 32px;
+  transform: translateX(100%);
+  transition: transform .25s ease;
+  z-index: 50;
+  font-size: .8rem;
+}
+.g-panel.open { transform: translateX(0); }
+.gp-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  cursor: pointer;
+  color: var(--dim);
+  font-size: .85rem;
+  line-height: 1;
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: var(--surf2);
+  border: 1px solid var(--border);
+  transition: color .15s;
+}
+.gp-close:hover { color: var(--text); }
+.gp-cluster {
+  font-size: .6rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+.gp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.12rem;
+  color: #fff;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  line-height: 1.3;
+}
+.gp-short {
+  font-size: .79rem;
+  color: var(--sub);
+  margin-bottom: 13px;
+  line-height: 1.5;
+  font-style: italic;
+}
+.gp-body {
+  font-size: .81rem;
+  color: #9898b8;
+  line-height: 1.68;
+  margin-bottom: 14px;
+}
+.gp-section-label {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--dim);
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+.gp-refs { margin-bottom: 4px; }
+.gp-ref {
+  font-size: .74rem;
+  color: #7878a8;
+  line-height: 1.55;
+  margin-bottom: 5px;
+  padding-left: 6px;
+  border-left: 2px solid #2a2a50;
+}
+.gp-debate {
+  font-size: .77rem;
+  color: #b060a0;
+  line-height: 1.6;
+  background: #150810;
+  border: 1px solid #380a28;
+  border-radius: 6px;
+  padding: 9px 11px;
+  margin-bottom: 4px;
+}
+.gp-context {
+  font-size: .77rem;
+  color: #5898b8;
+  line-height: 1.6;
+  background: #081218;
+  border: 1px solid #102030;
+  border-radius: 6px;
+  padding: 9px 11px;
+  margin-bottom: 4px;
+}
+.gp-conns { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.gp-conn-chip {
+  font-size: .7rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid;
+  background: #12121e;
+  line-height: 1.4;
+}
+.gp-conn-chip em { font-style: italic; opacity: .7; margin-left: 3px; font-size: .58rem; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--sub); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .g-panel, .lbtn, .vbtn, .clpill { transition: none !important; }
+  .card-arrow { transition: none !important; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--arg);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus-visible, [role="button"]:focus-visible, [role="link"]:focus-visible {
+  outline: 2px solid var(--arg);
+  outline-offset: 2px;
+}
+.card:focus-visible { border-color: var(--ac); box-shadow: 0 0 0 3px rgba(155,127,232,0.4); }
+
+
+/* ── LIGHT MODE ── */
+[data-theme="light"] {
+  --bg:      #f5f4f0;
+  --surf:    #ffffff;
+  --surf2:   #f0eeea;
+  --surf3:   #e8e6e0;
+  --border:  #d8d4cc;
+  --border2: #c8c2b8;
+  --text:    #1a1820;
+  --sub:     #60607a;
+  --dim:     #9898a8;
+  --arg: #6b4fc8; --arg-bg: #ede8fa;
+  --fb:  #1a7cc8; --fb-bg:  #e4f0fa;
+  --th:  #1a9660; --th-bg:  #e4f5ec;
+  --ph:  #b86a10; --ph-bg:  #faf0e0;
+  --ai:  #c81858; --ai-bg:  #fae4ee;
+  --br:  #5a8a10; --br-bg:  #edf5e0;
+  --you: #8a5a00;
+}
+[data-theme="light"] .topbar,
+[data-theme="light"] .ctrlbar { background: var(--surf); border-color: var(--border); }
+[data-theme="light"] .sidebar { background: #fafaf8; border-color: var(--border); }
+[data-theme="light"] .card { background: #ffffff; border-color: var(--border); }
+[data-theme="light"] .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.10); }
+[data-theme="light"] .card-title { color: #1a1820; }
+[data-theme="light"] .card-body { color: #444458; }
+[data-theme="light"] .card-body strong { color: #1a1820; }
+[data-theme="light"] .lyr-refs   { border-color: #c8c8e8; }
+[data-theme="light"] .lyr-you    { border-color: #ddd0a0; }
+[data-theme="light"] .lyr-debate { border-color: #e8c0d8; }
+[data-theme="light"] .lyr-refs   .lyr-head { background: #ededfa; color: #4040a0; }
+[data-theme="light"] .lyr-you    .lyr-head { background: #fdf5e0; color: #8a5a00; }
+[data-theme="light"] .lyr-debate .lyr-head { background: #fdeaf4; color: #a03070; }
+[data-theme="light"] .lyr-refs   .lyr-body { background: #f5f4ff; }
+[data-theme="light"] .lyr-you    .lyr-body { background: #fffcf0; }
+[data-theme="light"] .lyr-debate .lyr-body { background: #fff5fa; }
+[data-theme="light"] .ref { color: #4040a0; }
+[data-theme="light"] .ref em { color: #2a2a80; }
+[data-theme="light"] .you-text { color: #7a4800; }
+[data-theme="light"] .deb-text { color: #901050; }
+[data-theme="light"] .chip-mini,
+[data-theme="light"] .chip { background: #eeecf0; border-color: #d8d4e0; color: #50507a; }
+[data-theme="light"] .sn-item:hover,
+[data-theme="light"] .sn-item.active { background: #f0eef8; }
+[data-theme="light"] .vtog { background: #eeecf0; border-color: var(--border); }
+[data-theme="light"] .srch input { background: #f8f6f4; border-color: var(--border); color: var(--text); }
+[data-theme="light"] .lbtn { border-color: var(--border); }
+[data-theme="light"] .lbtn.on { background: #eeecf0; }
+[data-theme="light"] .lbtn[data-l="refs"].on  { border-color: #9090cc; color: #3030a0; }
+[data-theme="light"] .lbtn[data-l="you"].on   { border-color: #c09840; color: #7a4800; }
+[data-theme="light"] .lbtn[data-l="debate"].on{ border-color: #d070a0; color: #901050; }
+[data-theme="light"] #graphView { background: #f5f4f0; }
+[data-theme="light"] .g-panel { background: #ffffff; border-color: var(--border); }
+[data-theme="light"] .gp-body { color: #444458; }
+[data-theme="light"] .gp-debate { background: #fff0f8; border-color: #e8c0d8; color: #901050; }
+[data-theme="light"] .gp-context { background: #f0f6ff; border-color: #c0d8f8; color: #1a4a80; }
+[data-theme="light"] .gp-ref { color: #3030a0; border-left-color: #c0c0e8; }
+[data-theme="light"] .g-legend { background: var(--surf); border-color: var(--border); }
+[data-theme="light"] .topbar-title h1 { color: #1a1820; }
+
+
+.theme-btn {
+  background: var(--surf2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: all .18s;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.theme-btn:hover { border-color: var(--arg); background: var(--surf3); }
+</style>
+</head>
+<body>
+<a href="#cm" class="skip-link">Skip to main content</a>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-title">
+    <h1>Argumentative Writing &amp; <em>Feedback</em></h1>
+    <div class="sub">Interactive Concept Map · Theories · Philosophical Stances · AI · Research Connections</div>
+  </div>
+  <div class="topbar-author">
+    <div class="name">Created by Dr. Golnoush Haddadian</div>
+    <div class="role">Postdoctoral Associate · AI in Education · Georgia State University</div>
+  </div>
+</div>
+
+<!-- CONTROL BAR -->
+<div class="ctrlbar">
+  <div class="vtog">
+    <button class="vbtn active" id="btnCard" onclick="setView('card')" aria-pressed="true" aria-label="Switch to card view">☰ Cards</button>
+    <button class="vbtn" id="btnGraph" onclick="setView('graph')" aria-pressed="false" aria-label="Switch to graph view">◎ Graph</button>
+  </div>
+
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Switch to light mode" title="Toggle light/dark mode">☀️</button>
+
+  <div class="srch">
+    <span class="srch-ic">⌕</span>
+    <input id="si" placeholder="Search concepts…" oninput="filterCards(this.value)" aria-label="Search concepts" autocomplete="off">
+  </div>
+
+  <div class="clpills" id="clpills">
+    <button class="clpill" data-cl="arg" onclick="filterCluster(\'arg\',this)" aria-pressed="false" aria-label="Filter by arg cluster"><div class="cpd" style="background:var(--arg)"></div>Arg. Writing</button>
+    <button class="clpill" data-cl="fb"  onclick="filterCluster('fb',this)"><div class="cpd" style="background:var(--fb)"></div>Feedback</button>
+    <button class="clpill" data-cl="th"  onclick="filterCluster('th',this)"><div class="cpd" style="background:var(--th)"></div>Theories</button>
+    <button class="clpill" data-cl="ph"  onclick="filterCluster('ph',this)"><div class="cpd" style="background:var(--ph)"></div>Philosophy</button>
+    <button class="clpill" data-cl="ai"  onclick="filterCluster('ai',this)"><div class="cpd" style="background:var(--ai)"></div>AI &amp; GenAI</button>
+    <button class="clpill" data-cl="br"  onclick="filterCluster('br',this)"><div class="cpd" style="background:var(--br)"></div>Bridging</button>
+    <button class="clpill-clear" onclick="filterCluster(null,null)" aria-label="Clear cluster filter">✕ all</button>
+  </div>
+
+  <div class="lyrs">
+    <button class="lbtn on" data-l="refs" onclick="toggleLayer('refs')" aria-pressed="true" aria-label="Toggle references layer"><span class="lic">📚</span> Refs</button>
+    <button class="lbtn on" data-l="you" onclick="toggleLayer('you')" aria-pressed="true" aria-label="Toggle research context layer"><span class="lic">🎯</span> Research Context</button>
+    <button class="lbtn on" data-l="debate" onclick="toggleLayer('debate')" aria-pressed="true" aria-label="Toggle tensions and debates layer"><span class="lic">⚡</span> Tensions</button>
+
+  </div>
+</div>
+
+<div id="sr-announce" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+<!-- CARD VIEW -->
+<div class="layout" id="cardView">
+  <nav class="sidebar" id="sidebar" aria-label="Concept map navigation">
+    <div class="sn-section">Clusters</div>
+    <div class="sn-item active" onclick="goTo('arg',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('arg',this)}">Argumentative Writing</div>
+    <div class="sn-item" onclick="goTo('fb',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('fb',this)}">Feedback Types</div>
+    <div class="sn-item" onclick="goTo('th',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('th',this)}">Learning Theories</div>
+    <div class="sn-item" onclick="goTo('ph',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('ph',this)}">Philosophical Stances</div>
+    <div class="sn-item" onclick="goTo('ai',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('ai',this)}">AI &amp; GenAI</div>
+    <div class="sn-item" onclick="goTo('br',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('br',this)}">Bridging Constructs</div>
+    <div class="sn-section" style="margin-top:12px">Jump to Concept</div>
+    <div class="sn-item" onclick="goTo('arg',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('arg',this)}">Toulmin Model</div>
+    <div class="sn-item" onclick="goTo('arg',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('arg',this)}">Dialogic Argument</div>
+    <div class="sn-item" onclick="goTo('fb',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('fb',this)}">Formative Feedback</div>
+    <div class="sn-item" onclick="goTo('fb',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('fb',this)}">Peer Feedback</div>
+    <div class="sn-item" onclick="goTo('th',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('th',this)}">ZPD / Scaffolding</div>
+    <div class="sn-item" onclick="goTo('th',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('th',this)}">Self-Regulation</div>
+    <div class="sn-item" onclick="goTo('ph',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('ph',this)}">Epistemic Rhetoric</div>
+    <div class="sn-item" onclick="goTo('ai',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('ai',this)}">GenAI Feedback</div>
+    <div class="sn-item" onclick="goTo('ai',this)" tabindex="0" role="link" onkeydown="if(event.key==='Enter'){goTo('ai',this)}">AES / Argument Scoring</div>
+  </nav>
+
+  <main class="card-main" id="cm" aria-label="Concept cards">
+
+    <!-- ===== CLUSTER 1 ===== -->
+    <div class="cluster" id="arg" data-cluster="arg" style="--cl-color:var(--arg)">
+      <div class="cl-header"><div class="cl-dot" style="background:var(--arg)"></div><div class="cl-title">Argumentative Writing</div><div class="cl-sub">Core Domain</div></div>
+      <div class="cards">
+
+        <div class="card" style="--ac:var(--arg)" data-cluster="arg" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Structural Model</div>
+          <div class="card-title">Toulmin Model of Argument</div>
+          <div class="card-short">Claim → Grounds → Warrant → Backing → Qualifier → Rebuttal</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Peer Feedback</span><span class="chip-mini">→ Dialogic Argument</span><span class="chip-mini">→ Epistemic Rhetoric</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Toulmin's reframing of argument as practical reasoning, not formal logic, gave writing educators an analytic language for quality. The six-part schema is now the dominant lens in both writing research and classroom instruction.</p>
+            <p><strong>Key insight:</strong> Warrants and rebuttals are the hardest elements for students — and the most consequential for argument quality. Feedback targeting warrant articulation shows strong learning effects.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Toulmin, S. (1958). <em>The Uses of Argument.</em> Cambridge UP.</div>
+              <div class="ref">Toulmin, S., Rieke, R., &amp; Janik, A. (1984). <em>An Introduction to Reasoning</em> (2nd ed.). Macmillan.</div>
+              <div class="ref">Hillocks, G. (2011). <em>Teaching Argument Writing, Grades 6–12.</em> Heinemann.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Toulmin's schema has become the dominant lens for feedback coding in writing research. Studies operationalizing claim, evidence, and warrant as discrete coding categories (e.g., Noroozi et al., 2022; Stab &amp; Gurevych, 2017) demonstrate that argument-component-level feedback produces more substantive revision than holistic commentary.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Critics argue Toulmin is too linear for real academic argumentation (Knudson, 1992). Cross-disciplinary application is contested — do STEM and humanities arguments share a schema? Also debated: whether Toulmin is a descriptive or normative model.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Peer Feedback</span><span class="chip">→ Dialogic Argument</span><span class="chip">→ Epistemic Rhetoric</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--arg)" data-cluster="arg" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Structural Model</div>
+          <div class="card-title">Dialogic / Dialectical Argument</div>
+          <div class="card-short">Argument as audience-responsive dialogue; considering counterpositions</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Toulmin Model</span><span class="chip-mini">→ Sociocultural Theory</span><span class="chip-mini">→ Epistemic Rhetoric</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Dialectical approaches treat argument as socially situated persuasion directed at a real or imagined interlocutor. The writer must anticipate and address counterarguments, not merely assert a position.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Perelman, C., &amp; Olbrechts-Tyteca, L. (1969). <em>The New Rhetoric.</em> U of Notre Dame Press.</div>
+              <div class="ref">Walton, D. (1998). <em>The New Dialectic.</em> U of Toronto Press.</div>
+              <div class="ref">Nystrand, M. (1997). <em>Opening Dialogue.</em> Teachers College Press.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">The dialogic framing directly explains why peer feedback has distinctive pedagogical value: peers function as genuine interlocutors whose resistance the writer must anticipate. This is the theoretical basis for designing peer review as an audience-simulation activity, documented empirically in Nystrand (1997) and revisited in Noroozi et al. (2016).</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Tension between monologic and dialogic models of argument: should students be taught to build the strongest single position, or to represent multiple perspectives? Cultural variation in argument norms (e.g., East Asian dialectical styles) challenges Western dialogic assumptions.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Toulmin Model</span><span class="chip">→ Sociocultural Theory</span><span class="chip">→ Epistemic Rhetoric</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--arg)" data-cluster="arg" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Genre Theory</div>
+          <div class="card-title">Argumentative Genre Conventions</div>
+          <div class="card-short">Thesis-driven prose, evidence integration, counterargument, conclusion</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Social Ontology</span><span class="chip-mini">→ Sociocultural Theory</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Genre theory locates argumentative writing within disciplinary communities with distinct norms. STEM argumentation is evidence-heavy; humanities centers interpretation and textual analysis; policy argument stresses stakeholder impact and feasibility.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Swales, J. (1990). <em>Genre Analysis.</em> Cambridge UP.</div>
+              <div class="ref">Bazerman, C. (1988). <em>Shaping Written Knowledge.</em> U of Wisconsin Press.</div>
+              <div class="ref">Miller, C. R. (1984). Genre as social action. <em>Quarterly Journal of Speech, 70</em>(2), 151–167.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Genre awareness is a documented confound in cross-domain comparisons of argument quality. Bazerman (1988) and Swales (1990) establish that what counts as a "strong argument" is community-specific; researchers comparing argument quality across topics must control for genre familiarity as a covariate.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Are genre conventions teachable or do they emerge from disciplinary enculturation? Critical genre theorists (Freedman) question whether explicit genre instruction is effective or even appropriate at the secondary level.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Social Ontology</span><span class="chip">→ Sociocultural Theory</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--arg)" data-cluster="arg" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Cognitive Process</div>
+          <div class="card-title">Writing as a Cognitive Process</div>
+          <div class="card-short">Planning → Translating → Reviewing (Hayes &amp; Flower, 1980)</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Self-Regulation</span><span class="chip-mini">→ Formative Feedback</span><span class="chip-mini">→ Metacognition</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Hayes &amp; Flower's model treats writing as recursive problem-solving. Later revisions (Hayes, 1996) added motivation, affect, and working memory. Scardamalia &amp; Bereiter distinguished knowledge-telling (novice) from knowledge-transforming (expert).</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Flower, L., &amp; Hayes, J. R. (1981). A cognitive process theory of writing. <em>College Composition and Communication, 32</em>(4), 365–387.</div>
+              <div class="ref">Hayes, J. R. (1996). A new framework for understanding cognition and affect in writing. In C. M. Levy &amp; S. Ransdell (Eds.), <em>The Science of Writing</em> (pp. 1–27). Erlbaum.</div>
+              <div class="ref">Scardamalia, M., &amp; Bereiter, C. (1987). Knowledge telling and knowledge transforming. <em>Advances in Applied Psycholinguistics, 2,</em> 142–175.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Hayes and Flower's model explains feedback timing effects: feedback intervenes at the reviewing stage but reshapes subsequent planning cycles. This is the cognitive mechanism underlying iterative draft-feedback-revision designs. Timing matters because early feedback shapes planning; late feedback shapes surface correction (Ferris, 2003).</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Cognitive process models have been critiqued as overly individualistic and acontextual (Prior, 2006). Sociocultural critics argue they miss the social, distributed, and embodied dimensions of actual writing practices.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Self-Regulation</span><span class="chip">→ Formative Feedback</span><span class="chip">→ Metacognition</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--arg)" data-cluster="arg" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Developmental</div>
+          <div class="card-title">Argument Literacy Development</div>
+          <div class="card-short">From assertion to reasoned argumentation across educational levels</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Scaffolding</span><span class="chip-mini">→ ZPD</span><span class="chip-mini">→ Epistemic Cognition</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Kuhn documented that most adults struggle to distinguish evidence from theory and generate genuine rebuttals. Newell et al. traced disciplinary argumentation development through secondary and post-secondary schooling.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Kuhn, D. (1991). <em>The Skills of Argument.</em> Cambridge UP.</div>
+              <div class="ref">Newell, G. E., et al. (2011). Teaching and learning argumentative writing. <em>Reading Research Quarterly, 46</em>(3), 273–304.</div>
+              <div class="ref">Reznitskaya, A., &amp; Anderson, R. C. (2002). The argument schema and learning to reason. In C. C. Block &amp; M. Pressley (Eds.), <em>Comprehension Instruction</em>. Guilford.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Kuhn's framework implies that feedback must be calibrated to developmental stage: novices benefit from explicit structural scaffolding, while advanced arguers need counterargument challenges. Learner modeling approaches that track individual argument literacy trajectories operationalize this implication computationally (VanLehn, 2011).</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Is argument literacy domain-general or domain-specific? Kuhn argues for transferable skills; disciplinary literacy scholars (Moje, 2008) contend that argument is always situated within a discipline's epistemic practices.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Scaffolding</span><span class="chip">→ ZPD</span><span class="chip">→ Epistemic Cognition</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--arg)" data-cluster="arg" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Linguistic</div>
+          <div class="card-title">Epistemic Modality &amp; Hedging</div>
+          <div class="card-short">Linguistic markers of certainty, stance, and authorial voice</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Epistemic Rhetoric</span><span class="chip-mini">→ GenAI Feedback</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Hyland's academic metadiscourse framework identifies hedges (<em>might, possibly</em>), boosters (<em>clearly, definitely</em>), and attitude markers as key features of academic argumentation. Writers manage epistemic commitments through language choices.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Hyland, K. (2005). <em>Metadiscourse.</em> Continuum.</div>
+              <div class="ref">Hyland, K. (1998). Hedging in Scientific Research Articles. John Benjamins.</div>
+              <div class="ref">Biber, D., &amp; Finegan, E. (1988). Adverbial stance types in English. <em>Discourse Processes, 11</em>(1), 1–34.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Automated feedback systems consistently underperform on epistemic stance features. Hyland (2005) documents that hedges and boosters are among the most discipline-sensitive metadiscourse features, yet AES systems trained on surface features rarely capture stance miscalibration. This represents a recognized validity gap in the field (Deane, 2013; Li &amp; Ng, 2024).</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Norms for hedging vary by discipline and culture — what reads as appropriate epistemic humility in one context reads as weak argumentation in another. NLP systems trained on one corpus may penalize appropriate hedging in another domain.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Epistemic Rhetoric</span><span class="chip">→ GenAI Feedback</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== CLUSTER 2 ===== -->
+    <div class="cluster" id="fb" data-cluster="fb" style="--cl-color:var(--fb)">
+      <div class="cl-header"><div class="cl-dot" style="background:var(--fb)"></div><div class="cl-title">Feedback on Argumentative Writing</div><div class="cl-sub">Sources &amp; Mechanisms</div></div>
+      <div class="cards">
+
+        <div class="card" style="--ac:var(--fb)" data-cluster="fb" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Core Framework</div>
+          <div class="card-title">Formative Feedback</div>
+          <div class="card-short">Feedback that informs and improves ongoing learning, not just judges</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Black &amp; Wiliam established formative assessment as a powerful lever for learning. For writing, formative feedback targets the gap between current and desired performance. Feedback is only formative if the learner can act on it.</p>
+            <p><strong>Hattie &amp; Timperley's three questions:</strong> Where am I going? How am I going? Where to next?</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Black, P., &amp; Wiliam, D. (1998). Assessment and classroom learning. <em>Assessment in Education, 5</em>(1), 7–74.</div>
+              <div class="ref">Sadler, D. R. (1989). Formative assessment and the design of instructional systems. <em>Instructional Science, 18</em>(2), 119–144.</div>
+              <div class="ref">Hattie, J., &amp; Timperley, H. (2007). The power of feedback. <em>Review of Educational Research, 77</em>(1), 81–112.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Whether peer and AI feedback actually function formatively — whether students can act on them to improve their arguments — is a central empirical question in the field. Carless and Boud (2018) note that feedback provision and feedback uptake are distinct processes, and most studies conflate them. Distinguishing provision from uptake is a recognized methodological priority.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">The formative/summative distinction has been critiqued as misleading: all feedback can be formative if used well (Wiliam, 2011). Also debated: whether feedback improves writing quality or only task compliance. Kluger &amp; DeNisi (1996) showed 38% of feedback interventions actually decreased performance.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Self-Regulation</span><span class="chip">→ ZPD</span><span class="chip">→ Writing Process</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--fb)" data-cluster="fb" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Source</div>
+          <div class="card-title">Peer Feedback</div>
+          <div class="card-short">Learner-to-learner feedback: cognitive, social, and motivational dimensions</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Peer feedback is valuable for both giver and receiver. Cognitive benefits: elaboration, knowledge co-construction. Social benefits: sense of audience, community of practice norms. Giving feedback may benefit the giver as much as the receiver.</p>
+            <p><strong>Key tensions:</strong> Peer credibility concerns; face-saving and friendship bias; training effects; cultural variation in directness norms.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Topping, K. J. (1998). Peer assessment between students in colleges and universities. <em>Review of Educational Research, 68</em>(3), 249–276.</div>
+              <div class="ref">Liu, J., &amp; Carless, D. (2006). Peer feedback: The learning element of peer assessment. <em>Teaching in Higher Education, 11</em>(3), 279–290.</div>
+              <div class="ref">Cho, K., &amp; MacArthur, C. (2010). Student revision with peer and expert reviewing. <em>Learning and Instruction, 20</em>(4), 328–338.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Research comparing peer, teacher, and AI feedback as distinct conditions is a rapidly growing area. Banihashem et al. (2024) found that ChatGPT and peer feedback serve complementary functions: AI feedback is more descriptive and structural, while peer feedback targets problem identification. Coding schemes based on Toulmin components are the standard tool for capturing these differences.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Does peer feedback actually improve writing quality, or just engagement? Meta-analyses (Lundstrom &amp; Baker, 2009) find stronger effects for givers than receivers. The "novices teaching novices" critique: peers lack the expert schemas needed to identify argument weaknesses accurately.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Toulmin Model</span><span class="chip">→ Sociocultural Theory</span><span class="chip">→ GenAI comparison</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--fb)" data-cluster="fb" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Source</div>
+          <div class="card-title">Teacher / Instructor Feedback</div>
+          <div class="card-short">Expert feedback: authoritative but often delayed, dense, or unread</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Formative Feedback</span><span class="chip-mini">→ GenAI as supplement</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Teacher feedback is the most studied but also the most problematic: often too late, too dense, conflicting, or ignored. Expert feedback is not always more effective for learning than peer feedback.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Ferris, D. R. (2003). <em>Response to Student Writing.</em> Erlbaum.</div>
+              <div class="ref">Hyland, F., &amp; Hyland, K. (2006). Feedback on second language students' writing. <em>Language Teaching, 39</em>(2), 83–101.</div>
+              <div class="ref">Sommers, N. (1982). Responding to student writing. <em>College Composition and Communication, 33</em>(2), 148–156.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">A 2025 crossover study (Taherian &amp; Jalilzadeh, Educational Psychology) found both human tutor and GenAI feedback produced better final drafts, with no significant difference between conditions on holistic quality. The critical unresolved question is whether this equivalence holds for argument-specific dimensions such as warrant articulation and counterargument integration.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Leki (1990) and others document that students often ignore or misunderstand teacher feedback. Truscott's (1996) controversial claim that grammar correction is ineffective sparked a major debate about whether any corrective feedback improves writing.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Formative Feedback</span><span class="chip">→ GenAI as supplement</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--fb)" data-cluster="fb" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Source</div>
+          <div class="card-title">AI-Generated Feedback</div>
+          <div class="card-short">AES systems and LLM-generated formative feedback on writing</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ GenAI cluster</span><span class="chip-mini">→ Formative Feedback</span><span class="chip-mini">→ Peer Feedback</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>AES systems (e-rater, Turnitin) primarily score surface and organizational features. GenAI can generate more holistic, explanatory feedback but with reliability limitations on discipline-specific argument structure and epistemic stance.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Burstein, J., Chodorow, M., &amp; Leacock, C. (2004). Automated essay evaluation. <em>AI Magazine, 25</em>(3), 27–36.</div>
+              <div class="ref">Stalnaker, J. M. (2023). GenAI feedback in writing: A systematic review. <em>Computers &amp; Education: AI, 4,</em> 100–115.</div>
+              <div class="ref">Deane, P. (2013). On the relation between automated essay scoring and modern views of the writing construct. <em>Assessing Writing, 18</em>(1), 7–24.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Comparing GenAI, peer, and teacher feedback quality on argumentative writing is a rapidly developing empirical domain. Banihashem et al. (2024) and Frontiers in Education (2025) studies establish that AI and peer feedback have distinct coverage profiles, motivating both comparative and complementary research designs.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Can AI feedback be "formative" in any meaningful sense if it lacks understanding of the student, the context, and the disciplinary community? Validity concerns: AES scores proxy writing quality without capturing the social and epistemic dimensions.</div></div>
+            </div><div class="card-chips"><span class="chip">→ GenAI cluster</span><span class="chip">→ Formative Feedback</span><span class="chip">→ Peer Feedback</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--fb)" data-cluster="fb" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Mechanism</div>
+          <div class="card-title">Feedback Uptake &amp; Revision</div>
+          <div class="card-short">Whether and how writers act on feedback — the critical outcome</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Self-Regulation</span><span class="chip-mini">→ Self-Efficacy</span><span class="chip-mini">→ Metacognition</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Receiving feedback ≠ using feedback. Research distinguishes uptake (incorporating feedback) from incorporation quality (surface vs. substantive revision). Factors: source credibility, feedback specificity, writer self-efficacy, revision strategy knowledge.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Conrad, S. M., &amp; Goldstein, L. M. (1999). ESL student revision after teacher-written comments. <em>Journal of Second Language Writing, 8</em>(2), 147–179.</div>
+              <div class="ref">Ferris, D. R., &amp; Roberts, B. (2001). Error feedback in L2 writing classes. <em>Journal of Second Language Writing, 10</em>(3), 161–184.</div>
+              <div class="ref">Paulus, T. M. (1999). The effect of peer and teacher feedback on student writing. <em>Journal of Second Language Writing, 8</em>(3), 265–289.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Uptake analysis — whether students revise arguments substantively after receiving different feedback types — is where feedback source differences become practically meaningful. Conrad and Goldstein (1999) established the distinction between surface uptake and meaning-level uptake; this distinction is especially consequential for argument-structure feedback, which demands conceptual rather than lexical revision.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Is uptake the right outcome to measure? Revision doesn't always indicate learning — students may incorporate feedback without understanding it. Conversely, students may internalize feedback without revising the current text.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Self-Regulation</span><span class="chip">→ Self-Efficacy</span><span class="chip">→ Metacognition</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--fb)" data-cluster="fb" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Quality Dimensions</div>
+          <div class="card-title">Feedback Specificity &amp; Elaboration</div>
+          <div class="card-short">Elaborated feedback outperforms simple verification for complex tasks</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Formative Feedback</span><span class="chip-mini">→ GenAI Feedback</span><span class="chip-mini">→ Cognitive Load</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Shute's 30-year review: elaborated feedback (explanation + direction) outperforms simple verification for complex tasks. For argumentative writing, directive + explanatory combinations are most effective.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Shute, V. J. (2008). Focus on formative feedback. <em>Review of Educational Research, 78</em>(1), 153–189.</div>
+              <div class="ref">Narciss, S. (2008). Feedback strategies for interactive learning tasks. In J. M. Spector et al. (Eds.), <em>Handbook of Research on Educational Communications and Technology.</em> Erlbaum.</div>
+              <div class="ref">Bangert-Drowns, R. L., et al. (1991). The instructional effect of feedback in test-like events. <em>Review of Educational Research, 61</em>(2), 213–238.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Shute's (2008) elaboration typology provides the standard framework for coding feedback function. Studies applying this framework to argumentative writing feedback (e.g., Noroozi et al., 2022) distinguish evaluative, directive, and interrogative feedback functions and show that interrogative feedback produces the deepest argument revision.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Too much elaboration increases cognitive load (Sweller). The "Goldilocks problem": optimal feedback specificity depends on learner level, task type, and domain — no universal formula exists. GenAI tends toward verbose elaboration regardless of learner need.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Formative Feedback</span><span class="chip">→ GenAI Feedback</span><span class="chip">→ Cognitive Load</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== CLUSTER 3 ===== -->
+    <div class="cluster" id="th" data-cluster="th" style="--cl-color:var(--th)">
+      <div class="cl-header"><div class="cl-dot" style="background:var(--th)"></div><div class="cl-title">Learning Theories</div><div class="cl-sub">Theoretical Grounding</div></div>
+      <div class="cards">
+
+        <div class="card" style="--ac:var(--th)" data-cluster="th" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Vygotskian</div>
+          <div class="card-title">Zone of Proximal Development (ZPD)</div>
+          <div class="card-short">The gap between what learners can do alone vs. with support</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Scaffolding</span><span class="chip-mini">→ Formative Feedback</span><span class="chip-mini">→ Personalized Feedback</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Feedback is effective when it operates in the learner's ZPD — challenging but reachable. Too far above → frustration; too far below → no growth. Identifying the ZPD requires knowing the learner's current level.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Vygotsky, L. S. (1978). <em>Mind in Society.</em> Harvard UP.</div>
+              <div class="ref">Tharp, R. G., &amp; Gallimore, R. (1988). <em>Rousing Minds to Life.</em> Cambridge UP.</div>
+              <div class="ref">Lantolf, J. P. (2000). <em>Sociocultural Theory and Second Language Learning.</em> Oxford UP.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Learner modeling is the computational operationalization of ZPD: identifying each learner's current argument proficiency so feedback can be calibrated to the proximal zone. VanLehn's (2011) meta-analysis established that one-on-one tutoring effects (effect size ~0.79) are achievable computationally when systems accurately model the learner's knowledge state.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">The ZPD has been criticized as metaphorical and unmeasurable in practice (Chaiklin, 2003). How do you assess the "lower bound" (independent performance) and "upper bound" (assisted performance) in a writing context? Learner modeling approaches offer one computational answer.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Scaffolding</span><span class="chip">→ Formative Feedback</span><span class="chip">→ Personalized Feedback</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--th)" data-cluster="th" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Vygotskian</div>
+          <div class="card-title">Scaffolding</div>
+          <div class="card-short">Temporary, calibrated support that fades as competence grows</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Key scaffolding features: <em>contingency</em> (responsive to current state), <em>fading</em> (support reduces as ability grows), <em>handover</em> (responsibility transfers to learner). Adaptive feedback systems that modulate based on performance are computational scaffolding.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Wood, D., Bruner, J. S., &amp; Ross, G. (1976). The role of tutoring in problem solving. <em>Journal of Child Psychology and Psychiatry, 17</em>(2), 89–100.</div>
+              <div class="ref">Puntambekar, S., &amp; Hubscher, R. (2005). Tools for scaffolding students in a complex learning environment. <em>Educational Psychologist, 40</em>(1), 1–12.</div>
+              <div class="ref">Belland, B. R. (2014). Scaffolding. In J. M. Spector et al. (Eds.), <em>Handbook of Research on Educational Communications and Technology.</em> Springer.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Whether AI feedback scaffolds or supplants student reasoning is one of the field's most important open questions. Scaffolding requires contingency and fading (Wood et al., 1976); AI feedback that is static and non-fading may support task performance without building independent reasoning capacity. This challenge is recognized as a central design problem in AI-augmented writing education (Winstone et al., 2017).</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">"Scaffolding" has been so widely applied it risks losing analytical precision (Stone, 1998). Key debate: does fading actually occur in practice, or do students remain dependent on external support? AI feedback raises this concern acutely.</div></div>
+            </div><div class="card-chips"><span class="chip">→ ZPD</span><span class="chip">→ Adaptive Feedback</span><span class="chip">→ Self-Regulation</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--th)" data-cluster="th" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Sociocultural</div>
+          <div class="card-title">Sociocultural Theory of Writing</div>
+          <div class="card-short">Writing as mediated, social, and historically situated activity</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Peer Feedback</span><span class="chip-mini">→ Genre Conventions</span><span class="chip-mini">→ Constructivism</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Writing as tool-mediated social practice. Peer feedback is one form of social mediation. The classroom community shapes argumentative norms. Feedback is not just a technical transaction — it is socialization into disciplinary practice.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Vygotsky, L. S. (1986). <em>Thought and Language.</em> MIT Press.</div>
+              <div class="ref">Engeström, Y. (1987). <em>Learning by Expanding.</em> Orienta-Konsultit.</div>
+              <div class="ref">Prior, P. (2006). A sociocultural theory of writing. In C. A. MacArthur et al. (Eds.), <em>Handbook of Writing Research.</em> Guilford.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Sociocultural theory grounds the argument that peer feedback has distinctive value AI cannot fully replicate: it constitutes genuine social mediation by community members who share the writer's epistemic situation. Prior (2006) and Nystrand (1997) establish that writing development is fundamentally social — a claim with direct implications for hybrid feedback designs.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Sociocultural approaches have been critiqued for underspecifying the cognitive mechanisms of change. How exactly does social interaction become internalized as individual writing competence? This is the zone where socio and cognitive approaches must be reconciled.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Peer Feedback</span><span class="chip">→ Genre Conventions</span><span class="chip">→ Constructivism</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--th)" data-cluster="th" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Cognitive</div>
+          <div class="card-title">Self-Regulated Learning (SRL)</div>
+          <div class="card-short">Goal-setting, monitoring, and self-correction in learning</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>SRL positions feedback as external input the learner internalizes over time. Expert writers self-regulate during drafting; developing writers need external feedback as a substitute until internal monitoring develops.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Zimmerman, B. J. (2000). Attaining self-regulation. In M. Boekaerts et al. (Eds.), <em>Handbook of Self-Regulation.</em> Academic Press.</div>
+              <div class="ref">Pintrich, P. R. (2000). The role of goal orientation in self-regulated learning. In M. Boekaerts et al. (Eds.), <em>Handbook of Self-Regulation.</em> Academic Press.</div>
+              <div class="ref">Nicol, D. J., &amp; Macfarlane-Dick, D. (2006). Formative assessment and self-regulated learning. <em>Studies in Higher Education, 31</em>(2), 199–218.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">SRL theory predicts that feedback supporting self-monitoring and self-evaluation produces more durable writing improvement than feedback that merely directs revision. Nicol and Macfarlane-Dick (2006) formalize this as seven principles of good feedback; principle 4 (motivates self-assessment) and principle 5 (encourages dialogue) are the most relevant to AI feedback design.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">SRL research is dominated by self-report measures (surveys) that may not capture actual regulatory behavior. The relationship between SRL during writing tasks and SRL as a stable trait is contested. Also debated: whether SRL is primarily cognitive or also fundamentally motivational.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Formative Feedback</span><span class="chip">→ Metacognition</span><span class="chip">→ Feedback Uptake</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--th)" data-cluster="th" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Cognitive</div>
+          <div class="card-title">Cognitive Load Theory</div>
+          <div class="card-short">Intrinsic, extraneous, and germane load in complex writing tasks</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Argumentative writing carries high intrinsic load. Well-designed feedback reduces extraneous load and increases germane load. Poorly designed feedback — including verbose AI output — adds extraneous load that impedes learning.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Sweller, J. (1988). Cognitive load during problem solving. <em>Cognitive Science, 12</em>(2), 257–285.</div>
+              <div class="ref">Sweller, J., van Merriënboer, J. J. G., &amp; Paas, F. (1998). Cognitive architecture and instructional design. <em>Educational Psychology Review, 10</em>(3), 251–296.</div>
+              <div class="ref">Kalyuga, S. (2007). Expertise reversal effect and its implications for learner-tailored instruction. <em>Educational Psychology Review, 19</em>(4), 509–539.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Verbosity in AI-generated feedback is a recognized extraneous load concern. Sweller et al. (1998) predict that feedback exceeding working memory capacity will impair rather than support revision. Empirically, Shute (2008) found that elaborated feedback outperforms verification only up to a threshold; beyond that threshold, cognitive overload reduces uptake.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">The germane/extraneous load distinction has been challenged as unfalsifiable (Kalyuga, 2011). Also: the "expertise reversal effect" means what constitutes extraneous load varies by skill level — further complicating one-size-fits-all feedback design.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Feedback Specificity</span><span class="chip">→ GenAI Feedback Design</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--th)" data-cluster="th" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Constructivist</div>
+          <div class="card-title">Knowledge-Transforming Writing</div>
+          <div class="card-short">Writing as a site of epistemic change (Bereiter &amp; Scardamalia)</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Constructivism</span><span class="chip-mini">→ Epistemic Rhetoric</span><span class="chip-mini">→ Writing Process</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Knowledge-transforming writing involves the writer's understanding being changed in the process of writing itself. Argumentative writing is the paradigm case: you discover what you think by having to defend it. Feedback enters this dynamic process and shapes thought, not just text.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Scardamalia, M., &amp; Bereiter, C. (1987). Knowledge telling and knowledge transforming. <em>Advances in Applied Psycholinguistics, 2,</em> 142–175.</div>
+              <div class="ref">Emig, J. (1977). Writing as a mode of learning. <em>College Composition and Communication, 28</em>(2), 122–128.</div>
+              <div class="ref">Klein, P. D. (1999). Reopening inquiry into cognitive processes in writing-to-learn. <em>Educational Psychology Review, 11</em>(3), 203–270.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Klein's (1999) review established that writing-to-learn effects depend critically on the quality of epistemic engagement during writing. Feedback that targets argument structure — claim, warrant, rebuttal — activates deeper epistemic processing than surface correction. This is the theoretical rationale for argument-component-level feedback in writing pedagogy.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Klein's (1999) review found that writing-to-learn effects are inconsistent across studies. The conditions under which writing transforms knowledge — vs. merely records it — are still not well-specified. Argumentative writing may be a special case because it requires explicit epistemic commitment.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Constructivism</span><span class="chip">→ Epistemic Rhetoric</span><span class="chip">→ Writing Process</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== CLUSTER 4 ===== -->
+    <div class="cluster" id="ph" data-cluster="ph" style="--cl-color:var(--ph)">
+      <div class="cl-header"><div class="cl-dot" style="background:var(--ph)"></div><div class="cl-title">Philosophical Stances</div><div class="cl-sub">Epistemological &amp; Ontological Grounding</div></div>
+      <div class="cards">
+
+        <div class="card" style="--ac:var(--ph)" data-cluster="ph" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Epistemology</div>
+          <div class="card-title">Constructivism</div>
+          <div class="card-short">Knowledge is actively built by learners, not passively received</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ ZPD</span><span class="chip-mini">→ Sociocultural Theory</span><span class="chip-mini">→ Knowledge-Transforming</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Piaget's cognitive constructivism and Vygotsky's social constructivism agree: knowledge is constructed, not transmitted. Students don't receive argument skills from instruction — they construct them through practice, reflection, and feedback interaction.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Piaget, J. (1970). <em>Genetic Epistemology.</em> Columbia UP.</div>
+              <div class="ref">Vygotsky, L. S. (1978). <em>Mind in Society.</em> Harvard UP.</div>
+              <div class="ref">Cobb, P. (1994). Where is the mind? Constructivist and sociocultural perspectives on mathematical development. <em>Educational Researcher, 23</em>(7), 13–20.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">The field of writing pedagogy integrates both Piagetian and Vygotskian constructivism: cognitive constructivism explains why students must actively build argument schemas through practice, while social constructivism explains why peer feedback accelerates that construction through externalized dialogue. Cobb (1994) formalized this integration as a methodological standard.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">The "math wars" and "reading wars" revealed that pure constructivism (minimal guidance) is less effective than guided instruction for novices (Kirschner et al., 2006). The question for writing education: how much direct instruction in argument structure is needed vs. discovery through practice and feedback?</div></div>
+            </div><div class="card-chips"><span class="chip">→ ZPD</span><span class="chip">→ Sociocultural Theory</span><span class="chip">→ Knowledge-Transforming</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ph)" data-cluster="ph" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Epistemology / Rhetoric</div>
+          <div class="card-title">Epistemic Rhetoric</div>
+          <div class="card-short">Rhetoric as a mode of epistemic inquiry, not just persuasion</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Epistemic Modality</span><span class="chip-mini">→ Dialogic Argument</span><span class="chip-mini">→ Knowledge-Transforming</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>The epistemic rhetoric tradition argues that rhetorical argument is not merely persuasion but a mode of inquiry — we use argument to discover truth, not just defend it. This links directly to why argumentative writing matters educationally: it is a form of thinking.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Scott, R. L. (1967). On viewing rhetoric as epistemic. <em>Central States Speech Journal, 18</em>(1), 9–17.</div>
+              <div class="ref">Rorty, R. (1979). <em>Philosophy and the Mirror of Nature.</em> Princeton UP.</div>
+              <div class="ref">Leff, M. (1987). Modern sophistic and the unity of rhetoric. In J. S. Nelson et al. (Eds.), <em>The Rhetoric of the Human Sciences.</em> U of Wisconsin Press.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Epistemic rhetoric provides the philosophical warrant for treating argument feedback as more than a writing skill intervention: it is intervention in students' epistemic development, their ways of knowing and justifying. Scott (1967) and the epistemic rhetoric tradition establish that feedback on argument quality is, at depth, feedback on reasoning quality.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Epistemic rhetoric has been critiqued for potentially collapsing truth into persuasion (relativism problem). If argument is purely epistemic, how do we distinguish good arguments from merely persuasive ones? This matters for automated quality assessment.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Epistemic Modality</span><span class="chip">→ Dialogic Argument</span><span class="chip">→ Knowledge-Transforming</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ph)" data-cluster="ph" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Ontology</div>
+          <div class="card-title">Social Ontology of Writing</div>
+          <div class="card-short">Writing as social action — texts exist in and shape social worlds</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Genre Conventions</span><span class="chip-mini">→ Sociocultural Theory</span><span class="chip-mini">→ AES/AI</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Miller's rhetorical genre theory grounds text types in recurring social situations. Argumentative writing is not an abstract skill but a situationally embedded social act. "Quality" is always a value-laden, community-relative judgment.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Miller, C. R. (1984). Genre as social action. <em>Quarterly Journal of Speech, 70</em>(2), 151–167.</div>
+              <div class="ref">Bazerman, C. (1994). Systems of genre and the enactment of social intentions. In A. Freedman &amp; P. Medway (Eds.), <em>Genre and the New Rhetoric.</em> Taylor &amp; Francis.</div>
+              <div class="ref">Berkenkotter, C., &amp; Huckin, T. N. (1995). <em>Genre Knowledge in Disciplinary Communication.</em> Erlbaum.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">AES systems implicitly encode a social ontology of "quality" derived from their training corpora. Deane (2013) and Perelman (2014) establish that AES validity arguments must address whose standards of argument quality are being operationalized — a question that is especially acute when training data reflects one disciplinary or cultural community's norms.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">If quality is community-relative, can any automated system validly score argumentative writing across contexts? The tension between universalist psychometric validity and social constructionist notions of quality is unresolved in AES research.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Genre Conventions</span><span class="chip">→ Sociocultural Theory</span><span class="chip">→ AES/AI</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ph)" data-cluster="ph" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Philosophy of Education</div>
+          <div class="card-title">Critical Pedagogy</div>
+          <div class="card-short">Freire: writing and argument as consciousness-raising and agency-building</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Peer Feedback</span><span class="chip-mini">→ AI Over-reliance</span><span class="chip-mini">→ Dialogic Argument</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Freire's critique of "banking" education applies to feedback: feedback that merely deposits corrections into students is a form of epistemic domination. Dialogic feedback that invites response and reflection respects student agency. Argument is inherently political — whose knowledge counts?</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Freire, P. (1970). <em>Pedagogy of the Oppressed.</em> Seabury Press.</div>
+              <div class="ref">hooks, b. (1994). <em>Teaching to Transgress.</em> Routledge.</div>
+              <div class="ref">Giroux, H. A. (1983). <em>Theory and Resistance in Education.</em> Heinemann.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Critical pedagogy provides the philosophical warrant for treating AI over-reliance as an educational problem, not merely an efficiency concern. Freire's banking critique applies directly to AI feedback that deposits corrections without engaging student agency. The field's response (Winstone et al., 2017; Carless &amp; Boud, 2018) emphasizes designing feedback for agentic engagement.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Critical pedagogy has been critiqued for privileging critique over construction (what positive vision of writing education does it offer?). Also: the "dialogic feedback" ideal may conflict with efficiency demands in large-enrollment courses where AI feedback is deployed precisely because dialogue is impossible at scale.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Peer Feedback</span><span class="chip">→ AI Over-reliance</span><span class="chip">→ Dialogic Argument</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ph)" data-cluster="ph" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Epistemology</div>
+          <div class="card-title">Epistemic Cognition</div>
+          <div class="card-short">How learners understand the nature of knowledge and justification</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Argument Literacy</span><span class="chip-mini">→ Epistemic Rhetoric</span><span class="chip-mini">→ GenAI risks</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>King &amp; Kitchener's Reflective Judgment model and Hofer &amp; Pintrich's epistemic beliefs framework: students' views about knowledge (absolute vs. contextual; certain vs. uncertain) shape how they argue and receive feedback.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">King, P. M., &amp; Kitchener, K. S. (1994). <em>Developing Reflective Judgment.</em> Jossey-Bass.</div>
+              <div class="ref">Hofer, B. K., &amp; Pintrich, P. R. (1997). The development of epistemological theories. <em>Review of Educational Research, 67</em>(1), 88–140.</div>
+              <div class="ref">Muis, K. R. (2007). The role of epistemic beliefs in self-regulated learning. <em>Educational Psychologist, 42</em>(3), 173–190.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">GenAI feedback that presents itself with false certainty may inadvertently reinforce absolutist epistemic beliefs in student writers. King and Kitchener (1994) document that absolutist knowers expect authoritative answers — precisely what confidently-worded AI feedback provides. This is a recognized but understudied risk at the intersection of epistemic cognition and AI feedback design.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Is epistemic cognition domain-general or domain-specific? Students may hold relativist views in one discipline and absolutist views in another. Measurement of epistemic beliefs remains contested — self-report surveys may not capture actual epistemic reasoning during writing tasks.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Argument Literacy</span><span class="chip">→ Epistemic Rhetoric</span><span class="chip">→ GenAI risks</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ph)" data-cluster="ph" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Philosophy of Mind</div>
+          <div class="card-title">Metacognition</div>
+          <div class="card-short">Thinking about one's own thinking; monitoring and regulating cognition</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Flavell's metacognition as awareness + regulation of cognitive processes. Metacognitive writers plan strategically, monitor while drafting, and evaluate their arguments critically. Feedback can develop metacognition — or suppress it if students defer to external judgment.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Flavell, J. H. (1979). Metacognition and cognitive monitoring. <em>American Psychologist, 34</em>(10), 906–911.</div>
+              <div class="ref">Schraw, G., &amp; Dennison, R. S. (1994). Assessing metacognitive awareness. <em>Contemporary Educational Psychology, 19</em>(4), 460–475.</div>
+              <div class="ref">Pintrich, P. R. (2002). The role of metacognitive knowledge in learning, teaching, and assessing. <em>Theory Into Practice, 41</em>(4), 219–225.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Feedback functions as a metacognitive scaffold when it helps students develop internal standards for argument quality. Flavell (1979) and Pintrich (2002) establish that metacognitive monitoring develops through repeated comparison of self-assessment against external standards — precisely what structured feedback activities provide. This is the learning mechanism underlying feedback-driven writing improvement.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Metacognitive knowledge and metacognitive monitoring are distinct and often disconnected: students may know what good argument looks like without being able to monitor their own writing for it. Transfer of metacognitive skills across domains remains poorly understood.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Self-Regulation</span><span class="chip">→ Feedback Uptake</span><span class="chip">→ Writing Process</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== CLUSTER 5 ===== -->
+    <div class="cluster" id="ai" data-cluster="ai" style="--cl-color:var(--ai)">
+      <div class="cl-header"><div class="cl-dot" style="background:var(--ai)"></div><div class="cl-title">AI &amp; GenAI Dimension</div><div class="cl-sub">Emerging Research Territory</div></div>
+      <div class="cards">
+
+        <div class="card" style="--ac:var(--ai)" data-cluster="ai" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Technology</div>
+          <div class="card-title">GenAI Feedback on Writing</div>
+          <div class="card-short">LLM-generated feedback: capabilities, limitations, student reception</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>LLM feedback can approximate expert feedback quality on holistic dimensions but is less reliable on discipline-specific argument structure, epistemic stance, and citation integration. Student reception is generally positive but raises over-reliance concerns.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Bai, L., &amp; Hu, G. (2017). In the face of fallible AWE feedback. <em>Journal of Second Language Writing, 36,</em> 45–56.</div>
+              <div class="ref">Guo, K., et al. (2024). Evaluating the effectiveness of ChatGPT feedback. <em>Computers &amp; Education: AI, 6,</em> 100–189.</div>
+              <div class="ref">Kellogg, R. T., &amp; Raulerson, B. A. (2007). Improving the writing skills of college students. <em>Psychonomic Bulletin &amp; Review, 14</em>(2), 237–242.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Empirical comparison of GenAI vs. peer feedback quality on argumentative writing is a rapidly developing research front. Banihashem et al. (2024) found complementary coverage profiles; a 2025 crossover study found no holistic quality difference between human tutor and GenAI conditions. Argument-structure coding grounded in Toulmin categories is the emerging methodological standard for these comparisons.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Can GenAI feedback be "formative" without understanding the student? Is statistical pattern-matching over training data a fundamentally different epistemic process than human evaluative judgment — and does that difference matter educationally? This is an open philosophical and empirical question.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Formative Feedback</span><span class="chip">→ Peer Feedback</span><span class="chip">→ Cognitive Load</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ai)" data-cluster="ai" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Technology</div>
+          <div class="card-title">Automated Essay Scoring (AES)</div>
+          <div class="card-short">Predictive scoring of essay quality; argument-aware NLP systems</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>AES systems score surface and organizational features. PERSUADE 2.0 corpus is central to current argument-score research. Emerging argument-aware AES systems sit at the junction of AES and actionable formative feedback.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Burstein, J. (2003). The e-rater scoring engine. In M. D. Shermis &amp; J. C. Burstein (Eds.), <em>Automated Essay Scoring.</em> Erlbaum.</div>
+              <div class="ref">Crossley, S. A., et al. (2023). The PERSUADE corpus 2.0. <em>Assessing Writing, 57,</em> 100</div>
+              <div class="ref">Perelman, L. C. (2014). When "the states" write: A critique of automated writing assessment. <em>Assessing Writing, 21,</em> 104–111.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Contemporary AES research has moved toward argument-aware models. Li and Ng (2024) and the PERSUADE corpus (Crossley et al., 2022) enable argument-component scoring. The recognized gap is between AES (scoring) and actionable formative feedback: systems that score well do not necessarily generate feedback that improves argument construction (Misgna et al., 2025).</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Perelman's "BABEL generator" demonstrated that e-rater can be fooled by syntactically complex but semantically empty text. The fundamental validity question: do AES scores measure writing ability or proxies for it? This challenge applies to any argument-scoring system, including those using LLM-based scoring.</div></div>
+            </div><div class="card-chips"><span class="chip">→ GenAI Feedback</span><span class="chip">→ Formative Feedback gap</span><span class="chip">→ Social Ontology</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ai)" data-cluster="ai" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Risk / Ethics</div>
+          <div class="card-title">Over-reliance &amp; Epistemic Autonomy</div>
+          <div class="card-short">Risk that AI feedback crowds out student epistemic agency</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Epistemic Cognition</span><span class="chip-mini">→ Critical Pedagogy</span><span class="chip-mini">→ Self-Regulation</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>If students defer to GenAI feedback rather than developing evaluative judgment, AI-assisted writing education could undermine the goal of argument literacy. Epistemic autonomy as an educational value: students have the right and responsibility to reason for themselves.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Bandura, A. (1997). <em>Self-Efficacy: The Exercise of Control.</em> Freeman.</div>
+              <div class="ref">Carless, D., &amp; Boud, D. (2018). The development of student feedback literacy. <em>Assessment &amp; Evaluation in Higher Education, 43</em>(8), 1315–1325.</div>
+              <div class="ref">Winstone, N. E., et al. (2017). Supporting learners' agentic engagement with feedback. <em>Educational Psychologist, 52</em>(1), 17–37.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Epistemic autonomy as an educational value grounds the concern that AI feedback may displace student reasoning rather than support it. Carless and Boud's (2018) feedback literacy framework and Winstone et al.'s (2017) agentic engagement model converge on the same design principle: feedback systems should cultivate, not replace, student evaluative judgment.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Counter-argument: students already defer to teacher feedback without developing autonomy — why is AI deference uniquely problematic? The key empirical question is whether GenAI feedback undermines SRL development more than teacher feedback does. This is largely unstudied.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Epistemic Cognition</span><span class="chip">→ Critical Pedagogy</span><span class="chip">→ Self-Regulation</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--ai)" data-cluster="ai" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Design</div>
+          <div class="card-title">Human-AI Hybrid Feedback</div>
+          <div class="card-short">Complementary strengths of peer, teacher, and AI feedback</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ All feedback sources</span><span class="chip-mini">→ Scaffolding</span><span class="chip-mini">→ Personalized Feedback</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>AI: scalable, immediate, consistent. Peer: audience-authentic, social, dialogic. Teacher: expert, context-sensitive, relational. Hybrid models that orchestrate all three are better than any single source. Not "AI vs. peers" but "AI + peers, theoretically grounded."</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Goldin, I. M., et al. (2012). Hints: The epistomics of telling. In S. A. Cerri et al. (Eds.), <em>Intelligent Tutoring Systems</em>. Springer.</div>
+              <div class="ref">Strijbos, J. W., &amp; Sluijsmans, D. (2010). Unravelling peer assessment. <em>Learning and Instruction, 20</em>(4), 265–269.</div>
+              <div class="ref">Dikli, S. (2006). An overview of automated scoring of essays. <em>Journal of Technology, Learning, and Assessment, 5</em>(1).</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">The field is moving toward hybrid feedback designs that combine AI and peer sources for complementary coverage. Banihashem et al. (2024) document that ChatGPT and peer feedback address different aspects of argumentative essays. ZPD and scaffolding theory provide the design rationale: different feedback sources should be sequenced and combined to match the learner's proximal zone.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Orchestrating multiple feedback sources may increase cognitive load rather than reduce it. Students may receive conflicting feedback from peers and AI, which can be confusing or paralyzing. The "more feedback is better" assumption is empirically contested.</div></div>
+            </div><div class="card-chips"><span class="chip">→ All feedback sources</span><span class="chip">→ Scaffolding</span><span class="chip">→ Personalized Feedback</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== CLUSTER 6 ===== -->
+    <div class="cluster" id="br" data-cluster="br" style="--cl-color:var(--br)">
+      <div class="cl-header"><div class="cl-dot" style="background:var(--br)"></div><div class="cl-title">Bridging Constructs</div><div class="cl-sub">Cross-Domain Connectors</div></div>
+      <div class="cards">
+
+        <div class="card" style="--ac:var(--br)" data-cluster="br" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Synthesis</div>
+          <div class="card-title">Personalized / Adaptive Feedback</div>
+          <div class="card-short">Feedback calibrated to the individual writer's current level</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Personalized feedback operationalizes ZPD computationally: differentiated by argument skill level, genre familiarity, linguistic background, and revision history. Learner modeling is exactly this bridge between Vygotskian theory and AI capability.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">VanLehn, K. (2011). The relative effectiveness of human tutoring, intelligent tutoring systems, and other tutoring systems. <em>Educational Psychologist, 46</em>(4), 197–221.</div>
+              <div class="ref">Corbett, A. T., &amp; Anderson, J. R. (1994). Knowledge tracing: Modeling the acquisition of procedural knowledge. <em>User Modeling and User-Adapted Interaction, 4</em>(4), 253–278.</div>
+              <div class="ref">Bull, S., &amp; Kay, J. (2016). SMILI☺: A framework for interfaces to learning data. <em>International Journal of Artificial Intelligence in Education, 26</em>(1), 293–331.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Personalized adaptive feedback on argumentative writing is the convergence point of learner modeling and feedback design research. VanLehn (2011) established that adaptive tutoring effects are strongest when systems accurately track knowledge state. Current challenges include modeling not just argument proficiency but also epistemic development and motivational state (Corbett &amp; Anderson, 1994).</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">What counts as "personalized"? Most adaptive feedback systems adapt on surface performance metrics, not on the deeper epistemic or motivational dimensions that Vygotskian theory implies matter. True ZPD-calibrated feedback may require richer learner models than current AI systems support.</div></div>
+            </div><div class="card-chips"><span class="chip">→ ZPD</span><span class="chip">→ GenAI Feedback</span><span class="chip">→ Learner Modeling</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--br)" data-cluster="br" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Synthesis</div>
+          <div class="card-title">Feedback as Dialogue</div>
+          <div class="card-short">Feedback as two-way epistemic exchange, not one-way transmission</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ Dialogic Argument</span><span class="chip-mini">→ Peer Feedback</span><span class="chip-mini">→ GenAI dialogue</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Nicol and Carless reframe feedback as dialogue: effective feedback invites response, not just correction. This aligns with Bakhtin's dialogism and with argument's fundamentally dialogic nature. Feedback loops close when writers respond — through revision, questions, or self-explanation.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Nicol, D. (2010). From monologue to dialogue: Improving written feedback processes in mass higher education. <em>Assessment &amp; Evaluation in Higher Education, 35</em>(5), 501–517.</div>
+              <div class="ref">Carless, D. (2016). Feedback as dialogue. In M. A. Peters (Ed.), <em>Encyclopedia of Educational Philosophy and Theory.</em> Springer.</div>
+              <div class="ref">Bakhtin, M. M. (1981). <em>The Dialogic Imagination.</em> U of Texas Press.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">The dialogic feedback framework (Nicol, 2010; Carless, 2016) reframes feedback evaluation: the question is not only whether feedback is accurate, but whether it enables genuine epistemic exchange. AI feedback that forecloses dialogue by providing authoritative answers rather than questions may reduce the learning benefit even when it increases revision quality.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Can AI systems genuinely participate in epistemic dialogue, or do they simulate it? Is "dialogue" with an LLM a category error? The question has both philosophical (what is dialogue?) and practical (does it produce the same learning effects?) dimensions.</div></div>
+            </div><div class="card-chips"><span class="chip">→ Dialogic Argument</span><span class="chip">→ Peer Feedback</span><span class="chip">→ GenAI dialogue</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--br)" data-cluster="br" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Methodological</div>
+          <div class="card-title">Design-Based Research (DBR)</div>
+          <div class="card-short">Iterative design of educational interventions grounded in theory and practice</div>
+<div class="card-cue"><div class="card-chips-preview"><span class="chip-mini">→ All theoretical clusters</span><span class="chip-mini">→ GenAI system design</span></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>DBR bridges theory and practice: interventions (feedback systems, argument scaffolds) are designed from theory, tested in authentic contexts, and findings feed back into both theory and design. Appropriate for complex phenomena like feedback in argumentative writing.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Collins, A. (1992). Toward a design science of education. In E. Scanlon &amp; T. O'Shea (Eds.), <em>New Directions in Educational Technology.</em> Springer.</div>
+              <div class="ref">Barab, S., &amp; Squire, K. (2004). Design-based research: Putting a stake in the ground. <em>Journal of the Learning Sciences, 13</em>(1), 1–14.</div>
+              <div class="ref">Design-Based Research Collective. (2003). Design-based research: An emerging paradigm for educational inquiry. <em>Educational Researcher, 32</em>(1), 5–8.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Design-based research is the appropriate methodology for evaluating feedback interventions in authentic educational settings. Barab and Squire (2004) establish that DBR produces both empirical findings and design knowledge — a dual contribution not achievable through controlled experiments alone. This is especially important for AI feedback systems, where contextual factors strongly moderate effects.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">DBR has been critiqued for lacking methodological rigor (how do you isolate causal claims from iterative interventions?) and for privileging the researcher-designer role in ways that may reproduce power dynamics in educational settings. Replication and generalizability remain open challenges.</div></div>
+            </div><div class="card-chips"><span class="chip">→ All theoretical clusters</span><span class="chip">→ GenAI system design</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="--ac:var(--br)" data-cluster="br" onclick="tog(this,event)" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tog(this,event)}">
+<div class="card-head">
+<div class="card-tag">Synthesis</div>
+          <div class="card-title">Feedback Literacy</div>
+          <div class="card-short">Students' capacity to understand, evaluate, and act on feedback</div>
+<div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
+</div>
+<div class="card-detail">
+              <div class="card-body">
+            <p>Carless &amp; Boud's feedback literacy framework: students need to develop the capacity to evaluate feedback quality, not just receive and apply it. This is a higher-order skill that connects SRL, metacognition, and epistemic cognition.</p>
+              </div>
+            <div class="lyr lyr-refs open">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="ref">Carless, D., &amp; Boud, D. (2018). The development of student feedback literacy. <em>Assessment &amp; Evaluation in Higher Education, 43</em>(8), 1315–1325.</div>
+              <div class="ref">Sutton, P. (2012). Conceptualizing feedback literacy: Knowing, being, and acting. <em>Innovations in Education and Teaching International, 49</em>(1), 31–40.</div>
+              <div class="ref">Gravett, K. (2022). Feedback literacies as sociomaterial practice. <em>Critical Studies in Education, 63</em>(2), 261–274.</div></div>
+            </div><div class="lyr lyr-you">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="you-text">Feedback literacy — students' capacity to evaluate, make sense of, and act on feedback — is a prerequisite for safe AI feedback deployment. Carless and Boud (2018) establish that students who cannot judge feedback quality will accept inaccurate or misdirected AI feedback without question. Gravett (2022) extends this to sociomaterial practice: feedback literacy is developed through repeated authentic engagement with feedback processes.</div></div>
+            </div><div class="lyr lyr-debate">
+              <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
+              <div class="lyr-body"><div class="deb-text">Can feedback literacy be taught, or does it develop incidentally through repeated feedback experience? Is the concept too broad to be useful — or is it the missing link between formative feedback theory (feedback as external) and SRL theory (feedback as internalized)?</div></div>
+            </div><div class="card-chips"><span class="chip">→ SRL</span><span class="chip">→ Metacognition</span><span class="chip">→ AI Over-reliance</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main><!-- /card-main -->
+</div><!-- /cardView -->
+
+<!-- GRAPH VIEW -->
+<div id="graphView">
+  <div class="g-hint">Hover to inspect · Drag to explore · Scroll to zoom</div>
+  <div class="g-legend">
+    <div class="g-legend-title">Clusters</div>
+    <div class="g-legend-item"><div class="g-dot" style="background:#9b7fe8"></div>Argumentative Writing</div>
+    <div class="g-legend-item"><div class="g-dot" style="background:#5aaee8"></div>Feedback Types</div>
+    <div class="g-legend-item"><div class="g-dot" style="background:#52d49a"></div>Learning Theories</div>
+    <div class="g-legend-item"><div class="g-dot" style="background:#e8a84a"></div>Philosophical Stances</div>
+    <div class="g-legend-item"><div class="g-dot" style="background:#e85a8a"></div>AI &amp; GenAI</div>
+    <div class="g-legend-item"><div class="g-dot" style="background:#9ed456"></div>Bridging Constructs</div>
+  </div>
+  <div class="g-tt" id="gtt"></div>
+  <div class="g-panel" id="g-panel"></div>
+  <svg id="graphSvg" role="img" aria-label="Interactive concept map graph showing connections between argumentative writing concepts"><title>Argumentative Writing and Feedback Concept Map</title></svg>
+</div>
+
+<script>
+// ── STATE ──
+let layers = {refs:true, you:true, debate:true};
+let currentCluster = null;
+
+// ── TOGGLE CARD ──
+function tog(card,e){
+  if(e && e.target.closest('.card-detail')) return;
+  const isOpen = card.classList.toggle('open');
+  card.setAttribute('aria-expanded', String(isOpen));
+}
+
+// ── SCROLL NAV ──
+function goTo(id, el){
+  const target = document.getElementById(id);
+  const scroller = document.getElementById('cm');
+  if(target && scroller){
+    const offset = target.offsetTop - scroller.offsetTop;
+    scroller.scrollTo({top: offset, behavior: 'smooth'});
+  }
+  document.querySelectorAll('.sn-item').forEach(n=>n.classList.remove('active'));
+  if(el) el.classList.add('active');
+}
+
+// ── SEARCH ──
+function filterCards(q){
+  q=q.toLowerCase().trim();
+  let visible=0;
+  document.querySelectorAll('.card').forEach(card=>{
+    if(!q){card.classList.remove('dim');visible++; return;}
+    const match=card.innerText.toLowerCase().includes(q);
+    card.classList.toggle('dim',!match);
+    if(match) visible++;
+  });
+  const ann=document.getElementById('sr-announce');
+  if(ann) ann.textContent = q ? visible+' concept'+(visible!==1?'s':'')+' found' : '';
+}
+
+// ── VIEW SWITCH ──
+function setView(v){
+  document.getElementById('cardView').style.display=v==='card'?'flex':'none';
+  document.getElementById('graphView').style.display=v==='graph'?'block':'none';
+  document.getElementById('btnCard').classList.toggle('active',v==='card');
+  document.getElementById('btnGraph').classList.toggle('active',v==='graph');
+  document.getElementById('btnCard').setAttribute('aria-pressed', String(v==='card'));
+  document.getElementById('btnGraph').setAttribute('aria-pressed', String(v==='graph'));
+  if(v==='graph' && !graphBuilt) buildGraph();
+}
+
+
+// ── GRAPH ──
+let graphBuilt=false;
+function buildGraph(){
+  graphBuilt=true;
+  const clusterColors={'arg':'#9b7fe8','fb':'#5aaee8','th':'#52d49a','ph':'#e8a84a','ai':'#e85a8a','br':'#9ed456'};
+  const clusterNames={'arg':'Argumentative Writing','fb':'Feedback Types','th':'Learning Theories','ph':'Philosophical Stances','ai':'AI & GenAI','br':'Bridging Constructs'};
+
+  const nodes=[
+    // arg
+    {id:'toulmin',label:'Toulmin Model',cluster:'arg',short:'Claim → Grounds → Warrant → Backing → Qualifier → Rebuttal',
+     body:'Toulmin (1958) reframed argument as practical reasoning, not formal logic. The six-part schema is the dominant analytic lens in writing research and classroom instruction. Warrants and rebuttals are the hardest elements for students and the most consequential for argument quality.',
+     refs:['Toulmin, S. (1958). The Uses of Argument. Cambridge UP.','Hillocks, G. (2011). Teaching Argument Writing, Grades 6–12. Heinemann.'],
+     debate:'Critics argue Toulmin is too linear for real academic argumentation. Cross-disciplinary application is contested — do STEM and humanities arguments share a schema?',
+     context:'Toulmin\'s schema provides the standard vocabulary for argument-component feedback coding (claim, evidence, warrant). Studies show argument-component-level feedback produces more substantive revision than holistic commentary.'},
+    {id:'dialogic',label:'Dialogic Argument',cluster:'arg',short:'Argument as audience-responsive dialogue; considering counterpositions',
+     body:'Dialectical approaches (Perelman & Olbrechts-Tyteca; Walton) treat argument as socially situated persuasion directed at a real or imagined interlocutor. Writers must anticipate and address counterarguments.',
+     refs:['Perelman, C., & Olbrechts-Tyteca, L. (1969). The New Rhetoric. U of Notre Dame Press.','Walton, D. (1998). The New Dialectic. U of Toronto Press.'],
+     debate:'Tension between monologic and dialogic models: should students build the strongest single position, or represent multiple perspectives? Cultural variation in argument norms challenges Western dialogic assumptions.',
+     context:'Peer reviewers function as genuine interlocutors whose resistance the writer must anticipate — the theoretical basis for peer review as audience-simulation. Documented empirically in Nystrand (1997) and Noroozi et al. (2016).'},
+    {id:'genre',label:'Genre Conventions',cluster:'arg',short:'Discipline-specific argumentative norms and text structure',
+     body:'Genre theory (Swales; Bazerman) locates argumentative writing within disciplinary communities. STEM argumentation is evidence-heavy; humanities centers interpretation; policy argument stresses stakeholder impact.',
+     refs:['Swales, J. (1990). Genre Analysis. Cambridge UP.','Miller, C. R. (1984). Genre as social action. Quarterly Journal of Speech, 70(2), 151–167.'],
+     debate:'Are genre conventions teachable or do they emerge from disciplinary enculturation? Freedman questions whether explicit genre instruction is effective at the secondary level.',
+     context:'Genre awareness is a documented confound in cross-domain comparisons of argument quality. What counts as a "strong argument" is community-specific; researchers comparing argument quality across topics must control for genre familiarity.'},
+    {id:'cogproc',label:'Writing Process',cluster:'arg',short:'Planning → Translating → Reviewing (Hayes & Flower, 1980)',
+     body:'Hayes & Flower\'s cognitive process model treats writing as recursive problem-solving. Scardamalia & Bereiter distinguished knowledge-telling (novice) from knowledge-transforming (expert) strategies.',
+     refs:['Flower, L., & Hayes, J. R. (1981). A cognitive process theory of writing. College Composition and Communication, 32(4), 365–387.','Hayes, J. R. (1996). A new framework for understanding cognition and affect in writing. In C. M. Levy & S. Ransdell (Eds.), The Science of Writing. Erlbaum.'],
+     debate:'Cognitive process models have been critiqued as overly individualistic and acontextual. Sociocultural critics argue they miss the social and distributed dimensions of actual writing practices.',
+     context:'Feedback intervenes primarily at the reviewing stage but reshapes subsequent planning cycles. This is the cognitive mechanism underlying iterative draft–feedback–revision designs.'},
+    {id:'argliteracy',label:'Argument Literacy',cluster:'arg',short:'Developmental trajectory of argument skill across education',
+     body:'Kuhn (1991) documented that most adults struggle to distinguish evidence from theory and generate genuine rebuttals. Newell et al. traced disciplinary argumentation development through secondary and post-secondary schooling.',
+     refs:['Kuhn, D. (1991). The Skills of Argument. Cambridge UP.','Newell, G. E., et al. (2011). Teaching and learning argumentative writing. Reading Research Quarterly, 46(3), 273–304.'],
+     debate:'Is argument literacy domain-general or domain-specific? Kuhn argues for transferable skills; disciplinary literacy scholars contend argument is always situated within a discipline\'s epistemic practices.',
+     context:'Feedback must be calibrated to developmental stage: novices benefit from explicit structural scaffolding, while advanced arguers need counterargument challenges. Tracking individual argument literacy trajectories is a recognized priority in adaptive writing education.'},
+    {id:'hedging',label:'Epistemic Modality',cluster:'arg',short:'Linguistic markers of certainty, stance, and authorial voice',
+     body:'Hyland\'s metadiscourse framework identifies hedges (might, possibly), boosters (clearly, definitely), and attitude markers as key features of academic argumentative writing. Writers manage epistemic commitments through language choices.',
+     refs:['Hyland, K. (2005). Metadiscourse. Continuum.','Biber, D., & Finegan, E. (1988). Adverbial stance types in English. Discourse Processes, 11(1), 1–34.'],
+     debate:'Norms for hedging vary by discipline and culture — appropriate epistemic humility in one context reads as weak argumentation in another. NLP systems trained on one corpus may penalize appropriate hedging in another domain.',
+     context:'Automated feedback systems consistently underperform on epistemic stance features. AES systems trained on surface features rarely capture stance miscalibration — a recognized validity gap (Deane, 2013; Li & Ng, 2024).'},
+    // fb
+    {id:'formative',label:'Formative Feedback',cluster:'fb',short:'Feedback that informs and improves ongoing learning',
+     body:'Black & Wiliam (1998) established formative assessment as a powerful lever for learning. Sadler (1989): feedback is only formative if it targets the gap between current and desired performance AND the learner can act on it.',
+     refs:['Black, P., & Wiliam, D. (1998). Assessment and classroom learning. Assessment in Education, 5(1), 7–74.','Hattie, J., & Timperley, H. (2007). The power of feedback. Review of Educational Research, 77(1), 81–112.','Sadler, D. R. (1989). Formative assessment. Instructional Science, 18(2), 119–144.'],
+     debate:'Kluger & DeNisi (1996) showed 38% of feedback interventions actually decreased performance. The formative/summative distinction has been critiqued as misleading — all feedback can be formative if used well (Wiliam, 2011).',
+     context:'Whether peer and AI feedback actually function formatively is a central empirical question. Carless and Boud (2018) note that feedback provision and feedback uptake are distinct processes that most studies conflate.'},
+    {id:'peer',label:'Peer Feedback',cluster:'fb',short:'Learner-to-learner feedback: cognitive, social, motivational',
+     body:'Peer feedback benefits both giver and receiver. Cognitive benefits: elaboration, knowledge co-construction. Social benefits: sense of audience, community norms. Giving feedback may benefit the giver as much as the receiver (Lundstrom & Baker, 2009).',
+     refs:['Topping, K. J. (1998). Peer assessment between students. Review of Educational Research, 68(3), 249–276.','Liu, J., & Carless, D. (2006). Peer feedback: The learning element of peer assessment. Teaching in Higher Education, 11(3), 279–290.','Cho, K., & MacArthur, C. (2010). Student revision with peer and expert reviewing. Learning and Instruction, 20(4), 328–338.'],
+     debate:'Does peer feedback actually improve writing quality, or just engagement? Meta-analyses find stronger effects for givers than receivers. The "novices teaching novices" critique: peers lack expert schemas needed to identify argument weaknesses accurately.',
+     context:'Research comparing peer and AI feedback finds complementary coverage profiles: AI feedback is more descriptive and structural, while peer feedback targets problem identification (Banihashem et al., 2024). This supports hybrid, rather than competing, designs.'},
+    {id:'teacher',label:'Teacher Feedback',cluster:'fb',short:'Expert feedback: authoritative but often delayed or dense',
+     body:'Teacher feedback is the most studied but also the most problematic: often too late, too dense, conflicting, or ignored. Sommers (1982) found teacher comments frequently prioritize surface features over argument development.',
+     refs:['Ferris, D. R. (2003). Response to Student Writing. Erlbaum.','Hyland, F., & Hyland, K. (2006). Feedback on second language students\' writing. Language Teaching, 39(2), 83–101.','Sommers, N. (1982). Responding to student writing. College Composition and Communication, 33(2), 148–156.'],
+     debate:'Truscott\'s (1996) controversial claim that corrective feedback is ineffective sparked major debate. Leki (1990) documents that students often ignore or misunderstand teacher feedback. Expert feedback is not always more effective for learning than peer feedback.',
+     context:'A 2025 crossover study (Taherian & Jalilzadeh) found both human tutor and GenAI feedback produced better final drafts, with no significant difference on holistic quality — raising questions about the unique added value of expert feedback.'},
+    {id:'aifb',label:'AI-Generated Feedback',cluster:'fb',short:'AES systems and LLM-generated formative feedback',
+     body:'AES systems (e-rater, Turnitin) primarily score surface and organizational features. GenAI can generate more holistic, explanatory feedback but with reliability limitations on discipline-specific argument structure and epistemic stance.',
+     refs:['Burstein, J., Chodorow, M., & Leacock, C. (2004). Automated essay evaluation. AI Magazine, 25(3), 27–36.','Deane, P. (2013). On the relation between automated essay scoring and modern views of the writing construct. Assessing Writing, 18(1), 7–24.','Misgna, H., et al. (2025). A survey on deep learning-based AES and feedback generation. Artificial Intelligence Review, 58(2).'],
+     debate:'Can AI feedback be "formative" without understanding the student or context? Validity concerns: AES scores proxy writing quality without capturing social and epistemic dimensions. Perelman\'s BABEL generator demonstrated AES can be fooled by empty but syntactically complex text.',
+     context:'Empirical comparison of GenAI vs. peer feedback quality on argumentative writing is a rapidly developing field. Banihashem et al. (2024) and a Frontiers in Education (2025) study establish that AI and peer feedback have distinct coverage profiles.'},
+    {id:'uptake',label:'Feedback Uptake',cluster:'fb',short:'Whether and how writers act on feedback received',
+     body:'Receiving feedback ≠ using feedback. Research distinguishes uptake (incorporating) from incorporation quality (surface vs. substantive revision). Factors: source credibility, feedback specificity, writer self-efficacy, revision strategy knowledge.',
+     refs:['Conrad, S. M., & Goldstein, L. M. (1999). ESL student revision after teacher-written comments. Journal of Second Language Writing, 8(2), 147–179.','Paulus, T. M. (1999). The effect of peer and teacher feedback on student writing. Journal of Second Language Writing, 8(3), 265–289.'],
+     debate:'Is uptake the right outcome to measure? Students may incorporate feedback without understanding it. Conversely, students may internalize feedback without revising the current text — making revision an imperfect proxy for learning.',
+     context:'Distinguishing surface uptake from meaning-level uptake is especially consequential for argument-structure feedback, which demands conceptual rather than lexical revision (Conrad & Goldstein, 1999).'},
+    {id:'specificity',label:'Feedback Specificity',cluster:'fb',short:'Elaborated feedback outperforms simple verification',
+     body:'Shute (2008): elaborated feedback (explanation + direction) outperforms simple verification (right/wrong) for complex tasks. For argumentative writing, directive + explanatory combinations are most effective.',
+     refs:['Shute, V. J. (2008). Focus on formative feedback. Review of Educational Research, 78(1), 153–189.','Narciss, S. (2008). Feedback strategies for interactive learning tasks. In J. M. Spector et al. (Eds.), Handbook of Research on Educational Communications and Technology. Erlbaum.'],
+     debate:'Too much elaboration increases cognitive load (Sweller). The "Goldilocks problem": optimal feedback specificity depends on learner level, task type, and domain. GenAI tends toward verbose elaboration regardless of learner need.',
+     context:'Interrogative feedback (asking questions about warrant and evidence rather than directing revision) has been shown to produce deeper argument revision than directive feedback in peer and AI feedback studies (Noroozi et al., 2022).'},
+    // th
+    {id:'zpd',label:'ZPD',cluster:'th',short:'Gap between independent performance and assisted performance',
+     body:'Vygotsky (1978): feedback is effective when it operates in the learner\'s Zone of Proximal Development — challenging but reachable. Too far above → frustration; too far below → no growth.',
+     refs:['Vygotsky, L. S. (1978). Mind in Society. Harvard UP.','Tharp, R. G., & Gallimore, R. (1988). Rousing Minds to Life. Cambridge UP.'],
+     debate:'The ZPD has been criticized as metaphorical and unmeasurable in practice (Chaiklin, 2003). How do you assess the "lower bound" (independent performance) and "upper bound" (assisted performance) in a writing context?',
+     context:'Learner modeling is the computational operationalization of ZPD. VanLehn\'s (2011) meta-analysis established that one-on-one tutoring effects (effect size ~0.79) are achievable computationally when systems accurately model the learner\'s knowledge state.'},
+    {id:'scaffolding',label:'Scaffolding',cluster:'th',short:'Temporary, calibrated support that fades as competence grows',
+     body:'Wood, Bruner & Ross (1976): scaffolding features are contingency (responsive to current state), fading (support reduces as ability grows), and handover (responsibility transfers to learner).',
+     refs:['Wood, D., Bruner, J. S., & Ross, G. (1976). The role of tutoring in problem solving. Journal of Child Psychology and Psychiatry, 17(2), 89–100.','Belland, B. R. (2014). Scaffolding. In J. M. Spector et al. (Eds.), Handbook of Research on Educational Communications and Technology. Springer.'],
+     debate:'"Scaffolding" has been so widely applied it risks losing analytical precision (Stone, 1998). Does fading actually occur in practice, or do students remain dependent on external support? AI feedback raises this concern acutely.',
+     context:'Whether AI feedback scaffolds or supplants student reasoning is a central open question. Static, non-fading AI feedback may support task performance without building independent reasoning capacity — a recognized design challenge (Winstone et al., 2017).'},
+    {id:'socioculture',label:'Sociocultural Theory',cluster:'th',short:'Writing as mediated, social, historically situated activity',
+     body:'Vygotsky\'s broader framework (extended by Engeström\'s Activity Theory) frames writing as tool-mediated social practice. Peer feedback is one form of social mediation; the classroom community shapes argumentative norms.',
+     refs:['Vygotsky, L. S. (1986). Thought and Language. MIT Press.','Engeström, Y. (1987). Learning by Expanding. Orienta-Konsultit.','Prior, P. (2006). A sociocultural theory of writing. In C. A. MacArthur et al. (Eds.), Handbook of Writing Research. Guilford.'],
+     debate:'Sociocultural approaches have been critiqued for underspecifying the cognitive mechanisms of change. How exactly does social interaction become internalized as individual writing competence?',
+     context:'Sociocultural theory grounds the argument that peer feedback has distinctive value AI cannot fully replicate: it constitutes genuine social mediation by community members who share the writer\'s epistemic situation (Prior, 2006; Nystrand, 1997).'},
+    {id:'srl',label:'Self-Regulated Learning',cluster:'th',short:'Goal-setting, monitoring, and self-correction in learning',
+     body:'Zimmerman\'s SRL model (forethought → performance → self-reflection) positions feedback as external input the learner internalizes over time. Expert writers self-regulate during drafting; developing writers need external feedback until internal monitoring develops.',
+     refs:['Zimmerman, B. J. (2000). Attaining self-regulation. In M. Boekaerts et al. (Eds.), Handbook of Self-Regulation. Academic Press.','Nicol, D. J., & Macfarlane-Dick, D. (2006). Formative assessment and self-regulated learning. Studies in Higher Education, 31(2), 199–218.'],
+     debate:'SRL research is dominated by self-report measures that may not capture actual regulatory behavior. The relationship between SRL during writing tasks and SRL as a stable trait is contested.',
+     context:'SRL theory predicts that feedback supporting self-monitoring produces more durable writing improvement than feedback that merely directs revision. Nicol and Macfarlane-Dick (2006) formalize this as seven principles of good feedback practice.'},
+    {id:'clt',label:'Cognitive Load Theory',cluster:'th',short:'Intrinsic, extraneous, and germane load in complex tasks',
+     body:'Sweller (1988): argumentative writing carries high intrinsic load. Well-designed feedback reduces extraneous load and increases germane load (productive cognitive effort). Poorly designed feedback adds load that impedes learning.',
+     refs:['Sweller, J. (1988). Cognitive load during problem solving. Cognitive Science, 12(2), 257–285.','Sweller, J., van Merriënboer, J. J. G., & Paas, F. (1998). Cognitive architecture and instructional design. Educational Psychology Review, 10(3), 251–296.'],
+     debate:'The germane/extraneous load distinction has been challenged as unfalsifiable (Kalyuga, 2011). The expertise reversal effect means what constitutes extraneous load varies by skill level — complicating one-size-fits-all feedback design.',
+     context:'Verbosity in AI-generated feedback is a recognized extraneous load concern. Shute (2008) found elaborated feedback outperforms verification only up to a threshold; beyond that threshold, cognitive overload reduces uptake.'},
+    {id:'ktt',label:'Knowledge-Transforming',cluster:'th',short:'Writing as a site of epistemic change (Bereiter & Scardamalia)',
+     body:'Knowledge-transforming writing involves the writer\'s understanding being changed in the process of writing itself — not just transcribing what is already known. Argumentative writing is the paradigm case: you discover what you think by having to defend it.',
+     refs:['Scardamalia, M., & Bereiter, C. (1987). Knowledge telling and knowledge transforming. Advances in Applied Psycholinguistics, 2, 142–175.','Emig, J. (1977). Writing as a mode of learning. College Composition and Communication, 28(2), 122–128.','Klein, P. D. (1999). Reopening inquiry into cognitive processes in writing-to-learn. Educational Psychology Review, 11(3), 203–270.'],
+     debate:'Klein\'s (1999) review found writing-to-learn effects inconsistent across studies. The conditions under which writing transforms knowledge — vs. merely records it — are still not well-specified.',
+     context:'Feedback on argumentative writing enters a dynamic epistemic process — not just correcting text, but shaping thought. Argument-focused feedback (targeting claim, warrant, rebuttal) activates deeper epistemic processing than surface correction.'},
+    // ph
+    {id:'constructivism',label:'Constructivism',cluster:'ph',short:'Knowledge is actively built by learners, not passively received',
+     body:'Piaget\'s cognitive constructivism and Vygotsky\'s social constructivism agree: knowledge is constructed, not transmitted. Students don\'t receive argument skills from instruction — they construct them through practice, reflection, and feedback interaction.',
+     refs:['Piaget, J. (1970). Genetic Epistemology. Columbia UP.','Vygotsky, L. S. (1978). Mind in Society. Harvard UP.','Cobb, P. (1994). Where is the mind? Educational Researcher, 23(7), 13–20.'],
+     debate:'Pure constructivism (minimal guidance) is less effective than guided instruction for novices (Kirschner et al., 2006). The question for writing: how much direct instruction in argument structure is needed vs. discovery through practice?',
+     context:'Both Piagetian and Vygotskian constructivism apply to argument writing pedagogy: cognitive constructivism explains why students must actively build argument schemas through practice; social constructivism explains why peer feedback accelerates that construction.'},
+    {id:'epistemicrhetoric',label:'Epistemic Rhetoric',cluster:'ph',short:'Rhetoric as a mode of epistemic inquiry, not just persuasion',
+     body:'Scott (1967) and the epistemic rhetoric tradition argue that rhetorical argument is not merely persuasion but a mode of inquiry — we use argument to discover truth, not just defend it. This is why argumentative writing matters educationally: it is a form of thinking.',
+     refs:['Scott, R. L. (1967). On viewing rhetoric as epistemic. Central States Speech Journal, 18(1), 9–17.','Rorty, R. (1979). Philosophy and the Mirror of Nature. Princeton UP.'],
+     debate:'Epistemic rhetoric has been critiqued for potentially collapsing truth into persuasion. If argument is purely epistemic, how do we distinguish good arguments from merely persuasive ones? This matters for automated quality assessment.',
+     context:'Epistemic rhetoric provides the philosophical warrant for treating argument feedback as more than a writing skill intervention: it is intervention in students\' epistemic development, their ways of knowing and justifying.'},
+    {id:'socialontology',label:'Social Ontology',cluster:'ph',short:'Writing as social action — texts exist in and shape social worlds',
+     body:'Miller\'s (1984) "Genre as Social Action" grounds text types in recurring social situations. Argumentative writing is not an abstract skill but a situationally embedded social act. "Quality" is always a value-laden, community-relative judgment.',
+     refs:['Miller, C. R. (1984). Genre as social action. Quarterly Journal of Speech, 70(2), 151–167.','Bazerman, C. (1994). Systems of genre. In A. Freedman & P. Medway (Eds.), Genre and the New Rhetoric. Taylor & Francis.'],
+     debate:'If quality is community-relative, can any automated system validly score argumentative writing across contexts? The tension between universalist psychometric validity and social constructionist quality is unresolved in AES research.',
+     context:'AES systems implicitly encode a social ontology of "quality" derived from their training corpora. Deane (2013) and Perelman (2014) establish that AES validity arguments must address whose standards of argument quality are being operationalized.'},
+    {id:'critical',label:'Critical Pedagogy',cluster:'ph',short:'Freire: writing and argument as consciousness-raising and agency',
+     body:'Freire\'s critique of "banking" education applies to feedback: feedback that merely deposits corrections into students is a form of epistemic domination. Dialogic feedback that invites response and reflection respects student agency.',
+     refs:['Freire, P. (1970). Pedagogy of the Oppressed. Seabury Press.','hooks, b. (1994). Teaching to Transgress. Routledge.','Giroux, H. A. (1983). Theory and Resistance in Education. Heinemann.'],
+     debate:'Critical pedagogy has been critiqued for privileging critique over construction. Also: the "dialogic feedback" ideal may conflict with efficiency demands in large-enrollment courses where AI feedback is deployed precisely because dialogue is impossible at scale.',
+     context:'Critical pedagogy provides the philosophical warrant for treating AI over-reliance as an educational problem — not merely an efficiency concern. The field\'s response (Winstone et al., 2017; Carless & Boud, 2018) emphasizes designing feedback for agentic engagement.'},
+    {id:'epistemiccog',label:'Epistemic Cognition',cluster:'ph',short:'How learners understand the nature of knowledge and justification',
+     body:'King & Kitchener\'s Reflective Judgment model; Hofer & Pintrich\'s epistemic beliefs framework. Students\' views about knowledge (absolute vs. contextual) shape how they argue and receive argument-focused feedback.',
+     refs:['King, P. M., & Kitchener, K. S. (1994). Developing Reflective Judgment. Jossey-Bass.','Hofer, B. K., & Pintrich, P. R. (1997). The development of epistemological theories. Review of Educational Research, 67(1), 88–140.','Muis, K. R. (2007). The role of epistemic beliefs in self-regulated learning. Educational Psychologist, 42(3), 173–190.'],
+     debate:'Is epistemic cognition domain-general or domain-specific? Students may hold relativist views in one discipline and absolutist views in another. Measurement of epistemic beliefs via self-report surveys may not capture actual epistemic reasoning during writing tasks.',
+     context:'GenAI feedback that presents itself with false certainty may reinforce absolutist epistemic beliefs in student writers. King and Kitchener (1994) document that absolutist knowers expect authoritative answers — precisely what confidently-worded AI feedback provides.'},
+    {id:'metacog',label:'Metacognition',cluster:'ph',short:'Thinking about one\'s own thinking; monitoring and regulating cognition',
+     body:'Flavell (1979): metacognition as awareness + regulation of cognitive processes. Metacognitive writers plan strategically, monitor while drafting, and evaluate their arguments critically.',
+     refs:['Flavell, J. H. (1979). Metacognition and cognitive monitoring. American Psychologist, 34(10), 906–911.','Pintrich, P. R. (2002). The role of metacognitive knowledge in learning, teaching, and assessing. Theory Into Practice, 41(4), 219–225.'],
+     debate:'Metacognitive knowledge and metacognitive monitoring are distinct and often disconnected: students may know what good argument looks like without being able to monitor their own writing for it.',
+     context:'Feedback functions as a metacognitive scaffold when it helps students develop internal standards for argument quality. Metacognitive monitoring develops through repeated comparison of self-assessment against external standards — what structured feedback activities provide.'},
+    // ai
+    {id:'genaifb',label:'GenAI Feedback',cluster:'ai',short:'LLM-generated feedback: capabilities, limitations, reception',
+     body:'Recent work (2023–2025) shows LLM feedback can approximate expert feedback quality on holistic dimensions but is less reliable on discipline-specific argument structure, epistemic stance, and citation integration.',
+     refs:['Banihashem, S. K., et al. (2024). Feedback sources in essay writing: peer-generated or AI-generated? International Journal of Educational Technology in Higher Education.','Guo, K., & Wang, D. (2023). To resist it or to embrace it? ChatGPT\'s potential to support teacher feedback. Education and Information Technologies.','Frontiers in Education (2025). AI vs. teacher feedback on EFL argumentative writing. 10.3389/feduc.2025.1614673.'],
+     debate:'Can GenAI feedback be "formative" without understanding the student? Is statistical pattern-matching over training data a fundamentally different epistemic process than human evaluative judgment — and does that difference matter educationally?',
+     context:'Banihashem et al. (2024): ChatGPT provided more descriptive structural feedback; peers provided feedback identifying specific problems. No significant relationship found between essay quality and feedback quality for either source — a methodologically important finding.'},
+    {id:'aes',label:'Automated Essay Scoring',cluster:'ai',short:'Predictive scoring of essay quality using NLP and ML',
+     body:'AES systems (e-rater, Turnitin) score surface and organizational features. Argument-aware systems using argument mining (Nguyen & Litman, 2018; Stab & Gurevych, 2017) extend AES to component-level argument quality. The PERSUADE 2.0 corpus enables large-scale argument scoring research.',
+     refs:['Burstein, J. (2003). The e-rater scoring engine. In M. D. Shermis & J. C. Burstein (Eds.), Automated Essay Scoring. Erlbaum.','Crossley, S. A., et al. (2022). The PERSUADE corpus 2.0. Assessing Writing, 57.','Li, S., & Ng, V. (2024). Automated essay scoring: A reflection on the state of the art. NAACL 2024.'],
+     debate:'Perelman\'s BABEL generator demonstrated AES can be fooled by syntactically complex but semantically empty text. Fundamental validity question: do AES scores measure writing ability or proxies for it?',
+     context:'The recognized gap is between AES (scoring) and actionable formative feedback: systems that score well do not necessarily generate feedback that improves argument construction (Misgna et al., 2025). This is the central design challenge in AI writing feedback.'},
+    {id:'overreliance',label:'Over-reliance Risk',cluster:'ai',short:'Risk that AI feedback crowds out student epistemic agency',
+     body:'If students defer to GenAI feedback rather than developing evaluative judgment, AI-assisted writing education could undermine argument literacy. Epistemic autonomy as an educational value: students have the right and responsibility to reason for themselves.',
+     refs:['Carless, D., & Boud, D. (2018). The development of student feedback literacy. Assessment & Evaluation in Higher Education, 43(8), 1315–1325.','Winstone, N. E., et al. (2017). Supporting learners\' agentic engagement with feedback. Educational Psychologist, 52(1), 17–37.'],
+     debate:'Counter-argument: students already defer to teacher feedback without developing autonomy — why is AI deference uniquely problematic? The key empirical question is whether GenAI feedback undermines SRL development more than teacher feedback does. This is largely unstudied.',
+     context:'Feedback literacy — students\' capacity to evaluate, make sense of, and act on feedback — is a prerequisite for safe AI feedback deployment. Students who cannot judge feedback quality will accept inaccurate AI feedback without question (Carless & Boud, 2018).'},
+    {id:'hybrid',label:'Hybrid Feedback',cluster:'ai',short:'Combining peer, teacher, and AI feedback for complementary coverage',
+     body:'Different feedback sources have complementary strengths. AI: scalable, immediate, consistent. Peer: audience-authentic, social, dialogic. Teacher: expert, context-sensitive, relational. Hybrid models that orchestrate all three outperform any single source.',
+     refs:['Banihashem, S. K., et al. (2024). Feedback sources in essay writing. International Journal of Educational Technology in Higher Education.','Strijbos, J. W., & Sluijsmans, D. (2010). Unravelling peer assessment. Learning and Instruction, 20(4), 265–269.'],
+     debate:'Orchestrating multiple feedback sources may increase cognitive load rather than reduce it. Students may receive conflicting feedback from peers and AI, causing confusion. The "more feedback is better" assumption is empirically contested.',
+     context:'The field is moving toward hybrid feedback designs. Banihashem et al. (2024) document that ChatGPT and peer feedback address different aspects of argumentative essays — motivating complementary rather than competing designs.'},
+    // br
+    {id:'personalized',label:'Personalized Feedback',cluster:'br',short:'Feedback calibrated to the individual writer\'s current level',
+     body:'Personalized feedback operationalizes ZPD: differentiated by argument skill level, genre familiarity, linguistic background, and revision history. VanLehn (2011): adaptive tutoring effects are strongest when systems accurately track learner knowledge state.',
+     refs:['VanLehn, K. (2011). The relative effectiveness of human tutoring, ITS, and other tutoring systems. Educational Psychologist, 46(4), 197–221.','Corbett, A. T., & Anderson, J. R. (1994). Knowledge tracing. User Modeling and User-Adapted Interaction, 4(4), 253–278.'],
+     debate:'What counts as "personalized"? Most adaptive feedback systems adapt on surface performance metrics, not on the deeper epistemic or motivational dimensions that Vygotskian theory implies matter.',
+     context:'Current challenges include modeling not just argument proficiency but also epistemic development and motivational state. True ZPD-calibrated feedback may require richer learner models than current AI systems support (Corbett & Anderson, 1994).'},
+    {id:'fbdialogue',label:'Feedback as Dialogue',cluster:'br',short:'Feedback as two-way epistemic exchange, not one-way transmission',
+     body:'Nicol (2010) and Carless (2016) reframe feedback as dialogue: effective feedback invites response, not just correction. Grounded in Bakhtin\'s dialogism — all utterances are responses to prior utterances. Feedback loops close when writers respond.',
+     refs:['Nicol, D. (2010). From monologue to dialogue. Assessment & Evaluation in Higher Education, 35(5), 501–517.','Carless, D. (2016). Feedback as dialogue. In M. A. Peters (Ed.), Encyclopedia of Educational Philosophy. Springer.','Bakhtin, M. M. (1981). The Dialogic Imagination. U of Texas Press.'],
+     debate:'Can AI systems genuinely participate in epistemic dialogue, or do they simulate it? Is "dialogue" with an LLM a category error? This has both philosophical (what is dialogue?) and practical (does it produce the same learning effects?) dimensions.',
+     context:'AI feedback that forecloses dialogue by providing authoritative answers rather than questions may reduce learning benefit even when it increases revision quality. The dialogic framing challenges AI feedback to enable, rather than foreclose, epistemic exchange.'},
+    {id:'dbr',label:'Design-Based Research',cluster:'br',short:'Iterative design of educational interventions grounded in theory',
+     body:'Collins (1992); Barab & Squire (2004). DBR bridges theory and practice: interventions are designed from theory, tested in authentic contexts, and findings feed back into both theory and design.',
+     refs:['Collins, A. (1992). Toward a design science of education. In E. Scanlon & T. O\'Shea (Eds.), New Directions in Educational Technology. Springer.','Barab, S., & Squire, K. (2004). Design-based research. Journal of the Learning Sciences, 13(1), 1–14.','Design-Based Research Collective. (2003). Design-based research. Educational Researcher, 32(1), 5–8.'],
+     debate:'DBR has been critiqued for lacking methodological rigor — how do you isolate causal claims from iterative interventions? Replication and generalizability remain open challenges.',
+     context:'DBR is the appropriate methodology for evaluating feedback interventions in authentic settings. It produces both empirical findings and design knowledge — a dual contribution not achievable through controlled experiments alone.'},
+    {id:'fbliteracy',label:'Feedback Literacy',cluster:'br',short:'Students\' capacity to understand, evaluate, and act on feedback',
+     body:'Carless & Boud (2018): students need to develop the capacity to evaluate feedback quality, not just receive and apply it. A higher-order skill connecting SRL, metacognition, and epistemic cognition.',
+     refs:['Carless, D., & Boud, D. (2018). The development of student feedback literacy. Assessment & Evaluation in Higher Education, 43(8), 1315–1325.','Sutton, P. (2012). Conceptualizing feedback literacy. Innovations in Education and Teaching International, 49(1), 31–40.','Gravett, K. (2022). Feedback literacies as sociomaterial practice. Critical Studies in Education, 63(2), 261–274.'],
+     debate:'Can feedback literacy be taught, or does it develop incidentally through repeated feedback experience? Is the concept too broad to be useful — or is it the missing link between formative feedback theory and SRL theory?',
+     context:'Feedback literacy is a prerequisite for safe AI feedback deployment. Students who cannot judge whether AI feedback is accurate will accept misdirected feedback without question — making feedback literacy instruction essential in AI-augmented writing education.'},
+  ];
+
+  const links=[
+    {source:'toulmin',target:'peer',label:'schema for coding'},
+    {source:'toulmin',target:'dialogic',label:'structural complement'},
+    {source:'toulmin',target:'epistemicrhetoric',label:'practical reasoning'},
+    {source:'dialogic',target:'socioculture',label:'social situatedness'},
+    {source:'dialogic',target:'fbdialogue',label:'Bakhtinian ground'},
+    {source:'formative',target:'zpd',label:'calibration principle'},
+    {source:'formative',target:'srl',label:'externalized monitoring'},
+    {source:'formative',target:'genaifb',label:'theoretical standard'},
+    {source:'peer',target:'socioculture',label:'social mediation'},
+    {source:'peer',target:'dialogic',label:'real audience'},
+    {source:'peer',target:'hybrid',label:'unique social value'},
+    {source:'aifb',target:'genaifb',label:'instantiation'},
+    {source:'aifb',target:'aes',label:'scoring → feedback gap'},
+    {source:'uptake',target:'srl',label:'SRL predicts uptake'},
+    {source:'uptake',target:'metacog',label:'requires monitoring'},
+    {source:'specificity',target:'clt',label:'load implications'},
+    {source:'zpd',target:'scaffolding',label:'operational mechanism'},
+    {source:'zpd',target:'personalized',label:'computational operationalization'},
+    {source:'scaffolding',target:'hybrid',label:'design principle'},
+    {source:'srl',target:'metacog',label:'includes monitoring'},
+    {source:'srl',target:'overreliance',label:'autonomy risk'},
+    {source:'clt',target:'genaifb',label:'verbosity concern'},
+    {source:'ktt',target:'constructivism',label:'constructivism in action'},
+    {source:'ktt',target:'epistemicrhetoric',label:'argument as inquiry'},
+    {source:'constructivism',target:'zpd',label:'theoretical home'},
+    {source:'epistemicrhetoric',target:'peer',label:'epistemic interlocutors'},
+    {source:'socialontology',target:'aes',label:'quality is value-laden'},
+    {source:'critical',target:'overreliance',label:'epistemic domination risk'},
+    {source:'epistemiccog',target:'argliteracy',label:'epistemics shape arguing'},
+    {source:'metacog',target:'fbliteracy',label:'metacog + feedback'},
+    {source:'genaifb',target:'overreliance',label:'dependency risk'},
+    {source:'genaifb',target:'hybrid',label:'one source among three'},
+    {source:'aes',target:'personalized',label:'scoring → adaptive gap'},
+    {source:'personalized',target:'zpd',label:'ZPD operationalized'},
+    {source:'fbdialogue',target:'peer',label:'dialogue realized'},
+    {source:'fbliteracy',target:'overreliance',label:'prerequisite for AI safety'},
+    {source:'dbr',target:'hybrid',label:'design methodology'},
+    {source:'hedging',target:'genaifb',label:'missed by AI systems'},
+    {source:'genre',target:'socialontology',label:'genre as social action'},
+  ];
+
+  // ── PANEL ──
+  const panel = document.getElementById('g-panel');
+  const clusterColorMap = clusterColors;
+
+  function openPanel(d){
+    const col = clusterColorMap[d.cluster];
+    const connected = links.filter(l=>{
+      const sid = typeof l.source==='object'?l.source.id:l.source;
+      const tid = typeof l.target==='object'?l.target.id:l.target;
+      return sid===d.id||tid===d.id;
+    }).map(l=>{
+      const sid = typeof l.source==='object'?l.source.id:l.source;
+      const tid = typeof l.target==='object'?l.target.id:l.target;
+      const other = sid===d.id?tid:sid;
+      const otherNode = nodes.find(n=>n.id===other);
+      return `<span class="gp-conn-chip" style="border-color:${clusterColorMap[otherNode?otherNode.cluster:'br']}40;color:${clusterColorMap[otherNode?otherNode.cluster:'br']}">${otherNode?otherNode.label:other} <em>${l.label}</em></span>`;
+    }).join('');
+
+    const refsHtml = (d.refs||[]).map(r=>`<div class="gp-ref">📄 ${r}</div>`).join('');
+
+    panel.innerHTML = `
+      <div class="gp-close" onclick="document.getElementById('g-panel').classList.remove('open')">✕</div>
+      <div class="gp-cluster" style="color:${col}">${clusterNames[d.cluster]}</div>
+      <div class="gp-title" style="border-left:3px solid ${col}">${d.label}</div>
+      <div class="gp-short">${d.short}</div>
+      <div class="gp-body">${d.body}</div>
+      ${d.refs&&d.refs.length?`<div class="gp-section-label">📚 Key References</div><div class="gp-refs">${refsHtml}</div>`:''}
+      ${d.debate?`<div class="gp-section-label" style="color:#d878b8">⚡ Tensions &amp; Debates</div><div class="gp-debate">${d.debate}</div>`:''}
+      ${d.context?`<div class="gp-section-label" style="color:#5ba8d4">🔬 Research Context</div><div class="gp-context">${d.context}</div>`:''}
+      ${connected?`<div class="gp-section-label">🔗 Connected Concepts</div><div class="gp-conns">${connected}</div>`:''}
+    `;
+    panel.classList.add('open');
+  }
+
+  const svg=d3.select('#graphSvg');
+  const w=document.getElementById('graphView').clientWidth;
+  const h=document.getElementById('graphView').clientHeight;
+  svg.attr('viewBox',`0 0 ${w} ${h}`);
+
+  const sim=d3.forceSimulation(nodes)
+    .force('link',d3.forceLink(links).id(d=>d.id).distance(120).strength(0.35))
+    .force('charge',d3.forceManyBody().strength(-380))
+    .force('center',d3.forceCenter(w/2,h/2))
+    .force('collision',d3.forceCollide(48));
+
+  const g=svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.25,3]).on('zoom',e=>{g.attr('transform',e.transform);}));
+
+  // link lines + labels
+  const linkG = g.append('g');
+  const linkLine = linkG.selectAll('line').data(links).join('line')
+    .attr('stroke','#2a2a40').attr('stroke-width',1.2).attr('stroke-opacity',0.5);
+
+  const node=g.append('g').selectAll('g').data(nodes).join('g')
+    .style('cursor','pointer')
+    .call(d3.drag()
+      .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+      .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
+      .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+  node.append('circle')
+    .attr('r', 20)
+    .attr('fill',d=>clusterColors[d.cluster]+'28')
+    .attr('stroke',d=>clusterColors[d.cluster])
+    .attr('stroke-width',2)
+    .attr('class','node-circle');
+
+  node.append('text')
+    .attr('text-anchor','middle')
+    .attr('dy','-0.15em')
+    .attr('font-size','8.5px')
+    .attr('fill','#e0ddf5')
+    .attr('pointer-events','none')
+    .attr('font-weight','500')
+    .each(function(d){
+      const words = d.label.split(' ');
+      const el = d3.select(this);
+      if(words.length===1){
+        el.attr('dy','0.35em').text(d.label.length>12?d.label.substring(0,11)+'…':d.label);
+      } else {
+        const line1 = words.slice(0,Math.ceil(words.length/2)).join(' ');
+        const line2 = words.slice(Math.ceil(words.length/2)).join(' ');
+        el.append('tspan').attr('x',0).attr('dy','-0.3em').text(line1.length>12?line1.substring(0,11)+'…':line1);
+        el.append('tspan').attr('x',0).attr('dy','1.1em').text(line2.length>12?line2.substring(0,11)+'…':line2);
+      }
+    });
+
+  // hover highlight
+  node.on('mouseover',function(e,d){
+    d3.select(this).select('.node-circle').attr('stroke-width',3).attr('fill',clusterColors[d.cluster]+'50');
+  }).on('mouseout',function(e,d){
+    d3.select(this).select('.node-circle').attr('stroke-width',2).attr('fill',clusterColors[d.cluster]+'28');
+  });
+
+  // CLICK → open panel
+  node.on('click',(e,d)=>{
+    e.stopPropagation();
+    openPanel(d);
+    // highlight connected
+    const connIds = links.filter(l=>{
+      const s=typeof l.source==='object'?l.source.id:l.source;
+      const t=typeof l.target==='object'?l.target.id:l.target;
+      return s===d.id||t===d.id;
+    }).flatMap(l=>[typeof l.source==='object'?l.source.id:l.source, typeof l.target==='object'?l.target.id:l.target]);
+    node.select('.node-circle')
+      .attr('opacity', nd => nd.id===d.id||connIds.includes(nd.id)?1:0.25);
+    linkLine.attr('stroke-opacity', l=>{
+      const s=typeof l.source==='object'?l.source.id:l.source;
+      const t=typeof l.target==='object'?l.target.id:l.target;
+      return (s===d.id||t===d.id)?0.9:0.1;
+    }).attr('stroke', l=>{
+      const s=typeof l.source==='object'?l.source.id:l.source;
+      const t=typeof l.target==='object'?l.target.id:l.target;
+      return (s===d.id||t===d.id)?clusterColors[d.cluster]:'#2a2a40';
+    }).attr('stroke-width', l=>{
+      const s=typeof l.source==='object'?l.source.id:l.source;
+      const t=typeof l.target==='object'?l.target.id:l.target;
+      return (s===d.id||t===d.id)?2:1.2;
+    });
+  });
+
+  // click on background resets
+  svg.on('click',()=>{
+    document.getElementById('g-panel').classList.remove('open');
+    node.select('.node-circle').attr('opacity',1);
+    linkLine.attr('stroke-opacity',0.5).attr('stroke','#2a2a40').attr('stroke-width',1.2);
+  });
+
+  sim.on('tick',()=>{
+    linkLine.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+            .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('transform',d=>`translate(${d.x},${d.y})`);
+  });
+}
+
+// Toggle layer accordion — find closest .lyr ancestor from the head element
+function togLyr(head, e){
+  if(e){ e.stopPropagation(); e.preventDefault(); }
+  const lyr=head.closest('.lyr');
+  if(lyr){
+    const isOpen = lyr.classList.toggle('open');
+    head.setAttribute('aria-expanded', String(isOpen));
+  }
+}
+
+// Layer visibility (show/hide entire layer type)
+function toggleLayer(l){
+  layers[l]=!layers[l];
+  const btn=document.querySelector('.lbtn[data-l="'+l+'"]');
+  if(btn){
+    btn.classList.toggle('on', layers[l]);
+    btn.setAttribute('aria-pressed', String(layers[l]));
+  }
+  document.querySelectorAll('.lyr-'+l).forEach(el=>{
+    el.style.display=layers[l]?'block':'none';
+  });
+}
+
+// Cluster filter
+function filterCluster(cl, el){
+  currentCluster = cl || null;
+  // reset all pill styles first
+  document.querySelectorAll('.clpill').forEach(p=>{
+    p.classList.remove('active');
+    p.style.borderColor='';
+    p.style.color='';
+    p.style.background='';
+  });
+  if(cl && el){
+    el.classList.add('active');
+    const color = getComputedStyle(document.documentElement).getPropertyValue('--'+cl).trim();
+    el.style.borderColor = color;
+    el.style.color = color;
+    el.style.background = color+'18';
+  }
+  document.querySelectorAll('.card').forEach(c=>{
+    if(!cl) c.classList.remove('dim');
+    else c.classList.toggle('dim', c.dataset.cluster !== cl);
+  });
+}
+
+// ── LAYOUT HEIGHT ──
+function fixHeight(){
+  const topbar = document.querySelector('.topbar');
+  const ctrlbar = document.querySelector('.ctrlbar');
+  const h = (topbar ? topbar.offsetHeight : 0) + (ctrlbar ? ctrlbar.offsetHeight : 0);
+  document.querySelectorAll('.layout, .sidebar, .card-main, #graphView').forEach(el=>{
+    el.style.height = (window.innerHeight - h) + 'px';
+  });
+}
+
+// ── INIT ──
+// Layer accordions: refs open by default, others closed
+document.querySelectorAll('.lyr-refs').forEach(el=>el.classList.add('open'));
+document.querySelectorAll('.lyr-you,.lyr-debate').forEach(el=>el.classList.remove('open'));
+
+// Run height fix after fonts/layout settle
+requestAnimationFrame(()=>{ fixHeight(); });
+window.addEventListener('resize', fixHeight);
+
+// ── THEME TOGGLE ──
+function toggleTheme(){
+  const html = document.documentElement;
+  const isLight = html.getAttribute('data-theme') === 'light';
+  html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  const btn = document.getElementById('themeBtn');
+  if(btn){
+    btn.textContent = isLight ? '☀️' : '🌙';
+    btn.setAttribute('aria-label', isLight ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+
+  }
+</script>
+</body>
+</html>
