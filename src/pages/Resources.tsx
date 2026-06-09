@@ -24,9 +24,7 @@ const resources: Resource[] = [
     description:
       "A layered interactive map connecting argumentative writing, feedback research, learning theories, and AI in education.",
     link: "/argumentative-writing-feedback.html",
-    citation:
-      "Haddadian, G. (2026). Argumentative writing & feedback: An interactive concept map [Interactive tool]. https://golnoushhaddadian.com/argumentative-writing-feedback.html",
-    embedUrl: "/argumentative-writing-feedback.html",
+    image: "/lovable-uploads/argumentative-writing-feedback-preview.png",
   },
   {
     title: "Research Statement Evaluation Rubric",
