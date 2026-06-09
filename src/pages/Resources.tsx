@@ -155,6 +155,11 @@ const Resources = () => {
                   </span>
                 )}
               </div>
+              {resource.note && (
+                <p className="text-[11px] italic text-muted-foreground/60 mb-3">
+                  {resource.note}
+                </p>
+              )}
               {resource.image && (
                 <div className="mb-3 rounded-lg overflow-hidden border border-border/50 aspect-video">
                   <img
