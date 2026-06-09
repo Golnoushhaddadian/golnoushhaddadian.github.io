@@ -19,6 +19,16 @@ type Resource = {
 
 const resources: Resource[] = [
   {
+    title: "Argumentative Writing & Feedback",
+    subtitle: "Interactive Concept Map",
+    description:
+      "A layered interactive map connecting argumentative writing, feedback research, learning theories, and AI in education.",
+    link: "/argumentative-writing-feedback.html",
+    citation:
+      "Haddadian, G. (2026). Argumentative writing & feedback: An interactive concept map [Interactive tool]. https://golnoushhaddadian.com/argumentative-writing-feedback.html",
+    embedUrl: "/argumentative-writing-feedback.html",
+  },
+  {
     title: "Research Statement Evaluation Rubric",
     subtitle: "Interactive Rubric",
     description:
@@ -29,6 +39,7 @@ const resources: Resource[] = [
     image: "/lovable-uploads/rubric-preview.png",
     disclaimer: "This tool is only a general guide and should not be treated as a definitive evaluation. Please use it alongside expert feedback and independent judgment.",
   },
+
   {
     title: "The Learning Theory Map",
     subtitle: "Made via Whimsical",
