@@ -20,8 +20,8 @@ type Resource = {
 
 const resources: Resource[] = [
   {
-    title: "Argumentative Writing & Feedback",
-    subtitle: "Interactive Concept Map",
+    title: "Argumentative Writing & Feedback Interactive Concept Map",
+    subtitle: "",
     note: "This concept map was developed with AI assistance, a useful starting point for exploration, though primary sources should be consulted for scholarly conclusions.",
     description:
       "A layered interactive map connecting argumentative writing, feedback research, learning theories, and AI in education.",
@@ -147,14 +147,18 @@ const Resources = () => {
                   {resource.title}
                 </h2>
               </div>
-              <div className="flex items-center gap-2 mb-3 flex-wrap">
-                <p className="text-xs text-muted-foreground">{resource.subtitle}</p>
-                {resource.disclaimer && (
-                  <span className="text-[11px] italic text-muted-foreground/70">
-                    — {resource.disclaimer}
-                  </span>
-                )}
-              </div>
+              {(resource.subtitle || resource.disclaimer) && (
+                <div className="flex items-center gap-2 mb-3 flex-wrap">
+                  {resource.subtitle && (
+                    <p className="text-xs text-muted-foreground">{resource.subtitle}</p>
+                  )}
+                  {resource.disclaimer && (
+                    <span className="text-[11px] italic text-muted-foreground/70">
+                      — {resource.disclaimer}
+                    </span>
+                  )}
+                </div>
+              )}
               {resource.note && (
                 <p className="text-[11px] italic text-muted-foreground/60 mb-3">
                   {resource.note}
