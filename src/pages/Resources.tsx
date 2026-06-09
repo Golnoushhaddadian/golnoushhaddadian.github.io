@@ -15,12 +15,14 @@ type Resource = {
   image?: string;
   imageAttribution?: { text: string; url: string };
   disclaimer?: string;
+  note?: string;
 };
 
 const resources: Resource[] = [
   {
     title: "Argumentative Writing & Feedback",
     subtitle: "Interactive Concept Map",
+    note: "This concept map was developed with AI assistance, a useful starting point for exploration, though primary sources should be consulted for scholarly conclusions.",
     description:
       "A layered interactive map connecting argumentative writing, feedback research, learning theories, and AI in education.",
     link: "/argumentative-writing-feedback.html",
