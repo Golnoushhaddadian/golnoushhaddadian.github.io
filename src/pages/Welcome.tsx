@@ -53,7 +53,7 @@ const AboutMe = () => {
     canonical: '/',
   });
 
-  const citations = useCountUp(65, 800);
+  const citations = useCountUp(66, 800);
   const publications = useCountUp(28, 800);
   const hIndex = useCountUp(5, 500);
 
