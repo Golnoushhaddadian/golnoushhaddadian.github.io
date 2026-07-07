@@ -139,7 +139,7 @@ const AboutMe = () => {
             </div>
             <p>
               Please feel free to explore my website and reach out if you are interested in potential collaborations or
-              would like to connect and learn more.
+              would like to connect.
             </p>
           </div>
         </section>
