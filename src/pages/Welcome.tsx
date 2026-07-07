@@ -127,8 +127,6 @@ const AboutMe = () => {
                 { label: 'Feedback', bg: 'bg-[hsl(160,84%,39%)] border-[hsl(160,84%,32%)] shadow-[0_6px_16px_-3px_hsl(160,84%,39%/0.45)]' },
                 { label: 'Assessment & Evaluation', bg: 'bg-[hsl(20,90%,55%)] border-[hsl(20,90%,47%)] shadow-[0_6px_16px_-3px_hsl(20,90%,55%/0.45)]' },
                 { label: 'Higher Education', bg: 'bg-[hsl(340,82%,55%)] border-[hsl(340,82%,47%)] shadow-[0_6px_16px_-3px_hsl(340,82%,55%/0.45)]' },
-                { label: 'Responsible AI', bg: 'bg-[hsl(0,72%,51%)] border-[hsl(0,72%,43%)] shadow-[0_6px_16px_-3px_hsl(0,72%,51%/0.45)]' },
-                { label: 'Human-centered Design', bg: 'bg-[hsl(250,70%,55%)] border-[hsl(250,70%,47%)] shadow-[0_6px_16px_-3px_hsl(250,70%,55%/0.45)]' },
               ].map(({ label, bg }, i) => (
                 <span
                   key={label}
