@@ -124,11 +124,19 @@ export const conferenceProceedings: ConferenceProceeding[] = [
     keywords: ["Interdisciplinary", "Problem Solving", "Assessment"]
   },
   {
-    authors: ["Cohen, J. D.", "Sabatini, J.", "Haddadian, G.", "O'Reilly, T.", "Magliano, J."],
+    authors: ["Cohen, J. D.", "Sabatini, J.", "Haddadian, G.", "O'Reilly, T.", "Pierce, B.", "Magliano, J."],
     year: "Accepted, 2026",
-    title: "Developing authentic learning and assessment through scenarios",
-    conference: "EdMedia 2026, Edinburgh, Scotland",
+    title: "Developing Authentic Learning and Assessment Through Scenarios",
+    conference: "Proceedings of EdMedia 2026 Edinburgh (pp. 1716-1717), Waynesville, NC: Association for the Advancement of Computing in Education (AACE)",
+    url: "https://www.learntechlib.org/primary/p/2129763/",
     keywords: ["Authentic Learning", "Assessment", "Scenarios"]
+  },
+  {
+    authors: ["de Kleijn, R.", "Brouwer, R.", "Haddadian, G.", "van den Beemt, A.", "Noroozi, O."],
+    year: "2026",
+    title: "Peer, AI, and teacher feedback: Features, perceptions and uptake",
+    conference: "EARLI SIG 1 Conference 2026, Utrecht, The Netherlands",
+    keywords: ["Peer Feedback", "AI Feedback", "Teacher Feedback"]
   },
   {
     authors: ["Malcolm, B.", "Vickery, M.", "Louis-Strakes Lopez, J.", "Siciliano, L. M.", "Simon, S.", "Xing, G. (Y.)", "Kim, J.", "Kim, C.", "Zhao, Y.", "Desai, A.", "Gadong, E. S.", "Mabadeje, Y.", "Mhungu, B.", "Haddadian, G.", "Eloy, A.", "Soodhani, N.", "Prasad, R.", "Bae, Y."],
