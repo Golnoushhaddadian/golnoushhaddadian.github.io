@@ -133,7 +133,7 @@ export const conferenceProceedings: ConferenceProceeding[] = [
   },
   {
     authors: ["de Kleijn, R.", "Brouwer, R.", "Haddadian, G.", "van den Beemt, A.", "Noroozi, O."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Peer, AI, and teacher feedback: Features, perceptions and uptake",
     conference: "EARLI SIG 1 Conference 2026, Utrecht, The Netherlands",
     keywords: ["Peer Feedback", "AI Feedback", "Teacher Feedback"]
