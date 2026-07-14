@@ -163,7 +163,7 @@ const AboutMe = () => {
               Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
             </p>
             <p>
-              de Kleijn, R., Brouwer, R., <strong>Haddadian, G.</strong>, van den Beemt, A., & Noroozi, O. (<span className="text-blue-600 font-medium">2026</span>). Peer, AI, and teacher feedback: Features, perceptions and uptake. EARLI SIG 1 Conference 2026, Utrecht, The Netherlands.
+              de Kleijn, R., Brouwer, R., <strong>Haddadian, G.</strong>, van den Beemt, A., & Noroozi, O. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Peer, AI, and teacher feedback: Features, perceptions and uptake. EARLI SIG 1 Conference 2026, Utrecht, The Netherlands.
             </p>
             <p>
               Noroozi, O., <strong>Haddadian, G.</strong>, Banihashem, K., & Schunn, C. (<span className="text-blue-600 font-medium">2026</span>). How students perceive and respond to GenAI for peer feedback uptake. In <em>Understanding and supporting feedback uptake: Bridging research and practice in educational contexts</em>. American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA, United States.
