@@ -1,10 +1,10 @@
 ---
 name: Home citation stats
-description: The Home page features a Google Scholar statistics section (Citations: 53, Publications: 28, H-Index: 5) with a minimal animated count-up.
+description: The Home page features a Google Scholar statistics section (Citations: 70, Publications: 28, H-Index: 5) with a minimal animated count-up.
 type: feature
 ---
 The Home page features a Google Scholar statistics section with three animated metrics:
-- Citations: 53
+- Citations: 70
 - Publications: 28
 - H-Index: 5
 
