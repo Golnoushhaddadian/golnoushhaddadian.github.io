@@ -4,7 +4,7 @@ description: The Home page features a Google Scholar statistics section (Citatio
 type: feature
 ---
 The Home page features a Google Scholar statistics section with three animated metrics:
-- Citations: 70
+- Citations: 71
 - Publications: 28
 - H-Index: 5
 
