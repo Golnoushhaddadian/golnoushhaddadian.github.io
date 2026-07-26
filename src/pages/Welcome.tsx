@@ -140,7 +140,7 @@ const AboutMe = () => {
               Please feel free to explore my website and reach out if you are interested in potential collaborations or
               would like to connect.
             </p>
-            <p className="text-xs text-muted-foreground/70 italic mt-4"><span className="font-medium not-italic text-foreground/80">✦ About my name:</span> I publish under Golnoush, my legal name, which I love; for simplicity, I now go by Lia, meaning one who brings good news.</p>
+            <p className="text-xs text-muted-foreground/70 italic mt-4"><span className="font-medium not-italic text-foreground/80">✦ About my name:</span> I publish under Golnoush, my legal name, the Persian name my mother gifted me and one I treasure like a gem; it means enduring beauty. In daily life I go by Lia, meaning one who brings good news.</p>
           </div>
         </section>
 
