@@ -28,4 +28,4 @@ User-agent: Google-Extended
 Allow: /
 Disallow: /admin-analytics
 
-Sitemap: https://golnoushhaddadian.com/sitemap.xml
+Sitemap: https://golnoushhaddadian.github.io/sitemap.xml
