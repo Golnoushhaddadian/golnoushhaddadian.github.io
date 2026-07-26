@@ -7,7 +7,7 @@ interface DocumentHeadOptions {
   noindex?: boolean;
 }
 
-const BASE_URL = 'https://golnoushhaddadian.com';
+const BASE_URL = 'https://golnoushhaddadian.github.io';
 
 export const useDocumentHead = ({ title, description, canonical, noindex }: DocumentHeadOptions) => {
   useEffect(() => {
