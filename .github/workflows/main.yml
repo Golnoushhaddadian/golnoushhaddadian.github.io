@@ -29,6 +29,14 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      # Prerender static HTML for each route so crawlers and AI assistants get
+      # real content. Non-blocking: if it fails, the plain SPA build still ships.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+        continue-on-error: true
+      - name: Prerender routes
+        run: npm run prerender
+        continue-on-error: true
       - name: SPA fallback
         run: cp dist/index.html dist/404.html
       - name: Upload artifact
