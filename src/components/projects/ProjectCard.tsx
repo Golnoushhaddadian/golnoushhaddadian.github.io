@@ -34,13 +34,13 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
           {/* Image Section */}
           {project.image && (
             <div className="md:w-1/3 relative overflow-hidden flex flex-col">
-              <div className="aspect-video sm:aspect-square md:aspect-auto md:flex-1 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
+              <div className="aspect-video sm:aspect-square md:aspect-auto md:flex-1 min-h-[150px] bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-contain md:absolute md:inset-0 p-4 transition-transform duration-500 group-hover:scale-110"
-                  style={{ minHeight: '150px', maxHeight: '220px', objectPosition: 'center center' }}
+                  className="max-w-full max-h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+                  style={{ maxHeight: '220px' }}
                 />
               </div>
               {(project.imageCaption || project.imageCaptionUrl) && (
