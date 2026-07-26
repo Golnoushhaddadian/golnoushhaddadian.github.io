@@ -15,6 +15,8 @@ interface Project {
   funding?: string;
   link?: { label: string; url: string };
   link2?: { label: string; url: string };
+  imageCaption?: string;
+  imageCaptionUrl?: string;
 }
 
 interface ProjectCardProps {
