@@ -70,21 +70,6 @@ const AboutMe = () => {
                 </Avatar>
               </AspectRatio>
             </div>
-            {/* Social Profile Links */}
-            <div className="flex items-center gap-3 sm:gap-5 mt-3 sm:mt-5">
-              <a href="https://www.linkedin.com/in/g-hdn" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="LinkedIn">
-                <img src="/lovable-uploads/linkedin-icon.png" alt="LinkedIn" width={32} height={32} loading="lazy" decoding="async" className="rounded-full w-6 h-6 sm:w-8 sm:h-8" />
-              </a>
-              <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="Google Scholar">
-                <img src="/lovable-uploads/google-scholar-icon.png" alt="Google Scholar" width={32} height={32} loading="lazy" decoding="async" className="w-6 h-6 sm:w-8 sm:h-8" />
-              </a>
-              <a href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-200" aria-label="ResearchGate">
-                <img src="/lovable-uploads/researchgate-icon.png" alt="ResearchGate" width={32} height={32} loading="lazy" decoding="async" className="rounded-full w-6 h-6 sm:w-8 sm:h-8" />
-              </a>
-              <a href="mailto:ghaddadian1@gsu.edu" className="hover:scale-110 transition-transform duration-200" aria-label="Email">
-                <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-foreground/80" strokeWidth={1.75} />
-              </a>
-            </div>
           </div>
           <div className="md:w-2/3 text-center md:text-left">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 flex flex-col sm:flex-row items-center sm:items-baseline gap-1 sm:gap-2">
@@ -97,9 +82,28 @@ const AboutMe = () => {
               </Button>
             </h1>
             <p className="text-sm sm:text-lg md:text-xl text-muted-foreground mb-2 sm:mb-3 md:mb-4">Ph.D. in Learning Sciences</p>
-            <p className="mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-base">
+            <p className="mb-2 sm:mb-3 md:mb-4 text-xs sm:text-sm md:text-base">
               Postdoctoral Associate | Georgia State University
             </p>
+            {/* Contact / Social Links */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 sm:gap-x-5 text-xs sm:text-sm">
+              <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-foreground/70 hover:text-foreground transition-colors" aria-label="Google Scholar">
+                <img src="/lovable-uploads/google-scholar-icon.png" alt="" width={16} height={16} loading="lazy" decoding="async" className="w-4 h-4 grayscale opacity-80" />
+                <span>Google Scholar</span>
+              </a>
+              <a href="https://www.researchgate.net/profile/Golnoush-Haddadian?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-foreground/70 hover:text-foreground transition-colors" aria-label="ResearchGate">
+                <img src="/lovable-uploads/researchgate-icon.png" alt="" width={16} height={16} loading="lazy" decoding="async" className="w-4 h-4 grayscale opacity-80 rounded-full" />
+                <span>ResearchGate</span>
+              </a>
+              <a href="https://www.linkedin.com/in/g-hdn" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-foreground/70 hover:text-foreground transition-colors" aria-label="LinkedIn">
+                <img src="/lovable-uploads/linkedin-icon.png" alt="" width={16} height={16} loading="lazy" decoding="async" className="w-4 h-4 grayscale opacity-80 rounded-full" />
+                <span>LinkedIn</span>
+              </a>
+              <a href="mailto:ghaddadian1@gsu.edu" className="flex items-center gap-1.5 text-foreground/70 hover:text-foreground transition-colors" aria-label="Email">
+                <Mail className="w-4 h-4" strokeWidth={1.75} />
+                <span>Email</span>
+              </a>
+            </div>
           </div>
         </div>
 
