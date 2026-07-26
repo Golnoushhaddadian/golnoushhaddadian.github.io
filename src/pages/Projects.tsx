@@ -26,7 +26,7 @@ const projects: Project[] = [
     mentors: "Drs. Cohen, J., & Magliano, J.",
     funding: "Institute of Education Sciences (IES)",
     description: "The purpose of this project is to create a Generative artificial intelligence (Gen-AI) enhanced authoring tool for scenario-based assessments (SBAs). Because SBAs are difficult to develop, college instructors struggle to develop and deploy SBAs in their courses. Recent advances in Gen-AI make it possible to scale up and democratize SBA development, enabling instructors to design and administer localized, personalized, and discipline-appropriate performance assessments that provide better feedback, higher levels of adaptivity, and richer diagnostic information.",
-    image: "/lovable-uploads/scenario-based-assessment-logo.jpeg",
+    image: "/lovable-uploads/scenario-based-assessment-logo.png",
     imageCaption: "Image from https://www.sabatiniliteracy.com",
     imageCaptionUrl: "https://www.sabatiniliteracy.com",
     link: { label: "Learn More about the Grant", url: "https://ies.ed.gov/use-work/awards/scenario-based-assessment-age-generative-ai-making-space-education-market-alternative-assessment" },
