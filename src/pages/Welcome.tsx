@@ -1,6 +1,6 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Mail } from "lucide-react";
 
 import ResearchStrands from "@/components/ResearchStrands";
 import CoauthorshipNetwork from "@/components/CoauthorshipNetwork";
@@ -82,7 +82,7 @@ const AboutMe = () => {
                 <img src="/lovable-uploads/researchgate-icon.png" alt="ResearchGate" width={32} height={32} loading="lazy" decoding="async" className="rounded-full w-6 h-6 sm:w-8 sm:h-8" />
               </a>
               <a href="mailto:ghaddadian1@gsu.edu" className="hover:scale-110 transition-transform duration-200" aria-label="Email">
-                
+                <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-foreground/80" strokeWidth={1.75} />
               </a>
             </div>
           </div>
