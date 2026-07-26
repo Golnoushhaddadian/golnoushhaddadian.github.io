@@ -1,32 +1,31 @@
 # https://www.robotstxt.org/robotstxt.html
-User-agent: Googlebot
-Allow: /
-Disallow: /cv
-Disallow: /projects
-Disallow: /teaching
-Disallow: /gallery
-Disallow: /contact
 
-User-agent: Bingbot
-Allow: /
-Disallow: /cv
-Disallow: /projects
-Disallow: /teaching
-Disallow: /gallery
-Disallow: /contact
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Search engines and AI assistants: full access to all public pages.
+# Only the private admin analytics route is disallowed.
 User-agent: *
 Allow: /
-Disallow: /cv
-Disallow: /projects
-Disallow: /teaching
-Disallow: /gallery
-Disallow: /contact
+Disallow: /admin-analytics
+
+# Explicitly welcome major AI/LLM crawlers so the site can surface
+# when researchers ask AI assistants about this work.
+User-agent: GPTBot
+Allow: /
+Disallow: /admin-analytics
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin-analytics
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin-analytics
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin-analytics
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin-analytics
 
 Sitemap: https://golnoushhaddadian.com/sitemap.xml
