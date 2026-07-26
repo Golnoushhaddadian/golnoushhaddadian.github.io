@@ -28,9 +28,11 @@ export const JournalsTab = () => {
           </CardContent>
           <CardFooter className="bg-muted/50 px-6 py-3">
             {journal.url && (
-              <Button variant="outline" size="sm" className="ml-auto gap-1">
-                <ExternalLink className="h-4 w-4 mr-1" />
-                View Publication
+              <Button asChild variant="outline" size="sm" className="ml-auto gap-1">
+                <a href={journal.url} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  View Publication
+                </a>
               </Button>
             )}
           </CardFooter>
