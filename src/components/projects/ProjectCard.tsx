@@ -33,8 +33,8 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
         <div className={`flex flex-col ${project.image ? (index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse') : ''}`}>
           {/* Image Section */}
           {project.image && (
-            <div className="md:w-1/3 relative overflow-hidden">
-              <div className="aspect-video sm:aspect-square md:aspect-auto md:h-full bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
+            <div className="md:w-1/3 relative overflow-hidden flex flex-col">
+              <div className="aspect-video sm:aspect-square md:aspect-auto md:flex-1 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 flex items-center justify-center relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <img
                   src={project.image}
@@ -43,6 +43,24 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
                   style={{ minHeight: '150px', maxHeight: '220px', objectPosition: 'center center' }}
                 />
               </div>
+              {(project.imageCaption || project.imageCaptionUrl) && (
+                <div className="px-3 py-2 text-center border-t border-primary/5 bg-muted/20">
+                  {project.imageCaptionUrl ? (
+                    <a
+                      href={project.imageCaptionUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] text-muted-foreground/70 hover:text-muted-foreground transition-colors"
+                    >
+                      {project.imageCaption || project.imageCaptionUrl}
+                    </a>
+                  ) : (
+                    <span className="text-[10px] text-muted-foreground/70">
+                      {project.imageCaption}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
