@@ -26,7 +26,9 @@ const projects: Project[] = [
     mentors: "Drs. Cohen, J., & Magliano, J.",
     funding: "Institute of Education Sciences (IES)",
     description: "The purpose of this project is to create a Generative artificial intelligence (Gen-AI) enhanced authoring tool for scenario-based assessments (SBAs). Because SBAs are difficult to develop, college instructors struggle to develop and deploy SBAs in their courses. Recent advances in Gen-AI make it possible to scale up and democratize SBA development, enabling instructors to design and administer localized, personalized, and discipline-appropriate performance assessments that provide better feedback, higher levels of adaptivity, and richer diagnostic information.",
-    image: "/lovable-uploads/ies-sba-project.png",
+    image: "/lovable-uploads/scenario-based-assessment-logo.jpeg",
+    imageCaption: "Image from https://www.sabatiniliteracy.com",
+    imageCaptionUrl: "https://www.sabatiniliteracy.com",
     link: { label: "Learn More about the Grant", url: "https://ies.ed.gov/use-work/awards/scenario-based-assessment-age-generative-ai-making-space-education-market-alternative-assessment" },
     link2: { label: "Watch in the News", url: "https://www.11alive.com/video/news/georgia-state-researchers-receive-federal-funding/85-2aeae8f3-b4b6-4e49-9e62-72218ce8bc08?fbclid=PAdGRleAQW3ipleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAad_Z0LGiZ9H6LUBF-aI4-Eb-2fzvvOMNXHigFj_aVDWYjorPKyNIZGTjL_NWw_aem_JkV1KjBDq7jy8VZR23QhLQ" }
   },
