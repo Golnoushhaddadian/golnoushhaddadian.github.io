@@ -53,7 +53,7 @@ const AboutMe = () => {
     canonical: '/',
   });
 
-  const [scholarStats, setScholarStats] = useState({ citations: 73, publications: 28, hIndex: 5, updated: "Mar 2026" });
+  const [scholarStats, setScholarStats] = useState({ citations: 74, publications: 17, hIndex: 5, i10Index: 2, updated: "Jul 2026" });
   useEffect(() => {
     fetch("/scholar-stats.json")
       .then((r) => (r.ok ? r.json() : null))
@@ -66,6 +66,7 @@ const AboutMe = () => {
   const citations = useCountUp(scholarStats.citations, 800);
   const publications = useCountUp(scholarStats.publications, 800);
   const hIndex = useCountUp(scholarStats.hIndex, 500);
+  const i10 = useCountUp(scholarStats.i10Index, 500);
 
   const iconSize = 32;
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
@@ -170,7 +171,7 @@ const AboutMe = () => {
 
         {/* Google Scholar Stats */}
         <section className="mt-16 sm:mt-20 md:mt-28">
-          <div className="flex items-center justify-between max-w-xl mx-auto">
+          <div className="flex items-center justify-between max-w-2xl mx-auto">
             <div ref={citations.ref} className="text-center">
               <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
                 {citations.count}
@@ -190,6 +191,13 @@ const AboutMe = () => {
                 {hIndex.count}
               </p>
               <p className="text-[10px] sm:text-xs font-medium text-muted-foreground mt-1 tracking-wider uppercase">H-Index</p>
+            </div>
+            <div className="w-px h-12 sm:h-16 bg-border" aria-hidden="true" />
+            <div ref={i10.ref} className="text-center">
+              <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tabular-nums tracking-tight">
+                {i10.count}
+              </p>
+              <p className="text-[10px] sm:text-xs font-medium text-muted-foreground mt-1 tracking-wider uppercase">i10-Index</p>
             </div>
           </div>
           <p className="text-[10px] sm:text-xs text-muted-foreground/40 mt-4 sm:mt-5 text-center">
