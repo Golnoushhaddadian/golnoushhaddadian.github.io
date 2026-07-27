@@ -40,6 +40,7 @@ jobs:
           const pick = (k) => { for (const row of table) if (row[k]) return row[k].all; return null; };
           const citations = pick('citations');
           const hIndex = pick('h_index');
+          const i10Index = pick('i10_index');
 
           // Count publications across all pages
           let publications = 0;
@@ -51,13 +52,13 @@ jobs:
             page = await (await fetch(next + '&api_key=' + KEY)).json();
           }
 
-          if (citations == null || hIndex == null || !publications) {
+          if (citations == null || hIndex == null || i10Index == null || !publications) {
             console.error('Incomplete data from SerpApi'); process.exit(1);
           }
 
           const now = new Date();
           const updated = now.toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-          const stats = { citations, publications, hIndex, updated };
+          const stats = { citations, publications, hIndex, i10Index, updated };
 
           let prev = null;
           try { prev = JSON.parse(readFileSync('public/scholar-stats.json', 'utf8')); } catch {}
