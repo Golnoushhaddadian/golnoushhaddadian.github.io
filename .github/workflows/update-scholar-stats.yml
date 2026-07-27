@@ -1,0 +1,82 @@
+name: Update Google Scholar stats
+
+on:
+  schedule:
+    # 06:00 UTC on the 1st of every month
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch Google Scholar stats from SerpApi
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: |
+          node <<'NODE'
+          import { writeFileSync, readFileSync } from 'node:fs';
+
+          const KEY = process.env.SERPAPI_KEY;
+          const AUTHOR_ID = '8MQCFZQAAAAJ';
+          if (!KEY) { console.error('Missing SERPAPI_KEY secret'); process.exit(1); }
+
+          const first = await (await fetch(
+            `https://serpapi.com/search.json?engine=google_scholar_author&author_id=${AUTHOR_ID}&num=100&api_key=${KEY}`
+          )).json();
+          if (first.error) { console.error('SerpApi error:', first.error); process.exit(1); }
+
+          const table = first.cited_by?.table || [];
+          const pick = (k) => { for (const row of table) if (row[k]) return row[k].all; return null; };
+          const citations = pick('citations');
+          const hIndex = pick('h_index');
+
+          // Count publications across all pages
+          let publications = 0;
+          let page = first;
+          while (true) {
+            publications += (page.articles || []).length;
+            const next = page.serpapi_pagination?.next;
+            if (!next) break;
+            page = await (await fetch(next + '&api_key=' + KEY)).json();
+          }
+
+          if (citations == null || hIndex == null || !publications) {
+            console.error('Incomplete data from SerpApi'); process.exit(1);
+          }
+
+          const now = new Date();
+          const updated = now.toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+          const stats = { citations, publications, hIndex, updated };
+
+          let prev = null;
+          try { prev = JSON.parse(readFileSync('public/scholar-stats.json', 'utf8')); } catch {}
+          const prevNoDate = prev ? { ...prev, updated: undefined } : null;
+          const curNoDate = { ...stats, updated: undefined };
+          if (JSON.stringify(prevNoDate) === JSON.stringify(curNoDate)) {
+            console.log('No metric change; leaving file as is.');
+          } else {
+            writeFileSync('public/scholar-stats.json', JSON.stringify(stats, null, 2) + '\n');
+            console.log('Wrote', stats);
+          }
+          NODE
+      - name: Commit if changed
+        run: |
+          if [[ -n "$(git status --porcelain public/scholar-stats.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add public/scholar-stats.json
+            git commit -m "chore: update Google Scholar stats"
+            git push
+          else
+            echo "No change to commit."
+          fi
