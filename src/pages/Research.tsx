@@ -386,7 +386,10 @@ const Research = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-center">Research</h1>
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 text-center">Selected Research</h1>
+      <p className="text-sm sm:text-base text-muted-foreground text-center mb-8">
+        For the full list, please refer to my <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Scholar</a> page.
+      </p>
 
 
 
