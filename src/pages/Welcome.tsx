@@ -68,6 +68,18 @@ const AboutMe = () => {
   const hIndex = useCountUp(scholarStats.hIndex, 500);
   const i10 = useCountUp(scholarStats.i10Index, 500);
 
+  const pillarsRef = useRef<HTMLIFrameElement>(null);
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      const d = e.data as { type?: string; height?: number };
+      if (d && d.type === "rp-h" && typeof d.height === "number" && pillarsRef.current) {
+        pillarsRef.current.style.height = `${Math.max(320, d.height)}px`;
+      }
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
   const iconSize = 32;
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-5xl">
@@ -158,6 +170,17 @@ const AboutMe = () => {
                   {label}
                 </span>
               ))}
+            </div>
+            <div className="not-prose my-6 sm:my-8">
+              <iframe
+                ref={pillarsRef}
+                src="/research-pillars.html"
+                title="Four research pillars"
+                loading="lazy"
+                scrolling="no"
+                className="w-full block"
+                style={{ width: "100%", height: "360px", border: 0, overflow: "hidden" }}
+              />
             </div>
             <h3 className="text-base sm:text-lg font-bold text-foreground mt-4 mb-1">Previously</h3>
             <p>
