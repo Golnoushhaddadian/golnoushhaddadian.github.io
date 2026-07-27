@@ -127,11 +127,11 @@ const Awards = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-10 sm:mb-14 text-center">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 text-center">
         Awards &amp; Honors
       </h1>
 
-      <div className="space-y-10 sm:space-y-14">
+      <div className="space-y-6 sm:space-y-8">
         {categories.map((cat, catIdx) => (
           <motion.section
             key={cat.label}
@@ -140,7 +140,7 @@ const Awards = () => {
             transition={{ duration: 0.45, delay: catIdx * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Category header */}
-            <div className="flex items-center gap-2.5 mb-5">
+            <div className="flex items-center gap-2.5 mb-2.5">
               <span className="text-primary/70">{cat.icon}</span>
               <h2 className="text-sm sm:text-base font-semibold uppercase tracking-wider text-foreground/70">
                 {cat.label}
@@ -156,7 +156,7 @@ const Awards = () => {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.35, delay: catIdx * 0.1 + idx * 0.04 }}
-                  className="group relative grid grid-cols-[auto_1fr] gap-x-4 py-3 sm:py-4 border-b border-border/20 last:border-b-0"
+                  className="group relative grid grid-cols-[auto_1fr] gap-x-4 py-2 sm:py-2.5 border-b border-border/20 last:border-b-0"
                 >
                   {/* Year */}
                   <div className="text-xs sm:text-sm font-medium text-muted-foreground/60 pt-0.5 min-w-[4.5rem] text-right tabular-nums">
