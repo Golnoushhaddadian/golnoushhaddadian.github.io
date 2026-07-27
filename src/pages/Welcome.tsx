@@ -53,9 +53,19 @@ const AboutMe = () => {
     canonical: '/',
   });
 
-  const citations = useCountUp(73, 800);
-  const publications = useCountUp(28, 800);
-  const hIndex = useCountUp(5, 500);
+  const [scholarStats, setScholarStats] = useState({ citations: 73, publications: 28, hIndex: 5, updated: "Mar 2026" });
+  useEffect(() => {
+    fetch("/scholar-stats.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d && typeof d.citations === "number") setScholarStats(d);
+      })
+      .catch(() => {});
+  }, []);
+
+  const citations = useCountUp(scholarStats.citations, 800);
+  const publications = useCountUp(scholarStats.publications, 800);
+  const hIndex = useCountUp(scholarStats.hIndex, 500);
 
   const iconSize = 32;
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
@@ -187,7 +197,7 @@ const AboutMe = () => {
             <a href="https://scholar.google.com/citations?user=8MQCFZQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-muted-foreground/60 transition-colors">
               Google Scholar
             </a>
-            {" "}· Updated Mar 2026
+            {" "}· Updated {scholarStats.updated}
           </p>
         </section>
 
