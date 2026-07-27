@@ -118,9 +118,9 @@ const AboutMe = () => {
         <section>
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2">Hello Amazing People!</h2>
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground/60 mb-3 sm:mb-4 md:mb-6">Welcome to My Personal Website</p>
-          <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base">
+          <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-justify text-xs sm:text-sm md:text-base">
             <p>
-              I am a Postdoctoral Associate at <a href="https://education.gsu.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Georgia State University</a>, where I contribute to two federally funded projects (<a href="https://ies.ed.gov/use-work/awards/scenario-based-assessment-age-generative-ai-making-space-education-market-alternative-assessment" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Transformative</a> &amp; <a href="https://www.ets.org/newsroom/ets-research-institute-awarded-department-of-education-grant-ai-ehanced-learning.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">FIPSE</a>), supported by <strong>~$8 million</strong> from the <strong>U.S. Department of Education</strong>, with the aim of reimagining learning and assessment in the age of generative AI (GenAI). My work focuses on developing scenario-based, <strong>AI-augmented learning and assessment systems</strong> that support students' reflection, metacognition, and self-regulation. These systems allow instructors to use learning and assessment data for formative support while maintaining the psychometric rigor needed to measure learning and evaluate instructional quality. This work is carried out in partnership with <a href="https://www.ets.org/about.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Educational Testing Service (ETS)</a>, the University of Memphis, and Middle Tennessee State University (MTSU).
+              I am a Postdoctoral Associate at <a href="https://education.gsu.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Georgia State University</a>, where I contribute to two federally funded projects (<a href="https://ies.ed.gov/use-work/awards/scenario-based-assessment-age-generative-ai-making-space-education-market-alternative-assessment" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Transformative</a> &amp; <a href="https://www.ets.org/newsroom/ets-research-institute-awarded-department-of-education-grant-ai-ehanced-learning.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">FIPSE</a>), supported by <strong>~$8 million</strong> from the <strong>U.S. Department of Education</strong>, with the aim of reimagining learning and assessment in the age of generative AI (GenAI). My work focuses on developing scenario-based, <strong>AI-augmented learning and assessment systems</strong> that support students' reflection, metacognition, and self-regulation. These systems allow instructors to use learning and assessment data for formative support while maintaining the psychometric rigor needed to measure learning and evaluate instructional quality. This work is carried out in partnership with <a href="https://www.ets.org/about.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Educational Testing Service (ETS)</a>, the <strong>University of Memphis</strong>, and <strong>Middle Tennessee State University (MTSU)</strong>, where I collaborate with leading scholars including Drs. <a href="https://scholar.google.com/citations?user=Rm877u0AAAAJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Joseph Magliano</a> (my mentor), <a href="https://scholar.google.com/citations?user=GO-H2ioAAAAJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Jonathan D. Cohen</a>, <a href="https://scholar.google.com/citations?user=Ai4ByXMAAAAJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">John Sabatini</a> (Memphis), <a href="https://scholar.google.com/citations?user=H6kyrwkAAAAJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Paul Deane</a> (ETS), <a href="https://scholar.google.com/citations?user=ONnsYA8AAAAJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Tenaha O'Reilly</a> (ETS), <a href="https://scholar.google.com/citations?user=gYOVNzIAAAAJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Zuowei Wang</a> (ETS), and <a href="https://scholar.google.com/citations?user=6poCvZYAAAAJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Randy Floyd</a> (Memphis).
             </p>
             <h3 className="text-base sm:text-lg font-bold text-foreground mt-4 mb-1">My Research</h3>
             <p>
@@ -159,42 +159,6 @@ const AboutMe = () => {
           </div>
         </section>
 
-        <section className="mt-6 sm:mt-8 md:mt-12">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
-          <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-[10px] sm:text-xs md:text-sm">
-            <p>
-              <strong>Haddadian, G.</strong>, Haddadian, N., & Soleimani, S. (Accepted). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. Paper presented at AIRiAL <span className="text-blue-600 font-medium">2026</span> Conference, Teachers College, Columbia University, New York, NY, United States.
-            </p>
-            <p>
-              Cohen, J. D., O'Reilly, T., Magliano, J. P., <strong>Haddadian, G.</strong>, Dobar, E. B., Ari, O., Tinker-Sachs, G., & Sabatini, J. (<span className="text-blue-600 font-medium">2026</span>). Scenario-based learning and assessment design principles for the AI age. <em>EDULEARN26 Proceedings</em>, Article 1753. <a href="https://doi.org/10.21125/edulearn.2026.1753" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://doi.org/10.21125/edulearn.2026.1753</a>
-            </p>
-            <p>
-              Dobar, E. B., <strong>Haddadian, G.</strong>, Ari, O., Cohen, J. D., Tinker-Sachs, G., & Magliano, J. P. (<span className="text-blue-600 font-medium">2026</span>). Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment. <em>EDULEARN26 Proceedings</em>, Article 1668. <a href="https://doi.org/10.21125/edulearn.2026.1668" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://doi.org/10.21125/edulearn.2026.1668</a>
-            </p>
-            <p>
-              Cohen, J. D., Sabatini, J., <strong>Haddadian, G.</strong>, O'Reilly, T., Pierce, B., & Magliano, J. (<span className="text-blue-600 font-medium">2026</span>). Developing authentic learning and assessment through scenarios. In <em>Proceedings of EdMedia 2026 Edinburgh</em> (pp. 1716–1717). Waynesville, NC: Association for the Advancement of Computing in Education (AACE). <a href="https://www.learntechlib.org/primary/p/2129763" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://www.learntechlib.org/primary/p/2129763</a>
-            </p>
-            <p>
-              Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
-            </p>
-            <p>
-              de Kleijn, R., Brouwer, R., <strong>Haddadian, G.</strong>, van den Beemt, A., & Noroozi, O. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Peer, AI, and teacher feedback: Features, perceptions and uptake. EARLI SIG 1 Conference 2026, Utrecht, The Netherlands.
-            </p>
-            <p>
-              Noroozi, O., <strong>Haddadian, G.</strong>, Banihashem, K., & Schunn, C. (<span className="text-blue-600 font-medium">2026</span>). How students perceive and respond to GenAI for peer feedback uptake. In <em>Understanding and supporting feedback uptake: Bridging research and practice in educational contexts</em>. American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA, United States.
-            </p>
-            <p>
-              <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (<span className="text-blue-600 font-medium">2026</span>). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
-            </p>
-            <p>
-              Motevali, S., <strong>Haddadian, G.</strong>, Desai, P., Seelam, N., & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>). The potential of artificial intelligence for automated scoring of argumentative essays. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
-            </p>
-            <p>
-              Haddadian, N., <strong>Haddadian, G.</strong>, & Haddadian, M. (<span className="text-blue-600 font-medium">2026</span>). Collaborative use of AI-generated feedback in EFL argumentative writing: Impacts on writing quality and self-efficacy. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
-            </p>
-          </div>
-        </section>
-
         {/* Google Scholar Stats */}
         <section className="mt-16 sm:mt-20 md:mt-28">
           <div className="flex items-center justify-between max-w-xl mx-auto">
@@ -226,6 +190,42 @@ const AboutMe = () => {
             </a>
             {" "}· Updated Mar 2026
           </p>
+        </section>
+
+        <section className="mt-6 sm:mt-8 md:mt-12">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
+          <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-justify text-[10px] sm:text-xs md:text-sm">
+            <p>
+              <strong>Haddadian, G.</strong>, Haddadian, N., & Soleimani, S. (Accepted). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. Paper presented at AIRiAL 2026 Conference, Teachers College, Columbia University, New York, NY, United States.
+            </p>
+            <p>
+              Cohen, J. D., O'Reilly, T., Magliano, J. P., <strong>Haddadian, G.</strong>, Dobar, E. B., Ari, O., Tinker-Sachs, G., & Sabatini, J. (<span className="text-blue-600 font-medium">2026</span>). Scenario-based learning and assessment design principles for the AI age. <em>EDULEARN26 Proceedings</em>, Article 1753. <a href="https://doi.org/10.21125/edulearn.2026.1753" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://doi.org/10.21125/edulearn.2026.1753</a>
+            </p>
+            <p>
+              Dobar, E. B., <strong>Haddadian, G.</strong>, Ari, O., Cohen, J. D., Tinker-Sachs, G., & Magliano, J. P. (<span className="text-blue-600 font-medium">2026</span>). Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment. <em>EDULEARN26 Proceedings</em>, Article 1668. <a href="https://doi.org/10.21125/edulearn.2026.1668" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://doi.org/10.21125/edulearn.2026.1668</a>
+            </p>
+            <p>
+              Cohen, J. D., Sabatini, J., <strong>Haddadian, G.</strong>, O'Reilly, T., Pierce, B., & Magliano, J. (<span className="text-blue-600 font-medium">2026</span>). Developing authentic learning and assessment through scenarios. In <em>Proceedings of EdMedia 2026 Edinburgh</em> (pp. 1716–1717). Waynesville, NC: Association for the Advancement of Computing in Education (AACE). <a href="https://www.learntechlib.org/primary/p/2129763" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://www.learntechlib.org/primary/p/2129763</a>
+            </p>
+            <p>
+              Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
+            </p>
+            <p>
+              de Kleijn, R., Brouwer, R., <strong>Haddadian, G.</strong>, van den Beemt, A., & Noroozi, O. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Peer, AI, and teacher feedback: Features, perceptions and uptake. EARLI SIG 1 Conference 2026, Utrecht, The Netherlands.
+            </p>
+            <p>
+              Noroozi, O., <strong>Haddadian, G.</strong>, Banihashem, K., & Schunn, C. (<span className="text-blue-600 font-medium">2026</span>). How students perceive and respond to GenAI for peer feedback uptake. In <em>Understanding and supporting feedback uptake: Bridging research and practice in educational contexts</em>. American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA, United States.
+            </p>
+            <p>
+              <strong>Haddadian, G.</strong>, Kim, M. K., & Haddadian, N. (<span className="text-blue-600 font-medium">2026</span>). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+            </p>
+            <p>
+              Motevali, S., <strong>Haddadian, G.</strong>, Desai, P., Seelam, N., & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>). The potential of artificial intelligence for automated scoring of argumentative essays. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+            </p>
+            <p>
+              Haddadian, N., <strong>Haddadian, G.</strong>, & Haddadian, M. (<span className="text-blue-600 font-medium">2026</span>). Collaborative use of AI-generated feedback in EFL argumentative writing: Impacts on writing quality and self-efficacy. American Association for Applied Linguistics (AAAL), Chicago, IL, United States.
+            </p>
+          </div>
         </section>
 
         <section className="mt-12 sm:mt-16 md:mt-20">
