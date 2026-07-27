@@ -123,6 +123,7 @@ const AboutMe = () => {
                 </a>
               </div>
             </div>
+            <p className="text-xs text-muted-foreground/70 italic mt-4 sm:mt-5 text-center md:text-left"><span className="font-medium not-italic text-foreground/80">✦ About my name:</span> I publish under Golnoush, my legal name, the <a href="https://en.wikipedia.org/wiki/Persians" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Persian</a> name my mother gifted me and one I treasure like a gem; it means enduring beauty. In daily life I go by Lia and I am deeply connected to that, meaning one who brings good news.</p>
           </div>
         </div>
 
@@ -167,7 +168,6 @@ const AboutMe = () => {
                 <strong>Recruiting &amp; collaborations:</strong> If you are interested in working with me, please fill out <a href="/contact" className="text-blue-600 hover:underline">this brief form</a>.
               </p>
             </div>
-            <p className="text-xs text-muted-foreground/70 italic mt-4"><span className="font-medium not-italic text-foreground/80">✦ About my name:</span> I publish under Golnoush, my legal name, the <a href="https://en.wikipedia.org/wiki/Persians" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Persian</a> name my mother gifted me and one I treasure like a gem; it means enduring beauty. In daily life I go by Lia and I am deeply connected to that, meaning one who brings good news.</p>
           </div>
         </section>
 
