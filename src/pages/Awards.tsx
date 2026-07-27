@@ -1,16 +1,12 @@
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 import { motion } from 'framer-motion';
 
-type Degree = { deg: string; year: string; gpa: string; color: string };
-
 type AwardItem = {
   year: string;
   title: string;
   amount?: string;
   org: string;
   desc?: string;
-  degrees?: Degree[];
-  fine?: string;
 };
 
 type AwardGroup = {
@@ -24,22 +20,22 @@ const groups: AwardGroup[] = [
     items: [
       {
         year: '2025',
-        title: 'AI4ED Summer Fellowship',
         amount: '$12,500',
-        org: 'AI Institutes Virtual Organization (AIVO) · funded by NSF & Google.org',
+        title: 'Fellowship Award (National Science Foundation & Google.org)',
+        org: 'AI Institutes Virtual Organization (AIVO)',
         desc: 'Awarded to selected graduate researchers representing five major AI in Education Institutes across the United States.',
       },
       {
         year: '2024',
-        title: 'Quantitative Evidence Synthesis (QUEST) Program',
+        title: 'Quantitative Evidence Synthesis (QUEST) Fully-Funded Program',
         org: 'American Institutes for Research (AIR)',
         desc: 'Fully funded program in advanced quantitative research methods.',
       },
       {
         year: '2023',
-        title: 'Doctoral Student Fellowship',
         amount: '$15,000',
-        org: 'College of Education & Human Development · Georgia State University',
+        title: 'Doctoral Student Fellowship Award',
+        org: 'Georgia State University',
         desc: 'Awarded to three PhD students demonstrating exceptional scholarship and academic potential in Learning Technologies.',
       },
     ],
@@ -50,40 +46,28 @@ const groups: AwardGroup[] = [
       {
         year: '2026',
         title: 'Outstanding Dissertation in Learning Technologies',
-        org: 'Department of Learning Sciences, College of Education & Human Development · Georgia State University',
+        org: 'Georgia State University',
       },
       {
         year: '2025',
-        title: 'Outstanding Ph.D. Student in Learning Technologies',
-        org: 'College of Education & Human Development · Georgia State University',
+        title: 'Outstanding PhD Student in Learning Technologies',
+        org: 'Georgia State University',
         desc: 'Recognized for demonstrated potential for excellence in research, teaching, and service.',
       },
       {
         year: '2025',
-        title: 'Outstanding Contributions to Global Engagement & Global Citizenship',
+        title: 'Outstanding Contributions to Global Engagement and Global Citizenship',
         org: 'Georgia State University',
-        desc: 'Nominated for the 2025 International Education Award in International Initiatives.',
       },
       {
-        year: '2012–25',
-        title: 'Honored Student, All Three Degrees',
-        org: "Sustained top-of-class distinction across Bachelor's, Master's, and Doctoral study.",
-        degrees: [
-          { deg: 'B.A.', year: '2012', gpa: '3.71', color: '#2563eb' },
-          { deg: 'M.A.', year: '2014', gpa: '4.00', color: '#7c3aed' },
-          { deg: 'Ph.D.', year: '2025', gpa: '4.14', color: '#059669' },
-        ],
-        fine: "Ph.D. GPA reported on the institution's weighted grading scale.",
+        year: '2025',
+        title: 'International Education Award in International Initiatives (Nominee)',
+        org: 'Georgia State University',
       },
       {
-        year: '2012',
-        title: 'Top 1% Nationwide, M.A. Entrance Exam',
-        org: 'Sharif University of Technology',
-      },
-      {
-        year: '2012',
-        title: 'Admitted as Exceptionally Talented Student',
-        org: 'Sharif University of Technology · supported by the National Organization for Development of Exceptional Talents',
+        year: '',
+        title: 'Ranked 11th of ~20,000',
+        org: 'National University Entrance Exam in Linguistics',
       },
     ],
   },
@@ -93,18 +77,13 @@ const groups: AwardGroup[] = [
       {
         year: '2024',
         title: 'Outstanding Conference Paper Award',
-        org: 'SITE & Association for the Advancement of Computing in Education (AACE)',
+        org: 'Society for Information Technology & Teacher Education & Association for the Advancement of Computing in Education (AACE)',
         desc: 'Distinguished for exceptional quality, originality, and significant scholarly contribution.',
       },
       {
         year: '2006',
-        title: 'Distinguished Student Researcher Award',
+        title: 'Distinguished Student Researcher',
         org: 'Young Researchers and Elite Club',
-      },
-      {
-        year: '2005',
-        title: 'Outstanding Student Researcher Award',
-        org: 'Shahid Shamloo High School',
       },
     ],
   },
@@ -143,12 +122,12 @@ const AwardRow = ({ item, delay }: { item: AwardItem; delay: number }) => (
     </div>
     <div className="min-w-0">
       <div className="text-[17px] sm:text-[18.5px] font-bold leading-tight tracking-[-0.02em] text-foreground">
-        {item.title}
         {item.amount && (
-          <span className="ml-2.5 inline-block align-middle font-mono text-[13.5px] sm:text-[14.5px] font-extrabold text-white bg-blue-600 px-3 py-[3px] rounded-full tracking-tight shadow-[0_2px_8px_rgba(37,99,235,0.45)]">
+          <span className="mr-2.5 inline-block align-middle font-mono text-[13.5px] sm:text-[14.5px] font-extrabold text-white bg-blue-600 px-3 py-[3px] rounded-full tracking-tight shadow-[0_2px_8px_rgba(37,99,235,0.45)]">
             {item.amount}
           </span>
         )}
+        {item.title}
       </div>
       <div className="text-[13.5px] sm:text-[14.5px] text-foreground/70 font-medium mt-1 leading-snug">
         {item.org}
@@ -156,27 +135,6 @@ const AwardRow = ({ item, delay }: { item: AwardItem; delay: number }) => (
       {item.desc && (
         <div className="text-[12.5px] sm:text-[13.5px] text-muted-foreground mt-1.5 leading-relaxed max-w-[78ch]">
           {item.desc}
-        </div>
-      )}
-      {item.degrees && (
-        <div className="flex flex-wrap gap-2.5 mt-3">
-          {item.degrees.map((d) => (
-            <span
-              key={d.deg}
-              style={{ color: d.color, background: `${d.color}1F`, borderColor: `${d.color}66` }}
-              className="inline-flex items-baseline gap-1.5 text-[13.5px] sm:text-[14px] tabular-nums rounded-full px-4 py-1.5 border"
-            >
-              <span className="font-extrabold">{d.deg}</span>
-              <span className="font-semibold opacity-75">{d.year}</span>
-              <b className="font-extrabold">{d.gpa}</b>
-              <span className="opacity-60 font-semibold">/4.00</span>
-            </span>
-          ))}
-        </div>
-      )}
-      {item.fine && (
-        <div className="text-[11.5px] text-muted-foreground mt-1.5 italic opacity-90">
-          {item.fine}
         </div>
       )}
     </div>
@@ -190,6 +148,8 @@ const Awards = () => {
       'Awards, honors, and fellowships received by Golnoush Haddadian across learning sciences and education.',
     canonical: '/awards',
   });
+
+  const totalHonors = groups.reduce((sum, g) => sum + g.items.length, 0);
 
   return (
     <div className="max-w-5xl mx-auto">
@@ -209,28 +169,19 @@ const Awards = () => {
           transition={{ duration: 0.5, delay: 0.1, ease }}
           className="w-11 h-[3px] mx-auto mt-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
         />
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.16, ease }}
-          className="mt-3 max-w-[58ch] mx-auto text-[14px] sm:text-[15.5px] text-foreground/75 leading-relaxed"
-        >
-          Fellowships, academic distinction, and research and teaching recognition earned across two
-          decades in learning sciences and education.
-        </motion.p>
       </div>
 
       {/* Stat strip */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.22, ease }}
+        transition={{ duration: 0.5, delay: 0.16, ease }}
         className="grid grid-cols-3 divide-x divide-border max-w-[560px] mx-auto mt-7 sm:mt-9"
       >
         {[
-          { num: '14', lbl: 'Honors', accent: false },
+          { num: String(totalHonors), lbl: 'Honors', accent: false },
           { num: '$27.5K+', lbl: 'Funding', accent: true },
-          { num: '4', lbl: 'Categories', accent: false },
+          { num: String(groups.length), lbl: 'Categories', accent: false },
         ].map((s) => (
           <div key={s.lbl} className="text-center px-3 py-1">
             <div
