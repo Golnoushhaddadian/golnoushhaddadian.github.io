@@ -1,200 +1,278 @@
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 import { motion } from 'framer-motion';
 
+type Degree = { deg: string; year: string; gpa: string; color: string };
+
 type AwardItem = {
+  year: string;
   title: string;
+  amount?: string;
   org: string;
-  year: number | number[];
-  detail?: string;
-  category: string;
+  desc?: string;
+  degrees?: Degree[];
+  fine?: string;
 };
 
-const awards: AwardItem[] = [
-  // Fellowships & Grants
+type AwardGroup = {
+  label: string;
+  items: AwardItem[];
+};
+
+const groups: AwardGroup[] = [
   {
-    category: 'Fellowship',
-    title: 'AI4ED Summer Fellowship ($12,500)',
-    org: 'AI Institutes Virtual Organization (AIVO), funded by NSF & Google.org',
-    year: 2025,
-    detail: 'Awarded to selected graduate researchers representing five major AI in Education Institutes across the U.S.',
+    label: 'Fellowships & Grants',
+    items: [
+      {
+        year: '2025',
+        title: 'AI4ED Summer Fellowship',
+        amount: '$12,500',
+        org: 'AI Institutes Virtual Organization (AIVO) · funded by NSF & Google.org',
+        desc: 'Awarded to selected graduate researchers representing five major AI in Education Institutes across the United States.',
+      },
+      {
+        year: '2024',
+        title: 'Quantitative Evidence Synthesis (QUEST) Program',
+        org: 'American Institutes for Research (AIR)',
+        desc: 'Fully funded program in advanced quantitative research methods.',
+      },
+      {
+        year: '2023',
+        title: 'Doctoral Student Fellowship',
+        amount: '$15,000',
+        org: 'College of Education & Human Development · Georgia State University',
+        desc: 'Awarded to three PhD students demonstrating exceptional scholarship and academic potential in Learning Technologies.',
+      },
+    ],
   },
   {
-    category: 'Fellowship',
-    title: 'Doctoral Student Fellowship ($15,000)',
-    org: 'College of Education & Human Development, Georgia State University',
-    year: 2023,
-    detail: 'Given to three PhD students who demonstrate exceptional scholarship and academic potential in Learning Technologies.',
+    label: 'Academic Excellence',
+    items: [
+      {
+        year: '2026',
+        title: 'Outstanding Dissertation in Learning Technologies',
+        org: 'Department of Learning Sciences, College of Education & Human Development · Georgia State University',
+      },
+      {
+        year: '2025',
+        title: 'Outstanding Ph.D. Student in Learning Technologies',
+        org: 'College of Education & Human Development · Georgia State University',
+        desc: 'Recognized for demonstrated potential for excellence in research, teaching, and service.',
+      },
+      {
+        year: '2025',
+        title: 'Outstanding Contributions to Global Engagement & Global Citizenship',
+        org: 'Georgia State University',
+        desc: 'Nominated for the 2025 International Education Award in International Initiatives.',
+      },
+      {
+        year: '2012–25',
+        title: 'Honored Student, All Three Degrees',
+        org: "Sustained top-of-class distinction across Bachelor's, Master's, and Doctoral study.",
+        degrees: [
+          { deg: 'B.A.', year: '2012', gpa: '3.71', color: '#2563eb' },
+          { deg: 'M.A.', year: '2014', gpa: '4.00', color: '#7c3aed' },
+          { deg: 'Ph.D.', year: '2025', gpa: '4.14', color: '#059669' },
+        ],
+        fine: "Ph.D. GPA reported on the institution's weighted grading scale.",
+      },
+      {
+        year: '2012',
+        title: 'Top 1% Nationwide, M.A. Entrance Exam',
+        org: 'Sharif University of Technology',
+      },
+      {
+        year: '2012',
+        title: 'Admitted as Exceptionally Talented Student',
+        org: 'Sharif University of Technology · supported by the National Organization for Development of Exceptional Talents',
+      },
+    ],
   },
   {
-    category: 'Fellowship',
-    title: "AIR's Quantitative Evidence Synthesis (QUEST) Program",
-    org: 'American Institutes for Research (AIR)',
-    year: 2024,
-    detail: 'Fully-funded program for advanced quantitative research methods.',
-  },
-  // Academic Excellence
-  {
-    category: 'Academic Excellence',
-    title: 'Outstanding Dissertation in Learning Technologies',
-    org: 'Department of Learning Sciences, College of Education & Human Development, Georgia State University',
-    year: 2026,
-  },
-  {
-    category: 'Academic Excellence',
-    title: 'Outstanding Ph.D. Student in Learning Technologies',
-    org: 'College of Education & Human Development, Georgia State University',
-    year: 2025,
-    detail: 'Awarded for demonstrated potential for excellence in research, teaching, and service.',
-  },
-  {
-    category: 'Academic Excellence',
-    title: 'Outstanding Contributions to Global Engagement and Global Citizenship',
-    org: 'Georgia State University',
-    year: 2025,
-    detail: 'Nominated for the 2025 International Education Award in International Initiatives.',
+    label: 'Research Awards',
+    items: [
+      {
+        year: '2024',
+        title: 'Outstanding Conference Paper Award',
+        org: 'SITE & Association for the Advancement of Computing in Education (AACE)',
+        desc: 'Distinguished for exceptional quality, originality, and significant scholarly contribution.',
+      },
+      {
+        year: '2006',
+        title: 'Distinguished Student Researcher Award',
+        org: 'Young Researchers and Elite Club',
+      },
+      {
+        year: '2005',
+        title: 'Outstanding Student Researcher Award',
+        org: 'Shahid Shamloo High School',
+      },
+    ],
   },
   {
-    category: 'Academic Excellence',
-    title: 'Top 1% Nationwide — M.A. Entrance Exam',
-    org: 'Sharif University of Technology',
-    year: 2012,
-  },
-  {
-    category: 'Academic Excellence',
-    title: 'Admitted as Exceptionally Talented Student',
-    org: 'Sharif University of Technology, supported by the National Organization for Development of Exceptional Talents',
-    year: 2012,
-  },
-  {
-    category: 'Academic Excellence',
-    title: 'Honored Student — All Three Degrees',
-    org: 'B.A. (3.71/4.00), M.A. (4.00/4.00), Ph.D. (4.14/4.00)',
-    year: [2012, 2014, 2025],
-  },
-  // Research Awards
-  {
-    category: 'Research Award',
-    title: 'Outstanding Conference Paper Award',
-    org: 'SITE & Association for the Advancement of Computing in Education (AACE)',
-    year: 2024,
-    detail: 'Distinguished for exceptional quality, originality, and significant scholarly contribution.',
-  },
-  {
-    category: 'Research Award',
-    title: 'Distinguished Student Researcher Award',
-    org: 'Young Researchers and Elite Club',
-    year: 2006,
-  },
-  {
-    category: 'Research Award',
-    title: 'Outstanding Student Researcher Award',
-    org: 'Shahid Shamloo High School',
-    year: 2005,
-  },
-  // Teaching Awards
-  {
-    category: 'Teaching Award',
-    title: 'Innovative and Supportive Teacher of Foreign Languages',
-    org: 'Balan Language Academy',
-    year: 2013,
-  },
-  {
-    category: 'Teaching Award',
-    title: 'Outstanding Teacher of Foreign Languages',
-    org: 'Aryana Fanavaran Institute of Technology',
-    year: 2010,
+    label: 'Teaching Awards',
+    items: [
+      {
+        year: '2013',
+        title: 'Innovative and Supportive Teacher of Foreign Languages',
+        org: 'Balan Language Academy',
+      },
+      {
+        year: '2010',
+        title: 'Outstanding Teacher of Foreign Languages',
+        org: 'Aryana Fanavaran Institute of Technology',
+      },
+    ],
   },
 ];
 
-const sortYear = (year: number | number[]) =>
-  Array.isArray(year) ? Math.max(...year) : year;
+const ease = [0.22, 0.8, 0.36, 1] as const;
 
-const groupByYear = (items: AwardItem[]) => {
-  const grouped: Record<number, AwardItem[]> = {};
-  items.forEach((item) => {
-    const y = sortYear(item.year);
-    if (!grouped[y]) grouped[y] = [];
-    grouped[y].push(item);
-  });
-  return Object.entries(grouped)
-    .sort(([a], [b]) => Number(b) - Number(a))
-    .map(([year, items]) => ({ year: Number(year), items }));
-};
+const AwardRow = ({ item, delay }: { item: AwardItem; delay: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay, ease }}
+    className="group relative grid grid-cols-[52px_1fr] sm:grid-cols-[66px_1fr] gap-3 sm:gap-[22px] pl-[18px] py-[13px]"
+  >
+    <span
+      aria-hidden="true"
+      className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-blue-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+    />
+    <div className="text-[15.5px] font-bold text-blue-400 sm:text-muted-foreground sm:group-hover:text-blue-400 tabular-nums pt-0.5 tracking-tight transition-colors duration-200">
+      {item.year}
+    </div>
+    <div className="min-w-0">
+      <div className="text-[17px] sm:text-[18.5px] font-bold leading-tight tracking-[-0.02em] text-foreground">
+        {item.title}
+        {item.amount && (
+          <span className="ml-2.5 inline-block align-middle font-mono text-[13.5px] sm:text-[14.5px] font-extrabold text-white bg-blue-600 px-3 py-[3px] rounded-full tracking-tight shadow-[0_2px_8px_rgba(37,99,235,0.45)]">
+            {item.amount}
+          </span>
+        )}
+      </div>
+      <div className="text-[13.5px] sm:text-[14.5px] text-foreground/70 font-medium mt-1 leading-snug">
+        {item.org}
+      </div>
+      {item.desc && (
+        <div className="text-[12.5px] sm:text-[13.5px] text-muted-foreground mt-1.5 leading-relaxed max-w-[78ch]">
+          {item.desc}
+        </div>
+      )}
+      {item.degrees && (
+        <div className="flex flex-wrap gap-2.5 mt-3">
+          {item.degrees.map((d) => (
+            <span
+              key={d.deg}
+              style={{ color: d.color, background: `${d.color}1F`, borderColor: `${d.color}66` }}
+              className="inline-flex items-baseline gap-1.5 text-[13.5px] sm:text-[14px] tabular-nums rounded-full px-4 py-1.5 border"
+            >
+              <span className="font-extrabold">{d.deg}</span>
+              <span className="font-semibold opacity-75">{d.year}</span>
+              <b className="font-extrabold">{d.gpa}</b>
+              <span className="opacity-60 font-semibold">/4.00</span>
+            </span>
+          ))}
+        </div>
+      )}
+      {item.fine && (
+        <div className="text-[11.5px] text-muted-foreground mt-1.5 italic opacity-90">
+          {item.fine}
+        </div>
+      )}
+    </div>
+  </motion.div>
+);
 
 const Awards = () => {
   useDocumentHead({
     title: 'Awards & Honors — Golnoush Haddadian',
-    description: 'Academic awards, honors, and fellowships received by Golnoush Haddadian.',
+    description:
+      'Awards, honors, and fellowships received by Golnoush Haddadian across learning sciences and education.',
     canonical: '/awards',
   });
 
-  const grouped = groupByYear(awards);
-
-  const yearColors = [
-    'text-[hsl(200,60%,65%)]',   // soft blue
-    'text-[hsl(340,50%,65%)]',   // soft rose
-    'text-[hsl(160,45%,55%)]',   // soft teal
-    'text-[hsl(270,45%,65%)]',   // soft lavender
-    'text-[hsl(30,60%,60%)]',    // soft amber
-  ];
-  const lineColors = [
-    'from-[hsl(200,60%,65%)]/30',
-    'from-[hsl(340,50%,65%)]/30',
-    'from-[hsl(160,45%,55%)]/30',
-    'from-[hsl(270,45%,65%)]/30',
-    'from-[hsl(30,60%,60%)]/30',
-  ];
-
   return (
     <div className="max-w-5xl mx-auto">
-      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 text-center">
-        Awards &amp; Honors
-      </h1>
+      {/* Hero */}
+      <div className="text-center max-w-3xl mx-auto pt-1 sm:pt-3">
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease }}
+          className="text-[clamp(30px,5.6vw,46px)] font-extrabold tracking-[-0.03em] leading-[1.04] text-foreground"
+        >
+          Awards &amp; Honors
+        </motion.h1>
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.5, delay: 0.1, ease }}
+          className="w-11 h-[3px] mx-auto mt-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
+        />
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.16, ease }}
+          className="mt-3 max-w-[58ch] mx-auto text-[14px] sm:text-[15.5px] text-foreground/75 leading-relaxed"
+        >
+          Fellowships, academic distinction, and research and teaching recognition earned across two
+          decades in learning sciences and education.
+        </motion.p>
+      </div>
 
-      <section className="mb-12">
-        {grouped.map(({ year, items }, groupIdx) => {
-          const colorClass = yearColors[groupIdx % yearColors.length];
-          const lineClass = lineColors[groupIdx % lineColors.length];
-
-          return (
-            <div key={year} className="mb-8 last:mb-0">
-              <div className="flex items-center gap-4 mb-2">
-                <h3 className={`text-3xl sm:text-4xl font-black tracking-tighter select-none ${colorClass}`}>
-                  {year}
-                </h3>
-                <div className={`flex-1 h-px bg-gradient-to-r ${lineClass} to-transparent`} />
-              </div>
-
-              <div>
-                {items.map((award, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.35, delay: idx * 0.04 }}
-                    className="group py-2.5 sm:py-3 border-b border-border/20 last:border-b-0"
-                  >
-                    <div className="flex items-baseline justify-between gap-3 sm:gap-4">
-                      <p className="text-sm sm:text-base font-semibold leading-snug text-foreground/90 group-hover:text-foreground transition-colors duration-200">
-                        {award.title}
-                      </p>
-                      <span className="shrink-0 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-muted-foreground/45 pt-1">
-                        {award.category}
-                      </span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-muted-foreground/70 leading-snug mt-1">
-                      {award.org}
-                      {award.detail && (
-                        <span className="text-muted-foreground/50"> · {award.detail}</span>
-                      )}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
+      {/* Stat strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.22, ease }}
+        className="grid grid-cols-3 divide-x divide-border max-w-[560px] mx-auto mt-7 sm:mt-9"
+      >
+        {[
+          { num: '14', lbl: 'Honors', accent: false },
+          { num: '$27.5K+', lbl: 'Funding', accent: true },
+          { num: '4', lbl: 'Categories', accent: false },
+        ].map((s) => (
+          <div key={s.lbl} className="text-center px-3 py-1">
+            <div
+              className={`text-[clamp(24px,4vw,32px)] font-extrabold tracking-[-0.02em] tabular-nums ${
+                s.accent ? 'text-blue-400' : 'text-foreground'
+              }`}
+            >
+              {s.num}
             </div>
-          );
-        })}
-      </section>
+            <div className="mt-1 text-[10.5px] font-semibold tracking-[0.14em] uppercase text-muted-foreground">
+              {s.lbl}
+            </div>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Groups */}
+      <div className="mt-10 sm:mt-12">
+        {groups.map((group) => (
+          <section key={group.label} className="mt-8 sm:mt-9 first:mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease }}
+              className="flex items-baseline gap-3 mb-1.5"
+            >
+              <h2 className="text-[19px] sm:text-[21px] font-bold tracking-[-0.01em] text-foreground">
+                {group.label}
+              </h2>
+              <span className="flex items-center text-[13px] font-semibold text-muted-foreground tabular-nums">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mr-2" />
+                {group.items.length}
+              </span>
+            </motion.div>
+            <div className="divide-y divide-border/60">
+              {group.items.map((item, idx) => (
+                <AwardRow key={idx} item={item} delay={Math.min(idx * 0.05, 0.3)} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   );
 };
