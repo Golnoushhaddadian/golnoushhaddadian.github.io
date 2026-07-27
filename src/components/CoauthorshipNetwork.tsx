@@ -184,7 +184,7 @@ const CoauthorshipNetwork = () => {
     const cR = Math.max(36 * scale, Math.min(72, w * 0.09));
 
     const nodes: Node[] = [{
-      id: "_center", label: "Golnoush\nHaddadian", count: 0,
+      id: "_center", label: "Collaborators", count: 0,
       x: cx, y: cy, vx: 0, vy: 0, r: cR, isCenter: true, cluster: -1,
     }];
     const links: Link[] = [];
@@ -421,16 +421,19 @@ const CoauthorshipNetwork = () => {
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          // Name
+          // Label
           ctx.fillStyle = "#ffffff";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          const centerFontLg = Math.max(10, Math.round(14 * scale));
-          const centerFontSm = Math.max(9, Math.round(13 * scale));
-          ctx.font = `bold ${centerFontLg}px system-ui, -apple-system, sans-serif`;
-          ctx.fillText("Golnoush", n.x, n.y - 8 * scale);
-          ctx.font = `600 ${centerFontSm}px system-ui, -apple-system, sans-serif`;
-          ctx.fillText("Haddadian", n.x, n.y + 10 * scale);
+          const centerLabel = "Collaborators";
+          let centerFont = Math.max(10, Math.round(14 * scale));
+          ctx.font = `bold ${centerFont}px system-ui, -apple-system, sans-serif`;
+          const centerMaxW = n.r * 1.6;
+          while (ctx.measureText(centerLabel).width > centerMaxW && centerFont > 8) {
+            centerFont -= 1;
+            ctx.font = `bold ${centerFont}px system-ui, -apple-system, sans-serif`;
+          }
+          ctx.fillText(centerLabel, n.x, n.y);
 
           ctx.globalAlpha = 1;
           continue;
