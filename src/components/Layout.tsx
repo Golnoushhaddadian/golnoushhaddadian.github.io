@@ -56,7 +56,7 @@ const Layout = ({ children }: LayoutProps) => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
       <ParticleField />
       {/* Skip to main content link for keyboard users */}
       <a
