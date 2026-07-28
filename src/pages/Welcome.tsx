@@ -172,11 +172,6 @@ const AboutMe = () => {
               ))}
             </div>
             <div className="not-prose mt-8 sm:mt-12 pt-8 sm:pt-10 border-t border-border">
-              <div className="text-center mb-5 sm:mb-7">
-                <div className="text-[10px] sm:text-[11px] font-semibold tracking-[0.24em] uppercase text-muted-foreground/70">Research Program</div>
-                <h3 className="text-xl sm:text-2xl md:text-[26px] font-bold tracking-tight text-foreground mt-2">Four Research Pillars</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground/60 mt-2">Hover to preview · click a pillar to open</p>
-              </div>
               <iframe
                 ref={pillarsRef}
                 src="/research-pillars.html?v=5"
