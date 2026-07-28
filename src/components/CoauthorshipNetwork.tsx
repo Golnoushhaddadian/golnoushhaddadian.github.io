@@ -72,16 +72,17 @@ function cleanAuthors(authors: string[]): string[] {
   return result;
 }
 
-// Vibrant, saturated academic palette
+// Pillar-family palette: matches the four research pillars (blue, teal, pink,
+// gold) plus complementary hues from the site's accent set.
 const PAL = [
-  { l: "hsl(215,75%,48%)", d: "hsl(215,70%,62%)", bg_l: "hsla(215,75%,48%,0.10)", bg_d: "hsla(215,70%,62%,0.12)" },
-  { l: "hsl(350,70%,52%)", d: "hsl(350,65%,65%)", bg_l: "hsla(350,70%,52%,0.10)", bg_d: "hsla(350,65%,65%,0.12)" },
-  { l: "hsl(165,60%,40%)", d: "hsl(165,55%,52%)", bg_l: "hsla(165,60%,40%,0.10)", bg_d: "hsla(165,55%,52%,0.12)" },
-  { l: "hsl(270,55%,52%)", d: "hsl(270,50%,65%)", bg_l: "hsla(270,55%,52%,0.10)", bg_d: "hsla(270,50%,65%,0.12)" },
-  { l: "hsl(28,80%,55%)",  d: "hsl(28,72%,64%)",  bg_l: "hsla(28,80%,55%,0.10)",  bg_d: "hsla(28,72%,64%,0.12)" },
-  { l: "hsl(195,65%,44%)", d: "hsl(195,58%,56%)", bg_l: "hsla(195,65%,44%,0.10)", bg_d: "hsla(195,58%,56%,0.12)" },
-  { l: "hsl(140,55%,42%)", d: "hsl(140,48%,52%)", bg_l: "hsla(140,55%,42%,0.10)", bg_d: "hsla(140,48%,52%,0.12)" },
-  { l: "hsl(20,72%,50%)",  d: "hsl(20,65%,60%)",  bg_l: "hsla(20,72%,50%,0.10)",  bg_d: "hsla(20,65%,60%,0.12)" },
+  { l: "hsl(224,84%,63%)", d: "hsl(224,84%,72%)", bg_l: "hsla(224,84%,63%,0.10)", bg_d: "hsla(224,84%,72%,0.12)" }, // pillar blue
+  { l: "hsl(174,72%,40%)", d: "hsl(174,66%,52%)", bg_l: "hsla(174,72%,40%,0.10)", bg_d: "hsla(174,66%,52%,0.12)" }, // pillar teal
+  { l: "hsl(336,78%,60%)", d: "hsl(336,78%,70%)", bg_l: "hsla(336,78%,60%,0.10)", bg_d: "hsla(336,78%,70%,0.12)" }, // pillar pink
+  { l: "hsl(43,86%,50%)",  d: "hsl(43,86%,60%)",  bg_l: "hsla(43,86%,50%,0.10)",  bg_d: "hsla(43,86%,60%,0.12)" },  // pillar gold
+  { l: "hsl(262,72%,64%)", d: "hsl(262,72%,74%)", bg_l: "hsla(262,72%,64%,0.10)", bg_d: "hsla(262,72%,74%,0.12)" }, // lavender/violet
+  { l: "hsl(196,76%,46%)", d: "hsl(196,70%,58%)", bg_l: "hsla(196,76%,46%,0.10)", bg_d: "hsla(196,70%,58%,0.12)" }, // sky
+  { l: "hsl(150,58%,42%)", d: "hsl(150,52%,54%)", bg_l: "hsla(150,58%,42%,0.10)", bg_d: "hsla(150,52%,54%,0.12)" }, // green
+  { l: "hsl(20,88%,56%)",  d: "hsl(20,84%,64%)",  bg_l: "hsla(20,88%,56%,0.10)",  bg_d: "hsla(20,84%,64%,0.12)" },  // orange
 ];
 
 function build() {
