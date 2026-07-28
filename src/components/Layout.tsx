@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/ThemeProvider';
 import { cn } from '@/lib/utils';
 import { useVisitorTracking } from '@/hooks/useVisitorTracking';
+import ParticleField from '@/components/ParticleField';
 
 type NavLinkProps = {
   to: string;
@@ -56,6 +57,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <ParticleField />
       {/* Skip to main content link for keyboard users */}
       <a
         href="#main-content"
@@ -123,11 +125,11 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       )}
       
-      <main id="main-content" role="main" className="flex-1 px-3 sm:px-4 md:px-6 lg:px-10 py-4 sm:py-6 md:py-10 max-w-7xl w-full mx-auto page-transition" tabIndex={-1}>
+      <main id="main-content" role="main" className="relative z-10 flex-1 px-3 sm:px-4 md:px-6 lg:px-10 py-4 sm:py-6 md:py-10 max-w-7xl w-full mx-auto page-transition" tabIndex={-1}>
         {children}
       </main>
       
-      <footer role="contentinfo" className="border-t py-3 sm:py-4 md:py-6 px-3 sm:px-4 md:px-6 lg:px-10 text-[10px] sm:text-xs md:text-sm text-muted-foreground">
+      <footer role="contentinfo" className="relative z-10 border-t py-3 sm:py-4 md:py-6 px-3 sm:px-4 md:px-6 lg:px-10 text-[10px] sm:text-xs md:text-sm text-muted-foreground">
         <div className="max-w-7xl mx-auto">
           <p>© {new Date().getFullYear()} Golnoush Haddadian. All rights reserved.</p>
         </div>
