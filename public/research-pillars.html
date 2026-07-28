@@ -257,7 +257,7 @@ body.touched .chev{animation:none}
   function engage(){ interacted=true; document.body.classList.add('touched'); }
   layers.forEach(function(l){
     l.addEventListener('pointerenter',engage,{once:true});
-    l.addEventListener('click',function(e){ if(l.classList.contains('active')) return; open(l); });
+    l.addEventListener('click',function(e){ if(l.classList.contains('active')){ close(); } else { open(l); } });
     l.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault(); if(l.classList.contains('active')) close(); else open(l);} });
     l.addEventListener('mouseenter',function(){ if(!stack.classList.contains('has-active')) l.classList.add('peeking'); });
     l.addEventListener('mouseleave',function(){ l.classList.remove('peeking'); });
