@@ -156,7 +156,7 @@ const AboutMe = () => {
             <div className="not-prose !mt-16 sm:!mt-24">
               <iframe
                 ref={pillarsRef}
-                src="/research-pillars.html?v=6"
+                src="/research-pillars.html?v=7"
                 title="Four research pillars"
                 loading="lazy"
                 scrolling="no"
