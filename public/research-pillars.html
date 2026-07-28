@@ -24,7 +24,7 @@ body{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
 .stage{position:relative;z-index:2;display:flex;align-items:flex-start;justify-content:center;padding:20px 20px 42px}
 .deck{position:relative;width:min(1160px,96vw)}
 .deck::after{content:"";position:absolute;left:9%;right:9%;bottom:-30px;height:80px;z-index:-1;
-  background:radial-gradient(50% 100% at 50% 0,rgba(30,28,24,.20),transparent 72%);filter:blur(16px);opacity:0;transition:opacity 1.2s var(--spring) .5s}
+  background:radial-gradient(50% 100% at 50% 0,rgba(30,28,24,0),transparent 72%);filter:blur(16px);opacity:0;transition:opacity 1.2s var(--spring) .5s}
 body.ready .deck::after{opacity:1}
 .stack{display:flex;flex-direction:column}
 
@@ -35,7 +35,7 @@ body.ready .deck::after{opacity:1}
 .sheet{position:relative;border-radius:26px;overflow:hidden;max-height:96px;transform-origin:50% 50%;animation:pmorph var(--m,9s) ease-in-out var(--dm,0s) infinite,pfloat var(--f,7s) ease-in-out var(--df,0s) infinite;
   background:linear-gradient(160deg,rgba(var(--soft),.97) 0%,rgba(var(--mid),.5) 140%);
   border:1px solid rgba(255,255,255,.62);
-  box-shadow:0 30px 50px -32px rgba(30,28,24,.55),0 10px 22px -14px rgba(var(--deep),.4),inset 0 1px 0 rgba(255,255,255,.7);
+  box-shadow:0 26px 46px -30px rgba(var(--deep),.30),0 10px 22px -14px rgba(var(--deep),.4),inset 0 1px 0 rgba(255,255,255,.7);
   transition:max-height .9s var(--spring),box-shadow .7s var(--spring),background .8s var(--smooth),border-color .6s,border-radius .8s var(--spring),transform .8s var(--spring)}
 .gloss{position:absolute;inset:0;pointer-events:none;background:radial-gradient(135% 130% at 10% -25%,rgba(255,255,255,.92),rgba(255,255,255,0) 44%)}
 .spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s var(--smooth);
@@ -81,19 +81,19 @@ body.touched .chev{animation:none}
 
 .xbtn{position:absolute;top:18px;right:18px;z-index:6;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
   background:rgba(255,255,255,.85);color:var(--ink);cursor:pointer;display:grid;place-items:center;
-  opacity:0;transform:scale(.7);pointer-events:none;transition:.5s var(--spring-b);box-shadow:0 8px 18px -10px rgba(30,28,24,.4)}
+  opacity:0;transform:scale(.7);pointer-events:none;transition:.5s var(--spring-b);box-shadow:0 8px 18px -10px rgba(var(--deep),.28)}
 .xbtn svg{width:20px;height:20px}
 .xbtn:hover{background:var(--ink);color:var(--cream);transform:rotate(90deg)}
 
 /* hover / peek lift — transform only (no reflow, so the page never jumps) */
 .stack:not(.has-active) .layer:hover,.stack:not(.has-active) .layer:focus-visible,.stack:not(.has-active) .layer.demo{transform:translateY(-5px) scale(1.014)}
 .stack:not(.has-active) .layer:hover .sheet,.stack:not(.has-active) .layer:focus-visible .sheet,.stack:not(.has-active) .layer.demo .sheet{
-  box-shadow:0 46px 74px -36px rgba(30,28,24,.6),0 14px 26px -12px rgba(var(--deep),.5),inset 0 1px 0 rgba(255,255,255,.8)}
+  box-shadow:0 46px 74px -36px rgba(var(--deep),.34),0 14px 26px -12px rgba(var(--deep),.5),inset 0 1px 0 rgba(255,255,255,.8)}
 
 /* active = expanded card */
 .layer.active{transform:none;z-index:30}
 .layer.active .sheet{max-height:900px;background:var(--cream);border-color:rgba(255,255,255,.4);border-radius:26px;transform:none;animation:none;
-  box-shadow:0 80px 120px -50px rgba(30,28,24,.5),0 20px 40px -18px rgba(var(--deep),.28),inset 0 1px 0 rgba(255,255,255,.9)}
+  box-shadow:0 80px 120px -50px rgba(var(--deep),.30),0 20px 40px -18px rgba(var(--deep),.28),inset 0 1px 0 rgba(255,255,255,.9)}
 .layer.active .head{opacity:0;height:0;padding:0;pointer-events:none;overflow:hidden}
 .layer.active .gloss,.layer.active .spot{opacity:0}
 .layer.active .pptcard{opacity:1;transform:none;pointer-events:auto}
