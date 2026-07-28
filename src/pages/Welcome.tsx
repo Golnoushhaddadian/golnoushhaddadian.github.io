@@ -153,25 +153,7 @@ const AboutMe = () => {
             <p>
               At the heart of my work is a simple belief: AI should not replace humans, but at its best should serve as connective tissue that amplifies human potential, strengthens agency, deepens thinking and reasoning, and enables learners and educators to connect, create, and achieve what would not be possible alone. Human progress has never occurred in isolation; it emerges through our ability to understand one another, cultivate trust, build meaningful relationships, and collaborate toward mutual goals. As AI continues to advance in its ability to reason, generate solutions, and operate with increasing autonomy, its greatest promise lies in reinforcing such unique and fundamental human qualities and expanding the possibilities we can achieve together.
             </p>
-            <p>My core research areas include:</p>
-            <div className="flex flex-wrap justify-center gap-2.5 mt-2">
-              {[
-                { label: 'AI in Education', bg: 'bg-[hsl(217,91%,60%)] border-[hsl(217,91%,50%)] shadow-[0_6px_16px_-3px_hsl(217,91%,60%/0.45)]' },
-                { label: 'Personalized Learning', bg: 'bg-[hsl(271,76%,53%)] border-[hsl(271,76%,45%)] shadow-[0_6px_16px_-3px_hsl(271,76%,53%/0.45)]' },
-                { label: 'Feedback', bg: 'bg-[hsl(160,84%,39%)] border-[hsl(160,84%,32%)] shadow-[0_6px_16px_-3px_hsl(160,84%,39%/0.45)]' },
-                { label: 'Assessment & Evaluation', bg: 'bg-[hsl(20,90%,55%)] border-[hsl(20,90%,47%)] shadow-[0_6px_16px_-3px_hsl(20,90%,55%/0.45)]' },
-                { label: 'Higher Education', bg: 'bg-[hsl(340,82%,55%)] border-[hsl(340,82%,47%)] shadow-[0_6px_16px_-3px_hsl(340,82%,55%/0.45)]' },
-              ].map(({ label, bg }, i) => (
-                <span
-                  key={label}
-                  className={`badge-float inline-block border ${bg} text-white text-[10px] sm:text-xs md:text-sm font-medium px-3 py-1.5 rounded-full`}
-                  style={{ animationDelay: `${i * 0.35}s` }}
-                >
-                  {label}
-                </span>
-              ))}
-            </div>
-            <div className="not-prose mt-8 sm:mt-12 pt-8 sm:pt-10 border-t border-border">
+            <div className="not-prose mt-8 sm:mt-12">
               <iframe
                 ref={pillarsRef}
                 src="/research-pillars.html?v=5"
