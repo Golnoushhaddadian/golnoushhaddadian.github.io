@@ -153,7 +153,7 @@ const AboutMe = () => {
             <p>
               At the heart of my work is a simple belief: AI should not replace humans, but at its best should serve as connective tissue that amplifies human potential, strengthens agency, deepens thinking and reasoning, and enables learners and educators to connect, create, and achieve what would not be possible alone. Human progress has never occurred in isolation; it emerges through our ability to understand one another, cultivate trust, build meaningful relationships, and collaborate toward mutual goals. As AI continues to advance in its ability to reason, generate solutions, and operate with increasing autonomy, its greatest promise lies in reinforcing such unique and fundamental human qualities and expanding the possibilities we can achieve together.
             </p>
-            <div className="not-prose mt-8 sm:mt-12">
+            <div className="not-prose mt-16 sm:mt-24">
               <iframe
                 ref={pillarsRef}
                 src="/research-pillars.html?v=6"
@@ -163,7 +163,7 @@ const AboutMe = () => {
                 className="w-full block"
                 style={{ width: "100%", height: "360px", border: 0, overflow: "hidden" }}
               />
-              <p className="text-center text-xs sm:text-sm text-muted-foreground/60 italic mt-4 sm:mt-5">Studied together, each pillar shapes how the others are designed.</p>
+              <p className="text-center text-xs sm:text-sm text-muted-foreground/60 italic mt-10 sm:mt-14">Studied together, each pillar shapes how the others are designed.</p>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-foreground mt-4 mb-1">Previously</h3>
             <p>
