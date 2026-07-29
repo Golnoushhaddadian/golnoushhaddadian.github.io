@@ -154,6 +154,7 @@ const AboutMe = () => {
               At the heart of my work is a simple belief: AI should not replace humans, but at its best should serve as connective tissue that amplifies human potential, strengthens agency, deepens thinking and reasoning, and enables learners and educators to connect, create, and achieve what would not be possible alone. Human progress has never occurred in isolation; it emerges through our ability to understand one another, cultivate trust, build meaningful relationships, and collaborate toward mutual goals. As AI continues to advance in its ability to reason, generate solutions, and operate with increasing autonomy, its greatest promise lies in reinforcing such unique and fundamental human qualities and expanding the possibilities we can achieve together.
             </p>
             <div className="not-prose !mt-16 sm:!mt-24">
+              <p className="text-center text-sm sm:text-base text-muted-foreground/75 max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed">My research is built on the four pillars below. They are not separate lines of inquiry but interdependent commitments, each shaping and shaped by the others, so that together they form a single, coherent picture of how AI can support human learning.</p>
               <iframe
                 ref={pillarsRef}
                 src="/research-pillars.html?v=7"
