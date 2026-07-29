@@ -157,7 +157,7 @@ const AboutMe = () => {
               <p className="text-center text-sm sm:text-base text-muted-foreground/75 max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed">My research is organized around four interconnected strands, as illustrated below. They are not separate lines of inquiry but interdependent commitments, each shaping and shaped by the others, so that together they form a single, coherent picture of how AI can support human learning.</p>
               <iframe
                 ref={pillarsRef}
-                src="/research-pillars.html?v=7"
+                src="/research-pillars.html?v=8"
                 title="Four research pillars"
                 loading="lazy"
                 scrolling="no"
