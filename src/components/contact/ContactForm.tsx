@@ -40,7 +40,6 @@ const COLLAB_OPTIONS = [
   "Mentorship or advising",
   "Speaking or guest lecture",
   "Consulting / advisory",
-  "Student / postdoc opportunity",
   "Other",
 ];
 
@@ -233,6 +232,23 @@ const ContactForm = () => {
           </div>
 
           <div className="space-y-2">
+            <label htmlFor="collaboration" className="text-sm font-medium">
+              What kind of collaboration are you looking for?
+            </label>
+            <select
+              id="collaboration"
+              {...register("collaboration")}
+              defaultValue=""
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+            >
+              <option value="" disabled>Select a type of collaboration</option>
+              {COLLAB_OPTIONS.map((opt) => (
+                <option key={opt} value={opt}>{opt}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-2">
             <label htmlFor="cvLink" className="text-sm font-medium">
               Link to CV/Website
             </label>
@@ -253,23 +269,6 @@ const ContactForm = () => {
             {errors.cvLink && (
               <p className="text-sm text-destructive mt-1">{errors.cvLink.message}</p>
             )}
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="collaboration" className="text-sm font-medium">
-              What kind of collaboration are you looking for?
-            </label>
-            <select
-              id="collaboration"
-              {...register("collaboration")}
-              defaultValue=""
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-            >
-              <option value="" disabled>Select a type of collaboration</option>
-              {COLLAB_OPTIONS.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
-              ))}
-            </select>
           </div>
 
           <div className="space-y-2">
