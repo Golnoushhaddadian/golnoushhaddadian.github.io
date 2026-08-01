@@ -347,9 +347,9 @@ const PublicationEntry = ({ pub, index }: { pub: Publication; index: number }) =
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
+      style={{ opacity: 1 }}
       className="group relative py-4 first:pt-1"
     >
       {/* Card-like container with subtle hover */}
