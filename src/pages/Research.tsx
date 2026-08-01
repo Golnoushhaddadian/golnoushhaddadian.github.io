@@ -37,14 +37,6 @@ const journalPublications: Publication[] = [
     apa: "Khajooeinejad, A., Haddadian, G., Chapariniya, M., & Motevali, S. (2026, September 5–6). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. 4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States.",
   },
   {
-    title: "A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education",
-    authors: "Haddadian, G., Kim, M. K., & Haddadian, N.",
-    venue: "Research Synthesis in Applied Linguistics, 1-51",
-    year: 2026,
-    doi: "https://doi.org/10.1080/29984475.2025.2598266",
-    apa: "Haddadian, G., Kim, M. K., & Haddadian, N. (2026). A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education. Research Synthesis in Applied Linguistics, 1-51.",
-  },
-  {
     title: "The value of GenAI for peer feedback provision: Student perceptions and impacts",
     authors: "Noroozi, O., Haddadian, G., Gao, X., Schunn, C., Alqassab, M., & Banihashem, S. K.",
     venue: "International Journal of Educational Technology in Higher Education, 22(1), 61",
@@ -98,6 +90,14 @@ const journalPublications: Publication[] = [
     venue: "AIRiAL 2026 Conference, Teachers College, Columbia University, New York, NY, United States (Accepted)",
     year: 2026,
     apa: "Haddadian, G., Haddadian, N., & Soleimani, S. (Accepted, 2026). Comparing the effects of AI-generated and teacher-delivered formative assessment on EFL learners' writing performance and writing self-efficacy. Paper presented at AIRiAL 2026 Conference, Teachers College, Columbia University, New York, NY, United States.",
+  },
+  {
+    title: "A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education",
+    authors: "Haddadian, G., Kim, M. K., & Haddadian, N.",
+    venue: "Research Synthesis in Applied Linguistics, 1-51",
+    year: 2026,
+    doi: "https://doi.org/10.1080/29984475.2025.2598266",
+    apa: "Haddadian, G., Kim, M. K., & Haddadian, N. (2026). A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education. Research Synthesis in Applied Linguistics, 1-51.",
   },
   {
     title: "Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment",
