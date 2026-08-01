@@ -15,7 +15,7 @@ type FormData = {
   stage: string;
   institution: string;
   cvLink: string;
-  collaboration: string[];
+  collaboration: string;
   interests: string;
   experience: string;
   subject: string;
@@ -89,10 +89,7 @@ const ContactForm = () => {
       if (data.stage) details.push(`Stage: ${data.stage}`);
       if (data.institution?.trim()) details.push(`Institution/Organization: ${data.institution.trim()}`);
       if (data.cvLink?.trim()) details.push(`CV/Website: ${data.cvLink.trim()}`);
-      const collab = Array.isArray(data.collaboration)
-        ? data.collaboration.filter(Boolean)
-        : (data.collaboration ? [data.collaboration] : []);
-      if (collab.length) details.push(`Collaboration interest: ${collab.join(", ")}`);
+      if (data.collaboration) details.push(`Collaboration interest: ${data.collaboration}`);
       if (data.interests?.trim()) details.push(`Areas of interest: ${data.interests.trim()}`);
       if (data.experience?.trim()) details.push(`Relevant skills/experience: ${data.experience.trim()}`);
 
@@ -259,26 +256,20 @@ const ContactForm = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">
-              What kind of collaboration are you looking for?{" "}
-              <span className="text-muted-foreground font-normal">(Check all that apply.)</span>
+            <label htmlFor="collaboration" className="text-sm font-medium">
+              What kind of collaboration are you looking for?
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+            <select
+              id="collaboration"
+              {...register("collaboration")}
+              defaultValue=""
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+            >
+              <option value="" disabled>Select a type of collaboration</option>
               {COLLAB_OPTIONS.map((opt) => (
-                <label
-                  key={opt}
-                  className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
-                >
-                  <input
-                    type="checkbox"
-                    value={opt}
-                    {...register("collaboration")}
-                    className="h-4 w-4 rounded border-input text-primary focus:ring-2 focus:ring-ring focus:ring-offset-0"
-                  />
-                  <span>{opt}</span>
-                </label>
+                <option key={opt} value={opt}>{opt}</option>
               ))}
-            </div>
+            </select>
           </div>
 
           <div className="space-y-2">
