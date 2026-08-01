@@ -281,7 +281,7 @@ const ContactForm = () => {
                 maxLength: { value: 1000, message: "Must be under 1000 characters" },
               })}
               aria-invalid={errors.interests ? "true" : "false"}
-              placeholder="e.g., feedback design, learner modeling, AI in education..."
+              placeholder="Tell me which aspects of my work interest you, and why..."
               rows={3}
               maxLength={1000}
             />
