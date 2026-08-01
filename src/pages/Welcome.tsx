@@ -222,10 +222,10 @@ const AboutMe = () => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-justify text-[10px] sm:text-xs md:text-sm">
             <p>
-              Khajooeinejad, A., Chapariniya, M., Motevali, S., & <strong>Haddadian, G.</strong> (<span className="text-blue-600 font-medium">2026</span>, September 5–6). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
+              Khajooeinejad, A., Chapariniya, M., Motevali, S., & <strong>Haddadian, G.</strong> (Accepted). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
             </p>
             <p>
-              Khajooeinejad, A., <strong>Haddadian, G.</strong>, Chapariniya, M., & Motevali, S. (<span className="text-blue-600 font-medium">2026</span>, September 5–6). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
+              Khajooeinejad, A., <strong>Haddadian, G.</strong>, Chapariniya, M., & Motevali, S. (Accepted). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
             </p>
             <p>
               <strong>Haddadian, G.</strong>, Haddadian, N., & Soleimani, S. (Accepted). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. Paper presented at AIRiAL 2026 Conference, Teachers College, Columbia University, New York, NY, United States.
