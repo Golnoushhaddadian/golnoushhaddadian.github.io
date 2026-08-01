@@ -15,6 +15,9 @@ type FormData = {
   stage: string;
   institution: string;
   cvLink: string;
+  collaboration: string[];
+  interests: string;
+  experience: string;
   subject: string;
   message: string;
   website: string; // honeypot field
@@ -28,6 +31,16 @@ const STAGE_OPTIONS = [
   "Faculty / Professor",
   "Researcher / Scientist",
   "Industry professional",
+  "Other",
+];
+
+const COLLAB_OPTIONS = [
+  "Research collaboration",
+  "Co-authoring / publication",
+  "Mentorship or advising",
+  "Speaking or guest lecture",
+  "Consulting / advisory",
+  "Student / postdoc opportunity",
   "Other",
 ];
 
@@ -76,6 +89,12 @@ const ContactForm = () => {
       if (data.stage) details.push(`Stage: ${data.stage}`);
       if (data.institution?.trim()) details.push(`Institution/Organization: ${data.institution.trim()}`);
       if (data.cvLink?.trim()) details.push(`CV/Website: ${data.cvLink.trim()}`);
+      const collab = Array.isArray(data.collaboration)
+        ? data.collaboration.filter(Boolean)
+        : (data.collaboration ? [data.collaboration] : []);
+      if (collab.length) details.push(`Collaboration interest: ${collab.join(", ")}`);
+      if (data.interests?.trim()) details.push(`Areas of interest: ${data.interests.trim()}`);
+      if (data.experience?.trim()) details.push(`Relevant skills/experience: ${data.experience.trim()}`);
 
       const composedMessage = details.length
         ? `${data.message.trim()}\n\n---\nSender details\n${details.join("\n")}`
@@ -236,6 +255,67 @@ const ContactForm = () => {
             />
             {errors.cvLink && (
               <p className="text-sm text-destructive mt-1">{errors.cvLink.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">
+              What kind of collaboration are you looking for?{" "}
+              <span className="text-muted-foreground font-normal">(Check all that apply.)</span>
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+              {COLLAB_OPTIONS.map((opt) => (
+                <label
+                  key={opt}
+                  className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    value={opt}
+                    {...register("collaboration")}
+                    className="h-4 w-4 rounded border-input text-primary focus:ring-2 focus:ring-ring focus:ring-offset-0"
+                  />
+                  <span>{opt}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="interests" className="text-sm font-medium">
+              What are your areas of interest related to my work?
+            </label>
+            <Textarea
+              id="interests"
+              {...register("interests", {
+                maxLength: { value: 1000, message: "Must be under 1000 characters" },
+              })}
+              aria-invalid={errors.interests ? "true" : "false"}
+              placeholder="e.g., feedback design, learner modeling, AI in education..."
+              rows={3}
+              maxLength={1000}
+            />
+            {errors.interests && (
+              <p className="text-sm text-destructive mt-1">{errors.interests.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="experience" className="text-sm font-medium">
+              Any relevant skills or experiences I should know about?
+            </label>
+            <Textarea
+              id="experience"
+              {...register("experience", {
+                maxLength: { value: 1000, message: "Must be under 1000 characters" },
+              })}
+              aria-invalid={errors.experience ? "true" : "false"}
+              placeholder="Briefly describe relevant skills, background, or experience..."
+              rows={3}
+              maxLength={1000}
+            />
+            {errors.experience && (
+              <p className="text-sm text-destructive mt-1">{errors.experience.message}</p>
             )}
           </div>
 
