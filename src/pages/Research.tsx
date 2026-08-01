@@ -23,6 +23,20 @@ type Publication = {
 
 const journalPublications: Publication[] = [
   {
+    title: "Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery",
+    authors: "Khajooeinejad, A., Chapariniya, M., Motevali, S., & Haddadian, G.",
+    venue: "4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States",
+    year: 2026,
+    apa: "Khajooeinejad, A., Chapariniya, M., Motevali, S., & Haddadian, G. (2026, September 5–6). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. 4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States.",
+  },
+  {
+    title: "Trustless multi-agent AI: Blockchain-based coordination for LLM agents",
+    authors: "Khajooeinejad, A., Haddadian, G., Chapariniya, M., & Motevali, S.",
+    venue: "4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States",
+    year: 2026,
+    apa: "Khajooeinejad, A., Haddadian, G., Chapariniya, M., & Motevali, S. (2026, September 5–6). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. 4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States.",
+  },
+  {
     title: "A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education",
     authors: "Haddadian, G., Kim, M. K., & Haddadian, N.",
     venue: "Research Synthesis in Applied Linguistics, 1-51",
