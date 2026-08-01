@@ -18,8 +18,7 @@ type FormData = {
   collaboration: string;
   interests: string;
   experience: string;
-  subject: string;
-  message: string;
+  anythingElse: string;
   website: string; // honeypot field
 };
 
@@ -85,23 +84,23 @@ const ContactForm = () => {
     
     try {
       const details: string[] = [];
-      if (data.stage) details.push(`Stage: ${data.stage}`);
-      if (data.institution?.trim()) details.push(`Institution/Organization: ${data.institution.trim()}`);
+      details.push(`Stage: ${data.stage}`);
+      details.push(`Institution/Organization: ${data.institution.trim()}`);
+      details.push(`Collaboration interest: ${data.collaboration}`);
       if (data.cvLink?.trim()) details.push(`CV/Website: ${data.cvLink.trim()}`);
-      if (data.collaboration) details.push(`Collaboration interest: ${data.collaboration}`);
-      if (data.interests?.trim()) details.push(`Areas of interest: ${data.interests.trim()}`);
-      if (data.experience?.trim()) details.push(`Relevant skills/experience: ${data.experience.trim()}`);
+      details.push(`Areas of interest: ${data.interests.trim()}`);
+      details.push(`Relevant skills/experience: ${data.experience.trim()}`);
+      if (data.anythingElse?.trim()) details.push(`Anything else: ${data.anythingElse.trim()}`);
 
-      const composedMessage = details.length
-        ? `${data.message.trim()}\n\n---\nSender details\n${details.join("\n")}`
-        : data.message.trim();
+      const composedMessage = details.join("\n");
+      const composedSubject = `New inquiry from ${data.name.trim()} — ${data.collaboration}`;
 
       const templateParams = {
         to_name: "Golnoush Haddadian",
         to_email: "ghaddadian1@gsu.edu",
         from_name: data.name.trim(),
         from_email: data.email.trim(),
-        subject: data.subject.trim(),
+        subject: composedSubject,
         message: composedMessage,
         stage: data.stage || "",
         institution: data.institution?.trim() || "",
@@ -154,7 +153,7 @@ const ContactForm = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium">
-                Name
+                Name <span className="text-destructive">*</span>
               </label>
               <Input 
                 id="name" 
@@ -172,7 +171,7 @@ const ContactForm = () => {
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">
-                Email
+                Email <span className="text-destructive">*</span>
               </label>
               <Input 
                 id="email" 
@@ -198,12 +197,13 @@ const ContactForm = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="stage" className="text-sm font-medium">
-                Current academic/professional stage
+                Current academic/professional stage <span className="text-destructive">*</span>
               </label>
               <select
                 id="stage"
-                {...register("stage")}
+                {...register("stage", { required: "Please select your stage" })}
                 defaultValue=""
+                aria-invalid={errors.stage ? "true" : "false"}
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
               >
                 <option value="" disabled>Select your stage</option>
@@ -211,14 +211,18 @@ const ContactForm = () => {
                   <option key={s} value={s}>{s}</option>
                 ))}
               </select>
+              {errors.stage && (
+                <p className="text-sm text-destructive mt-1">{errors.stage.message}</p>
+              )}
             </div>
             <div className="space-y-2">
               <label htmlFor="institution" className="text-sm font-medium">
-                Institution or Organization
+                Institution or Organization <span className="text-destructive">*</span>
               </label>
               <Input
                 id="institution"
                 {...register("institution", {
+                  required: "Institution or organization is required",
                   maxLength: { value: 200, message: "Must be under 200 characters" },
                 })}
                 aria-invalid={errors.institution ? "true" : "false"}
@@ -233,12 +237,13 @@ const ContactForm = () => {
 
           <div className="space-y-2">
             <label htmlFor="collaboration" className="text-sm font-medium">
-              What kind of collaboration are you looking for?
+              What kind of collaboration are you looking for? <span className="text-destructive">*</span>
             </label>
             <select
               id="collaboration"
-              {...register("collaboration")}
+              {...register("collaboration", { required: "Please select a type of collaboration" })}
               defaultValue=""
+              aria-invalid={errors.collaboration ? "true" : "false"}
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
             >
               <option value="" disabled>Select a type of collaboration</option>
@@ -246,6 +251,9 @@ const ContactForm = () => {
                 <option key={opt} value={opt}>{opt}</option>
               ))}
             </select>
+            {errors.collaboration && (
+              <p className="text-sm text-destructive mt-1">{errors.collaboration.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -273,11 +281,12 @@ const ContactForm = () => {
 
           <div className="space-y-2">
             <label htmlFor="interests" className="text-sm font-medium">
-              What are your areas of interest related to my work?
+              What are your areas of interest related to my work? <span className="text-destructive">*</span>
             </label>
             <Textarea
               id="interests"
               {...register("interests", {
+                required: "This field is required",
                 maxLength: { value: 1000, message: "Must be under 1000 characters" },
               })}
               aria-invalid={errors.interests ? "true" : "false"}
@@ -292,11 +301,12 @@ const ContactForm = () => {
 
           <div className="space-y-2">
             <label htmlFor="experience" className="text-sm font-medium">
-              Any relevant skills or experiences I should know about?
+              Any relevant skills or experiences I should know about? <span className="text-destructive">*</span>
             </label>
             <Textarea
               id="experience"
               {...register("experience", {
+                required: "This field is required",
                 maxLength: { value: 1000, message: "Must be under 1000 characters" },
               })}
               aria-invalid={errors.experience ? "true" : "false"}
@@ -310,41 +320,22 @@ const ContactForm = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="subject" className="text-sm font-medium">
-              Subject
+            <label htmlFor="anythingElse" className="text-sm font-medium">
+              Anything else you'd like me to know?{" "}
+              <span className="text-muted-foreground font-normal">(optional)</span>
             </label>
-            <Input 
-              id="subject" 
-              {...register("subject", { 
-                required: "Subject is required",
-                maxLength: { value: 200, message: "Subject must be under 200 characters" },
+            <Textarea
+              id="anythingElse"
+              {...register("anythingElse", {
+                maxLength: { value: 2000, message: "Must be under 2000 characters" },
               })}
-              aria-invalid={errors.subject ? "true" : "false"}
-              placeholder="What is this regarding?"
-              maxLength={200}
-            />
-            {errors.subject && (
-              <p className="text-sm text-destructive mt-1">{errors.subject.message}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-medium">
-              Message
-            </label>
-            <Textarea 
-              id="message" 
-              {...register("message", { 
-                required: "Message is required",
-                maxLength: { value: 2000, message: "Message must be under 2000 characters" },
-              })}
-              aria-invalid={errors.message ? "true" : "false"}
-              placeholder="Your message..." 
-              rows={6}
+              aria-invalid={errors.anythingElse ? "true" : "false"}
+              placeholder="Anything else you'd like to add..."
+              rows={4}
               maxLength={2000}
             />
-            {errors.message && (
-              <p className="text-sm text-destructive mt-1">{errors.message.message}</p>
+            {errors.anythingElse && (
+              <p className="text-sm text-destructive mt-1">{errors.anythingElse.message}</p>
             )}
           </div>
 
