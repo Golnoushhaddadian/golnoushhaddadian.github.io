@@ -12,10 +12,24 @@ import emailjs from '@emailjs/browser';
 type FormData = {
   name: string;
   email: string;
+  stage: string;
+  institution: string;
+  cvLink: string;
   subject: string;
   message: string;
   website: string; // honeypot field
 };
+
+const STAGE_OPTIONS = [
+  "Undergraduate student",
+  "Master's student",
+  "PhD student / candidate",
+  "Postdoctoral researcher",
+  "Faculty / Professor",
+  "Researcher / Scientist",
+  "Industry professional",
+  "Other",
+];
 
 const RATE_LIMIT_MS = 60_000; // 1 minute between submissions
 let lastSubmitTime = 0;
@@ -58,13 +72,25 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
+      const details: string[] = [];
+      if (data.stage) details.push(`Stage: ${data.stage}`);
+      if (data.institution?.trim()) details.push(`Institution/Organization: ${data.institution.trim()}`);
+      if (data.cvLink?.trim()) details.push(`CV/Website: ${data.cvLink.trim()}`);
+
+      const composedMessage = details.length
+        ? `${data.message.trim()}\n\n---\nSender details\n${details.join("\n")}`
+        : data.message.trim();
+
       const templateParams = {
         to_name: "Golnoush Haddadian",
         to_email: "ghaddadian1@gsu.edu",
         from_name: data.name.trim(),
         from_email: data.email.trim(),
         subject: data.subject.trim(),
-        message: data.message.trim(),
+        message: composedMessage,
+        stage: data.stage || "",
+        institution: data.institution?.trim() || "",
+        cv_link: data.cvLink?.trim() || "",
         reply_to: data.email.trim(),
       };
       
@@ -152,6 +178,65 @@ const ContactForm = () => {
                 <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
               )}
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="stage" className="text-sm font-medium">
+                Current academic/professional stage
+              </label>
+              <select
+                id="stage"
+                {...register("stage")}
+                defaultValue=""
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+              >
+                <option value="" disabled>Select your stage</option>
+                {STAGE_OPTIONS.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="institution" className="text-sm font-medium">
+                Institution or Organization
+              </label>
+              <Input
+                id="institution"
+                {...register("institution", {
+                  maxLength: { value: 200, message: "Must be under 200 characters" },
+                })}
+                aria-invalid={errors.institution ? "true" : "false"}
+                placeholder="e.g., Georgia State University"
+                maxLength={200}
+              />
+              {errors.institution && (
+                <p className="text-sm text-destructive mt-1">{errors.institution.message}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="cvLink" className="text-sm font-medium">
+              Link to CV/Website
+            </label>
+            <Input
+              id="cvLink"
+              type="url"
+              {...register("cvLink", {
+                maxLength: { value: 500, message: "Link must be under 500 characters" },
+                pattern: {
+                  value: /^https?:\/\/.+/i,
+                  message: "Please enter a valid URL starting with http:// or https://",
+                },
+              })}
+              aria-invalid={errors.cvLink ? "true" : "false"}
+              placeholder="https://your-cv-or-website.com"
+              maxLength={500}
+            />
+            {errors.cvLink && (
+              <p className="text-sm text-destructive mt-1">{errors.cvLink.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
