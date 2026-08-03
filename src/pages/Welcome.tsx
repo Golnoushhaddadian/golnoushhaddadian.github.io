@@ -84,7 +84,7 @@ const AboutMe = () => {
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-5xl">
         <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
-          <div className="md:w-2/5 flex flex-col items-center">
+          <div className="md:w-2/5 flex flex-col items-center md:items-start">
             <div className="w-44 sm:w-56 md:w-64 lg:w-[17rem]">
               <AspectRatio ratio={1388 / 1805} className="rounded-full overflow-hidden">
                 <Avatar className="h-full w-full rounded-full">
