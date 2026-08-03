@@ -84,8 +84,8 @@ const AboutMe = () => {
   return <div className="min-h-screen flex flex-col items-center py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
       <div className="w-full max-w-5xl">
         <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
-          <div className="md:w-1/3 flex flex-col items-center">
-            <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64">
+          <div className="md:w-2/5 flex flex-col items-center">
+            <div className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[22rem]">
               <AspectRatio ratio={1 / 1} className="rounded-lg overflow-hidden">
                 <Avatar className="h-full w-full">
                   <AvatarImage src="/lovable-uploads/profile-2026.jpg" alt="Golnoush (Lia) Haddadian" className="object-cover" width={256} height={256} loading="eager" decoding="async" />
@@ -94,7 +94,7 @@ const AboutMe = () => {
               </AspectRatio>
             </div>
           </div>
-          <div className="md:w-2/3 text-center md:text-left">
+          <div className="md:w-3/5 text-center md:text-left">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 flex flex-col sm:flex-row items-center sm:items-baseline gap-1 sm:gap-2">
               <span>Golnoush (Lia) Haddadian</span>
               <Button variant="ghost" size="sm" className="text-[10px] sm:text-xs h-6 sm:h-8 px-2" asChild>
