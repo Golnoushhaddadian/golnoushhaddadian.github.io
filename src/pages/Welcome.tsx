@@ -85,10 +85,10 @@ const AboutMe = () => {
       <div className="w-full max-w-5xl">
         <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
           <div className="md:w-2/5 flex flex-col items-center">
-            <div className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[22rem]">
-              <AspectRatio ratio={1 / 1} className="rounded-lg overflow-hidden">
-                <Avatar className="h-full w-full">
-                  <AvatarImage src="/lovable-uploads/profile-2026.jpg" alt="Golnoush (Lia) Haddadian" className="object-cover" width={256} height={256} loading="eager" decoding="async" />
+            <div className="w-52 sm:w-64 md:w-72 lg:w-80">
+              <AspectRatio ratio={1388 / 1805} className="rounded-full overflow-hidden">
+                <Avatar className="h-full w-full rounded-full">
+                  <AvatarImage src="/lovable-uploads/profile-2026b.jpg" alt="Golnoush (Lia) Haddadian" className="object-cover h-full w-full" width={720} height={936} loading="eager" decoding="async" />
                   <AvatarFallback className="text-2xl">GH</AvatarFallback>
                 </Avatar>
               </AspectRatio>
