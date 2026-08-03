@@ -53,7 +53,7 @@ const AboutMe = () => {
     canonical: '/',
   });
 
-  const [scholarStats, setScholarStats] = useState({ citations: 74, publications: 17, hIndex: 5, i10Index: 2, updated: "Jul 2026" });
+  const [scholarStats, setScholarStats] = useState({ citations: 78, publications: 17, hIndex: 5, i10Index: 2, updated: "Aug 2026" });
   useEffect(() => {
     fetch("/scholar-stats.json")
       .then((r) => (r.ok ? r.json() : null))
