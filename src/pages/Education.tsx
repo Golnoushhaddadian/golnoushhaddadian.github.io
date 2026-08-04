@@ -15,7 +15,6 @@ const educationData = [
     degree: "Ph.D., Learning Sciences",
     dates: "Aug 2021–Dec 2025",
     details: [
-      { label: "Interests", text: "AI in Education; Personalized Learning; Feedback; Adaptive Systems; Design-based Research; Mixed-methods" },
       { label: "Dissertation", text: "\"Enhancing Argumentative Writing in English as Foreign Language Education through AI-Powered Personalized Learning\"" },
       { label: "Learning Technology Developed", text: "\"RITA–Real-time Intelligent Technology for Argumentative Writing\"" },
       { label: "Advisor", text: "Dr. Kim, M. K." },
