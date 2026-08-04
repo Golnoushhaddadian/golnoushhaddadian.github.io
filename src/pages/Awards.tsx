@@ -6,6 +6,7 @@ type AwardItem = {
   title: string;
   amount?: string;
   org: string;
+  role?: string;
   desc?: string;
 };
 
@@ -21,22 +22,22 @@ const groups: AwardGroup[] = [
       {
         year: '2025',
         amount: '$12,500',
-        title: 'Fellowship Award (National Science Foundation & Google.org)',
-        org: 'AI Institutes Virtual Organization (AIVO)',
-        desc: 'Awarded to selected graduate researchers representing five major AI in Education Institutes across the United States.',
+        title: 'AI Institutes Virtual Organization (AIVO)',
+        org: 'Funded by NSF & Google.org',
+        role: 'Fellowship',
       },
       {
         year: '2024',
-        title: 'Quantitative Evidence Synthesis (QUEST) Fully-Funded Program',
+        title: 'Quantitative Evidence Synthesis (QUEST) Training Fellowship',
         org: 'American Institutes for Research (AIR)',
-        desc: 'Fully funded program in advanced quantitative research methods.',
+        role: 'Fellow',
       },
       {
         year: '2023',
         amount: '$15,000',
-        title: 'Doctoral Student Fellowship Award',
+        title: 'Doctoral Student Award',
         org: 'Georgia State University',
-        desc: 'Awarded to three PhD students demonstrating exceptional scholarship and academic potential in Learning Technologies.',
+        role: 'Award Recipient',
       },
     ],
   },
@@ -45,29 +46,32 @@ const groups: AwardGroup[] = [
     items: [
       {
         year: '2026',
-        title: 'Outstanding Dissertation in Learning Technologies',
+        title: 'Outstanding Dissertation Award in Learning Technologies',
         org: 'Georgia State University',
+        role: 'Award Recipient',
       },
       {
         year: '2025',
-        title: 'Outstanding PhD Student in Learning Technologies',
+        title: 'Outstanding PhD Student Award in Learning Technologies',
         org: 'Georgia State University',
-        desc: 'Recognized for demonstrated potential for excellence in research, teaching, and service.',
+        role: 'Award Recipient',
+      },
+      {
+        year: '2025',
+        title: 'International Education Award for International Initiatives',
+        org: 'Georgia State University',
+        role: 'Recognition',
       },
       {
         year: '2025',
         title: 'Outstanding Contributions to Global Engagement and Global Citizenship',
         org: 'Georgia State University',
-      },
-      {
-        year: '2025',
-        title: 'International Education Award in International Initiatives (Nominee)',
-        org: 'Georgia State University',
+        role: 'Recognition',
       },
       {
         year: '',
-        title: 'Ranked 11th of ~20,000',
-        org: 'National University Entrance Exam in Linguistics',
+        title: 'National Rank: 11th / 20,000',
+        org: "Iran's National University Entrance Examination (Language & Linguistics)",
       },
     ],
   },
@@ -76,14 +80,15 @@ const groups: AwardGroup[] = [
     items: [
       {
         year: '2024',
-        title: 'Outstanding Conference Paper Award',
-        org: 'Society for Information Technology & Teacher Education & Association for the Advancement of Computing in Education (AACE)',
-        desc: 'Distinguished for exceptional quality, originality, and significant scholarly contribution.',
+        title: 'Outstanding Paper Award',
+        org: 'Association for the Advancement of Computing in Education (AACE)',
+        role: 'Award Recipient',
       },
       {
         year: '2006',
-        title: 'Distinguished Student Researcher',
+        title: 'Distinguished Student Researcher Award',
         org: 'Young Researchers and Elite Club',
+        role: 'Award Recipient',
       },
     ],
   },
@@ -92,13 +97,15 @@ const groups: AwardGroup[] = [
     items: [
       {
         year: '2013',
-        title: 'Innovative and Supportive Teacher of Foreign Languages',
+        title: 'Innovative and Supportive Foreign Language Teacher Award',
         org: 'Balan Language Academy',
+        role: 'Award Recipient',
       },
       {
         year: '2010',
-        title: 'Outstanding Teacher of Foreign Languages',
+        title: 'Outstanding Foreign Language Teacher Award',
         org: 'Aryana Fanavaran Institute of Technology',
+        role: 'Award Recipient',
       },
     ],
   },
@@ -132,6 +139,11 @@ const AwardRow = ({ item, delay }: { item: AwardItem; delay: number }) => (
       <div className="text-[13.5px] sm:text-[14.5px] text-foreground/70 font-medium mt-1 leading-snug">
         {item.org}
       </div>
+      {item.role && (
+        <span className="inline-block mt-2 text-[10px] font-semibold tracking-[0.12em] uppercase text-blue-400/90 bg-blue-500/10 px-2.5 py-[3px] rounded-full">
+          {item.role}
+        </span>
+      )}
       {item.desc && (
         <div className="text-[12.5px] sm:text-[13.5px] text-muted-foreground mt-1.5 leading-relaxed max-w-[78ch]">
           {item.desc}
