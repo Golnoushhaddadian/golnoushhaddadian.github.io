@@ -230,6 +230,9 @@ const AboutMe = () => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-justify text-[10px] sm:text-xs md:text-sm">
             <p>
+              Chowdhury Niloy, A., <strong>Haddadian, G.</strong>, & Kim, M. K. (Accepted). Who keeps up with whom? Assessing GenAI text detection across version updates. Paper accepted for presentation at the AIME-Con 2026 Conference, Pittsburgh, PA, United States.
+            </p>
+            <p>
               Khajooeinejad, A., Chapariniya, M., Motevali, S., & <strong>Haddadian, G.</strong> (Accepted). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
             </p>
             <p>
