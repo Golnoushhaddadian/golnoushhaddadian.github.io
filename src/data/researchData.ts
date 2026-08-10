@@ -275,6 +275,13 @@ export const otherPresentations: NonRefereedPublication[] = [
   {
     authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
     year: "2026",
+    title: "Who keeps up with whom? Assessing GenAI text detection across version updates",
+    journal: "AIME-Con 2026 Conference, Pittsburgh, PA, United States [Accepted]",
+    keywords: ["AI Detection", "GenAI"]
+  },
+  {
+    authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
+    year: "2026",
     title: "The Moving Target Problem in AI Text Detection: Evidence From Chatbot and Detector Version Changes",
     journal: "External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), May 15, Atlanta, Georgia [Format: Poster]",
     keywords: ["AI Detection", "Chatbots"]
