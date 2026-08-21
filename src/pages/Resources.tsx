@@ -28,7 +28,7 @@ const resources: Resource[] = [
     link: "/argumentative-writing-feedback.html",
     citation:
       "Haddadian, G. (2026). Argumentative writing & feedback: An interactive concept map [Interactive tool]. https://golnoushhaddadian.com/argumentative-writing-feedback.html",
-    image: "/lovable-uploads/argumentative-writing-feedback-preview.png",
+    image: "/uploads/argumentative-writing-feedback-preview.png",
   },
   {
     title: "Research Statement Evaluation Rubric",
@@ -38,7 +38,7 @@ const resources: Resource[] = [
     link: "https://lime-benny-27-5769c8.tiiny.site",
     citation:
       "Haddadian, G. (n.d.). Research statement evaluation rubric [Interactive tool]. https://lime-benny-27-5769c8.tiiny.site",
-    image: "/lovable-uploads/rubric-preview.png",
+    image: "/uploads/rubric-preview.png",
     disclaimer: "This tool is only a general guide and should not be treated as a definitive evaluation. Please use it alongside expert feedback and independent judgment.",
   },
 
@@ -60,7 +60,7 @@ const resources: Resource[] = [
     link: "https://docs.google.com/document/d/1FJQ4H9y1M8vuPmn6oCDm8T_fZRFQplm4Lmce-2ZlhOM",
     citation:
       "Vickery, M. (2019–present). Things I wish I knew about the learning sciences [Living document].",
-    image: "/lovable-uploads/things-i-wish-i-knew-preview.png",
+    image: "/uploads/things-i-wish-i-knew-preview.png",
   },
   {
     title: "Interactive Literature Database for JLS",
@@ -70,7 +70,7 @@ const resources: Resource[] = [
     link: "https://morganavickery.github.io/JLS-interactive-database/",
     citation:
       "Vickery, M. (2025). Journal of the Learning Sciences: Interactive literature database [Web application]. https://morganavickery.github.io/JLS-interactive-database/",
-    image: "/lovable-uploads/jls-database-preview.png",
+    image: "/uploads/jls-database-preview.png",
   },
   {
     title: "Publication Venue Guide",
@@ -80,7 +80,7 @@ const resources: Resource[] = [
     link: "https://publication-guide.notion.site/",
     citation:
       "Vickery, M. (2025). Publication venue guide [Web application]. https://publication-guide.notion.site/",
-    image: "/lovable-uploads/publication-venue-guide-preview.png",
+    image: "/uploads/publication-venue-guide-preview.png",
   },
   {
     title: "Academic Website Template",
@@ -90,7 +90,7 @@ const resources: Resource[] = [
     link: "https://github.com/morganavickery/academic-website-template",
     citation:
       "Vickery, M. (n.d.). Academic website template [GitHub Pages template]. GitHub. https://github.com/morganavickery/academic-website-template",
-    image: "/lovable-uploads/academic-website-template.jpg",
+    image: "/uploads/academic-website-template.jpg",
     imageAttribution: { text: "Image Attribution", url: "https://www.freepik.com/free-photo/3d-rendering-website-hosting-concept_28645200.htm" },
   }
 ];

@@ -22,23 +22,23 @@ import {
 } from "@/components/ui/carousel";
 
 const htcSliderImages = [
-  { src: "/lovable-uploads/htc-slider-2.jpg", alt: "English learning materials" },
-  { src: "/lovable-uploads/htc-slider-1.jpg", alt: "HTC Training Center activity" },
-  { src: "/lovable-uploads/htc-slider-3.jpg", alt: "Classroom group activity" },
-  { src: "/lovable-uploads/htc-slider-4.jpg", alt: "Student with school bus" },
-  { src: "/lovable-uploads/htc-slider-5.jpg", alt: "Presentation session" },
-  { src: "/lovable-uploads/htc-slider-6.jpg", alt: "Student studying" },
-  { src: "/lovable-uploads/htc-slider-7.jpg", alt: "TOEFL preparation" },
-  { src: "/lovable-uploads/htc-slider-8.jpg", alt: "Group learning session" },
-  { src: "/lovable-uploads/htc-slider-9.jpg", alt: "Collaborative learning" },
-  { src: "/lovable-uploads/htc-slider-10.jpg", alt: "ELA balloon activity" },
-  { src: "/lovable-uploads/htc-slider-11.jpg", alt: "Cambridge TOEFL preparation book" },
-  { src: "/lovable-uploads/htc-slider-12.jpg", alt: "TOEFL study materials" },
-  { src: "/lovable-uploads/htc-slider-13.jpg", alt: "Student with Cambridge TOEFL book" },
-  { src: "/lovable-uploads/htc-slider-14.jpg", alt: "University application workshop" },
-  { src: "/lovable-uploads/htc-slider-15.jpg", alt: "Classroom instruction" },
-  { src: "/lovable-uploads/htc-slider-16.jpg", alt: "HTC group photo" },
-  { src: "/lovable-uploads/htc-slider-17.jpg", alt: "TESOL certification graduates" },
+  { src: "/uploads/htc-slider-2.jpg", alt: "English learning materials" },
+  { src: "/uploads/htc-slider-1.jpg", alt: "HTC Training Center activity" },
+  { src: "/uploads/htc-slider-3.jpg", alt: "Classroom group activity" },
+  { src: "/uploads/htc-slider-4.jpg", alt: "Student with school bus" },
+  { src: "/uploads/htc-slider-5.jpg", alt: "Presentation session" },
+  { src: "/uploads/htc-slider-6.jpg", alt: "Student studying" },
+  { src: "/uploads/htc-slider-7.jpg", alt: "TOEFL preparation" },
+  { src: "/uploads/htc-slider-8.jpg", alt: "Group learning session" },
+  { src: "/uploads/htc-slider-9.jpg", alt: "Collaborative learning" },
+  { src: "/uploads/htc-slider-10.jpg", alt: "ELA balloon activity" },
+  { src: "/uploads/htc-slider-11.jpg", alt: "Cambridge TOEFL preparation book" },
+  { src: "/uploads/htc-slider-12.jpg", alt: "TOEFL study materials" },
+  { src: "/uploads/htc-slider-13.jpg", alt: "Student with Cambridge TOEFL book" },
+  { src: "/uploads/htc-slider-14.jpg", alt: "University application workshop" },
+  { src: "/uploads/htc-slider-15.jpg", alt: "Classroom instruction" },
+  { src: "/uploads/htc-slider-16.jpg", alt: "HTC group photo" },
+  { src: "/uploads/htc-slider-17.jpg", alt: "TESOL certification graduates" },
 ];
 
 const Teaching = () => {
@@ -80,7 +80,7 @@ const Teaching = () => {
             {/* Logo */}
             <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-1.5 sm:p-2 shrink-0 self-start sm:self-auto">
               <img 
-                src="/lovable-uploads/gsu-logo.jpg" 
+                src="/uploads/gsu-logo.jpg" 
                 alt="Georgia State University logo"
                 className="h-8 sm:h-10 md:h-16 w-auto"
               />
@@ -130,7 +130,7 @@ const Teaching = () => {
             {/* Featured Image */}
             <div className="mx-auto max-w-2xl rounded-lg overflow-hidden border shadow-sm">
               <img 
-                src="/lovable-uploads/inventing-to-learn-thank-a-teacher.png" 
+                src="/uploads/inventing-to-learn-thank-a-teacher.png" 
                 alt="Thank-A-Teacher Program recognition letter from CETLOE for Inventing to Learn course"
                 className="w-full h-auto"
               />
@@ -173,7 +173,7 @@ const Teaching = () => {
             {/* Logo */}
             <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-1.5 sm:p-2 shrink-0 self-start sm:self-auto">
               <img 
-                src="/lovable-uploads/gsu-logo.jpg" 
+                src="/uploads/gsu-logo.jpg" 
                 alt="Georgia State University logo"
                 className="h-8 sm:h-10 md:h-16 w-auto"
               />
@@ -241,7 +241,7 @@ const Teaching = () => {
             {/* Featured Image */}
             <div className="mx-auto max-w-2xl rounded-lg overflow-hidden border shadow-sm">
               <img 
-                src="/lovable-uploads/computer-skills-thank-a-teacher.png" 
+                src="/uploads/computer-skills-thank-a-teacher.png" 
                 alt="Thank-A-Teacher Program recognition letter from CETLOE for Computer Skills course"
                 className="w-full h-auto"
               />
@@ -284,7 +284,7 @@ const Teaching = () => {
             {/* Logo */}
             <div className="rounded-lg overflow-hidden border shadow-sm bg-background p-1.5 sm:p-2 shrink-0 self-start sm:self-auto">
               <img 
-                src="/lovable-uploads/htc-new-logo.png" 
+                src="/uploads/htc-new-logo.png" 
                 alt="Haddadian Training Center logo"
                 className="h-8 sm:h-10 md:h-16 w-auto"
               />

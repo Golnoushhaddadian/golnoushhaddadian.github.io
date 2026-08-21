@@ -88,7 +88,7 @@ const AboutMe = () => {
             <div className="w-44 sm:w-56 md:w-64 lg:w-[17rem]">
               <AspectRatio ratio={1388 / 1805} className="rounded-full overflow-hidden">
                 <Avatar className="h-full w-full rounded-full">
-                  <AvatarImage src="/lovable-uploads/profile-2026b.jpg" alt="Golnoush (Lia) Haddadian" className="object-cover h-full w-full" width={720} height={936} loading="eager" decoding="async" />
+                  <AvatarImage src="/uploads/profile-2026b.jpg" alt="Golnoush (Lia) Haddadian" className="object-cover h-full w-full" width={720} height={936} loading="eager" decoding="async" />
                   <AvatarFallback className="text-2xl">GH</AvatarFallback>
                 </Avatar>
               </AspectRatio>

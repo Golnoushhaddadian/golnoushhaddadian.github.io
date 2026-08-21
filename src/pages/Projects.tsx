@@ -26,7 +26,7 @@ const projects: Project[] = [
     mentors: "Drs. Cohen, J., & Magliano, J.",
     funding: "Institute of Education Sciences (IES)",
     description: "The purpose of this project is to create a Generative artificial intelligence (Gen-AI) enhanced authoring tool for scenario-based assessments (SBAs). Because SBAs are difficult to develop, college instructors struggle to develop and deploy SBAs in their courses. Recent advances in Gen-AI make it possible to scale up and democratize SBA development, enabling instructors to design and administer localized, personalized, and discipline-appropriate performance assessments that provide better feedback, higher levels of adaptivity, and richer diagnostic information.",
-    image: "/lovable-uploads/scenario-based-assessment-logo.png",
+    image: "/uploads/scenario-based-assessment-logo.png",
     imageCaption: "Image from https://www.sabatiniliteracy.com",
     imageCaptionUrl: "https://www.sabatiniliteracy.com",
     link: { label: "Learn More about the Grant", url: "https://ies.ed.gov/use-work/awards/scenario-based-assessment-age-generative-ai-making-space-education-market-alternative-assessment" },
@@ -38,7 +38,7 @@ const projects: Project[] = [
     period: "Ongoing",
     mentors: "Drs. Kim, M. K., Motevali, S.",
     description: "RITA is an AI-powered Automated Writing Evaluation (AWE) system designed and developed to assess and scaffold students' argumentative writing. As the initial phase of DBR, we are centering our efforts on the development and validation of RITA's automated essay scoring (AES) engine, which is a fundamental step in any AWE development. This stage serves as the foundation for subsequent system components. Building on this, the next phase will empirically validate RITA's formative feedback mechanisms, examining how they can become increasingly responsive to and adapted to the evolving needs of each individual learner across different stages of argumentative writing development. This line of research will be extended to additional empirical lines of research. This involves, but is not limited to, advancing RITA's adaptive feedback mechanisms, investigating learners' feedback‐uptake processes, examining longitudinal patterns of writing development supported by AI-powered scaffolds, and conducting classroom-based deployment to understand how RITA integrates into authentic instructional ecologies. Together, these interconnected strands aim to advance a robust, theoretically grounded, and methodologically rigorous line of research to inform the next generation of AI-powered writing support systems.",
-    image: "/lovable-uploads/rita-mark-color.svg"
+    image: "/uploads/rita-mark-color.svg"
   },
   {
     title: "LANGCASTX: An AI-Augmented Personalized Podcast Platform to Advance Language-science Competence for Speech-language Pathologists",
@@ -47,7 +47,7 @@ const projects: Project[] = [
     mentors: "Drs. Kim, M. K., Xiong, J., Hadley, P., Lane, H. C.",
     funding: "Google.org (2025), NSF AI Institutes Virtual Organization (AIVO), AI4Ed Summer Program",
     description: "As part of a larger initiative involving five national AI research institutes in the United States (i.e., AI-ALOE, AI4ExceptionalEd, ENGAGE AI, iSAT, and INVITE), our interdisciplinary team brought together researchers from two of them—the National AI Institute for Exceptional Education (AI4ExceptionalEd) and the National AI Institute for Adult Learning and Online Education (AI-ALOE)—to advance the shared vision and mission of both AI institutes and to foster innovation at the intersection of AI and education. Through this collaboration, we aimed to address a real-world problem experienced by practicing Speech-Language Pathologists (SLPs) who treat children with language disorders. Existing research highlights a critical gap in language science knowledge among SLPs, which poses a substantial barrier to the effective implementation of evidence-based assessment and intervention practices. Thus, we designed and developed an AI-augmented platform to offer personalized learning episodes adapted to the daily questions and challenges of Speech-Language Pathologists (SLPs).",
-    image: "/lovable-uploads/langcastx-logo.png",
+    image: "/uploads/langcastx-logo.png",
     link: { label: "Learn More about AIVO", url: "http://aiinstitutes.org/ai-for-education/" }
   },
   {
@@ -57,7 +57,7 @@ const projects: Project[] = [
     mentors: "Drs. Kim, M. K., Takabi, D.",
     funding: "National Science Foundation (NSF)",
     description: "This interdisciplinary project focused on AI and privacy (private AI), supported by the Secure and Trustworthy Cyberspace (SaTC) program. Aligned with the Federal Cybersecurity Research and Development Strategic Plan and the National Privacy Research Strategy, it aimed to protect the benefits of cyber systems while ensuring security and privacy. The project developed instructional materials and hands-on labs to train students in trustworthy AI. It aimed to address the fast-growing demand for skilled researchers by integrating technical knowledge with ethical and privacy-focused practices in AI.",
-    image: "/lovable-uploads/nsf2-satc.png"
+    image: "/uploads/nsf2-satc.png"
   },
   {
     title: "AI Institute for Adult Learning and Online Education (ALOE)",
@@ -66,7 +66,7 @@ const projects: Project[] = [
     mentors: "Drs. Kim, M. K., Goel, A. K., Dede, C.",
     funding: "National Science Foundation (NSF)",
     description: "This interdisciplinary project aims to transform online adult learning through AI-driven models grounded in cognitive and social learning theories. It addresses the distinct needs of adult learners by developing intelligent virtual assistants and personalized learning systems. The initiative brings together a national network of universities, nonprofits, and industry partners to advance foundational research in areas such as cognitive-based AI, scalable personalization, human-AI collaboration, and ethical AI design. Using iterative learning engineering and mixed-methods evaluation, the project seeks to deliver scalable, equitable, and effective solutions for adult education.",
-    image: "/lovable-uploads/nsf2-aloe.png",
+    image: "/uploads/nsf2-aloe.png",
     link: { label: "Learn More about AI-ALOE", url: "https://aialoe.org/" }
   },
   {
@@ -76,7 +76,7 @@ const projects: Project[] = [
     mentors: "Drs. Kim, M. K., Abdeen, M. S.",
     funding: "National Science Foundation (NSF)",
     description: "This project designs and implements AI-augmented formative assessment and feedback systems to help students build skills for in-classroom interactive problem-solving activities. The aim is to determine whether AI in education improves students' well-being inside and outside the classroom, with a focus on those traditionally underrepresented in STEM education. Extensive data collected in the final phase will examine the relationships among pre-classroom activities, in-classroom performance, self-efficacy, interest in physics, and student backgrounds, including gender, race, ethnicity, first-generation status, and English language learning.",
-    image: "/lovable-uploads/nsf2.png"
+    image: "/uploads/nsf2.png"
   },
   {
     title: "Design and Development of a Computer-Adaptive Prototype to Measure Written Receptive Vocabulary Knowledge of English Language Learners",
