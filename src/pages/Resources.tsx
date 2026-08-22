@@ -38,7 +38,7 @@ const resources: Resource[] = [
       "An interactive concept map of argumentative writing and feedback in the age of AI, spanning six connected clusters from feedback sources to learning theories, philosophical stances, and the AI dimension, with each concept offering a definition, key references, and open debates.",
     link: "https://golnoushhaddadian.github.io/argumentative_writing_feedback_interactive_concept_map/",
     citation:
-      "Haddadian, G. (2026). Argumentative Writing and Feedback: An Interactive Concept Map. Zenodo. https://doi.org/10.5281/zenodo.22036882",
+      "Haddadian, G. (2026). Argumentative Writing & Feedback: An Interactive Concept Map. Zenodo. https://doi.org/10.5281/zenodo.22036882",
     image: "/uploads/argumentative-writing-feedback-preview.png",
   },
   {
