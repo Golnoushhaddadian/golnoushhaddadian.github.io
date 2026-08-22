@@ -22,9 +22,9 @@ const resources: Resource[] = [
   {
     title: "Learning Theories Atlas",
     subtitle: "Interactive Concept Map",
-    note: "This educational artifact was developed with AI assistance to support the synthesis, organization, and presentation of information. For educational purposes only, meant to support learning and exploration, not to replace the original sources.",
+    note: "This educational artifact was developed with AI assistance, a useful starting point for exploration, not a substitute for the original sources.",
     description:
-      "A visual atlas of how learning has been theorized: six research philosophies at the top, twelve major paradigms beneath, and hundreds of theories, frameworks, methods, and concepts branching out below. Every node opens a sourced explanation with definitions, examples, common misreadings, teaching implications, and references, while connecting lines show who influenced, agreed with, or challenged whom.",
+      "A visual atlas of how learning has been theorized: six research philosophies, twelve major paradigms, and hundreds of theories, frameworks, and concepts, with connecting lines showing who influenced, agreed with, or challenged whom.",
     link: "https://golnoushhaddadian.github.io/learning-theories-atlas/",
     citation:
       "Haddadian, G. (2026). Learning Theories Atlas. Zenodo. https://doi.org/10.5281/zenodo.22052032",
