@@ -25,19 +25,19 @@ const resources: Resource[] = [
     note: "This concept map was developed with AI assistance, a useful starting point for exploration, though primary sources should be consulted for scholarly conclusions.",
     description:
       "A layered interactive map connecting argumentative writing, feedback research, learning theories, and AI in education.",
-    link: "/argumentative-writing-feedback.html",
+    link: "https://golnoushhaddadian.github.io/argumentative_writing_feedback_interactive_concept_map/",
     citation:
-      "Haddadian, G. (2026). Argumentative writing & feedback: An interactive concept map [Interactive tool]. https://golnoushhaddadian.com/argumentative-writing-feedback.html",
+      "Haddadian, G. (2026). Argumentative Writing and Feedback: An Interactive Concept Map. Zenodo. https://doi.org/10.5281/zenodo.22036882",
     image: "/uploads/argumentative-writing-feedback-preview.png",
   },
   {
-    title: "Research Statement Evaluation Rubric",
-    subtitle: "Interactive Rubric",
+    title: "Hiring Lens: Research Statement",
+    subtitle: "Faculty Application Lens Series",
     description:
-      "A self-scoring rubric for evaluating research statements across dimensions such as research identity, narrative architecture, and scholarly contribution. Useful for doctoral candidates and early-career researchers preparing application materials.",
-    link: "https://lime-benny-27-5769c8.tiiny.site",
+      "An interactive rubric for evaluating research statements written by PhD candidates pursuing assistant professor positions at R1 institutions. Grounded in empirical hiring literature, federal grant review criteria (NSF CAREER, NIH R01, DOE ECRP), and institutional guidance, it walks through seven dimensions — research identity, independence from PhD training, funding viability, institutional fit, tenure trajectory, external validation, and communication clarity — with per-criterion scoring and an exportable report.",
+    link: "https://golnoushhaddadian.github.io/lens-series-research-statement/",
     citation:
-      "Haddadian, G. (n.d.). Research statement evaluation rubric [Interactive tool]. https://lime-benny-27-5769c8.tiiny.site",
+      "Haddadian, G. (2026). LENS Series, Research Statement. Zenodo. https://doi.org/10.5281/zenodo.22051000",
     image: "/uploads/rubric-preview.png",
     disclaimer: "This tool is only a general guide and should not be treated as a definitive evaluation. Please use it alongside expert feedback and independent judgment.",
   },
