@@ -44,13 +44,13 @@ const resources: Resource[] = [
   {
     title: "Hiring Lens: Research Statement",
     subtitle: "Faculty Application Lens Series",
+    note: "This educational artifact was developed with AI assistance, a useful starting point for exploration, not a substitute for expert feedback and independent judgment.",
     description:
-      "An interactive rubric for evaluating research statements written by PhD candidates pursuing assistant professor positions at R1 institutions. Grounded in empirical hiring literature, federal grant review criteria (NSF CAREER, NIH R01, DOE ECRP), and institutional guidance, it walks through seven dimensions — research identity, independence from PhD training, funding viability, institutional fit, tenure trajectory, external validation, and communication clarity — with per-criterion scoring and an exportable report.",
+      "An interactive rubric for evaluating research statements for tenure-track R1 jobs across seven weighted dimensions, from research identity and funding potential to departmental fit and path to tenure, scored criterion by criterion into an exportable report meant as feedback for revision, not a prediction.",
     link: "https://golnoushhaddadian.github.io/lens-series-research-statement/",
     citation:
       "Haddadian, G. (2026). LENS Series, Research Statement. Zenodo. https://doi.org/10.5281/zenodo.22051000",
     image: "/uploads/rubric-preview.png",
-    disclaimer: "This tool is only a general guide and should not be treated as a definitive evaluation. Please use it alongside expert feedback and independent judgment.",
   },
 
   {
