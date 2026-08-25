@@ -4,4 +4,5 @@ export type GalleryImage = {
   alt: string;
   description: string;
   category: "teaching" | "research" | "awards" | "community";
+  fit?: "cover" | "contain";
 };
