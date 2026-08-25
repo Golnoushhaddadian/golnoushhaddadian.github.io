@@ -74,7 +74,7 @@ export const galleryImages: GalleryImage[] = [
   {
     src: "/uploads/1779301718940.jpeg",
     alt: "AERA 2026 Annual Meeting collage: conference signage, an award presentation, and colleagues in Los Angeles",
-    description: "AERA 2026 Annual Meeting, Los Angeles [April 8–12, 2026]",
+    description: "AERA 2026 Annual Meeting, April 8–12, 2026 — Los Angeles, California",
     category: "research",
     fit: "contain"
   },
