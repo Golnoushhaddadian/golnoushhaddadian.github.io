@@ -266,5 +266,19 @@ export const galleryImages: GalleryImage[] = [
     alt: "Welcome Back Party group photo at Department of Learning Sciences",
     description: "Welcome Back Party— Department of Learning Sciences, Georgia State University (GSU), 2023 — Atlanta, Georgia",
     category: "community"
+  },
+  {
+    src: "/uploads/photo_2019-02-24_01-02-25.jpg",
+    alt: "Group photo of TOEFL/IELTS workshop participants and instructors at RadGuyesh Haddadian Institute",
+    description: "TOEFL/IELTS Workshop at RadGuyesh Haddadian Institute",
+    category: "teaching",
+    fit: "contain"
+  },
+  {
+    src: "/uploads/Panorama%202.JPG",
+    alt: "TOEFL/IELTS workshop participants gathered during a break at RadGuyesh Haddadian Institute",
+    description: "TOEFL/IELTS Workshop at RadGuyesh Haddadian Institute",
+    category: "teaching",
+    fit: "contain"
   }
 ];
