@@ -42,7 +42,7 @@ const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   useVisitorTracking();
 
-  const navLinks = [
+  const navLinks: { path: string; label: string; sub?: string; external?: boolean }[] = [
     { path: '/', label: 'Home' },
     { path: '/education', label: 'Education' },
     { path: '/research', label: 'Research' },
@@ -53,6 +53,7 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/resources', label: 'Useful Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
+    { path: '/claire-lab/', label: 'CLAIRE-X Lab', sub: '(Launching soon)', external: true },
   ];
 
   return (
@@ -104,22 +105,37 @@ const Layout = ({ children }: LayoutProps) => {
           
           <nav className="absolute top-12 sm:top-14 right-3 sm:right-6 lg:right-10 bg-background border shadow-lg rounded-md overflow-hidden animate-in slide-in-from-top-2 duration-200 w-56" aria-label="Main navigation">
             <ul className="flex flex-col py-1">
-              {navLinks.map((link) => (
-                <li key={link.path}>
-                  <Link 
-                    to={link.path} 
-                    onClick={() => setIsMenuOpen(false)}
-                    className={cn(
-                      "flex items-center py-2.5 px-4 text-sm font-medium transition-colors border-l-2",
-                      location.pathname === link.path 
-                        ? "bg-primary/10 text-primary border-primary" 
-                        : "text-foreground/80 hover:bg-muted border-transparent hover:border-primary/30"
-                    )}
-                  >
+              {navLinks.map((link) => {
+                const itemClass = cn(
+                  "flex items-center py-2.5 px-4 text-sm font-medium transition-colors border-l-2",
+                  location.pathname === link.path
+                    ? "bg-primary/10 text-primary border-primary"
+                    : "text-foreground/80 hover:bg-muted border-transparent hover:border-primary/30"
+                );
+                const content = (
+                  <>
                     {link.label}
-                  </Link>
-                </li>
-              ))}
+                    {link.sub && (
+                      <span className="ml-1.5 text-[8px] font-semibold uppercase tracking-wider opacity-60">
+                        {link.sub}
+                      </span>
+                    )}
+                  </>
+                );
+                return (
+                  <li key={link.path}>
+                    {link.external ? (
+                      <a href={link.path} onClick={() => setIsMenuOpen(false)} className={itemClass}>
+                        {content}
+                      </a>
+                    ) : (
+                      <Link to={link.path} onClick={() => setIsMenuOpen(false)} className={itemClass}>
+                        {content}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>
