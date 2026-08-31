@@ -53,7 +53,7 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/resources', label: 'Useful Resources' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/contact', label: 'Contact' },
-    { path: '/claire-lab/', label: 'CLAIRE-X Lab', sub: '(Launching soon)', external: true },
+    { path: '/claire-x/', label: 'CLAIRE-X Lab', sub: '(Launching soon)', external: true },
   ];
 
   return (
