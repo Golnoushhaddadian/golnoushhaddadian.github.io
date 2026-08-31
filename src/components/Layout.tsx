@@ -112,15 +112,15 @@ const Layout = ({ children }: LayoutProps) => {
                     ? "bg-primary/10 text-primary border-primary"
                     : "text-foreground/80 hover:bg-muted border-transparent hover:border-primary/30"
                 );
-                const content = (
-                  <>
-                    {link.label}
-                    {link.sub && (
-                      <span className="ml-1.5 text-[8px] font-semibold uppercase tracking-wider opacity-60">
-                        {link.sub}
-                      </span>
-                    )}
-                  </>
+                const content = link.sub ? (
+                  <span className="flex flex-col leading-tight">
+                    <span className="whitespace-nowrap">{link.label}</span>
+                    <span className="text-[8px] font-semibold uppercase tracking-wider opacity-60 whitespace-nowrap">
+                      {link.sub}
+                    </span>
+                  </span>
+                ) : (
+                  <>{link.label}</>
                 );
                 return (
                   <li key={link.path}>
