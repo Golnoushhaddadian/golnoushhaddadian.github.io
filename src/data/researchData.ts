@@ -104,9 +104,9 @@ export const journalPublications: JournalPublication[] = [
 export const conferenceProceedings: ConferenceProceeding[] = [
   {
     authors: ["Haddadian, G.", "Haddadian, N.", "Soleimani, S."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy",
-    conference: "AIRiAL 2026 Conference, Teachers College, Columbia University, New York, NY, United States",
+    conference: "AIRiAL 2026 Conference, Teachers College, Columbia University, New York, United States",
     keywords: ["AI Feedback", "Formative Assessment", "EFL", "Writing Self-Efficacy"]
   },
   {
