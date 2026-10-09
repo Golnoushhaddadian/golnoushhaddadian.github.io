@@ -94,9 +94,9 @@ const journalPublications: Publication[] = [
   {
     title: "Comparing the effects of AI-generated and teacher-delivered formative assessment on EFL learners' writing performance and writing self-efficacy",
     authors: "Haddadian, G., Haddadian, N., & Soleimani, S.",
-    venue: "AIRiAL 2026 Conference, Teachers College, Columbia University, New York, NY, United States (Accepted)",
+    venue: "AIRiAL 2026 Conference, Teachers College, Columbia University, New York, United States",
     year: 2026,
-    apa: "Haddadian, G., Haddadian, N., & Soleimani, S. (Accepted, 2026). Comparing the effects of AI-generated and teacher-delivered formative assessment on EFL learners' writing performance and writing self-efficacy. Paper presented at AIRiAL 2026 Conference, Teachers College, Columbia University, New York, NY, United States.",
+    apa: "Haddadian, G., Haddadian, N., & Soleimani, S. (2026). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. AIRiAL 2026 Conference, Teachers College, Columbia University, New York, United States.",
   },
   {
     title: "A Systematic Review of Automated Writing Evaluation Tools in Argumentative Writing for English as Foreign Language Education",
