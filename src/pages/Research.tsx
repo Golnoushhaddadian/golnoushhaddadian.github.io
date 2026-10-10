@@ -30,6 +30,13 @@ const journalPublications: Publication[] = [
     apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026, November 18). The moving target problem in AI text detection [Conference presentation]. 5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States.",
   },
   {
+    title: "How to generate scenario-based learning and assessment for postsecondary courses with GenAI",
+    authors: "Wang, Z., O'Reilly, T., Magliano, J., Cohen, J., Suhan, M., & Haddadian, G.",
+    venue: "2026 NCME AIME-Con, Pittsburgh, PA, United States",
+    year: 2026,
+    apa: "Wang, Z., O'Reilly, T., Magliano, J., Cohen, J., Suhan, M., & Haddadian, G. (2026). How to generate scenario-based learning and assessment for postsecondary courses with GenAI. 2026 NCME AIME-Con, Pittsburgh, PA, United States.",
+  },
+  {
     title: "Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates",
     authors: "Niloy, A. C., Haddadian, G., & Kim, M. K.",
     venue: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
