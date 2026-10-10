@@ -23,6 +23,13 @@ type Publication = {
 
 const journalPublications: Publication[] = [
   {
+    title: "The moving target problem in AI text detection",
+    authors: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K.",
+    venue: "5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States [Conference presentation]",
+    year: 2026,
+    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026, November 18). The moving target problem in AI text detection [Conference presentation]. 5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States.",
+  },
+  {
     title: "Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates",
     authors: "Niloy, A. C., Haddadian, G., & Kim, M. K.",
     venue: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
