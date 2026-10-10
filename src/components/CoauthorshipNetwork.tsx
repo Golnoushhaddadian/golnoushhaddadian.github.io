@@ -33,6 +33,19 @@ const isSelf = (n: string) => SELF.some(p => n.trim().startsWith(p));
 const isExcluded = (n: string) => EXCLUDED.some(p => n.trim().startsWith(p));
 const lk = (a: string, b: string) => [a, b].sort().join("|||");
 
+// Papers whose network shows only some of their authors (the full author
+// list still appears in the citation). Keyed by a lowercase title prefix.
+const NETWORK_ONLY: Record<string, string[]> = {
+  "fostering educational intimacy": [
+    "Malcolm, B.", "Vickery, M.", "Louis-Strakes Lopez, J.", "Kim, J.", "Bae, Y.",
+  ],
+};
+const keepFor = (title: string | undefined) => {
+  const t = (title ?? "").toLowerCase();
+  const k = Object.keys(NETWORK_ONLY).find(p => t.startsWith(p));
+  return k ? NETWORK_ONLY[k] : null;
+};
+
 // Merge name variants to canonical form
 const NAME_ALIASES: Record<string, string> = {
   "Schunn, C": "Schunn, C. D.",
@@ -96,7 +109,11 @@ function build() {
     ...workInProgress,
   ]
     .filter(p => p.authors?.length)
-    .map((p, i) => ({ i, year: parseInt(String((p as { year?: string }).year ?? "").match(/\d{4}/)?.[0] ?? "0", 10), authors: cleanAuthors(p.authors) }))
+    .map((p, i) => {
+      const keep = keepFor((p as { title?: string }).title);
+      const authors = cleanAuthors(p.authors).filter(a => !keep || isSelf(a) || keep.includes(a));
+      return { i, year: parseInt(String((p as { year?: string }).year ?? "").match(/\d{4}/)?.[0] ?? "0", 10), authors };
+    })
     .sort((a, b) => b.year - a.year || a.i - b.i);
   const all: string[][] = papers.map(p => p.authors);
 
