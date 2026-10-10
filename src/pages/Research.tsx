@@ -23,11 +23,12 @@ type Publication = {
 
 const journalPublications: Publication[] = [
   {
-    title: "Who keeps up with whom? Assessing GenAI text detection across version updates",
-    authors: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K.",
-    venue: "AIME-Con 2026 Conference, Pittsburgh, PA, United States (Accepted)",
+    title: "Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates",
+    authors: "Niloy, A. C., Haddadian, G., & Kim, M. K.",
+    venue: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
     year: 2026,
-    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (Accepted). Who keeps up with whom? Assessing GenAI text detection across version updates. Paper accepted for presentation at the AIME-Con 2026 Conference, Pittsburgh, PA, United States.",
+    doi: "https://aclanthology.org/2026.aimecon-main.63.pdf",
+    apa: "Niloy, A. C., Haddadian, G., & Kim, M. K. (2026, October). Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates. In Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570). https://aclanthology.org/2026.aimecon-main.63.pdf",
   },
   {
     title: "Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery",
