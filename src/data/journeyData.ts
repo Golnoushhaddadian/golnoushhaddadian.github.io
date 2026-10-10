@@ -267,36 +267,36 @@ export const journeyItems: JourneyItem[] = [
     category: 'Publications',
     period: '2025–2026',
     label: 'Peer Feedback with GenAI',
-    sublabel: 'ICLS 2025 · Helsinki (Accepted)',
+    sublabel: 'ICLS 2025 · Helsinki',
     detail:
-      'Noroozi, O., Haddadian, G., Gao, X., Schunn, C. D., Alqassab, M., & Banihashem, S. K. (Accepted). Supporting peer feedback provision and uptake with GenAI. ICLS/ISLS 2025, Helsinki.',
+      'Noroozi, O., Haddadian, G., Gao, X., Schunn, C. D., Alqassab, M., & Banihashem, S. K. (2025). Supporting peer feedback provision and uptake with GenAI. ICLS/ISLS 2025, Helsinki.',
     badges: ['Upcoming'],
   },
   {
     category: 'Publications',
     period: '2025–2026',
     label: 'Expert Models with GenAI',
-    sublabel: 'ICLS 2025 · Helsinki (Accepted)',
+    sublabel: 'ICLS 2025 · Helsinki',
     detail:
-      'Haddadian, G., Han, H., Kim, M. Kim, J., Bae, Y. (Accepted). Automated Generation of Expert Models with Generative AI. ICLS/ISLS 2025, Helsinki.',
+      'Haddadian, G., Han, H., Kim, M. Kim, J., Bae, Y. (2025). Automated Generation of Expert Models with Generative AI. ICLS/ISLS 2025, Helsinki.',
     badges: ['Upcoming'],
   },
   {
     category: 'Publications',
     period: '2025–2026',
     label: 'GenAI for Peer Feedback Uptake',
-    sublabel: 'AERA 2026 · Los Angeles (Accepted)',
+    sublabel: 'AERA 2026 · Los Angeles',
     detail:
-      'GenAI-supported peer feedback uptake in collaborative writing contexts. Accepted for AERA 2026, Los Angeles.',
+      'GenAI-supported peer feedback uptake in collaborative writing contexts. AERA 2026, Los Angeles.',
     badges: ['Upcoming'],
   },
   {
     category: 'Publications',
     period: '2025–2026',
     label: 'AWE in EFL Argumentative Writing',
-    sublabel: 'AAAL 2026 · Chicago (Accepted)',
+    sublabel: 'AAAL 2026 · Chicago',
     detail:
-      'Automated Writing Evaluation in Foreign Language Education: A Systematic Review in Argumentative Writing. Accepted for AAAL 2026, Chicago.',
+      'Automated Writing Evaluation in Foreign Language Education: A Systematic Review in Argumentative Writing. AAAL 2026, Chicago.',
     badges: ['Upcoming'],
   },
 
