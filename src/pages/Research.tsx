@@ -291,7 +291,7 @@ const journalPublications: Publication[] = [
     authors: "Haddadian, G., Kim, M. K., & Haddadian, N.",
     venue: "External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), Atlanta, Georgia [Poster]",
     year: 2025,
-    apa: "Haddadian, G., Kim, M. K., & Haddadian, N. (2025). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. External Advisory Board meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE) 2025, Atlanta, Georgia [Format: Poster].",
+    apa: "Haddadian, G., Kim, M. K., & Haddadian, N. (2025). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. External Advisory Board meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE) 2025, May 16, Atlanta, Georgia [Format: Poster].",
   },
   {
     title: "Automated Writing Evaluation in Foreign Language Education: A Systematic Review in Argumentative Writing",
