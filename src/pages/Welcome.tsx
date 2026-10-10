@@ -239,13 +239,16 @@ const AboutMe = () => {
               Chowdhury Niloy, A., <strong>Haddadian, G.</strong>, & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>, November 18). The moving target problem in AI text detection [Conference presentation]. <em>5th Annual Graduate Conference for Research, Scholarship, and Creative Activity</em>, Georgia State University, Atlanta, GA, United States.
             </p>
             <p>
+              Wang, Z., O'Reilly, T., Magliano, J., Cohen, J., Suhan, M., & <strong>Haddadian, G.</strong> (<span className="text-blue-600 font-medium">2026</span>). How to generate scenario-based learning and assessment for postsecondary courses with GenAI. <em>2026 NCME AIME-Con</em>, Pittsburgh, PA, United States.
+            </p>
+            <p>
               Niloy, A. C., <strong>Haddadian, G.</strong>, & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>, October). Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates. In <em>Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers</em> (pp. 560–570). <a href="https://aclanthology.org/2026.aimecon-main.63.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://aclanthology.org/2026.aimecon-main.63.pdf</a>
             </p>
             <p>
-              Khajooeinejad, A., Chapariniya, M., Motevali, S., & <strong>Haddadian, G.</strong> (Accepted). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
+              Khajooeinejad, A., Chapariniya, M., Motevali, S., & <strong>Haddadian, G.</strong> (<span className="text-blue-600 font-medium">2026</span>). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
             </p>
             <p>
-              Khajooeinejad, A., <strong>Haddadian, G.</strong>, Chapariniya, M., & Motevali, S. (Accepted). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
+              Khajooeinejad, A., <strong>Haddadian, G.</strong>, Chapariniya, M., & Motevali, S. (<span className="text-blue-600 font-medium">2026</span>). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
             </p>
             <p>
               <strong>Haddadian, G.</strong>, Haddadian, N., & Soleimani, S. (2026). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. AIRiAL 2026 Conference, Teachers College, Columbia University, New York, United States.
@@ -260,10 +263,10 @@ const AboutMe = () => {
               Cohen, J. D., Sabatini, J., <strong>Haddadian, G.</strong>, O'Reilly, T., Pierce, B., & Magliano, J. (<span className="text-blue-600 font-medium">2026</span>). Developing authentic learning and assessment through scenarios. In <em>Proceedings of EdMedia 2026 Edinburgh</em> (pp. 1716–1717). Waynesville, NC: Association for the Advancement of Computing in Education (AACE). <a href="https://www.learntechlib.org/primary/p/2129763" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://www.learntechlib.org/primary/p/2129763</a>
             </p>
             <p>
-              Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
+              Malcolm, B., Vickery, M., Louis-Strakes Lopez, J., Siciliano, L. M., Simon, S., Xing, G. (Y.), Kim, J., Kim, C., Zhao, Y., Desai, A., Gadong, E. S., Mabadeje, Y., Mhungu, B., <strong>Haddadian, G.</strong>, Eloy, A., Soodhani, N., Prasad, R., & Bae, Y. (<span className="text-blue-600 font-medium">2026</span>). Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building. Session presented at the International Society of the Learning Sciences (ISLS).
             </p>
             <p>
-              de Kleijn, R., Brouwer, R., <strong>Haddadian, G.</strong>, van den Beemt, A., & Noroozi, O. (Accepted, <span className="text-blue-600 font-medium">2026</span>). Peer, AI, and teacher feedback: Features, perceptions and uptake. EARLI SIG 1 Conference 2026, Utrecht, The Netherlands.
+              de Kleijn, R., Brouwer, R., <strong>Haddadian, G.</strong>, van den Beemt, A., & Noroozi, O. (<span className="text-blue-600 font-medium">2026</span>). Peer, AI, and teacher feedback: Features, perceptions and uptake. EARLI SIG 1 Conference 2026, Utrecht, The Netherlands.
             </p>
             <p>
               Noroozi, O., <strong>Haddadian, G.</strong>, Banihashem, K., & Schunn, C. (<span className="text-blue-600 font-medium">2026</span>). How students perceive and respond to GenAI for peer feedback uptake. In <em>Understanding and supporting feedback uptake: Bridging research and practice in educational contexts</em>. American Educational Research Association (AERA) Annual Meeting, Los Angeles, CA, United States.
