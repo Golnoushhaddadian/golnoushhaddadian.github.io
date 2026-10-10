@@ -290,7 +290,7 @@ export const otherPresentations: NonRefereedPublication[] = [
     authors: ["Chowdhury Niloy, A.", "Haddadian, G.", "Kim, M. K."],
     year: "2026",
     title: "The moving target problem in AI text detection",
-    journal: "5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States, November 18 [Conference presentation]",
+    journal: "5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States [Conference presentation]",
     keywords: ["AI Detection", "GenAI"]
   },
   {
@@ -318,7 +318,7 @@ export const otherPresentations: NonRefereedPublication[] = [
     authors: ["Haddadian, G.", "Kim, M. K.", "Haddadian, N."],
     year: "2025",
     title: "Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context",
-    journal: "External Advisory Board meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), May 16, Atlanta, Georgia [Format: Poster]",
+    journal: "External Advisory Board meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), Atlanta, Georgia [Format: Poster]",
     keywords: ["AWE", "EFL"]
   },
   {

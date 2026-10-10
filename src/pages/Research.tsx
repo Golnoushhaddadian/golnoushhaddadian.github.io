@@ -27,7 +27,7 @@ const journalPublications: Publication[] = [
     authors: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K.",
     venue: "5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States [Conference presentation]",
     year: 2026,
-    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026, November 18). The moving target problem in AI text detection [Conference presentation]. 5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States.",
+    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026). The moving target problem in AI text detection [Conference presentation]. 5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States.",
   },
   {
     title: "How to generate scenario-based learning and assessment for postsecondary courses with GenAI",
@@ -42,21 +42,21 @@ const journalPublications: Publication[] = [
     venue: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
     year: 2026,
     doi: "https://aclanthology.org/2026.aimecon-main.63.pdf",
-    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026, October). Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates. In Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570). https://aclanthology.org/2026.aimecon-main.63.pdf",
+    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026). Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates. In Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570). https://aclanthology.org/2026.aimecon-main.63.pdf",
   },
   {
     title: "Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery",
     authors: "Khajooeinejad, A., Chapariniya, M., Motevali, S., & Haddadian, G.",
     venue: "4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States",
     year: 2026,
-    apa: "Khajooeinejad, A., Chapariniya, M., Motevali, S., & Haddadian, G. (2026, September 5–6). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. 4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States.",
+    apa: "Khajooeinejad, A., Chapariniya, M., Motevali, S., & Haddadian, G. (2026). Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery [Paper presentation]. 4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States.",
   },
   {
     title: "Trustless multi-agent AI: Blockchain-based coordination for LLM agents",
     authors: "Khajooeinejad, A., Haddadian, G., Chapariniya, M., & Motevali, S.",
     venue: "4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States",
     year: 2026,
-    apa: "Khajooeinejad, A., Haddadian, G., Chapariniya, M., & Motevali, S. (2026, September 5–6). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. 4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States.",
+    apa: "Khajooeinejad, A., Haddadian, G., Chapariniya, M., & Motevali, S. (2026). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. 4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States.",
   },
   {
     title: "The value of GenAI for peer feedback provision: Student perceptions and impacts",
@@ -291,7 +291,7 @@ const journalPublications: Publication[] = [
     authors: "Haddadian, G., Kim, M. K., & Haddadian, N.",
     venue: "External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), Atlanta, Georgia [Poster]",
     year: 2025,
-    apa: "Haddadian, G., Kim, M. K., & Haddadian, N. (2025). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. External Advisory Board meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE) 2025, May 16, Atlanta, Georgia [Format: Poster].",
+    apa: "Haddadian, G., Kim, M. K., & Haddadian, N. (2025). Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context. External Advisory Board meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE) 2025, Atlanta, Georgia [Format: Poster].",
   },
   {
     title: "Automated Writing Evaluation in Foreign Language Education: A Systematic Review in Argumentative Writing",
