@@ -275,8 +275,8 @@ export const otherPresentations: NonRefereedPublication[] = [
   {
     authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
     year: "2026",
-    title: "Who keeps up with whom? Assessing GenAI text detection across version updates",
-    journal: "AIME-Con 2026 Conference, Pittsburgh, PA, United States [Accepted]",
+    title: "Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates",
+    journal: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
     keywords: ["AI Detection", "GenAI"]
   },
   {
