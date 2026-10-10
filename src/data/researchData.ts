@@ -111,21 +111,21 @@ export const conferenceProceedings: ConferenceProceeding[] = [
   },
   {
     authors: ["Cohen, J. D.", "O'Reilly, T.", "Magliano, J.", "Haddadian, G.", "Dobar, E. B.", "Ari, O.", "Tinker Sachs, G.", "Sabatini, J."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Scenario-based learning and assessment design principles for the AI age",
     conference: "International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain",
     keywords: ["Scenario-Based Learning", "Assessment", "AI"]
   },
   {
     authors: ["Dobar, E. B.", "Haddadian, G.", "Ari, O.", "Cohen, J. D.", "Tinker Sachs, G.", "Magliano, J."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment",
     conference: "International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain",
     keywords: ["Interdisciplinary", "Problem Solving", "Assessment"]
   },
   {
     authors: ["Cohen, J. D.", "Sabatini, J.", "Haddadian, G.", "O'Reilly, T.", "Pierce, B.", "Magliano, J."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Developing Authentic Learning and Assessment Through Scenarios",
     conference: "Proceedings of EdMedia 2026 Edinburgh (pp. 1716-1717), Waynesville, NC: Association for the Advancement of Computing in Education (AACE)",
     url: "https://www.learntechlib.org/primary/p/2129763/",
@@ -140,7 +140,7 @@ export const conferenceProceedings: ConferenceProceeding[] = [
   },
   {
     authors: ["Malcolm, B.", "Vickery, M.", "Louis-Strakes Lopez, J.", "Siciliano, L. M.", "Simon, S.", "Xing, G. (Y.)", "Kim, J.", "Kim, C.", "Zhao, Y.", "Desai, A.", "Gadong, E. S.", "Mabadeje, Y.", "Mhungu, B.", "Haddadian, G.", "Eloy, A.", "Soodhani, N.", "Prasad, R.", "Bae, Y."],
-    year: "Accepted, 2026",
+    year: "2026",
     title: "Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building",
     conference: "International Society of the Learning Sciences (ISLS)",
     keywords: ["ILSSA", "Community", "Learning Sciences"]
@@ -278,6 +278,13 @@ export const otherPresentations: NonRefereedPublication[] = [
     title: "The moving target problem in AI text detection",
     journal: "5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States, November 18 [Conference presentation]",
     keywords: ["AI Detection", "GenAI"]
+  },
+  {
+    authors: ["Wang, Z.", "O'Reilly, T.", "Magliano, J.", "Cohen, J. D.", "Suhan, M.", "Haddadian, G."],
+    year: "2026",
+    title: "How to generate scenario-based learning and assessment for postsecondary courses with GenAI",
+    journal: "2026 NCME AIME-Con, Pittsburgh, PA, United States",
+    keywords: ["Scenario-Based Learning", "Assessment", "GenAI"]
   },
   {
     authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
