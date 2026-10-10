@@ -324,15 +324,6 @@ export const journeyItems: JourneyItem[] = [
   {
     category: 'Publications',
     period: '2025–2026',
-    label: 'GenAI Scaffolding for Peer Feedback',
-    sublabel: 'Intl. Journal of Ed. Tech. in Higher Ed. · In Revision',
-    detail:
-      'Noroozi, O., Haddadian, G., Banihashem, K., Schunn, C, Alqassab, M. (In revision). The Scaffolding Value of GenAI during Peer Feedback Provision and Uptake: Student Perceptions and Actual Impacts. International Journal of Educational Technology in Higher Education.',
-    badges: ['In Review'],
-  },
-  {
-    category: 'Publications',
-    period: '2025–2026',
     label: 'EFL Teachers\' Professional Development',
     sublabel: 'Journal of Language and Education · Under Review',
     detail:
