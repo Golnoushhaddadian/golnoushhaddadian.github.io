@@ -31,18 +31,18 @@ const journalPublications: Publication[] = [
   },
   {
     title: "How to generate scenario-based learning and assessment for postsecondary courses with GenAI",
-    authors: "Wang, Z., O'Reilly, T., Magliano, J., Cohen, J., Suhan, M., & Haddadian, G.",
+    authors: "Wang, Z., O'Reilly, T., Magliano, J. P., Cohen, J. D., Suhan, M., & Haddadian, G.",
     venue: "2026 NCME AIME-Con, Pittsburgh, PA, United States",
     year: 2026,
-    apa: "Wang, Z., O'Reilly, T., Magliano, J., Cohen, J., Suhan, M., & Haddadian, G. (2026). How to generate scenario-based learning and assessment for postsecondary courses with GenAI. 2026 NCME AIME-Con, Pittsburgh, PA, United States.",
+    apa: "Wang, Z., O'Reilly, T., Magliano, J. P., Cohen, J. D., Suhan, M., & Haddadian, G. (2026). How to generate scenario-based learning and assessment for postsecondary courses with GenAI. 2026 NCME AIME-Con, Pittsburgh, PA, United States.",
   },
   {
     title: "Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates",
-    authors: "Niloy, A. C., Haddadian, G., & Kim, M. K.",
+    authors: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K.",
     venue: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
     year: 2026,
     doi: "https://aclanthology.org/2026.aimecon-main.63.pdf",
-    apa: "Niloy, A. C., Haddadian, G., & Kim, M. K. (2026, October). Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates. In Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570). https://aclanthology.org/2026.aimecon-main.63.pdf",
+    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026, October). Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates. In Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570). https://aclanthology.org/2026.aimecon-main.63.pdf",
   },
   {
     title: "Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery",
@@ -139,11 +139,11 @@ const journalPublications: Publication[] = [
   },
   {
     title: "Developing Authentic Learning and Assessment Through Scenarios",
-    authors: "Cohen, J. D., Sabatini, J., Haddadian, G., O'Reilly, T., Pierce, B., & Magliano, J.",
+    authors: "Cohen, J. D., Sabatini, J., Haddadian, G., O'Reilly, T., Pierce, B., & Magliano, J. P.",
     venue: "Proceedings of EdMedia 2026 Edinburgh (pp. 1716-1717). Association for the Advancement of Computing in Education (AACE)",
     year: 2026,
     doi: "https://www.learntechlib.org/primary/p/2129763/",
-    apa: "Cohen, J. D., Sabatini, J., Haddadian, G., O'Reilly, T., Pierce, B., & Magliano, J. (2026). Developing Authentic Learning and Assessment Through Scenarios. In Proceedings of EdMedia 2026 Edinburgh (pp. 1716-1717). Waynesville, NC: Association for the Advancement of Computing in Education (AACE).",
+    apa: "Cohen, J. D., Sabatini, J., Haddadian, G., O'Reilly, T., Pierce, B., & Magliano, J. P. (2026). Developing Authentic Learning and Assessment Through Scenarios. In Proceedings of EdMedia 2026 Edinburgh (pp. 1716-1717). Waynesville, NC: Association for the Advancement of Computing in Education (AACE).",
   },
   {
     title: "Fostering educational intimacy: ILSSA intergenerational partnerships for purposeful community building",
@@ -281,10 +281,10 @@ const journalPublications: Publication[] = [
   },
   {
     title: "The Moving Target Problem in AI Text Detection: Evidence From Chatbot and Detector Version Changes",
-    authors: "Niloy, A. C., Haddadian, G., & Kim, M. K.",
+    authors: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K.",
     venue: "External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), Atlanta, Georgia [Poster]",
     year: 2026,
-    apa: "Niloy, A. C., Haddadian, G., & Kim, M. K. (2026). The Moving Target Problem in AI Text Detection: Evidence From Chatbot and Detector Version Changes. External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), May 15, Atlanta, Georgia [Format: Poster].",
+    apa: "Chowdhury Niloy, A., Haddadian, G., & Kim, M. K. (2026). The Moving Target Problem in AI Text Detection: Evidence From Chatbot and Detector Version Changes. External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), May 15, Atlanta, Georgia [Format: Poster].",
   },
   {
     title: "Synthesizing Research on Automated Writing Evaluation Tools in EFL Argumentative Writing Context",
