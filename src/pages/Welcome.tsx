@@ -236,6 +236,9 @@ const AboutMe = () => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-justify text-[10px] sm:text-xs md:text-sm">
             <p>
+              Chowdhury Niloy, A., <strong>Haddadian, G.</strong>, & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>, November 18). The moving target problem in AI text detection [Conference presentation]. <em>5th Annual Graduate Conference for Research, Scholarship, and Creative Activity</em>, Georgia State University, Atlanta, GA, United States.
+            </p>
+            <p>
               Niloy, A. C., <strong>Haddadian, G.</strong>, & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>, October). Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates. In <em>Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers</em> (pp. 560–570). <a href="https://aclanthology.org/2026.aimecon-main.63.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://aclanthology.org/2026.aimecon-main.63.pdf</a>
             </p>
             <p>
