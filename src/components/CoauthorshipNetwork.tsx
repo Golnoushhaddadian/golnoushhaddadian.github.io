@@ -86,17 +86,19 @@ const PAL = [
 ];
 
 function build() {
-  const all: string[][] = [];
-  for (const a of [
-    ...journalPublications.map(p => p.authors),
-    ...conferenceProceedings.map(p => p.authors),
-    ...otherPresentations.map(p => p.authors),
-    ...nonRefereedPublications.map(p => p.authors),
-    ...workUnderReview.map(p => p.authors),
-    ...workInProgress.map(p => p.authors),
-  ]) {
-    if (a?.length) all.push(cleanAuthors(a));
-  }
+  // Every paper, newest first, so each paper can become its own cluster
+  const papers = [
+    ...journalPublications,
+    ...conferenceProceedings,
+    ...otherPresentations,
+    ...nonRefereedPublications,
+    ...workUnderReview,
+    ...workInProgress,
+  ]
+    .filter(p => p.authors?.length)
+    .map((p, i) => ({ i, year: parseInt(String((p as { year?: string }).year ?? "").match(/\d{4}/)?.[0] ?? "0", 10), authors: cleanAuthors(p.authors) }))
+    .sort((a, b) => b.year - a.year || a.i - b.i);
+  const all: string[][] = papers.map(p => p.authors);
 
   const counts: Record<string, number> = {};
   const pairs: Record<string, number> = {};
@@ -119,24 +121,16 @@ function build() {
     return { source: s, target: t, weight: w };
   });
 
-  // BFS clustering
-  const adj: Record<string, Set<string>> = {};
-  for (const c of coauthors) adj[c.name] = new Set();
-  for (const il of interLinks) {
-    adj[il.source]?.add(il.target);
-    adj[il.target]?.add(il.source);
-  }
+  // Paper clustering: each paper is a cluster. A co-author who appears on
+  // several papers joins the cluster of their most recent paper; the links
+  // still show every collaboration across clusters.
   const clusters: Record<string, number> = {};
-  const vis = new Set<string>();
   let ci = 0;
-  for (const { name } of coauthors) {
-    if (vis.has(name)) continue;
-    const q = [name]; vis.add(name);
-    while (q.length) {
-      const cur = q.shift()!;
-      clusters[cur] = ci;
-      for (const nb of adj[cur]) { if (!vis.has(nb)) { vis.add(nb); q.push(nb); } }
-    }
+  for (const authors of all) {
+    if (!authors.some(isSelf)) continue;
+    const fresh = authors.filter(a => counts[a] && clusters[a] === undefined);
+    if (!fresh.length) continue;
+    for (const a of fresh) clusters[a] = ci;
     ci++;
   }
 
@@ -306,8 +300,15 @@ const CoauthorshipNetwork = () => {
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, w, h);
 
-      const pal = (ci: number) => dk ? PAL[ci % PAL.length].d : PAL[ci % PAL.length].l;
-      const palBg = (ci: number) => dk ? PAL[ci % PAL.length].bg_d : PAL[ci % PAL.length].bg_l;
+      // First clusters use the pillar palette; later ones get distinct
+      // golden-angle hues so no two paper clusters share a colour.
+      const hue = (ci: number) => Math.round((ci * 137.508) % 360);
+      const pal = (ci: number) => ci < PAL.length
+        ? (dk ? PAL[ci].d : PAL[ci].l)
+        : (dk ? `hsl(${hue(ci)},66%,66%)` : `hsl(${hue(ci)},70%,48%)`);
+      const palBg = (ci: number) => ci < PAL.length
+        ? (dk ? PAL[ci].bg_d : PAL[ci].bg_l)
+        : (dk ? `hsla(${hue(ci)},66%,66%,0.12)` : `hsla(${hue(ci)},70%,48%,0.10)`);
 
       // ── CLUSTER HULLS ── draw soft background blobs behind each cluster
       const clusterMap = new Map<number, Node[]>();
