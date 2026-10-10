@@ -275,6 +275,13 @@ export const otherPresentations: NonRefereedPublication[] = [
   {
     authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
     year: "2026",
+    title: "The moving target problem in AI text detection",
+    journal: "5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States, November 18 [Conference presentation]",
+    keywords: ["AI Detection", "GenAI"]
+  },
+  {
+    authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
+    year: "2026",
     title: "Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates",
     journal: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
     keywords: ["AI Detection", "GenAI"]
