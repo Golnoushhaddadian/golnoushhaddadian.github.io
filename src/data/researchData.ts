@@ -103,6 +103,20 @@ export const journalPublications: JournalPublication[] = [
 
 export const conferenceProceedings: ConferenceProceeding[] = [
   {
+    authors: ["Khajooeinejad, A.", "Chapariniya, M.", "Motevali, S.", "Haddadian, G."],
+    year: "2026",
+    title: "Agentic LLM-driven loss function search: Decomposing exploration and exploitation in closed-loop discovery",
+    conference: "4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States",
+    keywords: ["LLM Agents", "AutoML", "Loss Functions"]
+  },
+  {
+    authors: ["Khajooeinejad, A.", "Haddadian, G.", "Chapariniya, M.", "Motevali, S."],
+    year: "2026",
+    title: "Trustless multi-agent AI: Blockchain-based coordination for LLM agents",
+    conference: "4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things (AIBThings), Mount Pleasant, MI, United States",
+    keywords: ["Multi-Agent AI", "Blockchain", "LLM Agents"]
+  },
+  {
     authors: ["Haddadian, G.", "Haddadian, N.", "Soleimani, S."],
     year: "2026",
     title: "Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy",
@@ -110,21 +124,21 @@ export const conferenceProceedings: ConferenceProceeding[] = [
     keywords: ["AI Feedback", "Formative Assessment", "EFL", "Writing Self-Efficacy"]
   },
   {
-    authors: ["Cohen, J. D.", "O'Reilly, T.", "Magliano, J.", "Haddadian, G.", "Dobar, E. B.", "Ari, O.", "Tinker Sachs, G.", "Sabatini, J."],
+    authors: ["Cohen, J. D.", "O'Reilly, T.", "Magliano, J. P.", "Haddadian, G.", "Dobar, E. B.", "Ari, O.", "Tinker-Sachs, G.", "Sabatini, J."],
     year: "2026",
     title: "Scenario-based learning and assessment design principles for the AI age",
     conference: "International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain",
     keywords: ["Scenario-Based Learning", "Assessment", "AI"]
   },
   {
-    authors: ["Dobar, E. B.", "Haddadian, G.", "Ari, O.", "Cohen, J. D.", "Tinker Sachs, G.", "Magliano, J."],
+    authors: ["Dobar, E. B.", "Haddadian, G.", "Ari, O.", "Cohen, J. D.", "Tinker-Sachs, G.", "Magliano, J. P."],
     year: "2026",
     title: "Navigating complexity in interdisciplinary problem solving: Insights from a scenario-based assessment",
     conference: "International Conference on Education and New Learning Technologies (EDULEARN), Palma de Mallorca, Spain",
     keywords: ["Interdisciplinary", "Problem Solving", "Assessment"]
   },
   {
-    authors: ["Cohen, J. D.", "Sabatini, J.", "Haddadian, G.", "O'Reilly, T.", "Pierce, B.", "Magliano, J."],
+    authors: ["Cohen, J. D.", "Sabatini, J.", "Haddadian, G.", "O'Reilly, T.", "Pierce, B.", "Magliano, J. P."],
     year: "2026",
     title: "Developing Authentic Learning and Assessment Through Scenarios",
     conference: "Proceedings of EdMedia 2026 Edinburgh (pp. 1716-1717), Waynesville, NC: Association for the Advancement of Computing in Education (AACE)",
@@ -264,7 +278,7 @@ export const conferenceProceedings: ConferenceProceeding[] = [
     conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
   },
   {
-    authors: ["Kim, J.", "Bae, Y.", "Haddadian, G.", "Morris, W.", "Crossely, S.", "Holmes, L.", "Stravelakis, J.", "Kim, M."],
+    authors: ["Kim, J.", "Bae, Y.", "Haddadian, G.", "Morris, W.", "Crossley, S.", "Holmes, L.", "Stravelakis, J.", "Kim, M."],
     year: "2023",
     title: "AI-augmented summarization: Impact on online adult learners' concept learning, discussion quality, and achievement",
     conference: "2023 Association for Educational Communications and Technology (AECT) Conference, Orlando, FL"
@@ -273,28 +287,28 @@ export const conferenceProceedings: ConferenceProceeding[] = [
 
 export const otherPresentations: NonRefereedPublication[] = [
   {
-    authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
+    authors: ["Chowdhury Niloy, A.", "Haddadian, G.", "Kim, M. K."],
     year: "2026",
     title: "The moving target problem in AI text detection",
     journal: "5th Annual Graduate Conference for Research, Scholarship, and Creative Activity, Georgia State University, Atlanta, GA, United States, November 18 [Conference presentation]",
     keywords: ["AI Detection", "GenAI"]
   },
   {
-    authors: ["Wang, Z.", "O'Reilly, T.", "Magliano, J.", "Cohen, J. D.", "Suhan, M.", "Haddadian, G."],
+    authors: ["Wang, Z.", "O'Reilly, T.", "Magliano, J. P.", "Cohen, J. D.", "Suhan, M.", "Haddadian, G."],
     year: "2026",
     title: "How to generate scenario-based learning and assessment for postsecondary courses with GenAI",
     journal: "2026 NCME AIME-Con, Pittsburgh, PA, United States",
     keywords: ["Scenario-Based Learning", "Assessment", "GenAI"]
   },
   {
-    authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
+    authors: ["Chowdhury Niloy, A.", "Haddadian, G.", "Kim, M. K."],
     year: "2026",
     title: "Who Keeps Up with Whom? Assessing GenAI Text Detection Across Version Updates",
     journal: "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers (pp. 560-570)",
     keywords: ["AI Detection", "GenAI"]
   },
   {
-    authors: ["Niloy, A. C.", "Haddadian, G.", "Kim, M. K."],
+    authors: ["Chowdhury Niloy, A.", "Haddadian, G.", "Kim, M. K."],
     year: "2026",
     title: "The Moving Target Problem in AI Text Detection: Evidence From Chatbot and Detector Version Changes",
     journal: "External Advisory Board Meeting, The National AI Institute for Adult Learning and Online Education (AI-ALOE), May 15, Atlanta, Georgia [Format: Poster]",
