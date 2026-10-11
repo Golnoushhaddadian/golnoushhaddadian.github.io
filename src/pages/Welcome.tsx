@@ -251,7 +251,7 @@ const AboutMe = () => {
               Khajooeinejad, A., <strong>Haddadian, G.</strong>, Chapariniya, M., & Motevali, S. (<span className="text-blue-600 font-medium">2026</span>). Trustless multi-agent AI: Blockchain-based coordination for LLM agents [Paper presentation]. <em>4th IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things</em> (AIBThings), Mount Pleasant, MI, United States.
             </p>
             <p>
-              <strong>Haddadian, G.</strong>, Haddadian, N., & Soleimani, S. (2026). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. AIRiAL 2026 Conference, Teachers College, Columbia University, New York, United States.
+              <strong>Haddadian, G.</strong>, Haddadian, N., & Soleimani, S. (<span className="text-blue-600 font-medium">2026</span>). Comparing the Effects of AI-generated and Teacher-delivered Formative Assessment on EFL Learners' Writing Performance and Writing Self-Efficacy. AIRiAL 2026 Conference, Teachers College, Columbia University, New York, United States.
             </p>
             <p>
               Cohen, J. D., O'Reilly, T., Magliano, J. P., <strong>Haddadian, G.</strong>, Dobar, E. B., Ari, O., Tinker-Sachs, G., & Sabatini, J. (<span className="text-blue-600 font-medium">2026</span>). Scenario-based learning and assessment design principles for the AI age. <em>EDULEARN26 Proceedings</em>, Article 1753. <a href="https://doi.org/10.21125/edulearn.2026.1753" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://doi.org/10.21125/edulearn.2026.1753</a>
