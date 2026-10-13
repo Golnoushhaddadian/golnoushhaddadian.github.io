@@ -236,7 +236,7 @@ const AboutMe = () => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 md:mb-6">Latest Work</h2>
           <div className="prose max-w-none text-muted-foreground space-y-2 sm:space-y-3 md:space-y-4 text-justify text-[10px] sm:text-xs md:text-sm">
             <p>
-              Chowdhury Niloy, A., <strong>Haddadian, G.</strong>, & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>). The moving target problem in AI text detection [Conference presentation]. <em>5th Annual Graduate Conference for Research, Scholarship, and Creative Activity</em>, Georgia State University, Atlanta, GA, United States.
+              Chowdhury Niloy, A., <strong>Haddadian, G.</strong>, & Kim, M. K. (<span className="text-blue-600 font-medium">2026</span>). The moving target problem in AI text detection. <em>5th Annual Graduate Conference for Research, Scholarship, and Creative Activity</em>, Georgia State University, Atlanta, GA, United States.
             </p>
             <p>
               Wang, Z., O'Reilly, T., Magliano, J. P., Cohen, J. D., Suhan, M., & <strong>Haddadian, G.</strong> (<span className="text-blue-600 font-medium">2026</span>). How to generate scenario-based learning and assessment for postsecondary courses with GenAI. <em>2026 NCME AIME-Con</em>, Pittsburgh, PA, United States.
