@@ -1123,12 +1123,12 @@ button:focus-visible, [role="button"]:focus-visible, [role="link"]:focus-visible
 <div class="card-head">
 <div class="card-tag">Vygotskian</div>
           <div class="card-title">Scaffolding</div>
-          <div class="card-short">Temporary, calibrated support that fades as competence grows</div>
+          <div class="card-short">Temporary, calibrated support tailored to the learner&#8217;s current level</div>
 <div class="card-cue"><div class="card-chips-preview"></div><span class="card-arrow">▾</span></div>
 </div>
 <div class="card-detail">
               <div class="card-body">
-            <p>Key scaffolding features: <em>contingency</em> (responsive to current state), <em>fading</em> (support reduces as ability grows), <em>handover</em> (responsibility transfers to learner). Adaptive feedback systems that modulate based on performance are computational scaffolding.</p>
+            <p>Temporary support that enables learners to accomplish tasks beyond their independent capability (Wood, Bruner, &amp; Ross, 1976). Adaptive feedback systems that modulate based on performance are computational scaffolding.</p>
               </div>
             <div class="lyr lyr-refs open">
               <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">📚</span><span class="lyr-label">Seminal References</span><span class="lyr-chev">▾</span></div>
@@ -1137,10 +1137,10 @@ button:focus-visible, [role="button"]:focus-visible, [role="link"]:focus-visible
               <div class="ref">Belland, B. R. (2014). Scaffolding. In J. M. Spector et al. (Eds.), <em>Handbook of Research on Educational Communications and Technology.</em> Springer.</div></div>
             </div><div class="lyr lyr-you">
               <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">🎯</span><span class="lyr-label">Field Research Context</span><span class="lyr-chev">▾</span></div>
-              <div class="lyr-body"><div class="you-text">Whether AI feedback scaffolds or supplants student reasoning is one of the field's most important open questions. Scaffolding requires contingency and fading (Wood et al., 1976); AI feedback that is static and non-fading may support task performance without building independent reasoning capacity. This challenge is recognized as a central design problem in AI-augmented writing education (Winstone et al., 2017).</div></div>
+              <div class="lyr-body"><div class="you-text">Whether AI feedback scaffolds or supplants student reasoning is one of the field's most important open questions. AI feedback that is static and uniform may support task performance without building independent reasoning capacity. This challenge is recognized as a central design problem in AI-augmented writing education (Winstone et al., 2017).</div></div>
             </div><div class="lyr lyr-debate">
               <div class="lyr-head" onclick="togLyr(this,event)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){togLyr(this,event)}"><span class="lyr-icon">⚡</span><span class="lyr-label">Tensions &amp; Debates</span><span class="lyr-chev">▾</span></div>
-              <div class="lyr-body"><div class="deb-text">"Scaffolding" has been so widely applied it risks losing analytical precision (Stone, 1998). Key debate: does fading actually occur in practice, or do students remain dependent on external support? AI feedback raises this concern acutely.</div></div>
+              <div class="lyr-body"><div class="deb-text">"Scaffolding" has been so widely applied it risks losing analytical precision (Stone, 1998). Key debate: do students become independent, or do they remain dependent on external support? AI feedback raises this concern acutely.</div></div>
             </div><div class="card-chips"><span class="chip">→ ZPD</span><span class="chip">→ Adaptive Feedback</span><span class="chip">→ Self-Regulation</span></div>
           </div>
         </div>
@@ -1786,11 +1786,11 @@ function buildGraph(){
      refs:['Vygotsky, L. S. (1978). Mind in Society. Harvard UP.','Tharp, R. G., & Gallimore, R. (1988). Rousing Minds to Life. Cambridge UP.'],
      debate:'The ZPD has been criticized as metaphorical and unmeasurable in practice (Chaiklin, 2003). How do you assess the "lower bound" (independent performance) and "upper bound" (assisted performance) in a writing context?',
      context:'Learner modeling is the computational operationalization of ZPD. VanLehn\'s (2011) meta-analysis established that one-on-one tutoring effects (effect size ~0.79) are achievable computationally when systems accurately model the learner\'s knowledge state.'},
-    {id:'scaffolding',label:'Scaffolding',cluster:'th',short:'Temporary, calibrated support that fades as competence grows',
-     body:'Wood, Bruner & Ross (1976): scaffolding features are contingency (responsive to current state), fading (support reduces as ability grows), and handover (responsibility transfers to learner).',
+    {id:'scaffolding',label:'Scaffolding',cluster:'th',short:'Temporary, calibrated support tailored to the learner\u2019s current level',
+     body:'Wood, Bruner & Ross (1976): temporary support that enables learners to accomplish tasks beyond their independent capability. Adaptive feedback systems that modulate based on performance are computational scaffolding.',
      refs:['Wood, D., Bruner, J. S., & Ross, G. (1976). The role of tutoring in problem solving. Journal of Child Psychology and Psychiatry, 17(2), 89–100.','Belland, B. R. (2014). Scaffolding. In J. M. Spector et al. (Eds.), Handbook of Research on Educational Communications and Technology. Springer.'],
-     debate:'"Scaffolding" has been so widely applied it risks losing analytical precision (Stone, 1998). Does fading actually occur in practice, or do students remain dependent on external support? AI feedback raises this concern acutely.',
-     context:'Whether AI feedback scaffolds or supplants student reasoning is a central open question. Static, non-fading AI feedback may support task performance without building independent reasoning capacity — a recognized design challenge (Winstone et al., 2017).'},
+     debate:'"Scaffolding" has been so widely applied it risks losing analytical precision (Stone, 1998). Do students become independent, or do they remain dependent on external support? AI feedback raises this concern acutely.',
+     context:'Whether AI feedback scaffolds or supplants student reasoning is a central open question. Static, uniform AI feedback may support task performance without building independent reasoning capacity, a recognized design challenge (Winstone et al., 2017).'},
     {id:'socioculture',label:'Sociocultural Theory',cluster:'th',short:'Writing as mediated, social, historically situated activity',
      body:'Vygotsky\'s broader framework (extended by Engeström\'s Activity Theory) frames writing as tool-mediated social practice. Peer feedback is one form of social mediation; the classroom community shapes argumentative norms.',
      refs:['Vygotsky, L. S. (1986). Thought and Language. MIT Press.','Engeström, Y. (1987). Learning by Expanding. Orienta-Konsultit.','Prior, P. (2006). A sociocultural theory of writing. In C. A. MacArthur et al. (Eds.), Handbook of Writing Research. Guilford.'],
